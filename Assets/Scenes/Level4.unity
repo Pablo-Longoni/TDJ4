@@ -474,9 +474,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fce5eba5bc2ab44daa042a9b1b45df0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationSpeed: 800
   _rotationTurn: 90
-  rotateCooldown: 2
+  _rotateCooldown: 2
 --- !u!65 &275411865
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1001,9 +1000,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fce5eba5bc2ab44daa042a9b1b45df0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationSpeed: 800
   _rotationTurn: 180
-  rotateCooldown: 2
+  _rotateCooldown: 2
 --- !u!65 &860167367
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1667,9 +1665,9 @@ GameObject:
   - component: {fileID: 1968460665}
   - component: {fileID: 1968460664}
   - component: {fileID: 1968460663}
-  - component: {fileID: 1968460660}
   - component: {fileID: 1968460659}
   - component: {fileID: 1968460662}
+  - component: {fileID: 1968460660}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -1700,7 +1698,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1968460658}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 078fe7f6e4437fc46b3cff75c8e8c07c, type: 3}
   m_Name: 
@@ -1759,7 +1757,6 @@ MonoBehaviour:
   _cubeRotation:
   - {fileID: 275411864}
   - {fileID: 860167366}
-  edgeDetectionDistance: 3
   groundCheckDistance: 0.6
 --- !u!54 &1968460664
 Rigidbody:

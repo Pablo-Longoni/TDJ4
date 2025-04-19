@@ -1372,9 +1372,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fce5eba5bc2ab44daa042a9b1b45df0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationSpeed: 800
-  _rotationTurn: 180
-  rotateCooldown: 1.5
+  _rotateCooldown: 2
 --- !u!64 &1715641910
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -1828,9 +1826,9 @@ GameObject:
   - component: {fileID: 2111671658}
   - component: {fileID: 2111671657}
   - component: {fileID: 2111671656}
-  - component: {fileID: 2111671655}
   - component: {fileID: 2111671654}
   - component: {fileID: 2111671653}
+  - component: {fileID: 2111671655}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -1876,7 +1874,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2111671652}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 078fe7f6e4437fc46b3cff75c8e8c07c, type: 3}
   m_Name: 
@@ -1901,8 +1899,7 @@ MonoBehaviour:
   _speed: 13
   _turnSpeed: 360
   _cubeRotation:
-  - {fileID: 0}
-  edgeDetectionDistance: 3
+  - {fileID: 1715641909}
   groundCheckDistance: 0.6
 --- !u!54 &2111671657
 Rigidbody:
