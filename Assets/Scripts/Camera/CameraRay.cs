@@ -1,12 +1,18 @@
 using Unity.Cinemachine;
 using UnityEngine;
+using UnityEngine.Windows;
+using static UnityEngine.UI.Image;
+using System.Collections;
+using static Unity.Cinemachine.IInputAxisOwner.AxisDescriptor;
 
 public class CameraRay : MonoBehaviour
 {
     //  public GameObject _player;
-    public float maxDistance = 100f;
+    public float maxDistance = 1000f;
     public LayerMask platformMask;
     public CinemachineCamera _cinemachineCamera;
+    [SerializeField] private float edgeDetectionDistance = 2f;
+    public PlayerMovement _player;
     void Start()
     {
         
@@ -19,6 +25,30 @@ public class CameraRay : MonoBehaviour
 
     public void CroosPlanes()
     {
+          Vector3 origin = _cinemachineCamera.transform.position;
+          Vector3 direction = _cinemachineCamera.transform.forward;
+
+          Ray ray = new Ray(origin, direction);
+          RaycastHit[] hits = Physics.RaycastAll(ray, 100f, platformMask);
+
+          Debug.DrawRay(origin, direction * 100f, Color.yellow);
+
+          if (hits.Length >= 2)
+          {
+              Debug.Log("Se alinean los planos");
+              System.Array.Sort(hits, (a, b) => a.distance.CompareTo(b.distance));
+
+
+              Vector3 firstPlatformPoint = hits[0].point;
+              Vector3 secondPlatformPoint = hits[1].point;
+
+              // Opcional: mostrarlos en la escena
+              Debug.DrawLine(firstPlatformPoint, secondPlatformPoint, Color.green);
+   
+
+              playerOnEdge(secondPlatformPoint);
+          }
+        /*
         Vector3 origin = _cinemachineCamera.transform.position;
         Vector3 direction = _cinemachineCamera.transform.forward;
 
@@ -29,7 +59,69 @@ public class CameraRay : MonoBehaviour
 
         if (hits.Length >= 2)
         {
-            Debug.Log("Se alinean los planos");
+            System.Array.Sort(hits, (a, b) => a.distance.CompareTo(b.distance)); // Ordena de más cercano a más lejano
+
+            Vector3 firstPlatformPoint = hits[0].point;
+            Vector3 secondPlatformPoint = hits[1].point;
+
+            Debug.DrawLine(firstPlatformPoint, secondPlatformPoint, Color.green);
+
+            // Dirección de movimiento del jugador
+            Vector3 moveDir = _player._input.normalized;
+
+            // Check si está al borde
+            Vector3 frontCheck = _player.transform.position + moveDir * edgeDetectionDistance;
+            bool isEdge = !Physics.Raycast(frontCheck, Vector3.down, 2f, platformMask);
+
+            if (isEdge && moveDir != Vector3.zero)
+            {
+                Vector3 targetPoint;
+
+                float distToFirst = Vector3.Distance(_player.transform.position, firstPlatformPoint);
+                float distToSecond = Vector3.Distance(_player.transform.position, secondPlatformPoint);
+                float forwardOffset = 3.5f;
+                // Si está más cerca del segundo plano, y se mueve hacia atrás => volver
+                if (distToSecond < distToFirst)
+                    targetPoint = firstPlatformPoint;
+                else
+                    targetPoint = secondPlatformPoint;
+
+                Vector3 newPlayerPos = targetPoint + moveDir *  forwardOffset;
+                newPlayerPos.y += 1f;
+
+                StartCoroutine(MovePlayerSmoothly(newPlayerPos));
+            }
+        }*/
+    }
+
+    public void playerOnEdge(Vector3 targetPoint)
+    {
+        Vector3 direction = _player._input.normalized;
+
+        Vector3 frontCheck = _player.transform.position + direction * edgeDetectionDistance;
+        bool isEdge = !Physics.Raycast(frontCheck, Vector3.down, 2f, platformMask);
+
+        if (isEdge)
+        {
+            float forwardOffset = 3.5f; // podés tunear este valor
+            Vector3 newPlayerPos = targetPoint + direction * forwardOffset;
+            newPlayerPos.y += 1f;
+
+
+            StartCoroutine(MovePlayerSmoothly(newPlayerPos));
+        }
+    }
+
+    IEnumerator MovePlayerSmoothly(Vector3 target)
+    {
+        float t = 0;
+        Vector3 start = _player.transform.position;
+
+        while (t < 1f)
+        {
+            t += Time.deltaTime * 50f; // velocidad
+            _player.transform.position = Vector3.Lerp(start, target, t);
+            yield return null;
         }
     }
 }

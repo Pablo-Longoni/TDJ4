@@ -3,7 +3,7 @@
 public class PlayerMovement : MonoBehaviour
 {
 
-    private Vector3 _input;
+    public Vector3 _input;
 
     [SerializeField] private Rigidbody _rb;
     [SerializeField] private float _speed = 5;
