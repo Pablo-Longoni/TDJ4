@@ -25,7 +25,7 @@ public class CameraRay : MonoBehaviour
 
     public void CroosPlanes()
     {
-          Vector3 origin = _cinemachineCamera.transform.position;
+       /*   Vector3 origin = _cinemachineCamera.transform.position;
           Vector3 direction = _cinemachineCamera.transform.forward;
 
           Ray ray = new Ray(origin, direction);
@@ -47,8 +47,8 @@ public class CameraRay : MonoBehaviour
    
 
               playerOnEdge(secondPlatformPoint);
-          }
-        /*
+          }*/
+        
         Vector3 origin = _cinemachineCamera.transform.position;
         Vector3 direction = _cinemachineCamera.transform.forward;
 
@@ -79,7 +79,7 @@ public class CameraRay : MonoBehaviour
 
                 float distToFirst = Vector3.Distance(_player.transform.position, firstPlatformPoint);
                 float distToSecond = Vector3.Distance(_player.transform.position, secondPlatformPoint);
-                float forwardOffset = 3.5f;
+                float forwardOffset = 3f;
                 // Si está más cerca del segundo plano, y se mueve hacia atrás => volver
                 if (distToSecond < distToFirst)
                     targetPoint = firstPlatformPoint;
@@ -91,7 +91,7 @@ public class CameraRay : MonoBehaviour
 
                 StartCoroutine(MovePlayerSmoothly(newPlayerPos));
             }
-        }*/
+        }
     }
 
     public void playerOnEdge(Vector3 targetPoint)
@@ -103,12 +103,13 @@ public class CameraRay : MonoBehaviour
 
         if (isEdge)
         {
-            float forwardOffset = 3.5f; // podés tunear este valor
+            float forwardOffset = 3.5f; 
             Vector3 newPlayerPos = targetPoint + direction * forwardOffset;
             newPlayerPos.y += 1f;
 
 
-            StartCoroutine(MovePlayerSmoothly(newPlayerPos));
+         //   StartCoroutine(MovePlayerSmoothly(newPlayerPos));
+            _player.transform.position = newPlayerPos;
         }
     }
 
