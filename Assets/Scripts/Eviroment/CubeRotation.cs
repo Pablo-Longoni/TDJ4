@@ -13,14 +13,14 @@ public class CubeRotation : MonoBehaviour
     {
         if (_shouldRotate)
         {
-            Debug.Log("Rotando cubo en Update");
+          //  Debug.Log("Rotando cubo en Update");
             transform.rotation = Quaternion.RotateTowards(transform.rotation, _targetRotation, rotationSpeed * Time.deltaTime);
 
             if (Quaternion.Angle(transform.rotation, _targetRotation) < 0.1f)
             {
                 transform.rotation = _targetRotation;
                 _shouldRotate = false;
-                Debug.Log("Rotación completada");
+            //    Debug.Log("Rotación completada");
             }
         }
     }

@@ -18,7 +18,13 @@ public class PlayerTransformation : MonoBehaviour
         if (_currentTrans >= _totalTrans)
         {
             _cameraChange._canChange = false;
-        }
+
+          /*  if(Input.GetKeyDown(KeyCode.Space)) 
+            {
+                CameraMovement.Instance.MoveCamera(10f, 3f, 3f);
+                Debug.Log("Vibra cam");
+            }*/
+        } 
     }
 
     public void PlayerTransformed()
