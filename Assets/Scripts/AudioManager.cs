@@ -3,6 +3,9 @@ using UnityEngine.SceneManagement;
 
 public class AudioManager : MonoBehaviour
 {
+    public static AudioManager Instance;
+
+    [Header("Sources")]
     [SerializeField] public AudioSource musicSource;
     [SerializeField] public AudioSource soundSource;
 
@@ -13,9 +16,19 @@ public class AudioManager : MonoBehaviour
     [Header("Sound")]
     public AudioClip _turning;
     public AudioClip _portal;
+
+    public void Awake()
+    {
+        DontDestroyOnLoad(gameObject);        
+
+        AudioSource src = GetComponent<AudioSource>();
+        src.loop = true;                       
+        if (!src.isPlaying)
+            src.Play();
+    }
     void Start()
     {
-        SetBackgroundMusic();
+     //   SetBackgroundMusic();
     }
 
     // Update is called once per frame
@@ -42,6 +55,10 @@ public class AudioManager : MonoBehaviour
         musicSource.Play();
     }
 
+    public void playSound(AudioClip clip)
+    {
+        soundSource.PlayOneShot(clip);
+    }
 
     public void ChangeBackgroundMusic(AudioClip newMusic)
     {

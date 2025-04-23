@@ -10,8 +10,17 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float _turnSpeed = 360;
     private CameraChange _cameraChange;
     public CubeRotation [] _cubeRotation;
+    public CubeRotation _cube;
     //  [SerializeField] private float edgeDetectionDistance = 1f;
     [SerializeField] private float groundCheckDistance = 0.2f;
+    public bool justRespawned = false;
+
+    public void ResetRespawnFlag()
+    {
+        justRespawned = false;
+    }
+
+    //  [SerializeField] public AudioManager _audioManager;
 
     private void Start()
     {
@@ -26,7 +35,7 @@ public class PlayerMovement : MonoBehaviour
             Look();
 
         }
-        else
+        else if (!_cameraChange._isIsometric && _cube._canRotate == true)
         {
             Rotating();
         }
@@ -132,8 +141,10 @@ public class PlayerMovement : MonoBehaviour
         else if (Input.GetKeyDown(KeyCode.D))
             rotationAxis = Vector3.back;
 
-      //  _cubeRotation.RotateCube(rotationAxis, transform);
-          if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, groundCheckDistance + 0.5f))
+      
+
+        //  _cubeRotation.RotateCube(rotationAxis, transform);
+        if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, groundCheckDistance + 0.5f))
           {
               CubeRotation currentPlatform = hit.collider.GetComponent<CubeRotation>();
               if (currentPlatform != null)

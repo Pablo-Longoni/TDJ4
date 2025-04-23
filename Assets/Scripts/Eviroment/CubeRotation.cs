@@ -6,9 +6,10 @@ public class CubeRotation : MonoBehaviour
     private float rotationSpeed = 200f;
     private bool _shouldRotate = false;
     public float _rotationTurn = 90f;
-    private bool _canRotate = true;
+    public bool _canRotate = true;
     public float _rotateCooldown = 2f;
 
+    [SerializeField] public AudioManager _audioManager;
     void Update()
     {
         if (_shouldRotate)
@@ -27,12 +28,13 @@ public class CubeRotation : MonoBehaviour
 
       public void RotateCube(Vector3 rotationAxis, Transform player)
       {
-          if (!_shouldRotate && _canRotate)
-          {
+          if (!_shouldRotate && _canRotate) 
+        {
 
             _targetRotation = Quaternion.AngleAxis(_rotationTurn, rotationAxis) * transform.rotation;
             _shouldRotate = true;
 
+            _audioManager.playSound(_audioManager._turning);
             StartCoroutine(RotationCooldown());
         }
       }
@@ -40,7 +42,7 @@ public class CubeRotation : MonoBehaviour
       {
        _canRotate = false;
         yield return new WaitForSeconds(_rotateCooldown);
-       _canRotate = true;
+        _canRotate = true;
       }
 
 }

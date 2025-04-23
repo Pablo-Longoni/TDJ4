@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using System.Collections;
 public class PlayerTransformation : MonoBehaviour
 {
     public int _totalTrans = 3;
@@ -7,6 +8,8 @@ public class PlayerTransformation : MonoBehaviour
 
     public CameraChange _cameraChange;
     public TextMeshProUGUI _textTrans;
+
+    private bool _isBlinking = false;
     void Start()
     {
         _textTrans.text = "Transformations: " + _currentTrans + "/" + _totalTrans;
@@ -19,11 +22,13 @@ public class PlayerTransformation : MonoBehaviour
         {
             _cameraChange._canChange = false;
 
-          /*  if(Input.GetKeyDown(KeyCode.Space)) 
+            if(Input.GetKeyDown(KeyCode.Space)) 
             {
-                CameraMovement.Instance.MoveCamera(10f, 3f, 3f);
-                Debug.Log("Vibra cam");
-            }*/
+                if (!_isBlinking)
+                {
+                    StartCoroutine(BlinkText());
+                }
+            }
         } 
     }
 
@@ -32,5 +37,20 @@ public class PlayerTransformation : MonoBehaviour
         _currentTrans = _currentTrans + 1;
         _textTrans.text = "Transformations: " + _currentTrans + "/" + _totalTrans; 
         Debug.Log("Transformations: " + _currentTrans);
+    }
+
+    IEnumerator BlinkText()
+    {
+        _isBlinking = true;
+
+        for (int i = 0; i < 4; i++) // cantidad de parpadeos
+        {
+            _textTrans.enabled = false;
+            yield return new WaitForSeconds(0.15f);
+            _textTrans.enabled = true;
+            yield return new WaitForSeconds(0.15f);
+        }
+
+        _isBlinking = false;
     }
 }

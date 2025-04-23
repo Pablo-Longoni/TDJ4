@@ -18,6 +18,7 @@ public class CameraRay : MonoBehaviour
     [SerializeField] private Material _defaultMaterial;
     [SerializeField] private Material _alignedMaterial;
 
+
     void Start()
     {
         
@@ -40,7 +41,7 @@ public class CameraRay : MonoBehaviour
 
           if (hits.Length >= 2)
           {
-            /*foreach (GameObject plane in _planes)
+          /*  foreach (GameObject plane in _planes)
             {
                 var renderer = plane.GetComponent<MeshRenderer>();
                 if (renderer != null)
@@ -62,7 +63,7 @@ public class CameraRay : MonoBehaviour
 
               playerOnEdge(secondPlatformPoint);
           }
-         /* else
+        /*  else
           {
             // Si no están alineados, volver al material por defecto
             foreach (GameObject plane in _planes)

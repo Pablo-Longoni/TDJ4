@@ -45,7 +45,7 @@ public class TutorialDisplay : MonoBehaviour
 
     public void TransformTutorial()
     {
-        Debug.Log("Tutorial Transform");
+       // Debug.Log("Tutorial Transform");
    
         if (Input.GetKeyDown(KeyCode.Space) && !_didTrans)
         {
@@ -53,7 +53,10 @@ public class TutorialDisplay : MonoBehaviour
             _wasdImage.SetActive(true);
             _didTrans = true;
         }
-        if (Input.GetKeyDown(KeyCode.W))
+        if (Input.GetKeyDown(KeyCode.W) ||
+            Input.GetKeyDown(KeyCode.A) ||
+            Input.GetKeyDown(KeyCode.S) ||
+            Input.GetKeyDown(KeyCode.D))
         {
             _wasdImage.SetActive(false);
         }
@@ -61,7 +64,7 @@ public class TutorialDisplay : MonoBehaviour
 
     public void MouseTutorial()
     {
-        Debug.Log("Tutorial mouse");
+      //  Debug.Log("Tutorial mouse");
         // Paso 1: Hizo click izquierdo
         if (!_didClick && Input.GetMouseButtonDown(0))
         {
@@ -99,7 +102,7 @@ public class TutorialDisplay : MonoBehaviour
 
      public IEnumerator EnableMovementDetection()
     {
-        yield return new WaitForSeconds(2.5f); 
+        yield return new WaitForSeconds(1.5f); 
         _canDetectMovement = true;
     }
 }

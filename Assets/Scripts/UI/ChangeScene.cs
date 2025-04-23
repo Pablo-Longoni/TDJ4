@@ -42,4 +42,14 @@ public class ChangeScene : MonoBehaviour
     {
         SceneManager.LoadScene("Level1");
     }
+
+    public void BackToMenu()
+    {
+        SceneManager.LoadScene("Menu");
+    }
+
+    public void GoToCredits()
+    {
+        SceneManager.LoadScene("Credits");
+    }
 }

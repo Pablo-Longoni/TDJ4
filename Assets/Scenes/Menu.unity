@@ -1560,7 +1560,7 @@ MonoBehaviour:
   _gameMusic: {fileID: 0}
   _menuMusic: {fileID: 8300000, guid: 7a2d6f9c0e05fce48b8aee81ca7c3995, type: 3}
   _turning: {fileID: 0}
-  _portal: {fileID: 0}
+  _portal: {fileID: 8300000, guid: bcfd63baeb09e8d4897462015cdac119, type: 3}
 --- !u!82 &1810800670
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1571,12 +1571,12 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 8498d53625558bf48ba5d17fe8b8647e, type: 3}
+  m_Resource: {fileID: 8300000, guid: 8498d53625558bf48ba5d17fe8b8647e, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.7
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -1759,7 +1759,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 74669034}
         m_TargetAssemblyTypeName: ChangeScene, Assembly-CSharp
-        m_MethodName: StartButton
+        m_MethodName: GoToCredits
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
