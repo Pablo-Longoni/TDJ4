@@ -25,7 +25,7 @@ public class CameraZoom : MonoBehaviour
         // Obtener la cámara principal asociada
         //  _mainCamera = Camera.main;
 
-        // Inicializar el zoom con el tamaño ortográfico actual de la cámara
+        // Inicializar  zoom con el tamaño ortográfico actual de la cámara
         _currentZoom = _cinemachineCamera.Lens.OrthographicSize;
     }
 

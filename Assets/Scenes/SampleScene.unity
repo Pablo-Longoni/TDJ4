@@ -614,6 +614,7 @@ MonoBehaviour:
   _rb: {fileID: 133158887}
   _limit: -30
   _playerGrab: {fileID: 0}
+  _playerMovement: {fileID: 0}
 --- !u!114 &133158892
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -629,7 +630,7 @@ MonoBehaviour:
   _input: {x: 0, y: 0, z: 0}
   _rb: {fileID: 133158887}
   _speed: 15
-  _turnSpeed: 360
+  _turnSpeed: 720
   _cubeRotation:
   - {fileID: 1316158921}
   - {fileID: 92508649}
@@ -641,6 +642,7 @@ MonoBehaviour:
   - {fileID: 1532831843}
   _cube: {fileID: 317876083}
   groundCheckDistance: 0.2
+  justRespawned: 0
 --- !u!114 &133158893
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -672,7 +674,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &210111498
 Transform:
   m_ObjectHideFlags: 0
@@ -1637,7 +1639,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 35e94d4d308b99248962bc28d3d05a30, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1976,7 +1978,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 35e94d4d308b99248962bc28d3d05a30, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3225,6 +3227,7 @@ MonoBehaviour:
   _rb: {fileID: 1288920043}
   _limit: -30
   _playerGrab: {fileID: 0}
+  _playerMovement: {fileID: 0}
 --- !u!1001 &1316158911
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3303,7 +3306,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 35e94d4d308b99248962bc28d3d05a30, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3578,7 +3581,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1410878936
 Transform:
   m_ObjectHideFlags: 0

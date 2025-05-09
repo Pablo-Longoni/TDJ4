@@ -16,7 +16,6 @@ public class CameraChange : MonoBehaviour
     public bool _canChange = true;
     public CameraRotation _cameraRotation;
 
-    public PlayerGrab _playerGrab;
     public PlayerTransformation _playerTransformation;
     void Start()
     {
@@ -31,7 +30,7 @@ public class CameraChange : MonoBehaviour
 
     private IEnumerator DelayedCinematicStart()
     {
-        // Esperar  que haya una cámara activa
+
         yield return new WaitUntil(() =>
             _cameraBrain != null &&
             _cameraBrain.ActiveVirtualCamera != null
@@ -61,7 +60,6 @@ public class CameraChange : MonoBehaviour
                 _overHeadCamera.Priority = 3;
                 _cameraData.renderShadows = false;
                  Debug.Log("Camara cenital" + _isIsometric);
-                _playerGrab._canGrab = false;
             }
             else
             {
@@ -69,7 +67,6 @@ public class CameraChange : MonoBehaviour
                 _overHeadCamera.Priority = 2;
                 _cameraData.renderShadows = true;
                  Debug.Log("Camara Isometrica");
-                _playerGrab._canGrab = true;
             }
         }
 

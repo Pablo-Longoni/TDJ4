@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class PlayerGrab : MonoBehaviour
 {
-    public bool _canGrab;
+  /*  public bool _canGrab;
     public float _grabRange = 2f;
     public Transform _grabPoint;
     public KeyCode _grabKey = KeyCode.F;
@@ -96,5 +96,5 @@ public class PlayerGrab : MonoBehaviour
         _grabbedObject = null;
         _grabbedRb = null;
     }
-
+    */
 }

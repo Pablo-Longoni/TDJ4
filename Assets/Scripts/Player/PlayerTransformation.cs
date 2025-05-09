@@ -43,7 +43,7 @@ public class PlayerTransformation : MonoBehaviour
     {
         _isBlinking = true;
 
-        for (int i = 0; i < 4; i++) // cantidad de parpadeos
+        for (int i = 0; i < 4; i++) 
         {
             _textTrans.enabled = false;
             yield return new WaitForSeconds(0.15f);

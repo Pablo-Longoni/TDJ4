@@ -324,7 +324,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.07, y: 0.12, z: 0.04}
+  m_Size: {x: 0.07, y: 0.1, z: 0.04}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!212 &138120499
 SpriteRenderer:
@@ -1123,27 +1123,27 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: e2770f07175c98c48adb8942c942b9e8, type: 3}
       propertyPath: m_LocalScale.x
-      value: 100
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e2770f07175c98c48adb8942c942b9e8, type: 3}
       propertyPath: m_LocalScale.y
-      value: 100
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e2770f07175c98c48adb8942c942b9e8, type: 3}
       propertyPath: m_LocalScale.z
-      value: 100
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e2770f07175c98c48adb8942c942b9e8, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.52000046
+      value: -0.26000023
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e2770f07175c98c48adb8942c942b9e8, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.5199966
+      value: -0.7599983
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e2770f07175c98c48adb8942c942b9e8, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.099998474
+      value: -0.049999237
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e2770f07175c98c48adb8942c942b9e8, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1327,7 +1327,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7a5bb0fef69c2444a5e9d2f115a043d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rotationSpeed: 600
+  _rotationSpeed: 360
   _cameraChange: {fileID: 893716525}
 --- !u!4 &893716527
 Transform:
@@ -2006,9 +2006,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3990522f09d0c944e88a6c36640501f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxZoom: 35
+  _maxZoom: 40
   _minZoom: 5
-  _zoomSpeed: 120
+  _zoomSpeed: 160
   _zoomSmoothness: 30
   _cinemachineCamera: {fileID: 1235092553}
 --- !u!114 &1235092556
@@ -2051,7 +2051,7 @@ Transform:
   m_GameObject: {fileID: 1235092552}
   serializedVersion: 2
   m_LocalRotation: {x: 0.23911765, y: 0.3696438, z: -0.09904577, w: 0.89239913}
-  m_LocalPosition: {x: -22.271786, y: 133.79106, z: -17.091785}
+  m_LocalPosition: {x: -20.813034, y: 132.6, z: -15.633029}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2240,7 +2240,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _maxZoom: 30
   _minZoom: 5
-  _zoomSpeed: 120
+  _zoomSpeed: 160
   _zoomSmoothness: 30
   _cinemachineCamera: {fileID: 1642813130}
 --- !u!114 &1642813132
@@ -2283,7 +2283,7 @@ Transform:
   m_GameObject: {fileID: 1642813129}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0.62, y: 140.1, z: 5.8000035}
+  m_LocalPosition: {x: 0.62, y: 140.10004, z: 5.800003}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2895,7 +2895,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -3.6, y: -49, z: 8.1}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 844224893}
@@ -2913,10 +2913,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fce5eba5bc2ab44daa042a9b1b45df0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rotationTurn: 90
+  _rotationTurn: 180
   _canRotate: 1
   _rotateCooldown: 2
-  _audioManager: {fileID: 0}
+  _audioManager: {fileID: 375957869}
 --- !u!65 &2005186118
 BoxCollider:
   m_ObjectHideFlags: 0

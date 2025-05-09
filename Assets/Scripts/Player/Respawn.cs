@@ -24,21 +24,19 @@ public class Respawn : MonoBehaviour
         {
             _rb.linearVelocity = Vector3.zero;
 
-            // Desactivar collider para evitar triggers al mover
+
             Collider col = GetComponent<Collider>();
             if (col != null)
                 col.enabled = false;
 
-            // Teletransportar
+
             transform.position = _startPosition;
 
-            // Activar collider de nuevo
             if (col != null)
                 col.enabled = true;
 
-            // Marcar que acaba de respawnear para que puertas u otros no lo detecten
             _playerMovement.justRespawned = true;
-            _playerMovement.Invoke("ResetRespawnFlag", 1f);  // desactiva la flag tras un pequeño delay
+            _playerMovement.Invoke("ResetRespawnFlag", 1f);  
         }
     }
 

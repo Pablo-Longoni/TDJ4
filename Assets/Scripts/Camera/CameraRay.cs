@@ -65,7 +65,7 @@ public class CameraRay : MonoBehaviour
           }
         /*  else
           {
-            // Si no están alineados, volver al material por defecto
+            //  no  alineados volver a material por defecto
             foreach (GameObject plane in _planes)
             {
                 var renderer = plane.GetComponent<MeshRenderer>();

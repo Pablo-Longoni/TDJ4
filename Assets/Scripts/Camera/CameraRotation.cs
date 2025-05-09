@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class CameraRotation : MonoBehaviour
 {
-    public float _rotationSpeed = 5f;
+    public float _rotationSpeed = 1000f;
     public CameraChange _cameraChange;
     void Start()
     {

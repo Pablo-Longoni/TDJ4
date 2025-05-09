@@ -17,7 +17,6 @@ public class LevitatingEffect : MonoBehaviour
         textMesh.ForceMeshUpdate();
         textInfo = textMesh.textInfo;
 
-        // Guardamos una copia de los vértices originales
         originalVertices = new Vector3[textInfo.meshInfo.Length][];
         for (int i = 0; i < textInfo.meshInfo.Length; i++)
         {

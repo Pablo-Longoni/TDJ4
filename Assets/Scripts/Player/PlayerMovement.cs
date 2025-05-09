@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -20,22 +21,22 @@ public class PlayerMovement : MonoBehaviour
         justRespawned = false;
     }
 
-    //  [SerializeField] public AudioManager _audioManager;
-
     private void Start()
     {
         _cameraChange = FindAnyObjectByType<CameraChange>();
     }
+
+
     void Update()
     {
         GatherInput();
 
-        if (_cameraChange._isIsometric)
+      /*  if (_cameraChange._isIsometric)
         {
             Look();
 
-        }
-        else if (!_cameraChange._isIsometric && _cube._canRotate == true)
+        }*/
+         if (!_cameraChange._isIsometric && _cube._canRotate == true)
         {
             Rotating();
         }
@@ -43,7 +44,17 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
+        GatherInput();
         Move();
+
+        if (_cameraChange._isIsometric)
+        {
+            Look();
+        }
+        else if (!_cameraChange._isIsometric && _cube._canRotate == true)
+        {
+            Rotating();
+        }
     }
     void GatherInput()
     {
@@ -68,25 +79,6 @@ public class PlayerMovement : MonoBehaviour
         {
             _input = rawInput;
         }
-
-        /*   if (_cameraChange._isIsometric && Camera.main != null)
-           {
-               _input = rawInput; // Cámara totalmente cenital, usar input sin proyectar
-               Vector3 camForward = Camera.main.transform.forward;
-               Vector3 camRight = Camera.main.transform.right;
-
-               camForward.y = 0;
-               camRight.y = 0;
-
-               camForward.Normalize();
-               camRight.Normalize();
-
-               _input = (camForward * rawInput.z + camRight * rawInput.x).normalized;
-           }
-           else
-           {
-               _input = rawInput; // Cámara totalmente cenital, usar input sin proyectar
-           }*/
     }
 
     void Look()
@@ -102,7 +94,8 @@ public class PlayerMovement : MonoBehaviour
 
              transform.rotation = Quaternion.RotateTowards(transform.rotation, rotation, _turnSpeed * Time.deltaTime);*/
             Quaternion rotation = Quaternion.LookRotation(_input, Vector3.up);
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, rotation, _turnSpeed * Time.deltaTime);
+             transform.rotation = Quaternion.RotateTowards(transform.rotation, rotation, _turnSpeed * Time.fixedDeltaTime);
+
         }
     }
 
@@ -110,15 +103,14 @@ public class PlayerMovement : MonoBehaviour
     {
         if (_cameraChange._isIsometric)
         {
+          //  _rb.MovePosition(transform.position + _input * _speed * Time.deltaTime);
             _rb.MovePosition(transform.position + (transform.forward * _input.magnitude) * _speed * Time.deltaTime);
             _rb.constraints = RigidbodyConstraints.FreezeRotation;
             //    Debug.Log("Movimiento isometrico");
         }
         else
         {
-            /* _rb.MovePosition(_rb.position + _input * _speed * Time.fixedDeltaTime);
-             _rb.transform.rotation = (Quaternion.Euler(0, 0, 0));
-             _rb.constraints = RigidbodyConstraints.FreezePositionY;*/
+
             _rb.constraints = RigidbodyConstraints.FreezeAll;
             //  Debug.Log("Movimiento cential");
         }
@@ -157,74 +149,4 @@ public class PlayerMovement : MonoBehaviour
     }
 }
    
-        /* private void CheckForEdge()
-         {
-             if (_input == Vector3.zero) return;
-
-             Vector3 direction = _input.normalized;
-             Vector3 checkPosFront = transform.position + direction * edgeDetectionDistance;
-
-             // Línea 1: raycast abajo desde el centro actual
-             bool isOnGround = Physics.Raycast(transform.position, Vector3.down, out RaycastHit hitDown, groundCheckDistance);
-
-             // Línea 2: raycast abajo desde adelante (verifica si hay borde)
-             bool isEdge = !Physics.Raycast(checkPosFront, Vector3.down, groundCheckDistance);
-
-             // Línea 3: raycast (o spherecast) en dirección diagonal
-             Vector3 diagonalDir = (direction + Vector3.down).normalized;
-             bool foundAdjacentFace = Physics.Raycast(checkPosFront, diagonalDir, out RaycastHit hitDiagonal, groundCheckDistance * 4f);
-
-           //  Debug.DrawRay(transform.position, Vector3.down * groundCheckDistance, Color.green, 10f);
-           //  Debug.DrawRay(checkPosFront, Vector3.down * groundCheckDistance, Color.red, 10f);
-             Debug.DrawRay(checkPosFront, diagonalDir.normalized * groundCheckDistance * 4f, Color.red,5f);
-
-             if (isOnGround && isEdge)
-             {
-                 Vector3 rotationAxis = Vector3.zero;
-
-                 if (direction == Vector3.forward)
-                     rotationAxis = Vector3.left;
-                 else if (direction == Vector3.back)
-                     rotationAxis = Vector3.right;
-                 else if (direction == Vector3.right)
-                     rotationAxis = Vector3.forward;
-                 else if (direction == Vector3.left)
-                     rotationAxis = Vector3.back;
-
-                     CubeRotation currentPlatform = null;
-
-                     if (foundAdjacentFace)
-                     {
-                         Debug.Log("Cara adyacente detectada: giro de 90°");
-                         currentPlatform = hitDiagonal.collider.GetComponent<CubeRotation>();
-                         if (currentPlatform != null)
-                         {
-                             currentPlatform._rotationTurn = 90;
-                             currentPlatform.RotateCube(rotationAxis, transform);
-                             Debug.Log("90°");
-                         }
-                     }
-                     else
-                     {
-                         Debug.Log("Sin cara adyacente: giro de 180°");
-                         currentPlatform = hitDown.collider?.GetComponent<CubeRotation>();
-                         if (currentPlatform != null)
-                         {
-                             currentPlatform._rotationTurn = 180;
-                             currentPlatform.RotateCube(rotationAxis, transform);
-                             Debug.Log("180°");
-                         }
-                     }
-
-               /*  RaycastHit hit;
-                 if (Physics.Raycast(transform.position, Vector3.down, out hit, groundCheckDistance + 0.5f))
-                 {
-                     CubeRotation currentPlatform = hit.collider.GetComponent<CubeRotation>();
-                     if (currentPlatform != null)
-                     {
-                         currentPlatform.RotateCube(rotationAxis, transform);
-                     }
-                 }
-             }
-         }*/
-    
+     
