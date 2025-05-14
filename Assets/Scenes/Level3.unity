@@ -2166,6 +2166,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _cameraChange: {fileID: 415670792}
   _player: {fileID: 1606612548}
+  _rb: {fileID: 0}
   moveSpeed: 2
   _target: {fileID: 1459861535}
   _audioManager: {fileID: 1371472233}
@@ -2207,8 +2208,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _rb: {fileID: 1606612549}
   _limit: -30
-  _playerGrab: {fileID: 1606612547}
-  _playerMovement: {fileID: 1606612548}
+  _player: {fileID: 1606612550}
 --- !u!114 &1606612546
 MonoBehaviour:
   m_ObjectHideFlags: 0
