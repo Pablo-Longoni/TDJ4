@@ -38,6 +38,7 @@ public class CubeRotation : MonoBehaviour
             StartCoroutine(RotationCooldown());
         }
       }
+
       private IEnumerator RotationCooldown()
       {
        _canRotate = false;

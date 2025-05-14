@@ -10,8 +10,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float _speed = 5;
     [SerializeField] private float _turnSpeed = 360;
     private CameraChange _cameraChange;
-    public CubeRotation [] _cubeRotation;
-    public CubeRotation _cube;
+    public CubeRotation _currentCube;
+   // public CubeRotation _cube;
     //  [SerializeField] private float edgeDetectionDistance = 1f;
     [SerializeField] private float groundCheckDistance = 0.2f;
     public bool justRespawned = false;
@@ -36,7 +36,7 @@ public class PlayerMovement : MonoBehaviour
             Look();
 
         }*/
-         if (!_cameraChange._isIsometric && _cube._canRotate == true)
+         if (!_cameraChange._isIsometric && _currentCube._canRotate == true)
         {
             Rotating();
         }
@@ -51,7 +51,7 @@ public class PlayerMovement : MonoBehaviour
         {
             Look();
         }
-        else if (!_cameraChange._isIsometric && _cube._canRotate == true)
+        else if (!_cameraChange._isIsometric && _currentCube._canRotate == true)
         {
             Rotating();
         }
@@ -120,8 +120,8 @@ public class PlayerMovement : MonoBehaviour
     {
         if (_input == Vector3.zero) return;
 
-     //   Debug.Log("Rotating");
-           Physics.Raycast(transform.position, Vector3.down, out RaycastHit hitDown, groundCheckDistance);
+        //   Debug.Log("Rotating");
+        Physics.Raycast(transform.position, Vector3.down, out RaycastHit hitDown, groundCheckDistance);
         Vector3 rotationAxis = Vector3.zero;
 
         if (Input.GetKeyDown(KeyCode.W))
@@ -133,19 +133,22 @@ public class PlayerMovement : MonoBehaviour
         else if (Input.GetKeyDown(KeyCode.D))
             rotationAxis = Vector3.back;
 
-      
 
-        //  _cubeRotation.RotateCube(rotationAxis, transform);
+        //si detecta una figura actualiza _currentCube
         if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, groundCheckDistance + 0.5f))
-          {
-              CubeRotation currentPlatform = hit.collider.GetComponent<CubeRotation>();
-              if (currentPlatform != null)
-              {
-                  currentPlatform.RotateCube(rotationAxis, transform);
-               //   Debug.Log("Rotando");
-              }
-          }
+        {
+            CubeRotation detectedCube = hit.collider.GetComponent<CubeRotation>();
+            if (detectedCube != null)
+            {
+                _currentCube = detectedCube;
+            }
+        }
 
+        // si hay una figura guardada, la rota
+        if (_currentCube != null)
+        {
+            _currentCube.RotateCube(rotationAxis, transform);
+        }
     }
 }
    

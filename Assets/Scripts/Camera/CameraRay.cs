@@ -18,7 +18,6 @@ public class CameraRay : MonoBehaviour
     [SerializeField] private Material _defaultMaterial;
     [SerializeField] private Material _alignedMaterial;
 
-
     void Start()
     {
         
@@ -137,21 +136,22 @@ public class CameraRay : MonoBehaviour
             newPlayerPos.y += 1f;
 
 
-         //   StartCoroutine(MovePlayerSmoothly(newPlayerPos));
-            _player.transform.position = newPlayerPos;
+            StartCoroutine(MovePlayerSmoothly(newPlayerPos));
+         //   _player.transform.position = newPlayerPos;
         }
     }
 
     IEnumerator MovePlayerSmoothly(Vector3 target)
     {
-        float t = 0;
-        Vector3 start = _player.transform.position;
+          float t = 0;
+          Vector3 start = _player.transform.position;
 
-        while (t < 1f)
-        {
-            t += Time.deltaTime * 50f; // velocidad
-            _player.transform.position = Vector3.Lerp(start, target, t);
-            yield return null;
-        }
+          while (t < 1f)
+          {
+              t += Time.deltaTime * 3f; // velocidad
+              _player.transform.position = Vector3.Lerp(start, target, t);
+              yield return null;
+          }
+      
     }
 }

@@ -1,19 +1,22 @@
+using Unity.VisualScripting;
 using UnityEngine;
-
+using static UnityEditor.Experimental.GraphView.GraphView;
+using System.Collections;
 public class Respawn : MonoBehaviour
 {
     private Vector3 _startPosition;
     public Rigidbody _rb;
     public int _limit;
-    public PlayerGrab _playerGrab;
-    [SerializeField] public PlayerMovement _playerMovement;
+
+    [SerializeField] public BoxCollider _player;
     void Start()
     {
         _startPosition = transform.position;
+        Debug.Log("Posicion inicial: " + _startPosition);
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         RespawnObject();
     }
@@ -22,22 +25,27 @@ public class Respawn : MonoBehaviour
     {
         if (transform.position.y <= _limit)
         {
-            _rb.linearVelocity = Vector3.zero;
-
-
-            Collider col = GetComponent<Collider>();
-            if (col != null)
-                col.enabled = false;
-
-
-            transform.position = _startPosition;
-
-            if (col != null)
-                col.enabled = true;
-
-            _playerMovement.justRespawned = true;
-            _playerMovement.Invoke("ResetRespawnFlag", 1f);  
+            StartCoroutine(RespawnRoutine());
         }
+    }
+
+    IEnumerator RespawnRoutine()
+    {
+        // Desactivar físicas y colisiones
+        _player.enabled = false;
+     //   _rb.isKinematic = false;
+        _rb.linearVelocity = Vector3.zero;
+        _rb.angularVelocity = Vector3.zero;
+
+        // Reposicionar
+        transform.position = _startPosition;
+        Debug.Log("Posicion inicial en corrutina: " +  _startPosition);
+        // Esperar un frame para asegurar que las físicas se actualicen
+        yield return null;
+
+        // Reactivar físicas y colisiones
+        _rb.isKinematic = false;
+        _player.enabled = true;
     }
 
 }

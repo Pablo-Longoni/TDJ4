@@ -303,7 +303,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _cameraChange: {fileID: 893716525}
   _player: {fileID: 1714814547}
+  _rb: {fileID: 0}
   moveSpeed: 2
+  _target: {fileID: 138120495}
   _audioManager: {fileID: 375957869}
 --- !u!65 &138120498
 BoxCollider:
@@ -1313,7 +1315,6 @@ MonoBehaviour:
   _isIsometric: 1
   _canChange: 1
   _cameraRotation: {fileID: 893716526}
-  _playerGrab: {fileID: 1714814546}
   _playerTransformation: {fileID: 1714814545}
 --- !u!114 &893716526
 MonoBehaviour:
@@ -2305,7 +2306,6 @@ GameObject:
   - component: {fileID: 1714814547}
   - component: {fileID: 1714814545}
   - component: {fileID: 1714814549}
-  - component: {fileID: 1714814546}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -2346,22 +2346,6 @@ MonoBehaviour:
   _currentTrans: 0
   _cameraChange: {fileID: 893716525}
   _textTrans: {fileID: 1016176627}
---- !u!114 &1714814546
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1714814543}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 078fe7f6e4437fc46b3cff75c8e8c07c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _canGrab: 1
-  _grabRange: 50
-  _grabPoint: {fileID: 355743064}
-  _grabKey: 102
 --- !u!114 &1714814547
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2378,10 +2362,7 @@ MonoBehaviour:
   _rb: {fileID: 1714814548}
   _speed: 13
   _turnSpeed: 360
-  _cubeRotation:
-  - {fileID: 2005186117}
-  - {fileID: 1987779333}
-  _cube: {fileID: 1987779333}
+  _currentCube: {fileID: 191496361}
   groundCheckDistance: 0.6
   justRespawned: 0
 --- !u!54 &1714814548
@@ -2425,8 +2406,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _rb: {fileID: 1714814548}
   _limit: -80
-  _playerGrab: {fileID: 1714814546}
-  _playerMovement: {fileID: 1714814547}
+  _player: {fileID: 1714814550}
 --- !u!65 &1714814550
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -6,9 +6,10 @@ public class DoorTrigger : MonoBehaviour
     private ChangeScene _changeScene;
     public CameraChange _cameraChange;
     [SerializeField] public PlayerMovement _player;
-    public float moveSpeed = 2f; 
+    [SerializeField] public Rigidbody _rb;
+    public float moveSpeed = 0.5f;
    // private bool isMoving = false;
-
+    public GameObject _target;
     [SerializeField] public AudioManager _audioManager;
     string _sceneName = string.Empty;
     void Start()
@@ -18,36 +19,35 @@ public class DoorTrigger : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player") && _cameraChange._isIsometric && !other.GetComponent<PlayerMovement>().justRespawned)
+        if (other.CompareTag("Player") && _cameraChange._isIsometric/* && !other.GetComponent<PlayerMovement>().justRespawned*/)
         {
-            _audioManager.playSound(_audioManager._portal);
+            _changeScene.NextLevel();
+            StartCoroutine(MovePlayerToDoor(_target.transform.position));
+         //   _audioManager.playSound(_audioManager._portal);
 
-                _changeScene.NextLevel();
+           
 
             Debug.Log("Jugador entró en la puerta");
         }
     }
 
-   /* private IEnumerator MovePlayerToDoor(Vector3 targetPosition)
+    private IEnumerator MovePlayerToDoor(Vector3 targetPosition)
     {
-    //   isMoving = true;
+        _player.enabled = false;
+        //   isMoving = true;
         _audioManager.playSound(_audioManager._portal);
         float timeElapsed = 0f;
         Vector3 initialPosition = _player.transform.position;
 
-
-        while (timeElapsed < 1f)
+        while (timeElapsed < 2f)
         {
             timeElapsed += Time.deltaTime * moveSpeed; 
             _player.transform.position = Vector3.Lerp(initialPosition, targetPosition, timeElapsed);
-            _changeScene.NextLevel();
             yield return null;
         }
 
-
-        _changeScene.NextLevel();
         Debug.Log("Jugador entró en la puerta");
-
-    //    isMoving = false; 
-    }*/
+        _player.enabled = true;
+        // isMoving = false; 
+    }
 }

@@ -649,10 +649,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 078fe7f6e4437fc46b3cff75c8e8c07c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _canGrab: 1
-  _grabRange: 50
-  _grabPoint: {fileID: 811779487}
-  _grabKey: 102
 --- !u!4 &492641272
 Transform:
   m_ObjectHideFlags: 0
@@ -702,9 +698,7 @@ MonoBehaviour:
   _rb: {fileID: 492641275}
   _speed: 13
   _turnSpeed: 360
-  _cubeRotation:
-  - {fileID: 30883160}
-  _cube: {fileID: 30883160}
+  _currentCube: {fileID: 30883160}
   groundCheckDistance: 0.6
   justRespawned: 0
 --- !u!54 &492641275
@@ -1276,6 +1270,7 @@ MonoBehaviour:
   _cameraChange: {fileID: 1474532234}
   _player: {fileID: 492641274}
   moveSpeed: 2
+  _target: {fileID: 1106117800}
   _audioManager: {fileID: 220997187}
 --- !u!65 &1106117804
 BoxCollider:
@@ -1984,7 +1979,6 @@ MonoBehaviour:
   _isIsometric: 1
   _canChange: 1
   _cameraRotation: {fileID: 1474532235}
-  _playerGrab: {fileID: 492641271}
   _playerTransformation: {fileID: 492641270}
 --- !u!114 &1474532235
 MonoBehaviour:

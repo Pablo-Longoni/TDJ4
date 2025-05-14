@@ -156,7 +156,6 @@ MonoBehaviour:
   _isIsometric: 1
   _canChange: 1
   _cameraRotation: {fileID: 8203505}
-  _playerGrab: {fileID: 1968460660}
   _playerTransformation: {fileID: 1968460659}
 --- !u!114 &8203505
 MonoBehaviour:
@@ -1956,6 +1955,7 @@ MonoBehaviour:
   _cameraChange: {fileID: 8203504}
   _player: {fileID: 1968460663}
   moveSpeed: 2
+  _target: {fileID: 1287387273}
   _audioManager: {fileID: 607012025}
 --- !u!1 &1326979282
 GameObject:
@@ -2277,10 +2277,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 078fe7f6e4437fc46b3cff75c8e8c07c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _canGrab: 1
-  _grabRange: 50
-  _grabPoint: {fileID: 1219222140}
-  _grabKey: 102
 --- !u!4 &1968460661
 Transform:
   m_ObjectHideFlags: 0
@@ -2330,10 +2326,7 @@ MonoBehaviour:
   _rb: {fileID: 1968460664}
   _speed: 13
   _turnSpeed: 360
-  _cubeRotation:
-  - {fileID: 49217605}
-  - {fileID: 860167366}
-  _cube: {fileID: 860167366}
+  _currentCube: {fileID: 860167366}
   groundCheckDistance: 0.6
   justRespawned: 0
 --- !u!54 &1968460664
