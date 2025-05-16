@@ -8,44 +8,53 @@ public class Respawn : MonoBehaviour
     public Rigidbody _rb;
     public int _limit;
 
-    [SerializeField] public BoxCollider _player;
+   [SerializeField] public BoxCollider [] _collisions;
+
     void Start()
     {
         _startPosition = transform.position;
         Debug.Log("Posicion inicial: " + _startPosition);
     }
 
-    // Update is called once per frame
-    void FixedUpdate()
+
+    void Update()
     {
-        RespawnObject();
+        if (transform.position.y <= _limit)
+        {
+           RespawnRoutine();
+        }
     }
 
-    void RespawnObject()
+   /* void RespawnObject()
     {
         if (transform.position.y <= _limit)
         {
             StartCoroutine(RespawnRoutine());
         }
-    }
+    }*/
 
-    IEnumerator RespawnRoutine()
+    public void RespawnRoutine()
     {
-        // Desactivar f�sicas y colisiones
-        _player.enabled = false;
-        //   _rb.isKinematic = false;
+        // Desactiva collider para evitar colisiones al moverlo
+        foreach (BoxCollider col in _collisions)
+        {
+            col.enabled = false;
+        }
+
+        // Resetea posición y velocidad
+        transform.position = _startPosition;
         _rb.linearVelocity = Vector3.zero;
         _rb.angularVelocity = Vector3.zero;
 
-        // Reposicionar
-        transform.position = _startPosition;
-        Debug.Log("Posicion inicial en corrutina: " + _startPosition);
-        // Esperar un frame para asegurar que las f�sicas se actualicen
-        yield return null;
-
-        // Reactivar f�sicas y colisiones
-        _rb.isKinematic = false;
-        _player.enabled = true;
+        // Reactiva collider después de un pequeño delay
+        Invoke(nameof(EnableCollider), 0.5f);
     }
 
+    void EnableCollider()
+    {
+        foreach (BoxCollider col in _collisions)
+        {
+            col.enabled = true;
+        }
+    }
 }

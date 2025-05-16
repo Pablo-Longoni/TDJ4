@@ -14,12 +14,7 @@ public class PlayerMovement : MonoBehaviour
    // public CubeRotation _cube;
     //  [SerializeField] private float edgeDetectionDistance = 1f;
     [SerializeField] private float groundCheckDistance = 0.2f;
-    public bool justRespawned = false;
 
-    public void ResetRespawnFlag()
-    {
-        justRespawned = false;
-    }
 
     private void Start()
     {
