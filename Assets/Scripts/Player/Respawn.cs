@@ -1,6 +1,6 @@
 using Unity.VisualScripting;
 using UnityEngine;
-using static UnityEditor.Experimental.GraphView.GraphView;
+//using static UnityEditor.Experimental.GraphView.GraphView;
 using System.Collections;
 public class Respawn : MonoBehaviour
 {
@@ -31,19 +31,19 @@ public class Respawn : MonoBehaviour
 
     IEnumerator RespawnRoutine()
     {
-        // Desactivar físicas y colisiones
+        // Desactivar fï¿½sicas y colisiones
         _player.enabled = false;
-     //   _rb.isKinematic = false;
+        //   _rb.isKinematic = false;
         _rb.linearVelocity = Vector3.zero;
         _rb.angularVelocity = Vector3.zero;
 
         // Reposicionar
         transform.position = _startPosition;
-        Debug.Log("Posicion inicial en corrutina: " +  _startPosition);
-        // Esperar un frame para asegurar que las físicas se actualicen
+        Debug.Log("Posicion inicial en corrutina: " + _startPosition);
+        // Esperar un frame para asegurar que las fï¿½sicas se actualicen
         yield return null;
 
-        // Reactivar físicas y colisiones
+        // Reactivar fï¿½sicas y colisiones
         _rb.isKinematic = false;
         _player.enabled = true;
     }
