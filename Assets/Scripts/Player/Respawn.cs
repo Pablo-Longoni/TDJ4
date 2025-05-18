@@ -25,13 +25,16 @@ public class Respawn : MonoBehaviour
         }
     }
 
-   /* void RespawnObject()
-    {
-        if (transform.position.y <= _limit)
-        {
-            StartCoroutine(RespawnRoutine());
-        }
-    }*/
+    /* void RespawnObject()
+     {
+         if (transform.position.y <= _limit)
+         {
+             StartCoroutine(RespawnRoutine());
+         }
+     }*/
+    /// <summary>
+    /// /fff
+    /// </summary>
 
     public void RespawnRoutine()
     {
