@@ -326,7 +326,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.07, y: 0.1, z: 0.04}
+  m_Size: {x: 0.04, y: 0.1, z: 0.03}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!212 &138120499
 SpriteRenderer:
@@ -2364,7 +2364,6 @@ MonoBehaviour:
   _turnSpeed: 360
   _currentCube: {fileID: 191496361}
   groundCheckDistance: 0.6
-  justRespawned: 0
 --- !u!54 &1714814548
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2406,7 +2405,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _rb: {fileID: 1714814548}
   _limit: -80
-  _player: {fileID: 1714814550}
+  _collisions:
+  - {fileID: 844224895}
+  - {fileID: 1714814550}
+  - {fileID: 138120498}
+  - {fileID: 2005186118}
 --- !u!65 &1714814550
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -167,7 +167,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _cameraChange: {fileID: 1553909911}
   _player: {fileID: 1962134563}
+  _rb: {fileID: 1962134564}
   moveSpeed: 2
+  _target: {fileID: 12377493}
   _audioManager: {fileID: 1610948462}
 --- !u!65 &12377496
 BoxCollider:
@@ -2292,7 +2294,7 @@ MonoBehaviour:
   _rotationTurn: 90
   _canRotate: 1
   _rotateCooldown: 2
-  _audioManager: {fileID: 0}
+  _audioManager: {fileID: 1610948462}
 --- !u!4 &1499965630 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 64dbccd9aabd428419f79e4e44e8248a, type: 3}
@@ -2384,7 +2386,6 @@ MonoBehaviour:
   _isIsometric: 1
   _canChange: 1
   _cameraRotation: {fileID: 1553909912}
-  _playerGrab: {fileID: 1962134562}
   _playerTransformation: {fileID: 1962134561}
 --- !u!114 &1553909912
 MonoBehaviour:
@@ -3031,7 +3032,6 @@ GameObject:
   - component: {fileID: 1962134563}
   - component: {fileID: 1962134561}
   - component: {fileID: 1962134565}
-  - component: {fileID: 1962134562}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -3072,22 +3072,6 @@ MonoBehaviour:
   _currentTrans: 0
   _cameraChange: {fileID: 1553909911}
   _textTrans: {fileID: 661348787}
---- !u!114 &1962134562
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1962134559}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 078fe7f6e4437fc46b3cff75c8e8c07c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _canGrab: 1
-  _grabRange: 50
-  _grabPoint: {fileID: 982756477}
-  _grabKey: 102
 --- !u!114 &1962134563
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3104,10 +3088,7 @@ MonoBehaviour:
   _rb: {fileID: 1962134564}
   _speed: 13
   _turnSpeed: 360
-  _cubeRotation:
-  - {fileID: 1828968821}
-  - {fileID: 1278151756}
-  _cube: {fileID: 1278151756}
+  _currentCube: {fileID: 0}
   groundCheckDistance: 0.6
   justRespawned: 0
 --- !u!54 &1962134564
@@ -3151,8 +3132,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _rb: {fileID: 1962134564}
   _limit: -30
-  _playerGrab: {fileID: 1962134562}
-  _playerMovement: {fileID: 1962134563}
+  _player: {fileID: 1962134566}
 --- !u!65 &1962134566
 BoxCollider:
   m_ObjectHideFlags: 0

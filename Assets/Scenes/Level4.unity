@@ -1954,6 +1954,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _cameraChange: {fileID: 8203504}
   _player: {fileID: 1968460663}
+  _rb: {fileID: 0}
   moveSpeed: 2
   _target: {fileID: 1287387273}
   _audioManager: {fileID: 607012025}
@@ -2241,7 +2242,6 @@ GameObject:
   - component: {fileID: 1968460663}
   - component: {fileID: 1968460659}
   - component: {fileID: 1968460662}
-  - component: {fileID: 1968460660}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -2265,18 +2265,6 @@ MonoBehaviour:
   _currentTrans: 0
   _cameraChange: {fileID: 8203504}
   _textTrans: {fileID: 1157520902}
---- !u!114 &1968460660
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1968460658}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 078fe7f6e4437fc46b3cff75c8e8c07c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &1968460661
 Transform:
   m_ObjectHideFlags: 0
@@ -2308,8 +2296,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _rb: {fileID: 1968460664}
   _limit: -30
-  _playerGrab: {fileID: 1968460660}
-  _playerMovement: {fileID: 1968460663}
+  _player: {fileID: 1968460665}
 --- !u!114 &1968460663
 MonoBehaviour:
   m_ObjectHideFlags: 0

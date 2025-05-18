@@ -1,6 +1,6 @@
 using Unity.VisualScripting;
 using UnityEngine;
-using static UnityEditor.Experimental.GraphView.GraphView;
+//using static UnityEditor.Experimental.GraphView.GraphView;
 using System.Collections;
 public class Respawn : MonoBehaviour
 {
@@ -8,44 +8,56 @@ public class Respawn : MonoBehaviour
     public Rigidbody _rb;
     public int _limit;
 
-    [SerializeField] public BoxCollider _player;
+   [SerializeField] public BoxCollider [] _collisions;
+
     void Start()
     {
         _startPosition = transform.position;
         Debug.Log("Posicion inicial: " + _startPosition);
     }
 
-    // Update is called once per frame
-    void FixedUpdate()
-    {
-        RespawnObject();
-    }
 
-    void RespawnObject()
+    void Update()
     {
         if (transform.position.y <= _limit)
         {
-            StartCoroutine(RespawnRoutine());
+           RespawnRoutine();
         }
     }
 
-    IEnumerator RespawnRoutine()
+    /* void RespawnObject()
+     {
+         if (transform.position.y <= _limit)
+         {
+             StartCoroutine(RespawnRoutine());
+         }
+     }*/
+    /// <summary>
+    /// /fff
+    /// </summary>
+
+    public void RespawnRoutine()
     {
-        // Desactivar físicas y colisiones
-        _player.enabled = false;
-     //   _rb.isKinematic = false;
+        // Desactiva collider para evitar colisiones al moverlo
+        foreach (BoxCollider col in _collisions)
+        {
+            col.enabled = false;
+        }
+
+        // Resetea posiciÃ³n y velocidad
+        transform.position = _startPosition;
         _rb.linearVelocity = Vector3.zero;
         _rb.angularVelocity = Vector3.zero;
 
-        // Reposicionar
-        transform.position = _startPosition;
-        Debug.Log("Posicion inicial en corrutina: " +  _startPosition);
-        // Esperar un frame para asegurar que las físicas se actualicen
-        yield return null;
-
-        // Reactivar físicas y colisiones
-        _rb.isKinematic = false;
-        _player.enabled = true;
+        // Reactiva collider despuÃ©s de un pequeÃ±o delay
+        Invoke(nameof(EnableCollider), 0.5f);
     }
 
+    void EnableCollider()
+    {
+        foreach (BoxCollider col in _collisions)
+        {
+            col.enabled = true;
+        }
+    }
 }

@@ -19,22 +19,22 @@ public class AudioManager : MonoBehaviour
 
     public void Awake()
     {
-        DontDestroyOnLoad(gameObject);        
+        DontDestroyOnLoad(gameObject);
 
         AudioSource src = GetComponent<AudioSource>();
-        src.loop = true;                       
+        src.loop = true;
         if (!src.isPlaying)
             src.Play();
     }
     void Start()
     {
-     //   SetBackgroundMusic();
+
     }
 
-    // Update is called once per frame
+
     void Update()
     {
-        
+
     }
 
     private void SetBackgroundMusic()
