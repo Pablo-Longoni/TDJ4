@@ -1,5 +1,6 @@
 
 using System.Collections;
+using System.Collections.Generic;
 using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -9,21 +10,70 @@ public class ChangeScene : MonoBehaviour
 {
     private Animator _transitionAnimator;
     public float _transitionTime;
-  
+
+    // etapas
+    private Dictionary<int, string> firstLevelsByStage = new Dictionary<int, string>()
+    {
+        { 1, "Level1" },
+        { 2, "Level4" },
+        { 3, "Level6" }
+    };
+
+    //lista de niveles
+    private List<string> levelsStage1 = new List<string>() { "Level1", "Level2", "Level3" };
+    private List<string> levelsStage2 = new List<string>() { "Level4", "Level5" };
+    private List<string> levelsStage3 = new List<string>() { "Level6" };
+
     void Start()
     {
         _transitionAnimator = GetComponentInChildren<Animator>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     public void NextLevel()
     {
-       StartCoroutine(SceneLoad());
+
+        string currentScene = SceneManager.GetActiveScene().name;
+        string nextScene = GetNextLevel(currentScene);
+        if (nextScene != "")
+        {
+            StartCoroutine(SceneLoad(nextScene));
+        }
+        else
+        {
+            StartCoroutine(SceneLoad("Stages"));
+        }
+    }
+
+    string GetNextLevel(string currentLevel)
+    {
+        int index;
+
+        if (levelsStage1.Contains(currentLevel))
+        {
+            index = levelsStage1.IndexOf(currentLevel);
+            if (index < levelsStage1.Count - 1)
+                return levelsStage1[index + 1];
+        }
+        else if (levelsStage2.Contains(currentLevel))
+        {
+            index = levelsStage2.IndexOf(currentLevel);
+            if (index < levelsStage2.Count - 1)
+                return levelsStage2[index + 1];
+        }
+        else if (levelsStage3.Contains(currentLevel))
+        {
+
+        }
+
+        return "";
+    }
+
+    public IEnumerator SceneLoad(string sceneName)
+    {
+        _transitionAnimator.SetTrigger("StartTransition");
+        yield return new WaitForSeconds(_transitionTime);
+        SceneManager.LoadScene(sceneName);
     }
 
     public void RestartLevel()
@@ -31,16 +81,18 @@ public class ChangeScene : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
-    public IEnumerator SceneLoad()
-    {
-        _transitionAnimator.SetTrigger("StartTransition");
-        yield return new WaitForSeconds(_transitionTime);
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-    }
 
     public void StartButton()
     {
-        SceneManager.LoadScene("Level1");
+        SceneManager.LoadScene("Stages");
+    }
+
+    public void StageSelector(int stageNumber)
+    {
+        if (firstLevelsByStage.ContainsKey(stageNumber))
+        {
+            SceneManager.LoadScene(firstLevelsByStage[stageNumber]);
+        }
     }
 
     public void BackToMenu()

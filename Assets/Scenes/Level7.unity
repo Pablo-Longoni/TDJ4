@@ -167,7 +167,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _cameraChange: {fileID: 1553909911}
   _player: {fileID: 1962134563}
-  _rb: {fileID: 1962134564}
   moveSpeed: 2
   _target: {fileID: 12377493}
   _audioManager: {fileID: 1610948462}
@@ -1316,37 +1315,6 @@ RectTransform:
   m_AnchoredPosition: {x: -700, y: 417}
   m_SizeDelta: {x: 700, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!1 &982756476
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 982756477}
-  m_Layer: 6
-  m_Name: GrabPoint
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &982756477
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 982756476}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.9, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1962134560}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1008976081
 GameObject:
   m_ObjectHideFlags: 0
@@ -2567,59 +2535,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1676011356
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1676011357}
-  - component: {fileID: 1676011358}
-  m_Layer: 6
-  m_Name: GrabZone
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1676011357
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1676011356}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1962134560}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &1676011358
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1676011356}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1.5, y: 0, z: 1.5}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1828968819
 GameObject:
   m_ObjectHideFlags: 0
@@ -3051,9 +2966,7 @@ Transform:
   m_LocalPosition: {x: -4.5, y: 71.7, z: 42}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 982756477}
-  - {fileID: 1676011357}
+  m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1962134561
@@ -3090,7 +3003,6 @@ MonoBehaviour:
   _turnSpeed: 360
   _currentCube: {fileID: 0}
   groundCheckDistance: 0.6
-  justRespawned: 0
 --- !u!54 &1962134564
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3132,7 +3044,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _rb: {fileID: 1962134564}
   _limit: -30
-  _player: {fileID: 1962134566}
+  _collisions: []
 --- !u!65 &1962134566
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -915,7 +915,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _cameraChange: {fileID: 1598393187}
   _player: {fileID: 2111671656}
-  _rb: {fileID: 2111671657}
   moveSpeed: 2
   _target: {fileID: 720387963}
   _audioManager: {fileID: 1922197126}
@@ -1792,37 +1791,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 10, y: 2.220446e-16, z: 10}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!1 &1787520673
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1787520674}
-  m_Layer: 0
-  m_Name: GrabPoint
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1787520674
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1787520673}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.9, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 2111671661}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1922197125
 GameObject:
   m_ObjectHideFlags: 0
@@ -1858,7 +1826,7 @@ MonoBehaviour:
   _gameMusic: {fileID: 0}
   _menuMusic: {fileID: 8300000, guid: 7a2d6f9c0e05fce48b8aee81ca7c3995, type: 3}
   _turning: {fileID: 8300000, guid: 8bde3e0726cd063488bbbd57053648e3, type: 3}
-  _portal: {fileID: 8300000, guid: bcfd63baeb09e8d4897462015cdac119, type: 3}
+  _portal: {fileID: 8300000, guid: 0f71ce1ad90644643a42eb571ee0502c, type: 3}
 --- !u!82 &1922197127
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1872,7 +1840,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.5
+  m_Volume: 0.7
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -2119,7 +2087,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2048968718
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2238,59 +2206,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2048968717}
   m_CullTransparentMesh: 1
---- !u!1 &2074894393
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2074894394}
-  - component: {fileID: 2074894395}
-  m_Layer: 0
-  m_Name: GrabZone
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2074894394
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2074894393}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 2111671661}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &2074894395
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2074894393}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1.5, y: 0, z: 1.5}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &2111671652
 GameObject:
   m_ObjectHideFlags: 0
@@ -2328,7 +2243,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _rb: {fileID: 2111671657}
   _limit: -30
-  _player: {fileID: 2111671658}
+  _collisions: []
 --- !u!114 &2111671654
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2363,7 +2278,6 @@ MonoBehaviour:
   _turnSpeed: 360
   _currentCube: {fileID: 1715641909}
   groundCheckDistance: 0.6
-  justRespawned: 0
 --- !u!54 &2111671657
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2477,9 +2391,7 @@ Transform:
   m_LocalPosition: {x: -4.13, y: 29.1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1787520674}
-  - {fileID: 2074894394}
+  m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &7639238967919474251
