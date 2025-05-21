@@ -10,6 +10,8 @@ public class ChangeScene : MonoBehaviour
 {
     private Animator _transitionAnimator;
     public float _transitionTime;
+    public GameObject pausePanel;
+    private bool isPaused = false;
 
     // etapas
     private Dictionary<int, string> firstLevelsByStage = new Dictionary<int, string>()
@@ -29,6 +31,30 @@ public class ChangeScene : MonoBehaviour
         _transitionAnimator = GetComponentInChildren<Animator>();
     }
 
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            TogglePause();
+        }
+    }
+
+
+    void TogglePause()
+    {
+        isPaused = !isPaused;
+
+        if (isPaused)
+        {
+            pausePanel.SetActive(true);
+            Time.timeScale = 0f;
+        }
+        else
+        {
+            pausePanel.SetActive(false);
+            Time.timeScale = 1f;
+        }
+    }
 
     public void NextLevel()
     {
@@ -103,5 +129,15 @@ public class ChangeScene : MonoBehaviour
     public void GoToCredits()
     {
         SceneManager.LoadScene("Credits");
+    }
+
+    public void Exit()
+    {
+        Debug.Log("Cerrando el juego...");
+#if UNITY_EDITOR
+    UnityEditor.EditorApplication.isPlaying = false;
+#else
+        Application.Quit();
+#endif
     }
 }
