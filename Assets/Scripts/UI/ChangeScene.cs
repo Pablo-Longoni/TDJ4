@@ -18,13 +18,13 @@ public class ChangeScene : MonoBehaviour
     {
         { 1, "Level1" },
         { 2, "Level4" },
-        { 3, "Level6" }
+        { 3, "Level7" }
     };
 
     //lista de niveles
     private List<string> levelsStage1 = new List<string>() { "Level1", "Level2", "Level3" };
     private List<string> levelsStage2 = new List<string>() { "Level4", "Level5" };
-    private List<string> levelsStage3 = new List<string>() { "Level6" };
+    private List<string> levelsStage3 = new List<string>() { "Level7", "Level9", "Level10", "Level6" };
 
     void Start()
     {
@@ -90,6 +90,9 @@ public class ChangeScene : MonoBehaviour
         else if (levelsStage3.Contains(currentLevel))
         {
 
+            index = levelsStage3.IndexOf(currentLevel);
+            if (index < levelsStage3.Count - 1)
+                return levelsStage3[index + 1];
         }
 
         return "";
@@ -129,6 +132,11 @@ public class ChangeScene : MonoBehaviour
     public void GoToCredits()
     {
         SceneManager.LoadScene("Credits");
+    }
+
+    public void GoToStage()
+    {
+        SceneManager.LoadScene("Stages");
     }
 
     public void Exit()
