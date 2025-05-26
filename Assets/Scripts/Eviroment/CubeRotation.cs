@@ -5,15 +5,28 @@ public class CubeRotation : MonoBehaviour
 {
   private Quaternion _targetRotation;
   private float rotationSpeed = 200f;
-  private bool _shouldRotate = false;
+  public bool _shouldRotate = false;
   public float _rotationTurn = 90f;
   public bool _canRotate = true;
   public float _rotateCooldown = 2f;
+  
+  //Blink figura
+  public MeshRenderer _renderer;
+  private Coroutine _blinkCoroutine;
+  private float _fadeSpeed = 0.6f;
+  private Color _originalColor;
+  private Color _targetColor;
 
   [SerializeField] public AudioManager _audioManager;
 
-  private bool _isInCooldown = false;
+  public bool _isInCooldown = false;
+  public CameraChange _cameraChange;
 
+  void Start()
+  {
+        _originalColor = _renderer.material.color;
+        _targetColor = _originalColor * 0.8f;
+    }
   void Update()
   {
     if (_shouldRotate)
@@ -52,10 +65,63 @@ public class CubeRotation : MonoBehaviour
   {
     _isInCooldown = true;
     _canRotate = false;
-
+    _cameraChange._canChange = false;
     yield return new WaitForSeconds(_rotateCooldown);
 
     _canRotate = true;
     _isInCooldown = false;
-  }
+    _cameraChange._canChange = true;
+    }
+
+
+    public void StartBlinking()
+    {
+        if (_blinkCoroutine == null)
+        {
+            _blinkCoroutine = StartCoroutine(Blink());
+        }
+    }
+
+    public void StopBlinking()
+    {
+        if (_blinkCoroutine != null)
+        {
+            StopCoroutine(_blinkCoroutine);
+            _blinkCoroutine = null;
+            _renderer.material.color = _originalColor; 
+        }
+    }
+
+
+    private IEnumerator Blink()
+    {
+        float t = 0f;
+        bool fadingToTarget = true;
+
+        while (true)
+        {
+            t += Time.deltaTime * _fadeSpeed;
+
+            if (fadingToTarget)
+            {
+                _renderer.material.color = Color.Lerp(_originalColor, _targetColor, t);
+                if (t >= 1f)
+                {
+                    t = 0f;
+                    fadingToTarget = false;
+                }
+            }
+            else
+            {
+                _renderer.material.color = Color.Lerp(_targetColor, _originalColor, t);
+                if (t >= 1f)
+                {
+                    t = 0f;
+                    fadingToTarget = true;
+                }
+            }
+
+            yield return null;
+        }
+    }
 }

@@ -437,10 +437,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fce5eba5bc2ab44daa042a9b1b45df0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _shouldRotate: 0
   _rotationTurn: 90
   _canRotate: 1
   _rotateCooldown: 0.7
+  _renderer: {fileID: 0}
   _audioManager: {fileID: 0}
+  _isInCooldown: 0
+  _cameraChange: {fileID: 0}
 --- !u!1 &133158882
 GameObject:
   m_ObjectHideFlags: 0
@@ -457,6 +461,7 @@ GameObject:
   - component: {fileID: 133158892}
   - component: {fileID: 133158890}
   - component: {fileID: 133158891}
+  - component: {fileID: 133158893}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -612,7 +617,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _rb: {fileID: 133158887}
   _limit: -30
-  _player: {fileID: 133158883}
+  _collisions: []
 --- !u!114 &133158892
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -629,9 +634,24 @@ MonoBehaviour:
   _rb: {fileID: 133158887}
   _speed: 15
   _turnSpeed: 720
-  _currentCube: {fileID: 0}
   groundCheckDistance: 0.2
-  justRespawned: 0
+  _currentCube: {fileID: 1819116744}
+--- !u!114 &133158893
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 133158882}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59eb192f8e0abbe42a0c266068f1e1bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _canGrab: 0
+  _grabRange: 2
+  _grabPoint: {fileID: 1944661099}
+  _grabKey: 102
 --- !u!1 &210111497
 GameObject:
   m_ObjectHideFlags: 0
@@ -850,6 +870,114 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 317876086}
   m_SourcePrefab: {fileID: 100100000, guid: 64dbccd9aabd428419f79e4e44e8248a, type: 3}
+--- !u!1 &285826723
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 285826724}
+  - component: {fileID: 285826727}
+  - component: {fileID: 285826726}
+  - component: {fileID: 285826725}
+  m_Layer: 0
+  m_Name: GrabCube
+  m_TagString: Movable
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &285826724
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 285826723}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: -0.0024000022, y: 0.010500001, z: 0.0012899931}
+  m_LocalScale: {x: 0.0009999998, y: 0.001, z: 0.0009999998}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1819116747}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &285826725
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 285826723}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &285826726
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 285826723}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 25be64a863cfc9e489284d06ebde17a2, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &285826727
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 285826723}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &291382117
 GameObject:
   m_ObjectHideFlags: 0
@@ -1166,10 +1294,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fce5eba5bc2ab44daa042a9b1b45df0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _shouldRotate: 0
   _rotationTurn: 90
   _canRotate: 1
   _rotateCooldown: 2
+  _renderer: {fileID: 0}
   _audioManager: {fileID: 0}
+  _isInCooldown: 0
+  _cameraChange: {fileID: 0}
 --- !u!65 &317876084
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1663,7 +1795,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!108 &410087040
 Light:
   m_ObjectHideFlags: 0
@@ -2015,6 +2147,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _transitionTime: 0
+  pausePanel: {fileID: 0}
 --- !u!4 &688380929
 Transform:
   m_ObjectHideFlags: 0
@@ -2099,6 +2232,10 @@ MonoBehaviour:
   _canChange: 1
   _cameraRotation: {fileID: 716789542}
   _playerTransformation: {fileID: 133158890}
+  _changeScene: {fileID: 688380928}
+  currentState: 0
+  _holdTimer: 0
+  _holdDuration: 0.5
 --- !u!1 &748945564
 GameObject:
   m_ObjectHideFlags: 0
@@ -2673,10 +2810,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fce5eba5bc2ab44daa042a9b1b45df0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _shouldRotate: 0
   _rotationTurn: 90
   _canRotate: 1
   _rotateCooldown: 2
+  _renderer: {fileID: 0}
   _audioManager: {fileID: 0}
+  _isInCooldown: 0
+  _cameraChange: {fileID: 0}
 --- !u!4 &956743658 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: f0ae903406bce0e4eb96debbce39377f, type: 3}
@@ -3001,10 +3142,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fce5eba5bc2ab44daa042a9b1b45df0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _shouldRotate: 0
   _rotationTurn: 90
   _canRotate: 1
   _rotateCooldown: 0.77
+  _renderer: {fileID: 0}
   _audioManager: {fileID: 0}
+  _isInCooldown: 0
+  _cameraChange: {fileID: 0}
 --- !u!65 &1184867440
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3198,7 +3343,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _rb: {fileID: 1288920043}
   _limit: -30
-  _player: {fileID: 0}
+  _collisions: []
 --- !u!1001 &1316158911
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3375,10 +3520,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fce5eba5bc2ab44daa042a9b1b45df0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _shouldRotate: 0
   _rotationTurn: 90
   _canRotate: 1
   _rotateCooldown: 0.77
+  _renderer: {fileID: 0}
   _audioManager: {fileID: 0}
+  _isInCooldown: 0
+  _cameraChange: {fileID: 0}
 --- !u!114 &1316158924
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3424,7 +3573,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 133158886}
@@ -3448,7 +3597,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.5, y: 0, z: 1.5}
+  m_Size: {x: 4, y: 0, z: 4}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1371421229
 GameObject:
@@ -3628,7 +3777,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Transformations
+  m_text: SWAPS
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3853,10 +4002,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fce5eba5bc2ab44daa042a9b1b45df0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _shouldRotate: 0
   _rotationTurn: 90
   _canRotate: 1
   _rotateCooldown: 2
+  _renderer: {fileID: 0}
   _audioManager: {fileID: 0}
+  _isInCooldown: 0
+  _cameraChange: {fileID: 0}
 --- !u!4 &1532831846 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: f0ae903406bce0e4eb96debbce39377f, type: 3}
@@ -4290,10 +4443,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fce5eba5bc2ab44daa042a9b1b45df0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _shouldRotate: 0
   _rotationTurn: 90
   _canRotate: 1
   _rotateCooldown: 0.77
+  _renderer: {fileID: 0}
   _audioManager: {fileID: 0}
+  _isInCooldown: 0
+  _cameraChange: {fileID: 0}
 --- !u!65 &1778298331
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4418,7 +4575,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 64dbccd9aabd428419f79e4e44e8248a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 285826724}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 64dbccd9aabd428419f79e4e44e8248a, type: 3}
       insertIndex: -1
@@ -4537,10 +4697,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fce5eba5bc2ab44daa042a9b1b45df0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _shouldRotate: 0
   _rotationTurn: 90
   _canRotate: 1
   _rotateCooldown: 2
+  _renderer: {fileID: 0}
   _audioManager: {fileID: 0}
+  _isInCooldown: 0
+  _cameraChange: {fileID: 0}
 --- !u!4 &1819116747 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 64dbccd9aabd428419f79e4e44e8248a, type: 3}

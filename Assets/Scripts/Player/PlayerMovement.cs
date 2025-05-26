@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.InputSystem;
-
+using System.Collections;
 public class PlayerMovement : MonoBehaviour
 {
 
@@ -9,14 +9,12 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Rigidbody _rb;
     [SerializeField] private float _speed = 5;
     [SerializeField] private float _turnSpeed = 360;
-    private CameraChange _cameraChange;
-    public CubeRotation _currentCube;
-   // public CubeRotation _cube;
-    //  [SerializeField] private float edgeDetectionDistance = 1f;
     [SerializeField] private float groundCheckDistance = 0.2f;
 
+    private CameraChange _cameraChange;
+    public CubeRotation _currentCube;
 
-    private void Start()
+     private void Start()
     {
         _cameraChange = FindAnyObjectByType<CameraChange>();
     }
@@ -25,13 +23,13 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         GatherInput();
+        CheckCurrentCube();
+        /*  if (_cameraChange._isIsometric)
+          {
+              Look();
 
-      /*  if (_cameraChange._isIsometric)
-        {
-            Look();
-
-        }*/
-         if (!_cameraChange._isIsometric && _currentCube._canRotate == true)
+          }*/
+        if (!_cameraChange._isIsometric && _currentCube._canRotate == true)
         {
             Rotating();
         }
@@ -111,6 +109,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    // Rotacion de la figura
     public void Rotating()
     {
         if (_input == Vector3.zero) return;
@@ -136,6 +135,7 @@ public class PlayerMovement : MonoBehaviour
             if (detectedCube != null)
             {
                 _currentCube = detectedCube;
+                _currentCube.StartBlinking();
             }
         }
 
@@ -143,6 +143,22 @@ public class PlayerMovement : MonoBehaviour
         if (_currentCube != null)
         {
             _currentCube.RotateCube(rotationAxis, transform);
+        }
+    }
+
+
+    void CheckCurrentCube()
+    {
+        if (_input == Vector3.zero) return;
+        if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, groundCheckDistance + 0.5f))
+        {
+            CubeRotation detectedCube = hit.collider.GetComponent<CubeRotation>();
+            if (detectedCube != null && detectedCube != _currentCube)
+            {
+             _currentCube.StopBlinking();
+             _currentCube = detectedCube;
+             _currentCube.StartBlinking();
+            }
         }
     }
 }

@@ -17,13 +17,13 @@ public class ChangeScene : MonoBehaviour
     private Dictionary<int, string> firstLevelsByStage = new Dictionary<int, string>()
     {
         { 1, "Level1" },
-        { 2, "Level4" },
+        { 2, "Level3.5" },
         { 3, "Level7" }
     };
 
     //lista de niveles
     private List<string> levelsStage1 = new List<string>() { "Level1", "Level2", "Level3" };
-    private List<string> levelsStage2 = new List<string>() { "Level4", "Level5" };
+    private List<string> levelsStage2 = new List<string>() { "Level3.5", "Level4", "Level5" };
     private List<string> levelsStage3 = new List<string>() { "Level7", "Level9", "Level10", "Level6" };
 
     void Start()
@@ -147,5 +147,15 @@ public class ChangeScene : MonoBehaviour
 #else
         Application.Quit();
 #endif
+    }
+
+    public void NextLvl()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+
+    public void PreviousLvl()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
     }
 }
