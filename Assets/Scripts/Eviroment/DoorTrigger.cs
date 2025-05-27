@@ -6,7 +6,7 @@ public class DoorTrigger : MonoBehaviour
     private ChangeScene _changeScene;
     public CameraChange _cameraChange;
     [SerializeField] public PlayerMovement _player;
-    [SerializeField] public Rigidbody _rb;
+
     public float moveSpeed = 0.5f;
    // private bool isMoving = false;
     public GameObject _target;

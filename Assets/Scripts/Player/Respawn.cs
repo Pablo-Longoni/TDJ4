@@ -10,10 +10,14 @@ public class Respawn : MonoBehaviour
 
    [SerializeField] public BoxCollider [] _collisions;
 
+    private ChangeScene _changeScene;
     void Start()
     {
         _startPosition = transform.position;
         Debug.Log("Posicion inicial: " + _startPosition);
+
+       _changeScene = GameObject.FindGameObjectWithTag("GameController").GetComponent<ChangeScene>();
+
     }
 
 
@@ -21,7 +25,8 @@ public class Respawn : MonoBehaviour
     {
         if (transform.position.y <= _limit)
         {
-           RespawnRoutine();
+            _changeScene.RestartLevel();
+         //  RespawnRoutine();
         }
     }
 
