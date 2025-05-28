@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
-using UnityEngine.InputSystem;
-using System.Collections;
+
 public class PlayerMovement : MonoBehaviour
 {
+    public PlayerInputReader inputReader; // Asignar en el Inspector
 
     public Vector3 _input;
 
@@ -14,22 +14,17 @@ public class PlayerMovement : MonoBehaviour
     private CameraChange _cameraChange;
     public CubeRotation _currentCube;
 
-     private void Start()
+    private void Start()
     {
         _cameraChange = FindAnyObjectByType<CameraChange>();
     }
-
 
     void Update()
     {
         GatherInput();
         CheckCurrentCube();
-        /*  if (_cameraChange._isIsometric)
-          {
-              Look();
 
-          }*/
-        if (!_cameraChange._isIsometric && _currentCube._canRotate == true)
+        if (!_cameraChange._isIsometric && _currentCube._canRotate)
         {
             Rotating();
         }
@@ -44,22 +39,22 @@ public class PlayerMovement : MonoBehaviour
         {
             Look();
         }
-        else if (!_cameraChange._isIsometric && _currentCube._canRotate == true)
+        else if (!_cameraChange._isIsometric && _currentCube._canRotate)
         {
             Rotating();
         }
     }
+
     void GatherInput()
     {
-        //  _input = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
-        Vector3 rawInput = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
+        Vector2 input2D = inputReader.MoveInput;
+        Vector3 rawInput = new Vector3(input2D.x, 0, input2D.y);
 
         if (_cameraChange._isIsometric && Camera.main != null)
         {
             Vector3 camForward = Camera.main.transform.forward;
             Vector3 camRight = Camera.main.transform.right;
 
-            // Aseguramos que estén en plano horizontal
             camForward.y = 0;
             camRight.y = 0;
 
@@ -78,17 +73,8 @@ public class PlayerMovement : MonoBehaviour
     {
         if (_input != Vector3.zero)
         {
-            /* var matrix = Matrix4x4.Rotate(Quaternion.Euler(0, 45, 0));
-
-             var skewdInput = matrix.MultiplyPoint3x4(_input);
-
-             var relative = (transform.position + skewdInput) - transform.position;
-             var rotation = Quaternion.LookRotation(relative, Vector3.up);
-
-             transform.rotation = Quaternion.RotateTowards(transform.rotation, rotation, _turnSpeed * Time.deltaTime);*/
             Quaternion rotation = Quaternion.LookRotation(_input, Vector3.up);
-             transform.rotation = Quaternion.RotateTowards(transform.rotation, rotation, _turnSpeed * Time.fixedDeltaTime);
-
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, rotation, _turnSpeed * Time.fixedDeltaTime);
         }
     }
 
@@ -96,25 +82,19 @@ public class PlayerMovement : MonoBehaviour
     {
         if (_cameraChange._isIsometric)
         {
-          //  _rb.MovePosition(transform.position + _input * _speed * Time.deltaTime);
             _rb.MovePosition(transform.position + (transform.forward * _input.magnitude) * _speed * Time.deltaTime);
             _rb.constraints = RigidbodyConstraints.FreezeRotation;
-            //    Debug.Log("Movimiento isometrico");
         }
         else
         {
-
             _rb.constraints = RigidbodyConstraints.FreezeAll;
-            //  Debug.Log("Movimiento cential");
         }
     }
 
-    // Rotacion de la figura
     public void Rotating()
     {
         if (_input == Vector3.zero) return;
 
-        //   Debug.Log("Rotating");
         Physics.Raycast(transform.position, Vector3.down, out RaycastHit hitDown, groundCheckDistance);
         Vector3 rotationAxis = Vector3.zero;
 
@@ -127,8 +107,6 @@ public class PlayerMovement : MonoBehaviour
         else if (Input.GetKeyDown(KeyCode.D))
             rotationAxis = Vector3.back;
 
-
-        //si detecta una figura actualiza _currentCube
         if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, groundCheckDistance + 0.5f))
         {
             CubeRotation detectedCube = hit.collider.GetComponent<CubeRotation>();
@@ -139,25 +117,24 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
-        // si hay una figura guardada, la rota
         if (_currentCube != null)
         {
             _currentCube.RotateCube(rotationAxis, transform);
         }
     }
 
-
     void CheckCurrentCube()
     {
         if (_input == Vector3.zero) return;
+
         if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, groundCheckDistance + 0.5f))
         {
             CubeRotation detectedCube = hit.collider.GetComponent<CubeRotation>();
             if (detectedCube != null && detectedCube != _currentCube)
             {
-             _currentCube.StopBlinking();
-             _currentCube = detectedCube;
-             _currentCube.StartBlinking();
+                _currentCube?.StopBlinking();
+                _currentCube = detectedCube;
+                _currentCube.StartBlinking();
             }
         }
     }
