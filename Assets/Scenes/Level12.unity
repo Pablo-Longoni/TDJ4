@@ -133,15 +133,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 598830137108701039, guid: 73b0861027af1cf44a2fa0c0dea35a72, type: 3}
       propertyPath: m_LocalScale.x
-      value: 50.540985
+      value: 45
       objectReference: {fileID: 0}
     - target: {fileID: 598830137108701039, guid: 73b0861027af1cf44a2fa0c0dea35a72, type: 3}
       propertyPath: m_LocalScale.y
-      value: 63.680843
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 598830137108701039, guid: 73b0861027af1cf44a2fa0c0dea35a72, type: 3}
       propertyPath: m_LocalScale.z
-      value: 40.11238
+      value: 45
       objectReference: {fileID: 0}
     - target: {fileID: 598830137108701039, guid: 73b0861027af1cf44a2fa0c0dea35a72, type: 3}
       propertyPath: m_LocalPosition.x
@@ -149,7 +149,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 598830137108701039, guid: 73b0861027af1cf44a2fa0c0dea35a72, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 71.85
+      value: 72.67
       objectReference: {fileID: 0}
     - target: {fileID: 598830137108701039, guid: 73b0861027af1cf44a2fa0c0dea35a72, type: 3}
       propertyPath: m_LocalPosition.z
@@ -368,7 +368,7 @@ Transform:
   m_GameObject: {fileID: 198949546}
   serializedVersion: 2
   m_LocalRotation: {x: -0.06444657, y: 0.3817512, z: 0.026694642, w: 0.921629}
-  m_LocalPosition: {x: -24.48819, y: 8.865224, z: -72.799}
+  m_LocalPosition: {x: -41.4, y: 15.6, z: -71.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -847,7 +847,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &325951049
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2150,7 +2150,7 @@ Transform:
   m_GameObject: {fileID: 1257611651}
   serializedVersion: 2
   m_LocalRotation: {x: -0.06444657, y: 0.3817512, z: 0.026694642, w: 0.921629}
-  m_LocalPosition: {x: -24.488192, y: 8.865224, z: -72.799}
+  m_LocalPosition: {x: -41.4, y: 15.6, z: -71.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2164,6 +2164,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2126083849}
     m_Modifications:
+    - target: {fileID: 908840771699955729, guid: c8ee2eec68e79f141ae8e8bf8b4c46eb, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 908840771699955729, guid: c8ee2eec68e79f141ae8e8bf8b4c46eb, type: 3}
+      propertyPath: _audioManager
+      value: 
+      objectReference: {fileID: 1610948462}
+    - target: {fileID: 908840771699955729, guid: c8ee2eec68e79f141ae8e8bf8b4c46eb, type: 3}
+      propertyPath: _cameraChange
+      value: 
+      objectReference: {fileID: 1553909911}
     - target: {fileID: 3774617581507305700, guid: c8ee2eec68e79f141ae8e8bf8b4c46eb, type: 3}
       propertyPath: m_Name
       value: BigLv3
@@ -2246,7 +2258,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1532697658
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2396,7 +2408,7 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1610948461}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}

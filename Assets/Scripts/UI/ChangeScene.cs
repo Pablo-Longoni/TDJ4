@@ -24,7 +24,7 @@ public class ChangeScene : MonoBehaviour
     //lista de niveles
     private List<string> levelsStage1 = new List<string>() { "Level1", "Level2", "Level3" };
     private List<string> levelsStage2 = new List<string>() { "Level3.5", "Level4", "Level5" };
-    private List<string> levelsStage3 = new List<string>() { "Level7", "Level9", "Level10", "Level6" };
+    private List<string> levelsStage3 = new List<string>() { "Level7", "Level9", "Level10", "Level11", "Level12", "Level13"};
 
     void Start()
     {
