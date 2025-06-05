@@ -9,7 +9,7 @@ public class CubeRotation : MonoBehaviour
   public float _rotationTurn = 90f;
   public bool _canRotate = true;
   public float _rotateCooldown = 2f;
-  
+
   //Blink figura
   public MeshRenderer _renderer;
   private Coroutine _blinkCoroutine;
@@ -24,9 +24,9 @@ public class CubeRotation : MonoBehaviour
 
   void Start()
   {
-        _originalColor = _renderer.material.color;
-        _targetColor = _originalColor * 0.8f;
-    }
+    _originalColor = _renderer.material.color;
+    _targetColor = _originalColor * 0.8f;
+  }
   void Update()
   {
     if (_shouldRotate)
@@ -37,6 +37,25 @@ public class CubeRotation : MonoBehaviour
       {
         transform.rotation = _targetRotation;
         _shouldRotate = false;
+      }
+      float horizontal = Input.GetAxis("Horizontal");
+      float vertical = Input.GetAxis("Vertical");
+
+      if (horizontal < -0.5f)
+      {
+        RotateCube(Vector3.up, transform);
+      }
+      else if (horizontal > 0.5f)
+      {
+        RotateCube(Vector3.down, transform);
+      }
+      else if (vertical > 0.5f)
+      {
+        RotateCube(Vector3.right, transform);
+      }
+      else if (vertical < -0.5f)
+      {
+        RotateCube(Vector3.left, transform);
       }
     }
   }
@@ -71,57 +90,57 @@ public class CubeRotation : MonoBehaviour
     _canRotate = true;
     _isInCooldown = false;
     _cameraChange._canChange = true;
-    }
+  }
 
 
-    public void StartBlinking()
+  public void StartBlinking()
+  {
+    if (_blinkCoroutine == null)
     {
-        if (_blinkCoroutine == null)
-        {
-            _blinkCoroutine = StartCoroutine(Blink());
-        }
+      _blinkCoroutine = StartCoroutine(Blink());
     }
+  }
 
-    public void StopBlinking()
+  public void StopBlinking()
+  {
+    if (_blinkCoroutine != null)
     {
-        if (_blinkCoroutine != null)
-        {
-            StopCoroutine(_blinkCoroutine);
-            _blinkCoroutine = null;
-            _renderer.material.color = _originalColor; 
-        }
+      StopCoroutine(_blinkCoroutine);
+      _blinkCoroutine = null;
+      _renderer.material.color = _originalColor;
     }
+  }
 
 
-    private IEnumerator Blink()
+  private IEnumerator Blink()
+  {
+    float t = 0f;
+    bool fadingToTarget = true;
+
+    while (true)
     {
-        float t = 0f;
-        bool fadingToTarget = true;
+      t += Time.deltaTime * _fadeSpeed;
 
-        while (true)
+      if (fadingToTarget)
+      {
+        _renderer.material.color = Color.Lerp(_originalColor, _targetColor, t);
+        if (t >= 1f)
         {
-            t += Time.deltaTime * _fadeSpeed;
-
-            if (fadingToTarget)
-            {
-                _renderer.material.color = Color.Lerp(_originalColor, _targetColor, t);
-                if (t >= 1f)
-                {
-                    t = 0f;
-                    fadingToTarget = false;
-                }
-            }
-            else
-            {
-                _renderer.material.color = Color.Lerp(_targetColor, _originalColor, t);
-                if (t >= 1f)
-                {
-                    t = 0f;
-                    fadingToTarget = true;
-                }
-            }
-
-            yield return null;
+          t = 0f;
+          fadingToTarget = false;
         }
+      }
+      else
+      {
+        _renderer.material.color = Color.Lerp(_targetColor, _originalColor, t);
+        if (t >= 1f)
+        {
+          t = 0f;
+          fadingToTarget = true;
+        }
+      }
+
+      yield return null;
     }
+  }
 }

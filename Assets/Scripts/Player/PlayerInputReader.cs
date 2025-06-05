@@ -17,11 +17,11 @@ public class PlayerInputReader : MonoBehaviour
     {
         _controls.Enable();
 
-        
+
         _controls.Gameplay.Move.performed += ctx => MoveInput = ctx.ReadValue<Vector2>();
         _controls.Gameplay.Move.canceled += ctx => MoveInput = Vector2.zero;
 
-       
+
         //_controls.UI.RotateCamera.performed += ctx => RotateInput = ctx.ReadValue<float>();
         //_controls.UI.RotateCamera.canceled += ctx => RotateInput = 0f;
 

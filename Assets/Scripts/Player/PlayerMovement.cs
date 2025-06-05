@@ -95,18 +95,25 @@ public class PlayerMovement : MonoBehaviour
     {
         if (_input == Vector3.zero) return;
 
-        Physics.Raycast(transform.position, Vector3.down, out RaycastHit hitDown, groundCheckDistance);
         Vector3 rotationAxis = Vector3.zero;
 
-        if (Input.GetKeyDown(KeyCode.W))
+        // W o stick hacia adelante
+        if (Input.GetKeyDown(KeyCode.W) || _input.z > 0.5f)
             rotationAxis = Vector3.left;
-        else if (Input.GetKeyDown(KeyCode.S))
+
+        // S o stick hacia atrás
+        else if (Input.GetKeyDown(KeyCode.S) || _input.z < -0.5f)
             rotationAxis = Vector3.right;
-        else if (Input.GetKeyDown(KeyCode.A))
+
+        // A o stick hacia la izquierda
+        else if (Input.GetKeyDown(KeyCode.A) || _input.x < -0.5f)
             rotationAxis = Vector3.forward;
-        else if (Input.GetKeyDown(KeyCode.D))
+
+        // D o stick hacia la derecha
+        else if (Input.GetKeyDown(KeyCode.D) || _input.x > 0.5f)
             rotationAxis = Vector3.back;
 
+        // Verificar si hay un cubo debajo
         if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, groundCheckDistance + 0.5f))
         {
             CubeRotation detectedCube = hit.collider.GetComponent<CubeRotation>();
@@ -117,6 +124,7 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
+        // Rotar el cubo si se detectó uno
         if (_currentCube != null)
         {
             _currentCube.RotateCube(rotationAxis, transform);
@@ -139,5 +147,5 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 }
-   
-     
+
+

@@ -24,7 +24,7 @@ public class CameraChange : MonoBehaviour
     public ChangeScene _changeScene;
     public enum SpaceBarState
     {
-       // Cinematic,
+        // Cinematic,
         Playing
     }
     public SpaceBarState currentState = SpaceBarState.Playing;
@@ -57,15 +57,15 @@ public class CameraChange : MonoBehaviour
     {
         switch (currentState)
         {
-           /* case SpaceBarState.Cinematic:
-                if (Input.GetKeyDown(KeyCode.Space))
-                {
-                    SkipCinematic();
-                }
-                break;
-                */
+            /* case SpaceBarState.Cinematic:
+                 if (Input.GetKeyDown(KeyCode.Space))
+                 {
+                     SkipCinematic();
+                 }
+                 break;
+                 */
             case SpaceBarState.Playing:
-                if (Input.GetKeyDown(KeyCode.Space) && _canChange)
+                if ((Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.JoystickButton3)) && _canChange)
                 {
                     ChangeCamera();
                 }
@@ -125,7 +125,7 @@ public class CameraChange : MonoBehaviour
         _cameraBrain.ActiveVirtualCamera.Name == _cinematicCamera.Name
     );
 
-        // Esperar a que la cámara activa ya no sea la cinemática
+        // Esperar a que la cï¿½mara activa ya no sea la cinemï¿½tica
         yield return new WaitUntil(() =>
             _cameraBrain.ActiveVirtualCamera.Name != _cinematicCamera.Name
         );

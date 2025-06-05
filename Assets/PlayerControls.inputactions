@@ -13,15 +13,6 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
-                },
-                {
-                    "name": "RotateCamera",
-                    "type": "Value",
-                    "id": "e6fc3731-2c25-4455-b8b2-b1b255094f71",
-                    "expectedControlType": "Vector3",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -88,17 +79,6 @@
                     "processors": "",
                     "groups": ";Gamepad;Joystick",
                     "action": "Move",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "23fec776-c2d3-48e7-9749-633744f9cf54",
-                    "path": "<Mouse>/delta",
-                    "interactions": "",
-                    "processors": "ScaleVector2(x=0.05,y=0)",
-                    "groups": "",
-                    "action": "RotateCamera",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -194,6 +174,15 @@
                     "type": "PassThrough",
                     "id": "9caa3d8a-6b2f-4e8e-8bad-6ede561bd9be",
                     "expectedControlType": "Quaternion",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "MenuOpenClose",
+                    "type": "Button",
+                    "id": "83317fd5-ee17-4127-8405-29b074880d58",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -617,6 +606,98 @@
                     "action": "TrackedDeviceOrientation",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "24f5072d-1f84-40e2-bdd5-42cc34f3211c",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "MenuOpenClose",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9f66681a-12f3-4aaa-b88e-9114b062cc9d",
+                    "path": "<HID::Logitech Logitech Cordless RumblePad 2>/button10",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Gamepad",
+                    "action": "MenuOpenClose",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "Camera",
+            "id": "a5e509ec-ea25-483e-b62a-c836b8813db8",
+            "actions": [
+                {
+                    "name": "RotateCamera",
+                    "type": "Button",
+                    "id": "f973beb7-fcf1-49f5-9369-414559b6ec27",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "MouseDelta",
+                    "type": "Value",
+                    "id": "2933f9bb-2236-40f1-a461-4abca24a53c9",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "78c8f6ed-7e2d-4e65-a47b-a792a8037f63",
+                    "path": "<HID::Logitech Logitech Cordless RumblePad 2>/button5",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Joystick;Gamepad",
+                    "action": "RotateCamera",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "90303be8-4472-4947-8103-efa763849690",
+                    "path": "<HID::Logitech Logitech Cordless RumblePad 2>/button6",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Gamepad;Joystick",
+                    "action": "RotateCamera",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3e1bea62-ec5c-4b8b-b870-1e072a17e1c5",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "Press,Hold",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse;Gamepad;Joystick",
+                    "action": "RotateCamera",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "84458bcf-5e9d-4b62-b58f-90535274b8d6",
+                    "path": "<Mouse>/delta",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "MouseDelta",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }
@@ -678,6 +759,28 @@
                 {
                     "devicePath": "<XRController>",
                     "isOptional": false,
+                    "isOR": false
+                }
+            ]
+        },
+        {
+            "name": "Keyboard",
+            "bindingGroup": "Keyboard",
+            "devices": [
+                {
+                    "devicePath": "<Keyboard>",
+                    "isOptional": true,
+                    "isOR": false
+                }
+            ]
+        },
+        {
+            "name": "Gamepad1",
+            "bindingGroup": "Gamepad1",
+            "devices": [
+                {
+                    "devicePath": "<Gamepad>",
+                    "isOptional": true,
                     "isOR": false
                 }
             ]
