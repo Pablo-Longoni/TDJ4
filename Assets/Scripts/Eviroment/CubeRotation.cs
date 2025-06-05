@@ -9,12 +9,12 @@ public class CubeRotation : MonoBehaviour
   public float _rotationTurn = 90f;
   public bool _canRotate = true;
   public float _rotateCooldown = 2f;
-  
-  //Blink figura
-  public MeshRenderer _renderer;
+
+    //Blink figura
+  private MeshRenderer[] _renderers;
+  private Color[] _originalColors;
   private Coroutine _blinkCoroutine;
   private float _fadeSpeed = 0.6f;
-  private Color _originalColor;
   private Color _targetColor;
 
   [SerializeField] public AudioManager _audioManager;
@@ -24,9 +24,17 @@ public class CubeRotation : MonoBehaviour
 
   void Start()
   {
-        _originalColor = _renderer.material.color;
-        _targetColor = _originalColor * 0.8f;
-    }
+        _renderers = GetComponentsInChildren<MeshRenderer>();
+        _originalColors = new Color[_renderers.Length];
+
+        for (int i = 0; i < _renderers.Length; i++)
+        {
+            _originalColors[i] = _renderers[i].material.color;
+        }
+
+        _targetColor = _originalColors[0] * 0.6f;
+  }
+
   void Update()
   {
     if (_shouldRotate)
@@ -88,7 +96,11 @@ public class CubeRotation : MonoBehaviour
         {
             StopCoroutine(_blinkCoroutine);
             _blinkCoroutine = null;
-            _renderer.material.color = _originalColor; 
+
+            for (int i = 0; i < _renderers.Length; i++)
+            {
+                _renderers[i].material.color = _originalColors[i];
+            }
         }
     }
 
@@ -102,23 +114,22 @@ public class CubeRotation : MonoBehaviour
         {
             t += Time.deltaTime * _fadeSpeed;
 
-            if (fadingToTarget)
+            for (int i = 0; i < _renderers.Length; i++)
             {
-                _renderer.material.color = Color.Lerp(_originalColor, _targetColor, t);
-                if (t >= 1f)
+                if (fadingToTarget)
                 {
-                    t = 0f;
-                    fadingToTarget = false;
+                    _renderers[i].material.color = Color.Lerp(_originalColors[i], _targetColor, t);
+                }
+                else
+                {
+                    _renderers[i].material.color = Color.Lerp(_targetColor, _originalColors[i], t);
                 }
             }
-            else
+
+            if (t >= 1f)
             {
-                _renderer.material.color = Color.Lerp(_targetColor, _originalColor, t);
-                if (t >= 1f)
-                {
-                    t = 0f;
-                    fadingToTarget = true;
-                }
+                t = 0f;
+                fadingToTarget = !fadingToTarget;
             }
 
             yield return null;

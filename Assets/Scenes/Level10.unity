@@ -2299,7 +2299,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultFont: {fileID: 11400000, guid: ad101c1d3b64f5444a74035cd9c02210, type: 2}
   hoverFont: {fileID: 11400000, guid: 9810f0f2054b1694f9db8f1da06f8366, type: 2}
-  tmpText: {fileID: 452660079}
+  tmpText:
+  - {fileID: 452660079}
+  isLocked: 0
 --- !u!114 &1244817060
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2884,7 +2886,7 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1610948461}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
@@ -3438,7 +3440,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _rb: {fileID: 1962134564}
   _limit: 20
-  _collisions: []
+  _collisions:
+  - {fileID: 995247398}
+  - {fileID: 1962134566}
+  - {fileID: 1742084639}
+  - {fileID: 772516159}
 --- !u!65 &1962134566
 BoxCollider:
   m_ObjectHideFlags: 0

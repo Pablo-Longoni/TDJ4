@@ -1533,7 +1533,7 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 607012024}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
@@ -2395,7 +2395,6 @@ Transform:
   - {fileID: 860167371}
   - {fileID: 100381645846809372}
   - {fileID: 437501991}
-  - {fileID: 1968460661}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1263458955
@@ -2974,7 +2973,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultFont: {fileID: 11400000, guid: ad101c1d3b64f5444a74035cd9c02210, type: 2}
   hoverFont: {fileID: 11400000, guid: 9810f0f2054b1694f9db8f1da06f8366, type: 2}
-  tmpText: {fileID: 181310839}
+  tmpText:
+  - {fileID: 0}
+  isLocked: 0
 --- !u!114 &1874607853
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3117,11 +3118,11 @@ Transform:
   m_GameObject: {fileID: 1968460658}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -5.02, y: 40.02372, z: -9.589996}
+  m_LocalPosition: {x: -0.9200001, y: 49.02372, z: 57.010002}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1213537427}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1968460662
 MonoBehaviour:
@@ -3137,7 +3138,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _rb: {fileID: 1968460664}
   _limit: -30
-  _collisions: []
+  _collisions:
+  - {fileID: 1968460665}
+  - {fileID: 2879172501605084289}
+  - {fileID: 437501994}
+  - {fileID: 3106391728661908648}
+  - {fileID: 49217606}
+  - {fileID: 1287387276}
 --- !u!114 &1968460663
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3597,6 +3604,11 @@ PrefabInstance:
       addedObject: {fileID: 124398623}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7f94d295b1387034492187f8f51c457b, type: 3}
+--- !u!65 &2879172501605084289 stripped
+BoxCollider:
+  m_CorrespondingSourceObject: {fileID: 5375743961941563778, guid: 7f94d295b1387034492187f8f51c457b, type: 3}
+  m_PrefabInstance: {fileID: 2879172501605084288}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3106391728661908647
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3662,6 +3674,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 48f7c26faff9a3e40bf81ad688c92733, type: 3}
+--- !u!65 &3106391728661908648 stripped
+BoxCollider:
+  m_CorrespondingSourceObject: {fileID: 6855162486068345010, guid: 48f7c26faff9a3e40bf81ad688c92733, type: 3}
+  m_PrefabInstance: {fileID: 3106391728661908647}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -3670,6 +3687,7 @@ SceneRoots:
   - {fileID: 1479999206}
   - {fileID: 1263458957}
   - {fileID: 8203506}
+  - {fileID: 1968460661}
   - {fileID: 1213537427}
   - {fileID: 266954205}
   - {fileID: 275337848}

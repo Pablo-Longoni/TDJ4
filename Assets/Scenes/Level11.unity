@@ -196,6 +196,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2505466852517418599, guid: 7f94d295b1387034492187f8f51c457b, type: 3}
   m_PrefabInstance: {fileID: 184475626}
   m_PrefabAsset: {fileID: 0}
+--- !u!65 &184475628 stripped
+BoxCollider:
+  m_CorrespondingSourceObject: {fileID: 5375743961941563778, guid: 7f94d295b1387034492187f8f51c457b, type: 3}
+  m_PrefabInstance: {fileID: 184475626}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &190692462
 GameObject:
   m_ObjectHideFlags: 0
@@ -2232,6 +2237,16 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 598830137108701039, guid: 73b0861027af1cf44a2fa0c0dea35a72, type: 3}
   m_PrefabInstance: {fileID: 1382628606}
   m_PrefabAsset: {fileID: 0}
+--- !u!65 &1382628608 stripped
+BoxCollider:
+  m_CorrespondingSourceObject: {fileID: 1961819141383596828, guid: 73b0861027af1cf44a2fa0c0dea35a72, type: 3}
+  m_PrefabInstance: {fileID: 1382628606}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &1382628609 stripped
+BoxCollider:
+  m_CorrespondingSourceObject: {fileID: 2456143988033381296, guid: 73b0861027af1cf44a2fa0c0dea35a72, type: 3}
+  m_PrefabInstance: {fileID: 1382628606}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1532697657
 GameObject:
   m_ObjectHideFlags: 0
@@ -2398,7 +2413,7 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1610948461}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
@@ -3107,7 +3122,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _rb: {fileID: 1962134564}
   _limit: -30
-  _collisions: []
+  _collisions:
+  - {fileID: 184475628}
+  - {fileID: 1962134566}
+  - {fileID: 1382628608}
+  - {fileID: 1382628609}
 --- !u!65 &1962134566
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3224,7 +3243,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4551435107321231966, guid: c8ee2eec68e79f141ae8e8bf8b4c46eb, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.598
+      value: -0.701
       objectReference: {fileID: 0}
     - target: {fileID: 4551435107321231966, guid: c8ee2eec68e79f141ae8e8bf8b4c46eb, type: 3}
       propertyPath: m_LocalRotation.w

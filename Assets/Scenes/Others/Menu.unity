@@ -557,7 +557,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 74669034}
         m_TargetAssemblyTypeName: ChangeScene, Assembly-CSharp
-        m_MethodName: StartButton
+        m_MethodName: GoToStage
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -619,7 +619,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultFont: {fileID: 11400000, guid: ad101c1d3b64f5444a74035cd9c02210, type: 2}
   hoverFont: {fileID: 11400000, guid: 9810f0f2054b1694f9db8f1da06f8366, type: 2}
-  tmpText: {fileID: 1413252474}
+  tmpText:
+  - {fileID: 1413252474}
+  isLocked: 0
 --- !u!1 &835574196
 GameObject:
   m_ObjectHideFlags: 0
@@ -1717,7 +1719,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultFont: {fileID: 11400000, guid: ad101c1d3b64f5444a74035cd9c02210, type: 2}
   hoverFont: {fileID: 11400000, guid: 9810f0f2054b1694f9db8f1da06f8366, type: 2}
-  tmpText: {fileID: 1413252474}
+  tmpText:
+  - {fileID: 1421161737}
+  isLocked: 0
 --- !u!114 &1703784533
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1837,7 +1841,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1810800668}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: df40fdb022d29994086add214c861a7e, type: 3}
   m_Name: 
@@ -1855,7 +1859,7 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1810800668}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 8498d53625558bf48ba5d17fe8b8647e, type: 3}
@@ -2108,7 +2112,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultFont: {fileID: 11400000, guid: ad101c1d3b64f5444a74035cd9c02210, type: 2}
   hoverFont: {fileID: 11400000, guid: 9810f0f2054b1694f9db8f1da06f8366, type: 2}
-  tmpText: {fileID: 1413252474}
+  tmpText:
+  - {fileID: 1556326313}
+  isLocked: 0
 --- !u!1 &2105485088
 GameObject:
   m_ObjectHideFlags: 0

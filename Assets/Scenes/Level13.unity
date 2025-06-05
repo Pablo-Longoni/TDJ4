@@ -205,6 +205,16 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 598830137108701039, guid: 73b0861027af1cf44a2fa0c0dea35a72, type: 3}
   m_PrefabInstance: {fileID: 70991718}
   m_PrefabAsset: {fileID: 0}
+--- !u!65 &70991720 stripped
+BoxCollider:
+  m_CorrespondingSourceObject: {fileID: 1961819141383596828, guid: 73b0861027af1cf44a2fa0c0dea35a72, type: 3}
+  m_PrefabInstance: {fileID: 70991718}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &70991721 stripped
+BoxCollider:
+  m_CorrespondingSourceObject: {fileID: 2456143988033381296, guid: 73b0861027af1cf44a2fa0c0dea35a72, type: 3}
+  m_PrefabInstance: {fileID: 70991718}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &190692462
 GameObject:
   m_ObjectHideFlags: 0
@@ -985,11 +995,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4551435107321231966, guid: c8ee2eec68e79f141ae8e8bf8b4c46eb, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.67921096
+      value: 0.717
       objectReference: {fileID: 0}
     - target: {fileID: 4551435107321231966, guid: c8ee2eec68e79f141ae8e8bf8b4c46eb, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.27333337
+      value: -0.273
       objectReference: {fileID: 0}
     - target: {fileID: 4551435107321231966, guid: c8ee2eec68e79f141ae8e8bf8b4c46eb, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2065,6 +2075,11 @@ MeshRenderer:
   m_CorrespondingSourceObject: {fileID: 5580392173779016954, guid: 7f94d295b1387034492187f8f51c457b, type: 3}
   m_PrefabInstance: {fileID: 1140706798}
   m_PrefabAsset: {fileID: 0}
+--- !u!65 &1140706802 stripped
+BoxCollider:
+  m_CorrespondingSourceObject: {fileID: 5375743961941563778, guid: 7f94d295b1387034492187f8f51c457b, type: 3}
+  m_PrefabInstance: {fileID: 1140706798}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1164343508
 GameObject:
   m_ObjectHideFlags: 0
@@ -2178,7 +2193,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4551435107321231966, guid: c8ee2eec68e79f141ae8e8bf8b4c46eb, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.67921096
+      value: 0.716
       objectReference: {fileID: 0}
     - target: {fileID: 4551435107321231966, guid: c8ee2eec68e79f141ae8e8bf8b4c46eb, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2186,7 +2201,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4551435107321231966, guid: c8ee2eec68e79f141ae8e8bf8b4c46eb, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.2938698
+      value: -0.294
       objectReference: {fileID: 0}
     - target: {fileID: 4551435107321231966, guid: c8ee2eec68e79f141ae8e8bf8b4c46eb, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2580,7 +2595,7 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1610948461}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
@@ -3036,6 +3051,11 @@ MeshRenderer:
   m_CorrespondingSourceObject: {fileID: 5580392173779016954, guid: 7f94d295b1387034492187f8f51c457b, type: 3}
   m_PrefabInstance: {fileID: 1882015839}
   m_PrefabAsset: {fileID: 0}
+--- !u!65 &1882015842 stripped
+BoxCollider:
+  m_CorrespondingSourceObject: {fileID: 5375743961941563778, guid: 7f94d295b1387034492187f8f51c457b, type: 3}
+  m_PrefabInstance: {fileID: 1882015839}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1934948063
 GameObject:
   m_ObjectHideFlags: 0
@@ -3358,7 +3378,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _rb: {fileID: 1962134564}
   _limit: -30
-  _collisions: []
+  _collisions:
+  - {fileID: 1140706802}
+  - {fileID: 1882015842}
+  - {fileID: 70991721}
+  - {fileID: 1962134566}
+  - {fileID: 70991720}
 --- !u!65 &1962134566
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3441,6 +3466,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1882015840}
     m_Modifications:
+    - target: {fileID: 908840771699955729, guid: c8ee2eec68e79f141ae8e8bf8b4c46eb, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 908840771699955729, guid: c8ee2eec68e79f141ae8e8bf8b4c46eb, type: 3}
       propertyPath: _audioManager
       value: 

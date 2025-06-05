@@ -743,7 +743,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 304975050}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: df40fdb022d29994086add214c861a7e, type: 3}
   m_Name: 
@@ -761,7 +761,7 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 304975050}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
@@ -1848,7 +1848,7 @@ MonoBehaviour:
   m_LegacyPriority: 0
   Target:
     TrackingTarget: {fileID: 1931030346}
-    LookAtTarget: {fileID: 0}
+    LookAtTarget: {fileID: 1931030346}
     CustomLookAtTarget: 0
   Lens:
     FieldOfView: 60
@@ -2044,7 +2044,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultFont: {fileID: 11400000, guid: ad101c1d3b64f5444a74035cd9c02210, type: 2}
   hoverFont: {fileID: 11400000, guid: 9810f0f2054b1694f9db8f1da06f8366, type: 2}
-  tmpText: {fileID: 1529720350}
+  tmpText:
+  - {fileID: 1529720350}
+  isLocked: 0
 --- !u!114 &1107211792
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2970,7 +2972,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rb: {fileID: 1931030349}
-  _limit: -80
+  _limit: 20
   _collisions:
   - {fileID: 1213980264}
   - {fileID: 1931030351}
