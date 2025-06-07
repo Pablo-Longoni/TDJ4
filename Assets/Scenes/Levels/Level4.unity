@@ -782,7 +782,6 @@ MonoBehaviour:
   _canRotate: 1
   _rotateCooldown: 0.7
   _renderer: {fileID: 23011343}
-  _fadeSpeed: 0.6
   _audioManager: {fileID: 375957869}
   _isInCooldown: 0
   _cameraChange: {fileID: 893716525}
@@ -1634,7 +1633,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultFont: {fileID: 11400000, guid: ad101c1d3b64f5444a74035cd9c02210, type: 2}
   hoverFont: {fileID: 11400000, guid: 9810f0f2054b1694f9db8f1da06f8366, type: 2}
-  tmpText: {fileID: 1068499342}
+  tmpText:
+  - {fileID: 1068499342}
+  isLocked: 0
 --- !u!114 &840418507
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3686,7 +3687,6 @@ MonoBehaviour:
   _canRotate: 1
   _rotateCooldown: 0.7
   _renderer: {fileID: 750549057}
-  _fadeSpeed: 0.6
   _audioManager: {fileID: 375957869}
   _isInCooldown: 0
   _cameraChange: {fileID: 893716525}
@@ -3744,7 +3744,6 @@ MonoBehaviour:
   _canRotate: 1
   _rotateCooldown: 0.7
   _renderer: {fileID: 2005186120}
-  _fadeSpeed: 0.6
   _audioManager: {fileID: 375957869}
   _isInCooldown: 0
   _cameraChange: {fileID: 893716525}
