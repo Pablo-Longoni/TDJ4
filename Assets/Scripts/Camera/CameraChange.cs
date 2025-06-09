@@ -4,6 +4,7 @@ using UnityEngine.Rendering.Universal;
 using System.Collections;
 using Unity.VisualScripting;
 using NUnit.Framework.Constraints;
+
 public class CameraChange : MonoBehaviour
 {
     [SerializeField] private CinemachineCamera _isometricCamera;
@@ -11,7 +12,7 @@ public class CameraChange : MonoBehaviour
     [SerializeField] private CinemachineCamera _cinematicCamera;
     [SerializeField] private Camera _mainCamera;
 
-    //   private UniversalAdditionalCameraData _cameraData;
+    // private UniversalAdditionalCameraData _cameraData;
     private CinemachineBrain _cameraBrain;
 
     public bool _isIsometric;
@@ -20,22 +21,24 @@ public class CameraChange : MonoBehaviour
     public CameraRotation _cameraRotation;
     public PlayerTransformation _playerTransformation;
 
-    //Funciones del espacio
+    // Funciones del espacio
     public ChangeScene _changeScene;
+
     public enum SpaceBarState
     {
         Cinematic,
         Playing
     }
+
     public SpaceBarState currentState = SpaceBarState.Cinematic;
     public float _holdTimer = 0;
     public float _holdDuration = 0.5f;
 
     void Start()
     {
-        //  _isometricCamera.Priority = 2;
+        // _isometricCamera.Priority = 2;
         _overHeadCamera.Priority = 2;
-        //  _cameraData = _mainCamera.GetComponent<UniversalAdditionalCameraData>();
+        // _cameraData = _mainCamera.GetComponent<UniversalAdditionalCameraData>();
         _cameraBrain = _mainCamera.GetComponent<CinemachineBrain>();
         _isIsometric = true;
         StartCoroutine(DelayedCinematicStart());
@@ -43,7 +46,6 @@ public class CameraChange : MonoBehaviour
 
     private IEnumerator DelayedCinematicStart()
     {
-
         yield return new WaitUntil(() =>
             _cameraBrain != null &&
             _cameraBrain.ActiveVirtualCamera != null
@@ -51,7 +53,6 @@ public class CameraChange : MonoBehaviour
 
         CinematicCamera();
     }
-
 
     void Update()
     {
@@ -63,9 +64,9 @@ public class CameraChange : MonoBehaviour
                     SkipCinematic();
                 }
                 break;
-                
+
             case SpaceBarState.Playing:
-                if (Input.GetKeyDown(KeyCode.Space) && _canChange)
+                if ((Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.JoystickButton3)) && _canChange)
                 {
                     ChangeCamera();
                 }
@@ -88,6 +89,7 @@ public class CameraChange : MonoBehaviour
             _holdTimer = 0;
         }
     }
+
     private void ChangeCamera()
     {
         Debug.Log("ChangeCamera");
@@ -99,14 +101,14 @@ public class CameraChange : MonoBehaviour
             _cameraRotation.ResetRotation();
             _isometricCamera.Priority = 2;
             _overHeadCamera.Priority = 3;
-            //  _cameraData.renderShadows = true;
+            // _cameraData.renderShadows = true;
             Debug.Log("Camara cenital" + _isIsometric);
         }
         else
         {
             _isometricCamera.Priority = 3;
             _overHeadCamera.Priority = 2;
-            //  _cameraData.renderShadows = true;
+            // _cameraData.renderShadows = true;
             Debug.Log("Camara Isometrica");
         }
     }
@@ -121,12 +123,12 @@ public class CameraChange : MonoBehaviour
     private IEnumerator WaitForCinematicEnd()
     {
         yield return new WaitUntil(() =>
-        _cameraBrain != null &&
-        _cameraBrain.ActiveVirtualCamera != null &&
-        _cameraBrain.ActiveVirtualCamera.Name == _cinematicCamera.Name
-    );
+            _cameraBrain != null &&
+            _cameraBrain.ActiveVirtualCamera != null &&
+            _cameraBrain.ActiveVirtualCamera.Name == _cinematicCamera.Name
+        );
 
-        // Esperar a que la cámara activa ya no sea la cinemática
+        // Esperar a que la cÃ¡mara activa ya no sea la cinemÃ¡tica
         yield return new WaitUntil(() =>
             _cameraBrain.ActiveVirtualCamera.Name != _cinematicCamera.Name
         );
