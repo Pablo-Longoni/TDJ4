@@ -1011,9 +1011,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rb: {fileID: 697318385}
-  _limit: -80
+  _limit: -30
   _collisions:
+  - {fileID: 697318387}
   - {fileID: 708657846}
+  - {fileID: 258407131}
 --- !u!65 &697318387
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3484,7 +3486,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultFont: {fileID: 11400000, guid: ad101c1d3b64f5444a74035cd9c02210, type: 2}
   hoverFont: {fileID: 11400000, guid: 9810f0f2054b1694f9db8f1da06f8366, type: 2}
-  tmpText: {fileID: 1268888520}
+  tmpText:
+  - {fileID: 1268888520}
+  isLocked: 0
 --- !u!114 &1839844401
 MonoBehaviour:
   m_ObjectHideFlags: 0

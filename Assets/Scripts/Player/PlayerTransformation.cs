@@ -12,7 +12,7 @@ public class PlayerTransformation : MonoBehaviour
     private bool _isBlinking = false;
     void Start()
     {
-        _textTrans.text = "Transformations: " + _currentTrans + "/" + _totalTrans;
+        _textTrans.text = "Flips: " + _currentTrans + "/" + _totalTrans;
     }
 
     // Update is called once per frame
@@ -35,7 +35,7 @@ public class PlayerTransformation : MonoBehaviour
     public void PlayerTransformed()
     {
         _currentTrans = _currentTrans + 1;
-        _textTrans.text = "Transformations: " + _currentTrans + "/" + _totalTrans; 
+        _textTrans.text = "Swaps: " + _currentTrans + "/" + _totalTrans; 
         Debug.Log("Transformations: " + _currentTrans);
     }
 

@@ -793,7 +793,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultFont: {fileID: 11400000, guid: ad101c1d3b64f5444a74035cd9c02210, type: 2}
   hoverFont: {fileID: 11400000, guid: 9810f0f2054b1694f9db8f1da06f8366, type: 2}
-  tmpText: {fileID: 1184087314}
+  tmpText:
+  - {fileID: 1184087314}
+  isLocked: 0
 --- !u!114 &431404122
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1090,7 +1092,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _rb: {fileID: 492641275}
   _limit: -30
-  _collisions: []
+  _collisions:
+  - {fileID: 30883164}
 --- !u!114 &492641274
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1894,7 +1897,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Transformations
+  m_text: SWAPS
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9810f0f2054b1694f9db8f1da06f8366, type: 2}
   m_sharedMaterial: {fileID: -8857897507941539270, guid: 9810f0f2054b1694f9db8f1da06f8366, type: 2}
@@ -2743,7 +2746,7 @@ MonoBehaviour:
   _cameraRotation: {fileID: 1474532235}
   _playerTransformation: {fileID: 492641270}
   _changeScene: {fileID: 1199640582}
-  currentState: 0
+  currentState: 1
   _holdTimer: 0
   _holdDuration: 0.5
 --- !u!114 &1474532235

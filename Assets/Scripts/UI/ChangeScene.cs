@@ -1,6 +1,7 @@
 
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -24,7 +25,7 @@ public class ChangeScene : MonoBehaviour
     //lista de niveles
     private List<string> levelsStage1 = new List<string>() { "Level1", "Level2", "Level3" };
     private List<string> levelsStage2 = new List<string>() { "Level3.5", "Level4", "Level5" };
-    private List<string> levelsStage3 = new List<string>() { "Level7", "Level9", "Level10", "Level6" };
+    private List<string> levelsStage3 = new List<string>() { "Level7","Level8", "Level9", "Level10", "Level11", "Level12", "Level13"};
 
     void Start()
     {
@@ -67,6 +68,7 @@ public class ChangeScene : MonoBehaviour
         }
         else
         {
+            UnlockNextStage(currentScene);
             StartCoroutine(SceneLoad("Stages"));
         }
     }
@@ -89,13 +91,13 @@ public class ChangeScene : MonoBehaviour
         }
         else if (levelsStage3.Contains(currentLevel))
         {
-
             index = levelsStage3.IndexOf(currentLevel);
             if (index < levelsStage3.Count - 1)
                 return levelsStage3[index + 1];
         }
 
         return "";
+        
     }
 
     public IEnumerator SceneLoad(string sceneName)
@@ -105,16 +107,30 @@ public class ChangeScene : MonoBehaviour
         SceneManager.LoadScene(sceneName);
     }
 
+    void UnlockNextStage(string currentLevel)
+    {
+        int currentStage = PlayerPrefs.GetInt("Stage", 1);
+
+        // Verificar en qué etapa está el nivel actual
+        if (levelsStage1.Contains(currentLevel) && currentStage < 2)
+        {
+            PlayerPrefs.SetInt("Stage", 2);
+            Debug.Log("Stage 2 desbloqueado");
+        }
+        else if (levelsStage2.Contains(currentLevel) && currentStage < 3)
+        {
+            PlayerPrefs.SetInt("Stage", 3);
+            Debug.Log("Stage 3 desbloqueado");
+        }
+
+        PlayerPrefs.Save();
+    }
+
     public void RestartLevel()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
-
-    public void StartButton()
-    {
-        SceneManager.LoadScene("Stages");
-    }
 
     public void StageSelector(int stageNumber)
     {
@@ -137,6 +153,12 @@ public class ChangeScene : MonoBehaviour
     public void GoToStage()
     {
         SceneManager.LoadScene("Stages");
+        Time.timeScale = 1f;
+    }
+
+    public void GoToSandBox()
+    {
+        SceneManager.LoadScene("LevelTest");
     }
 
     public void Exit()
