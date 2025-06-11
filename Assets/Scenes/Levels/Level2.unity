@@ -172,7 +172,6 @@ MonoBehaviour:
   _rotationTurn: 180
   _canRotate: 1
   _rotateCooldown: 0.7
-  _renderer: {fileID: 30883162}
   _audioManager: {fileID: 220997187}
   _isInCooldown: 0
   _cameraChange: {fileID: 1474532234}
@@ -842,7 +841,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1199640582}
         m_TargetAssemblyTypeName: ChangeScene, Assembly-CSharp
-        m_MethodName: GoToStage
+        m_MethodName: BackToMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

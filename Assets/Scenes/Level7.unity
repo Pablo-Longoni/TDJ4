@@ -1647,7 +1647,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 622963046}
         m_TargetAssemblyTypeName: ChangeScene, Assembly-CSharp
-        m_MethodName: GoToStage
+        m_MethodName: BackToMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2398,15 +2398,9 @@ MonoBehaviour:
   _rotationTurn: 90
   _canRotate: 1
   _rotateCooldown: 0.7
-  _renderer: {fileID: 1376394845}
   _audioManager: {fileID: 1610948462}
   _isInCooldown: 0
   _cameraChange: {fileID: 1553909911}
---- !u!23 &1376394845 stripped
-MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: -7511558181221131132, guid: dc236198473f35840855e56b42ff1208, type: 3}
-  m_PrefabInstance: {fileID: 1376394840}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1463330802
 GameObject:
   m_ObjectHideFlags: 0

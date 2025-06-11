@@ -14,7 +14,11 @@ public class PlayerMovement : MonoBehaviour
     private CameraChange _cameraChange;
     public CubeRotation _currentCube;
 
-     private void Start()
+    public FollowEnviroment _minimapCameraFollow;
+    private Transform _currentFigure;
+    private string _minimapLayerName = "Enviroment";
+    private string _defaultLayerName = "Default";
+    private void Start()
     {
         _cameraChange = FindAnyObjectByType<CameraChange>();
     }
@@ -159,7 +163,23 @@ public class PlayerMovement : MonoBehaviour
              _currentCube = detectedCube;
              _currentCube.StartBlinking();
             }
+
+            Transform currentFigure = hit.collider.transform;
+
+            if (_currentFigure != currentFigure)
+            {
+                if (_currentFigure != null)
+                    _currentFigure.gameObject.layer = LayerMask.NameToLayer(_defaultLayerName);
+
+                currentFigure.gameObject.layer = LayerMask.NameToLayer(_minimapLayerName);
+                _currentFigure = currentFigure;
+            }
+
         }
+
+        //minmapa
+
+        
     }
 }
    

@@ -601,7 +601,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 622963046}
         m_TargetAssemblyTypeName: ChangeScene, Assembly-CSharp
-        m_MethodName: GoToStage
+        m_MethodName: BackToMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1285,15 +1285,9 @@ MonoBehaviour:
   _rotationTurn: 90
   _canRotate: 1
   _rotateCooldown: 0.7
-  _renderer: {fileID: 512119058}
   _audioManager: {fileID: 1610948462}
   _isInCooldown: 0
   _cameraChange: {fileID: 1553909911}
---- !u!23 &512119058 stripped
-MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: -7511558181221131132, guid: 2918bec5d6765424fb5e7c57b9b6f0ce, type: 3}
-  m_PrefabInstance: {fileID: 512119053}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &512119060 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 2918bec5d6765424fb5e7c57b9b6f0ce, type: 3}
@@ -2488,7 +2482,6 @@ MonoBehaviour:
   _rotationTurn: 90
   _canRotate: 1
   _rotateCooldown: 0.7
-  _renderer: {fileID: 1850368589}
   _audioManager: {fileID: 1610948462}
   _isInCooldown: 0
   _cameraChange: {fileID: 1553909911}
@@ -3156,11 +3149,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1844152549}
   m_CullTransparentMesh: 1
---- !u!23 &1850368589 stripped
-MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: -7511558181221131132, guid: 2918bec5d6765424fb5e7c57b9b6f0ce, type: 3}
-  m_PrefabInstance: {fileID: 1462956781}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1938768721
 GameObject:
   m_ObjectHideFlags: 0

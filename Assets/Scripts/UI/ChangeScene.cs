@@ -15,7 +15,7 @@ public class ChangeScene : MonoBehaviour
     private bool isPaused = false;
 
     // etapas
-    private Dictionary<int, string> firstLevelsByStage = new Dictionary<int, string>()
+  /*  private Dictionary<int, string> firstLevelsByStage = new Dictionary<int, string>()
     {
         { 1, "Level1" },
         { 2, "Level3.5" },
@@ -25,7 +25,7 @@ public class ChangeScene : MonoBehaviour
     //lista de niveles
     private List<string> levelsStage1 = new List<string>() { "Level1", "Level2", "Level3" };
     private List<string> levelsStage2 = new List<string>() { "Level3.5", "Level4", "Level5" };
-    private List<string> levelsStage3 = new List<string>() { "Level7","Level8", "Level9", "Level10", "Level11", "Level12", "Level13"};
+    private List<string> levelsStage3 = new List<string>() { "Level7","Level8", "Level9", "Level10", "Level11", "Level12", "Level13"};*/
 
     void Start()
     {
@@ -59,101 +59,59 @@ public class ChangeScene : MonoBehaviour
 
     public void NextLevel()
     {
+        int currentLevel = PlayerPrefs.GetInt("CurrentLevel", 0);
+        int unlockedLevels = PlayerPrefs.GetInt("UnlockedLevels", 0);
 
-        string currentScene = SceneManager.GetActiveScene().name;
-        string nextScene = GetNextLevel(currentScene);
-        if (nextScene != "")
-        {
-            StartCoroutine(SceneLoad(nextScene));
-        }
-        else
-        {
-            UnlockNextStage(currentScene);
-            StartCoroutine(SceneLoad("Stages"));
-        }
-    }
+        Debug.Log("UnlockedLevels: " + unlockedLevels + " | CurrentLevel: " + currentLevel);
 
-    string GetNextLevel(string currentLevel)
-    {
-        int index;
-
-        if (levelsStage1.Contains(currentLevel))
+        if (currentLevel >= unlockedLevels)
         {
-            index = levelsStage1.IndexOf(currentLevel);
-            if (index < levelsStage1.Count - 1)
-                return levelsStage1[index + 1];
-        }
-        else if (levelsStage2.Contains(currentLevel))
-        {
-            index = levelsStage2.IndexOf(currentLevel);
-            if (index < levelsStage2.Count - 1)
-                return levelsStage2[index + 1];
-        }
-        else if (levelsStage3.Contains(currentLevel))
-        {
-            index = levelsStage3.IndexOf(currentLevel);
-            if (index < levelsStage3.Count - 1)
-                return levelsStage3[index + 1];
+            unlockedLevels++;
+            PlayerPrefs.SetInt("UnlockedLevels", unlockedLevels);
+            PlayerPrefs.Save();
+            Debug.Log("Nuevo nivel desbloqueado: " + unlockedLevels);
         }
 
-        return "";
+        // Actualizar CurrentLevel al siguiente
+        int nextLevel = SceneManager.GetActiveScene().buildIndex + 1;
+        PlayerPrefs.SetInt("CurrentLevel", nextLevel);
+        PlayerPrefs.Save();
+
         
+           string currentSceneName = SceneManager.GetActiveScene().name;
+           if (currentSceneName == "Level3" || currentSceneName == "Level7" || currentSceneName == "Level13")
+           {
+               StartCoroutine(SceneLoad(0));
+           }
+           else
+           {
+            StartCoroutine(SceneLoad(nextLevel));
+            Time.timeScale = 1f;
+        }
     }
 
-    public IEnumerator SceneLoad(string sceneName)
+    public IEnumerator SceneLoad(int sceneName)
     {
         _transitionAnimator.SetTrigger("StartTransition");
         yield return new WaitForSeconds(_transitionTime);
         SceneManager.LoadScene(sceneName);
     }
 
-    void UnlockNextStage(string currentLevel)
-    {
-        int currentStage = PlayerPrefs.GetInt("Stage", 1);
-
-        // Verificar en qué etapa está el nivel actual
-        if (levelsStage1.Contains(currentLevel) && currentStage < 2)
-        {
-            PlayerPrefs.SetInt("Stage", 2);
-            Debug.Log("Stage 2 desbloqueado");
-        }
-        else if (levelsStage2.Contains(currentLevel) && currentStage < 3)
-        {
-            PlayerPrefs.SetInt("Stage", 3);
-            Debug.Log("Stage 3 desbloqueado");
-        }
-
-        PlayerPrefs.Save();
-    }
-
+  
     public void RestartLevel()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
-
-    public void StageSelector(int stageNumber)
-    {
-        if (firstLevelsByStage.ContainsKey(stageNumber))
-        {
-            SceneManager.LoadScene(firstLevelsByStage[stageNumber]);
-        }
-    }
-
     public void BackToMenu()
     {
         SceneManager.LoadScene("Menu");
+        Time.timeScale = 1f;
     }
 
     public void GoToCredits()
     {
         SceneManager.LoadScene("Credits");
-    }
-
-    public void GoToStage()
-    {
-        SceneManager.LoadScene("Stages");
-        Time.timeScale = 1f;
     }
 
     public void GoToSandBox()
@@ -173,7 +131,7 @@ public class ChangeScene : MonoBehaviour
 
     public void NextLvl()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        NextLevel();
     }
 
     public void PreviousLvl()
