@@ -1954,15 +1954,9 @@ MonoBehaviour:
   _rotationTurn: 90
   _canRotate: 1
   _rotateCooldown: 0.7
-  _renderer: {fileID: 995247391}
   _audioManager: {fileID: 1610948462}
   _isInCooldown: 0
   _cameraChange: {fileID: 1553909911}
---- !u!23 &995247391 stripped
-MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: -7511558181221131132, guid: c5dff5bdd606c464ab93b02fdc5cb6f8, type: 3}
-  m_PrefabInstance: {fileID: 995247387}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &995247393 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: c5dff5bdd606c464ab93b02fdc5cb6f8, type: 3}
@@ -3474,7 +3468,7 @@ MonoBehaviour:
   inputReader: {fileID: 115950414}
   _input: {x: 0, y: 0, z: 0}
   _rb: {fileID: 1962134564}
-  _speed: 13
+  _speed: 9
   _turnSpeed: 360
   groundCheckDistance: 0.6
   _currentCube: {fileID: 995247390}

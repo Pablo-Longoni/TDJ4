@@ -1401,7 +1401,6 @@ MonoBehaviour:
   _rotationTurn: 90
   _canRotate: 1
   _rotateCooldown: 0.7
-  _renderer: {fileID: 2049769022}
   _audioManager: {fileID: 1371472233}
   _isInCooldown: 0
   _cameraChange: {fileID: 415670792}
@@ -2777,7 +2776,7 @@ MonoBehaviour:
   inputReader: {fileID: 838566497}
   _input: {x: 0, y: 0, z: 0}
   _rb: {fileID: 1606612549}
-  _speed: 13
+  _speed: 9
   _turnSpeed: 360
   groundCheckDistance: 0.6
   _currentCube: {fileID: 725837454}
@@ -3495,11 +3494,6 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 725837461}
   m_SourcePrefab: {fileID: 100100000, guid: afc2839c07556ba4b9b329a8131fb8b0, type: 3}
---- !u!23 &2049769022 stripped
-MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 4974058828624409937, guid: afc2839c07556ba4b9b329a8131fb8b0, type: 3}
-  m_PrefabInstance: {fileID: 2049769021}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2079649810
 GameObject:
   m_ObjectHideFlags: 0
