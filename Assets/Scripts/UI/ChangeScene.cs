@@ -25,7 +25,7 @@ public class ChangeScene : MonoBehaviour
     //lista de niveles
     private List<string> levelsStage1 = new List<string>() { "Level1", "Level2", "Level3" };
     private List<string> levelsStage2 = new List<string>() { "Level3.5", "Level4", "Level5" };
-    private List<string> levelsStage3 = new List<string>() { "Level7","Level8", "Level9", "Level10", "Level11", "Level12", "Level13"};
+    private List<string> levelsStage3 = new List<string>() { "Level7", "Level9", "Level10", "Level11", "Level12", "Level13" };
 
     void Start()
     {
@@ -34,7 +34,7 @@ public class ChangeScene : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.JoystickButton9))
         {
             TogglePause();
         }
@@ -97,7 +97,7 @@ public class ChangeScene : MonoBehaviour
         }
 
         return "";
-        
+
     }
 
     public IEnumerator SceneLoad(string sceneName)
@@ -111,7 +111,7 @@ public class ChangeScene : MonoBehaviour
     {
         int currentStage = PlayerPrefs.GetInt("Stage", 1);
 
-        // Verificar en qué etapa está el nivel actual
+        // Verificar en quï¿½ etapa estï¿½ el nivel actual
         if (levelsStage1.Contains(currentLevel) && currentStage < 2)
         {
             PlayerPrefs.SetInt("Stage", 2);
