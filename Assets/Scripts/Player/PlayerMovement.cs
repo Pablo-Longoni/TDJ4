@@ -149,8 +149,6 @@ public class PlayerMovement : MonoBehaviour
                 _currentCube?.StopBlinking();
                 _currentCube = detectedCube;
                 _currentCube.StartBlinking();
-<<<<<<< HEAD
-=======
             }
 
             Transform currentFigure = hit.collider.transform;
@@ -162,7 +160,6 @@ public class PlayerMovement : MonoBehaviour
 
                 currentFigure.gameObject.layer = LayerMask.NameToLayer(_minimapLayerName);
                 _currentFigure = currentFigure;
->>>>>>> feature/stageScene
             }
 
         }
