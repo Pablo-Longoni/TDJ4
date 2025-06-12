@@ -38,14 +38,13 @@ public class DoorTrigger : MonoBehaviour
         _audioManager.playSound(_audioManager._portal);
         float timeElapsed = 0f;
         Vector3 initialPosition = _player.transform.position;
-
         while (timeElapsed < 2f)
         {
             timeElapsed += Time.deltaTime * moveSpeed; 
             _player.transform.position = Vector3.Lerp(initialPosition, targetPosition, timeElapsed);
             yield return null;
         }
-
+       
         Debug.Log("Jugador entró en la puerta");
         _player.enabled = true;
         // isMoving = false; 
