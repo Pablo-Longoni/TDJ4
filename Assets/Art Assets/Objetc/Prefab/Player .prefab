@@ -208,12 +208,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0072f9c1fe852ae4f9a868c6195dbc11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inputReader: {fileID: 0}
   _input: {x: 0, y: 0, z: 0}
   _rb: {fileID: 9096623278276697544}
-  _speed: 13
+  _speed: 9
   _turnSpeed: 360
   groundCheckDistance: 0.6
   _currentCube: {fileID: 0}
+  _minimapCameraFollow: {fileID: 0}
 --- !u!114 &265388989196013889
 MonoBehaviour:
   m_ObjectHideFlags: 0

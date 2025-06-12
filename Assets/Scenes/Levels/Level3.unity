@@ -1738,8 +1738,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 838566495}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 961.0323, y: 539.38007, z: -0.007378104}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -11.28, y: 35.2, z: -10.81}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1772,10 +1772,11 @@ MonoBehaviour:
   inputReader: {fileID: 838566497}
   _input: {x: 0, y: 0, z: 0}
   _rb: {fileID: 1606612549}
-  _speed: 5
+  _speed: 9
   _turnSpeed: 360
   groundCheckDistance: 0.2
   _currentCube: {fileID: 0}
+  _minimapCameraFollow: {fileID: 0}
 --- !u!114 &838566499
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2780,6 +2781,7 @@ MonoBehaviour:
   _turnSpeed: 360
   groundCheckDistance: 0.6
   _currentCube: {fileID: 725837454}
+  _minimapCameraFollow: {fileID: 0}
 --- !u!54 &1606612549
 Rigidbody:
   m_ObjectHideFlags: 0

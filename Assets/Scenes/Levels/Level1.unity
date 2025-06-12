@@ -1563,10 +1563,11 @@ MonoBehaviour:
   inputReader: {fileID: 1006522905}
   _input: {x: 0, y: 0, z: 0}
   _rb: {fileID: 2111671657}
-  _speed: 5
+  _speed: 9
   _turnSpeed: 360
   groundCheckDistance: 0.2
   _currentCube: {fileID: 1715641909}
+  _minimapCameraFollow: {fileID: 0}
 --- !u!4 &1006522907
 Transform:
   m_ObjectHideFlags: 0
@@ -2983,6 +2984,7 @@ MonoBehaviour:
   _turnSpeed: 360
   groundCheckDistance: 0.6
   _currentCube: {fileID: 1715641909}
+  _minimapCameraFollow: {fileID: 0}
 --- !u!54 &2111671657
 Rigidbody:
   m_ObjectHideFlags: 0
