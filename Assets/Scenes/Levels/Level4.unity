@@ -119,11 +119,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!23 &23011343 stripped
-MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: -7511558181221131132, guid: 64dbccd9aabd428419f79e4e44e8248a, type: 3}
-  m_PrefabInstance: {fileID: 191496354}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &93610092
 GameObject:
   m_ObjectHideFlags: 0
@@ -781,7 +776,6 @@ MonoBehaviour:
   _rotationTurn: 90
   _canRotate: 1
   _rotateCooldown: 0.7
-  _renderer: {fileID: 23011343}
   _audioManager: {fileID: 375957869}
   _isInCooldown: 0
   _cameraChange: {fileID: 893716525}
@@ -1572,11 +1566,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 579606447}
   m_CullTransparentMesh: 1
---- !u!23 &750549057 stripped
-MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: -7511558181221131132, guid: 64dbccd9aabd428419f79e4e44e8248a, type: 3}
-  m_PrefabInstance: {fileID: 1987779326}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &755953434
 GameObject:
   m_ObjectHideFlags: 0
@@ -3329,7 +3318,7 @@ MonoBehaviour:
   inputReader: {fileID: 422719816}
   _input: {x: 0, y: 0, z: 0}
   _rb: {fileID: 1714814548}
-  _speed: 13
+  _speed: 9
   _turnSpeed: 360
   groundCheckDistance: 0.6
   _currentCube: {fileID: 191496361}
@@ -3764,7 +3753,6 @@ MonoBehaviour:
   _rotationTurn: 90
   _canRotate: 1
   _rotateCooldown: 0.7
-  _renderer: {fileID: 750549057}
   _audioManager: {fileID: 375957869}
   _isInCooldown: 0
   _cameraChange: {fileID: 893716525}
@@ -3821,7 +3809,6 @@ MonoBehaviour:
   _rotationTurn: 180
   _canRotate: 1
   _rotateCooldown: 0.7
-  _renderer: {fileID: 2005186120}
   _audioManager: {fileID: 375957869}
   _isInCooldown: 0
   _cameraChange: {fileID: 893716525}
