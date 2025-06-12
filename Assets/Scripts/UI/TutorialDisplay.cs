@@ -18,7 +18,7 @@ public class TutorialDisplay : MonoBehaviour
     public string _scene;
     void Start()
     {
-        _scene = SceneManager.GetActiveScene().name; 
+        _scene = SceneManager.GetActiveScene().name;
 
         if (_scene == "Level2")
         {
@@ -45,18 +45,21 @@ public class TutorialDisplay : MonoBehaviour
 
     public void TransformTutorial()
     {
-       // Debug.Log("Tutorial Transform");
-   
-        if (Input.GetKeyDown(KeyCode.Space) && !_didTrans)
+        // Debug.Log("Tutorial Transform");
+
+        if ((Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.JoystickButton3)) && !_didTrans)
         {
             _spaceBarImage.SetActive(false);
             _wasdImage.SetActive(true);
             _didTrans = true;
         }
+
         if (Input.GetKeyDown(KeyCode.W) ||
             Input.GetKeyDown(KeyCode.A) ||
             Input.GetKeyDown(KeyCode.S) ||
-            Input.GetKeyDown(KeyCode.D))
+            Input.GetKeyDown(KeyCode.D) ||
+            Mathf.Abs(Input.GetAxis("Horizontal")) > 0.5f ||
+            Mathf.Abs(Input.GetAxis("Vertical")) > 0.5f)
         {
             _wasdImage.SetActive(false);
         }
@@ -64,7 +67,7 @@ public class TutorialDisplay : MonoBehaviour
 
     public void MouseTutorial()
     {
-      //  Debug.Log("Tutorial mouse");
+        //  Debug.Log("Tutorial mouse");
         // Paso 1: Hizo click izquierdo
         if (!_didClick && Input.GetMouseButtonDown(0))
         {
@@ -74,7 +77,7 @@ public class TutorialDisplay : MonoBehaviour
             StartCoroutine(EnableMovementDetection());
         }
 
-        // Paso 2: Mueve el mouse mientras tiene el botón izquierdo
+        // Paso 2: Mueve el mouse mientras tiene el botï¿½n izquierdo
         if (_didClick && !_didMove && _canDetectMovement && Input.GetMouseButton(0))
         {
             Vector3 currentMousePos = Input.mousePosition;
@@ -100,9 +103,9 @@ public class TutorialDisplay : MonoBehaviour
         }
     }
 
-     public IEnumerator EnableMovementDetection()
+    public IEnumerator EnableMovementDetection()
     {
-        yield return new WaitForSeconds(1.5f); 
+        yield return new WaitForSeconds(1.5f);
         _canDetectMovement = true;
     }
 }
