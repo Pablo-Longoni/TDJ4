@@ -1,11 +1,11 @@
 
+
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using static System.TimeZoneInfo;
 
 public class ChangeScene : MonoBehaviour
 {
@@ -14,19 +14,6 @@ public class ChangeScene : MonoBehaviour
     public GameObject pausePanel;
     private bool isPaused = false;
 
-    // etapas
-  /*  private Dictionary<int, string> firstLevelsByStage = new Dictionary<int, string>()
-    {
-        { 1, "Level1" },
-        { 2, "Level3.5" },
-        { 3, "Level7" }
-    };
-
-    //lista de niveles
-    private List<string> levelsStage1 = new List<string>() { "Level1", "Level2", "Level3" };
-    private List<string> levelsStage2 = new List<string>() { "Level3.5", "Level4", "Level5" };
-    private List<string> levelsStage3 = new List<string>() { "Level7","Level8", "Level9", "Level10", "Level11", "Level12", "Level13"};*/
-
     void Start()
     {
         _transitionAnimator = GetComponentInChildren<Animator>();
@@ -34,12 +21,11 @@ public class ChangeScene : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.JoystickButton9))
         {
             TogglePause();
         }
     }
-
 
     void TogglePause()
     {
@@ -77,27 +63,25 @@ public class ChangeScene : MonoBehaviour
         PlayerPrefs.SetInt("CurrentLevel", nextLevel);
         PlayerPrefs.Save();
 
-        
-           string currentSceneName = SceneManager.GetActiveScene().name;
-           if (currentSceneName == "Level3" || currentSceneName == "Level7" || currentSceneName == "Level13")
-           {
-               StartCoroutine(SceneLoad(0));
-           }
-           else
-           {
+        string currentSceneName = SceneManager.GetActiveScene().name;
+        if (currentSceneName == "Level3" || currentSceneName == "Level7" || currentSceneName == "Level13")
+        {
+            StartCoroutine(SceneLoad(0)); // Volver al menú o selector
+        }
+        else
+        {
             StartCoroutine(SceneLoad(nextLevel));
             Time.timeScale = 1f;
         }
     }
 
-    public IEnumerator SceneLoad(int sceneName)
+    public IEnumerator SceneLoad(int sceneIndex)
     {
         _transitionAnimator.SetTrigger("StartTransition");
         yield return new WaitForSeconds(_transitionTime);
-        SceneManager.LoadScene(sceneName);
+        SceneManager.LoadScene(sceneIndex);
     }
 
-  
     public void RestartLevel()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
@@ -123,7 +107,7 @@ public class ChangeScene : MonoBehaviour
     {
         Debug.Log("Cerrando el juego...");
 #if UNITY_EDITOR
-    UnityEditor.EditorApplication.isPlaying = false;
+        UnityEditor.EditorApplication.isPlaying = false;
 #else
         Application.Quit();
 #endif
