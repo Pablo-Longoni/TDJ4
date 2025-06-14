@@ -64,7 +64,9 @@ public class ChangeScene : MonoBehaviour
         PlayerPrefs.Save();
 
         string currentSceneName = SceneManager.GetActiveScene().name;
-        if (currentSceneName == "Level3" || currentSceneName == "Level7" || currentSceneName == "Level13")
+        StartCoroutine(SceneLoad(nextLevel));
+        Time.timeScale = 1f;
+       /* if (currentSceneName == "Level3" || currentSceneName == "Level7" || currentSceneName == "Level13")
         {
             StartCoroutine(SceneLoad(0)); // Volver al menú o selector
         }
@@ -72,7 +74,7 @@ public class ChangeScene : MonoBehaviour
         {
             StartCoroutine(SceneLoad(nextLevel));
             Time.timeScale = 1f;
-        }
+        }*/
     }
 
     public IEnumerator SceneLoad(int sceneIndex)
@@ -115,7 +117,7 @@ public class ChangeScene : MonoBehaviour
 
     public void NextLvl()
     {
-        NextLevel();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
     public void PreviousLvl()

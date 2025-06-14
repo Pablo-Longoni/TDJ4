@@ -8,6 +8,10 @@ public class CubeMenu : MonoBehaviour
     public float rotationSpeed = 90f; // grados por segundo
     public bool onStage = false;
     private Coroutine _rotationCoroutine;
+    //cooldown
+    private float _rotateCooldown = 1f;
+
+    private bool _isInCooldown = false;
     private void Start()
     {
         _rotationCoroutine = StartCoroutine(RotateCycle());
@@ -53,18 +57,27 @@ public class CubeMenu : MonoBehaviour
     }
     private void Update()
     {
-        if (onStage)
+        if (onStage && !_isInCooldown)
         {
           //  StopCoroutine(_rotationCoroutine);
             if (Input.GetKeyDown(KeyCode.A))
             {
                StartCoroutine( RotateBy(Vector3.back));
+                StartCoroutine(RotationCooldown());
             }
             else if (Input.GetKeyDown(KeyCode.D))
             {
                 StartCoroutine(RotateBy(Vector3.forward));
+                StartCoroutine(RotationCooldown());
             }
         }
 
+    }
+
+    private IEnumerator RotationCooldown()
+    {
+        _isInCooldown = true;
+        yield return new WaitForSeconds(_rotateCooldown);
+        _isInCooldown = false;
     }
 }

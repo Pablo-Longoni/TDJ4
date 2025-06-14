@@ -35,7 +35,7 @@ public class DoorTrigger : MonoBehaviour
     {
         _player.enabled = false;
         //   isMoving = true;
-        _audioManager.playSound(_audioManager._portal);
+      //  _audioManager.playSound(_audioManager._portal);
         float timeElapsed = 0f;
         Vector3 initialPosition = _player.transform.position;
         while (timeElapsed < 2f)

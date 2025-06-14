@@ -23,7 +23,7 @@ public class CameraChange : MonoBehaviour
 
     // Funciones del espacio
     public ChangeScene _changeScene;
-
+    private float _blendTime;
     public enum SpaceBarState
     {
         Cinematic,
@@ -32,7 +32,7 @@ public class CameraChange : MonoBehaviour
 
     public SpaceBarState currentState = SpaceBarState.Cinematic;
     public float _holdTimer = 0;
-    public float _holdDuration = 0.5f;
+    public float _holdDuration = 0f;
 
     void Start()
     {
@@ -41,6 +41,7 @@ public class CameraChange : MonoBehaviour
         // _cameraData = _mainCamera.GetComponent<UniversalAdditionalCameraData>();
         _cameraBrain = _mainCamera.GetComponent<CinemachineBrain>();
         _isIsometric = true;
+        _blendTime = _cameraBrain.DefaultBlend.Time;
         StartCoroutine(DelayedCinematicStart());
     }
 
@@ -75,18 +76,7 @@ public class CameraChange : MonoBehaviour
 
         if (Input.GetKey(KeyCode.R))
         {
-            _holdTimer += Time.deltaTime;
-            if (_holdTimer >= _holdDuration)
-            {
-                currentState = SpaceBarState.Cinematic;
-                _changeScene.RestartLevel();
-                _holdTimer = 0;
-            }
-        }
-
-        if (Input.GetKeyUp(KeyCode.R))
-        {
-            _holdTimer = 0;
+            _changeScene.RestartLevel();
         }
     }
 
@@ -95,7 +85,7 @@ public class CameraChange : MonoBehaviour
         Debug.Log("ChangeCamera");
         _isIsometric = !_isIsometric;
         _playerTransformation.PlayerTransformed();
-
+        _cameraBrain.DefaultBlend.Time = 1;
         if (!_isIsometric)
         {
             _cameraRotation.ResetRotation();
@@ -123,18 +113,23 @@ public class CameraChange : MonoBehaviour
     private IEnumerator WaitForCinematicEnd()
     {
         yield return new WaitUntil(() =>
-            _cameraBrain != null &&
-            _cameraBrain.ActiveVirtualCamera != null &&
-            _cameraBrain.ActiveVirtualCamera.Name == _cinematicCamera.Name
-        );
+        _cameraBrain != null &&
+        _cameraBrain.ActiveVirtualCamera != null &&
+        _cameraBrain.ActiveVirtualCamera.Name == _cinematicCamera.Name
+    );
 
-        // Esperar a que la cámara activa ya no sea la cinemática
+        // Esperar a que ya no sea la cámara activa
         yield return new WaitUntil(() =>
             _cameraBrain.ActiveVirtualCamera.Name != _cinematicCamera.Name
         );
 
+        // Esperar a que termine el blend (esto es lo que te faltaba)
+        yield return new WaitUntil(() => !_cameraBrain.IsBlending);
+
+        // Recién ahora cambia de estado
+        currentState = SpaceBarState.Playing;
         _cameraBrain.DefaultBlend.Time = 1;
-        Debug.Log("Cinematic terminada");
+        Debug.Log("Cinematica terminada y blend finalizado");
     }
 
     void SkipCinematic()

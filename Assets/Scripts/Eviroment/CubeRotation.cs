@@ -47,7 +47,7 @@ public class CubeRotation : MonoBehaviour
                 _shouldRotate = false;
             }
 
-            float horizontal = Input.GetAxis("Horizontal");
+         /*   float horizontal = Input.GetAxis("Horizontal");
             float vertical = Input.GetAxis("Vertical");
 
             if (horizontal < -0.5f)
@@ -65,7 +65,7 @@ public class CubeRotation : MonoBehaviour
             else if (vertical < -0.5f)
             {
                 RotateCube(Vector3.left, transform);
-            }
+            }*/
         }
     }
 
@@ -80,7 +80,7 @@ public class CubeRotation : MonoBehaviour
                 _targetRotation = newTargetRotation;
                 _shouldRotate = true;
 
-                _audioManager.playSound(_audioManager._turning);
+              //  _audioManager.playSound(_audioManager._turning);
                 StartCoroutine(RotationCooldown());
             }
         }
@@ -104,6 +104,7 @@ public class CubeRotation : MonoBehaviour
         {
             _blinkCoroutine = StartCoroutine(Blink());
         }
+        _canRotate = true;
     }
 
     public void StopBlinking()
@@ -117,6 +118,7 @@ public class CubeRotation : MonoBehaviour
             {
                 _renderers[i].material.color = _originalColors[i];
             }
+            _canRotate = false;
         }
     }
 

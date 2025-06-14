@@ -1,6 +1,7 @@
 using TMPro;
 using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 public class PlayerTransformation : MonoBehaviour
 {
     public int _totalTrans = 3;
@@ -10,6 +11,7 @@ public class PlayerTransformation : MonoBehaviour
     public TextMeshProUGUI _textTrans;
 
     private bool _isBlinking = false;
+   // [SerializeField] Toggle _toggle;
     void Start()
     {
         _textTrans.text = "Flips: " + _currentTrans + "/" + _totalTrans;
@@ -30,6 +32,11 @@ public class PlayerTransformation : MonoBehaviour
                 }
             }
         } 
+
+      /*  if (_toggle.isOn)
+        {
+            CheatTransformation();
+        }*/
     }
 
     public void PlayerTransformed()
@@ -52,5 +59,10 @@ public class PlayerTransformation : MonoBehaviour
         }
 
         _isBlinking = false;
+    }
+
+    public void CheatTransformation()
+    {
+        _totalTrans = 1000;
     }
 }

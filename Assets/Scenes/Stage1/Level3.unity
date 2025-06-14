@@ -690,7 +690,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7a5bb0fef69c2444a5e9d2f115a043d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rotationSpeed: 1000
+  _rotationSpeed: 360
   _cameraChange: {fileID: 415670792}
 --- !u!4 &415670794
 Transform:
@@ -1503,6 +1503,7 @@ GameObject:
   - component: {fileID: 748082748}
   - component: {fileID: 748082747}
   - component: {fileID: 748082746}
+  - component: {fileID: 748082749}
   m_Layer: 5
   m_Name: Next
   m_TagString: Untagged
@@ -1624,6 +1625,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 748082744}
   m_CullTransparentMesh: 1
+--- !u!114 &748082749
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 748082744}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72b6b073f0a957243a4dca87306fee11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _button: {fileID: 748082746}
 --- !u!1 &758476620
 GameObject:
   m_ObjectHideFlags: 0
@@ -1772,7 +1786,7 @@ MonoBehaviour:
   inputReader: {fileID: 838566497}
   _input: {x: 0, y: 0, z: 0}
   _rb: {fileID: 1606612549}
-  _speed: 9
+  _speed: 13
   _turnSpeed: 360
   groundCheckDistance: 0.2
   _currentCube: {fileID: 0}
@@ -1801,6 +1815,7 @@ GameObject:
   - component: {fileID: 906792685}
   - component: {fileID: 906792684}
   - component: {fileID: 906792683}
+  - component: {fileID: 906792686}
   m_Layer: 5
   m_Name: Previous
   m_TagString: Untagged
@@ -1922,6 +1937,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 906792681}
   m_CullTransparentMesh: 1
+--- !u!114 &906792686
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 906792681}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72b6b073f0a957243a4dca87306fee11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _button: {fileID: 906792683}
 --- !u!1 &907819492
 GameObject:
   m_ObjectHideFlags: 0
@@ -2095,8 +2123,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4281479730
-  m_fontColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+    rgba: 4278190080
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -2777,8 +2805,8 @@ MonoBehaviour:
   inputReader: {fileID: 838566497}
   _input: {x: 0, y: 0, z: 0}
   _rb: {fileID: 1606612549}
-  _speed: 9
-  _turnSpeed: 360
+  _speed: 13
+  _turnSpeed: 500
   groundCheckDistance: 0.6
   _currentCube: {fileID: 725837454}
   _minimapCameraFollow: {fileID: 0}
@@ -3155,6 +3183,7 @@ GameObject:
   - component: {fileID: 1958196591}
   - component: {fileID: 1958196590}
   - component: {fileID: 1958196589}
+  - component: {fileID: 1958196592}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -3276,6 +3305,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1958196587}
   m_CullTransparentMesh: 1
+--- !u!114 &1958196592
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1958196587}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 885e0a59fb24a6140ba6e3c4be33b375, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _txt: {fileID: 907890442}
 --- !u!1001 &2022554830
 PrefabInstance:
   m_ObjectHideFlags: 0
