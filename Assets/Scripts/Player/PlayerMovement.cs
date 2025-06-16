@@ -8,7 +8,7 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] private Rigidbody _rb;
     [SerializeField] private float _speed = 5;
-    [SerializeField] private float _turnSpeed = 360;
+    [SerializeField] private float _turnSpeed = 500;
     [SerializeField] private float groundCheckDistance = 0.2f;
 
     private CameraChange _cameraChange;
@@ -29,7 +29,6 @@ public class PlayerMovement : MonoBehaviour
     {
         GatherInput();
         CheckCurrentCube();
-
         if (!_cameraChange._isIsometric && _currentCube._canRotate)
         {
             Rotating();
@@ -99,25 +98,27 @@ public class PlayerMovement : MonoBehaviour
 
     public void Rotating()
     {
-        if (_input == Vector3.zero) return;
+       if (_input == Vector3.zero) return;
+
+       //ejes absolutos 
+        Vector3 upAxis = Vector3.right;
+        Vector3 downAxis = Vector3.left;
+        Vector3 leftAxis = Vector3.forward;
+        Vector3 rightAxis = Vector3.back;
 
         Vector3 rotationAxis = Vector3.zero;
 
-        // W o stick hacia adelante
         if (Input.GetKeyDown(KeyCode.W) || _input.z > 0.5f)
-            rotationAxis = Vector3.left;
+            rotationAxis = upAxis;
 
-        // S o stick hacia atrás
         else if (Input.GetKeyDown(KeyCode.S) || _input.z < -0.5f)
-            rotationAxis = Vector3.right;
+            rotationAxis = downAxis;
 
-        // A o stick hacia la izquierda
         else if (Input.GetKeyDown(KeyCode.A) || _input.x < -0.5f)
-            rotationAxis = Vector3.forward;
+            rotationAxis = leftAxis;
 
-        // D o stick hacia la derecha
         else if (Input.GetKeyDown(KeyCode.D) || _input.x > 0.5f)
-            rotationAxis = Vector3.back;
+            rotationAxis = rightAxis;
 
         // Verificar si hay un cubo debajo
         if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, groundCheckDistance + 0.5f))
@@ -140,7 +141,7 @@ public class PlayerMovement : MonoBehaviour
     void CheckCurrentCube()
     {
         if (_input == Vector3.zero) return;
-
+  
         if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, groundCheckDistance + 0.5f))
         {
             CubeRotation detectedCube = hit.collider.GetComponent<CubeRotation>();
@@ -156,17 +157,25 @@ public class PlayerMovement : MonoBehaviour
             if (_currentFigure != currentFigure)
             {
                 if (_currentFigure != null)
-                    _currentFigure.gameObject.layer = LayerMask.NameToLayer(_defaultLayerName);
 
-                currentFigure.gameObject.layer = LayerMask.NameToLayer(_minimapLayerName);
+                {
+                    int defaultLayer = LayerMask.NameToLayer(_defaultLayerName);
+                    foreach (Transform t in _currentFigure.GetComponentsInChildren<Transform>(true))
+                    {
+                        t.gameObject.layer = defaultLayer;
+                    }
+                }
+
+                int minimapLayer = LayerMask.NameToLayer(_minimapLayerName);
+                foreach (Transform t in currentFigure.GetComponentsInChildren<Transform>(true))
+                {
+                    t.gameObject.layer = minimapLayer;
+                }
+
                 _currentFigure = currentFigure;
             }
 
         }
-
-        //minmapa
-
-
     }
 }
 

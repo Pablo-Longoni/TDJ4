@@ -17,7 +17,7 @@ public class AudioManager : MonoBehaviour
     public AudioClip _turning;
     public AudioClip _portal;
 
-    public void Awake()
+  /*  public void Awake()
     {
         DontDestroyOnLoad(gameObject);
 
@@ -64,5 +64,5 @@ public class AudioManager : MonoBehaviour
     {
         musicSource.clip = newMusic;
         musicSource.Play();
-    }
+    }*/
 }

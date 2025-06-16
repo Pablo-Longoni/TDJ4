@@ -48,7 +48,7 @@ public class StageUnlock : MonoBehaviour
     {
         _cubeMenu.StopRotation();
         _cube.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
-        FadeIn();
+     //   FadeIn();
         _isCanvasCamera = false;
         foreach (Canvas _canvas in _canvas)
         {
@@ -63,7 +63,7 @@ public class StageUnlock : MonoBehaviour
 
     public void GoToMenuCanvas()
     {
-        FadeOut();
+      //  FadeOut();
         _isCanvasCamera = true;
         foreach (Canvas _canvas in _canvas)
         {
@@ -92,7 +92,7 @@ public class StageUnlock : MonoBehaviour
     //fades 
     public void FadeOut()
     {
-        StartCoroutine(FadeTo(0.7f));
+        StartCoroutine(FadeTo(1f));
     }
 
     public void FadeIn()
