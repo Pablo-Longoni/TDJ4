@@ -4,16 +4,15 @@ public class PlayerMovement : MonoBehaviour
 {
     public PlayerInputReader inputReader; // Asignar en el Inspector
 
-    public Vector3 _input;
-
     [SerializeField] private Rigidbody _rb;
-    [SerializeField] private float _speed = 5;
+    [SerializeField] private float _speed = 13;
     [SerializeField] private float _turnSpeed = 500;
     [SerializeField] private float groundCheckDistance = 0.2f;
 
+    public Vector3 _input;
+
     private CameraChange _cameraChange;
     public CubeRotation _currentCube;
-
 
     public FollowEnviroment _minimapCameraFollow;
     private Transform _currentFigure;
@@ -27,8 +26,8 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        GatherInput();
         CheckCurrentCube();
+
         if (!_cameraChange._isIsometric && _currentCube._canRotate)
         {
             Rotating();
@@ -43,10 +42,6 @@ public class PlayerMovement : MonoBehaviour
         if (_cameraChange._isIsometric)
         {
             Look();
-        }
-        else if (!_cameraChange._isIsometric && _currentCube._canRotate)
-        {
-            Rotating();
         }
     }
 
@@ -70,9 +65,48 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
-            _input = rawInput;
+            _input = rawInput.normalized;
         }
     }
+    
+    void Move()
+{
+    if (_cameraChange._isIsometric)
+    {
+        bool isGrounded = Physics.Raycast(transform.position, Vector3.down, groundCheckDistance);
+
+        Vector3 velocity = _rb.velocity;
+
+        // Movimiento horizontal siempre permitido
+        velocity.x = _input.x * _speed;
+        velocity.z = _input.z * _speed;
+
+        // Si no hay suelo, permitimos caída natural
+        if (!isGrounded)
+        {
+            // Dejá que la gravedad actúe, no tocamos velocity.y
+            // Pero si querés hacerla más fuerte, podés sumarle algo como:
+            // velocity.y += Physics.gravity.y * Time.fixedDeltaTime;
+        }
+        else
+        {
+            // Si está en el suelo y no te estás moviendo, frenamos
+            if (_input == Vector3.zero)
+            {
+                velocity.x = 0;
+                velocity.z = 0;
+            }
+        }
+
+        _rb.velocity = velocity;
+        _rb.constraints = RigidbodyConstraints.FreezeRotation;
+    }
+    else
+    {
+        _rb.velocity = Vector3.zero;
+        _rb.constraints = RigidbodyConstraints.FreezeAll;
+    }
+}
 
     void Look()
     {
@@ -83,44 +117,22 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    public void Move()
-    {
-        if (_cameraChange._isIsometric)
-        {
-            _rb.MovePosition(transform.position + (transform.forward * _input.magnitude) * _speed * Time.deltaTime);
-            _rb.constraints = RigidbodyConstraints.FreezeRotation;
-        }
-        else
-        {
-            _rb.constraints = RigidbodyConstraints.FreezeAll;
-        }
-    }
-
     public void Rotating()
     {
-       if (_input == Vector3.zero) return;
-
-       //ejes absolutos 
-        Vector3 upAxis = Vector3.right;
-        Vector3 downAxis = Vector3.left;
-        Vector3 leftAxis = Vector3.forward;
-        Vector3 rightAxis = Vector3.back;
+        if (_input == Vector3.zero) return;
 
         Vector3 rotationAxis = Vector3.zero;
 
-        if (Input.GetKeyDown(KeyCode.W) || _input.z > 0.5f)
-            rotationAxis = upAxis;
+        if (_input.z > 0.5f)
+            rotationAxis = Vector3.right;
+        else if (_input.z < -0.5f)
+            rotationAxis = Vector3.left;
+        else if (_input.x < -0.5f)
+            rotationAxis = Vector3.forward;
+        else if (_input.x > 0.5f)
+            rotationAxis = Vector3.back;
 
-        else if (Input.GetKeyDown(KeyCode.S) || _input.z < -0.5f)
-            rotationAxis = downAxis;
-
-        else if (Input.GetKeyDown(KeyCode.A) || _input.x < -0.5f)
-            rotationAxis = leftAxis;
-
-        else if (Input.GetKeyDown(KeyCode.D) || _input.x > 0.5f)
-            rotationAxis = rightAxis;
-
-        // Verificar si hay un cubo debajo
+        // Verificar cubo debajo
         if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, groundCheckDistance + 0.5f))
         {
             CubeRotation detectedCube = hit.collider.GetComponent<CubeRotation>();
@@ -131,7 +143,6 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
-        // Rotar el cubo si se detectó uno
         if (_currentCube != null)
         {
             _currentCube.RotateCube(rotationAxis, transform);
@@ -141,7 +152,7 @@ public class PlayerMovement : MonoBehaviour
     void CheckCurrentCube()
     {
         if (_input == Vector3.zero) return;
-  
+
         if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, groundCheckDistance + 0.5f))
         {
             CubeRotation detectedCube = hit.collider.GetComponent<CubeRotation>();
@@ -157,26 +168,18 @@ public class PlayerMovement : MonoBehaviour
             if (_currentFigure != currentFigure)
             {
                 if (_currentFigure != null)
-
                 {
                     int defaultLayer = LayerMask.NameToLayer(_defaultLayerName);
                     foreach (Transform t in _currentFigure.GetComponentsInChildren<Transform>(true))
-                    {
                         t.gameObject.layer = defaultLayer;
-                    }
                 }
 
                 int minimapLayer = LayerMask.NameToLayer(_minimapLayerName);
                 foreach (Transform t in currentFigure.GetComponentsInChildren<Transform>(true))
-                {
                     t.gameObject.layer = minimapLayer;
-                }
 
                 _currentFigure = currentFigure;
             }
-
         }
     }
 }
-
-
