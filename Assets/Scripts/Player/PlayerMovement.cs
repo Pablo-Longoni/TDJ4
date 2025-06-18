@@ -5,7 +5,7 @@ public class PlayerMovement : MonoBehaviour
     public PlayerInputReader inputReader; // Asignar en el Inspector
 
     [SerializeField] private Rigidbody _rb;
-    [SerializeField] private float _speed = 13;
+    [SerializeField] private float _speed = 5;
     [SerializeField] private float _turnSpeed = 500;
     [SerializeField] private float groundCheckDistance = 0.2f;
 
@@ -73,32 +73,17 @@ public class PlayerMovement : MonoBehaviour
 {
     if (_cameraChange._isIsometric)
     {
-        bool isGrounded = Physics.Raycast(transform.position, Vector3.down, groundCheckDistance);
-
-        Vector3 velocity = _rb.velocity;
-
-        // Movimiento horizontal siempre permitido
-        velocity.x = _input.x * _speed;
-        velocity.z = _input.z * _speed;
-
-        // Si no hay suelo, permitimos caída natural
-        if (!isGrounded)
+        if (_input != Vector3.zero)
         {
-            // Dejá que la gravedad actúe, no tocamos velocity.y
-            // Pero si querés hacerla más fuerte, podés sumarle algo como:
-            // velocity.y += Physics.gravity.y * Time.fixedDeltaTime;
+            Vector3 moveDir = _input * _speed;
+            _rb.velocity = new Vector3(moveDir.x, _rb.velocity.y, moveDir.z);
         }
         else
         {
-            // Si está en el suelo y no te estás moviendo, frenamos
-            if (_input == Vector3.zero)
-            {
-                velocity.x = 0;
-                velocity.z = 0;
-            }
+            
+            _rb.velocity = new Vector3(0, _rb.velocity.y, 0);
         }
 
-        _rb.velocity = velocity;
         _rb.constraints = RigidbodyConstraints.FreezeRotation;
     }
     else
