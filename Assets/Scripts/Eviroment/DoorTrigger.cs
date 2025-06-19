@@ -23,9 +23,9 @@ public class DoorTrigger : MonoBehaviour
         {
             _changeScene.NextLevel();
             StartCoroutine(MovePlayerToDoor(_target.transform.position));
-         //   _audioManager.playSound(_audioManager._portal);
+            AudioManager.Instance.soundSource.PlayOneShot(AudioManager.Instance._portal);
 
-           
+
 
             Debug.Log("Jugador entró en la puerta");
         }
