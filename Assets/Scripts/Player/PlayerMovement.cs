@@ -106,16 +106,24 @@ public class PlayerMovement : MonoBehaviour
     {
         if (_input == Vector3.zero) return;
 
+        Vector3 upAxis = Vector3.right;
+        Vector3 downAxis = Vector3.left;
+        Vector3 leftAxis = Vector3.forward;
+        Vector3 rightAxis = Vector3.back;
+
         Vector3 rotationAxis = Vector3.zero;
 
-        if (_input.z > 0.5f)
-            rotationAxis = Vector3.right;
-        else if (_input.z < -0.5f)
-            rotationAxis = Vector3.left;
-        else if (_input.x < -0.5f)
-            rotationAxis = Vector3.forward;
-        else if (_input.x > 0.5f)
-            rotationAxis = Vector3.back;
+        if (Input.GetKeyDown(KeyCode.W) || _input.z > 0.5f)
+            rotationAxis = upAxis;
+
+        else if (Input.GetKeyDown(KeyCode.S) || _input.z < -0.5f)
+            rotationAxis = downAxis;
+
+        else if (Input.GetKeyDown(KeyCode.A) || _input.x < -0.5f)
+            rotationAxis = leftAxis;
+
+        else if (Input.GetKeyDown(KeyCode.D) || _input.x > 0.5f)
+            rotationAxis = rightAxis;
 
         // Verificar cubo debajo
         if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, groundCheckDistance + 0.5f))

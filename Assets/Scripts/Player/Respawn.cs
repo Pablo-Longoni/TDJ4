@@ -22,7 +22,7 @@ public class Respawn : MonoBehaviour
 
     void Update()
     {
-        if (transform.position.y <= _limit)
+        if (_rb.position.y <= _limit)
         {
             // _changeScene.RestartLevel();
             RespawnRoutine();
@@ -31,25 +31,25 @@ public class Respawn : MonoBehaviour
 
     public void RespawnRoutine()
 {
-    // Desactivar colisiones
+   
     foreach (BoxCollider col in _collisions)
         col.enabled = false;
 
-    // Resetear física
+    
     _rb.velocity = Vector3.zero;
     _rb.angularVelocity = Vector3.zero;
 
-    // Reposicionar el objeto
-    transform.position = _startPosition;
+    
+    _rb.position = _startPosition;
 
-    // Reactivar la física
+    
     _rb.isKinematic = false;
     _rb.useGravity = true;
 
-    // Pequeño impulso hacia abajo para asegurar movimiento
+    
     StartCoroutine(ApplyInitialImpulse());
 
-    // Reactivar colisiones después de un pequeño delay
+    
     Invoke(nameof(EnableCollider), 0.5f);
 }
 
