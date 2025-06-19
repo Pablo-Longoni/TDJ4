@@ -182,7 +182,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 5eb7e461471201a43bb0ba281289313a, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 6e6d3fbee7d8ad247997ae652b777a34, type: 2}
+      objectReference: {fileID: 2100000, guid: f1593af605417a74b8d458331ef10b7c, type: 2}
     - target: {fileID: 919132149155446097, guid: 5eb7e461471201a43bb0ba281289313a, type: 3}
       propertyPath: m_Name
       value: Cube
@@ -213,6 +213,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: 90
+  onStage: 0
 --- !u!1 &293465922
 GameObject:
   m_ObjectHideFlags: 0
@@ -1979,6 +1980,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   musicSource: {fileID: 1901471310}
   soundSource: {fileID: 1901471310}
+  audioMixer: {fileID: 0}
   _gameMusic: {fileID: 0}
   _menuMusic: {fileID: 8300000, guid: 7a2d6f9c0e05fce48b8aee81ca7c3995, type: 3}
   _turning: {fileID: 0}

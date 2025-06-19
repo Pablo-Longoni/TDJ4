@@ -8,6 +8,7 @@ public class ChangeButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     [SerializeField] private Button _button;
      private Vector3 _newScale;
      private Vector3 _normalScale;
+    [SerializeField] private Vector3 _scale = new Vector3(1.2f, 1.2f, 1.2f);
     void Start()
     {
         _normalScale = _button.transform.localScale;
@@ -17,7 +18,7 @@ public class ChangeButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     {
         if(_button.interactable)
         {
-            _newScale = new Vector3(1.2f, 1.2f, 1.2f);
+            _newScale = _scale;
             _button.transform.localScale = _newScale;
         }
        

@@ -6,6 +6,7 @@ using System.Linq;
 using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class ChangeScene : MonoBehaviour
 {
@@ -13,7 +14,9 @@ public class ChangeScene : MonoBehaviour
     public float _transitionTime;
     public GameObject pausePanel;
     private bool isPaused = false;
-
+    [SerializeField] private RawImage _volume;
+    [SerializeField] private RawImage _controls;
+    private bool isVolume = true;
     void Start()
     {
         _transitionAnimator = GetComponentInChildren<Animator>();
@@ -27,7 +30,7 @@ public class ChangeScene : MonoBehaviour
         }
     }
 
-    void TogglePause()
+   public void TogglePause()
     {
         isPaused = !isPaused;
 
@@ -100,11 +103,31 @@ public class ChangeScene : MonoBehaviour
         SceneManager.LoadScene("Credits");
     }
 
+    public void GoToSettings()
+    {
+        SceneManager.LoadScene("Settings");
+    }
+
     public void GoToSandBox()
     {
         SceneManager.LoadScene("LevelTest");
     }
 
+    public void ToggleSettings()
+    {
+        isVolume = !isVolume;
+
+        if (isVolume)
+        {
+            _controls.gameObject.SetActive(false);
+            _volume.gameObject.SetActive(true);
+        }
+        else
+        {
+            _controls.gameObject.SetActive(true);
+            _volume.gameObject.SetActive(false);
+        }
+    }
     public void Exit()
     {
         Debug.Log("Cerrando el juego...");
