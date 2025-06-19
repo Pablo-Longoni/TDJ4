@@ -1120,11 +1120,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inputReader: {fileID: 1224493401}
-  _input: {x: 0, y: 0, z: 0}
   _rb: {fileID: 492641275}
   _speed: 13
   _turnSpeed: 500
   groundCheckDistance: 0.6
+  _input: {x: 0, y: 0, z: 0}
   _currentCube: {fileID: 30883160}
   _minimapCameraFollow: {fileID: 0}
 --- !u!54 &492641275
@@ -2656,6 +2656,7 @@ GameObject:
   - component: {fileID: 1224493402}
   - component: {fileID: 1224493401}
   - component: {fileID: 1224493400}
+  - component: {fileID: 1224493404}
   m_Layer: 0
   m_Name: Input
   m_TagString: Untagged
@@ -2694,17 +2695,17 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1224493399}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0072f9c1fe852ae4f9a868c6195dbc11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   inputReader: {fileID: 1224493401}
-  _input: {x: 0, y: 0, z: 0}
   _rb: {fileID: 492641275}
   _speed: 13
   _turnSpeed: 360
   groundCheckDistance: 0.2
+  _input: {x: 0, y: 0, z: 0}
   _currentCube: {fileID: 30883160}
   _minimapCameraFollow: {fileID: 0}
 --- !u!4 &1224493403
@@ -2722,6 +2723,36 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1224493404
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1224493399}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  m_NotificationBehavior: 0
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents: []
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: Gameplay
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
 --- !u!1 &1474532233
 GameObject:
   m_ObjectHideFlags: 0

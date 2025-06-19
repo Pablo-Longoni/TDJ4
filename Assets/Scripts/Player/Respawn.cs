@@ -22,7 +22,7 @@ public class Respawn : MonoBehaviour
 
     void Update()
     {
-        if (transform.position.y <= _limit)
+        if (_rb.position.y <= _limit)
         {
             // _changeScene.RestartLevel();
             RespawnRoutine();
@@ -30,23 +30,34 @@ public class Respawn : MonoBehaviour
     }
 
     public void RespawnRoutine()
-    {
-        // Desactiva colliders para evitar colisiones al moverlo
-        foreach (BoxCollider col in _collisions)
-        {
-            col.enabled = false;
-        }
+{
+   
+    foreach (BoxCollider col in _collisions)
+        col.enabled = false;
 
-        // Resetea posición
-        transform.position = _startPosition;
+    
+    _rb.velocity = Vector3.zero;
+    _rb.angularVelocity = Vector3.zero;
 
-        // Le da un pequeño impulso hacia abajo para que vuelva a caer
-        _rb.linearVelocity = new Vector3(0, -0.1f, 0);
-        _rb.angularVelocity = Vector3.zero;
+    
+    _rb.position = _startPosition;
 
-        // Reactiva collider después de un pequeño delay
-        Invoke(nameof(EnableCollider), 0.5f);
-    }
+    
+    _rb.isKinematic = false;
+    _rb.useGravity = true;
+
+    
+    StartCoroutine(ApplyInitialImpulse());
+
+    
+    Invoke(nameof(EnableCollider), 0.5f);
+}
+
+private IEnumerator ApplyInitialImpulse()
+{
+    yield return new WaitForFixedUpdate();
+    _rb.velocity = new Vector3(0, -2f, 0); 
+}
 
     void EnableCollider()
     {
