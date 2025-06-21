@@ -16,7 +16,7 @@ public class ChangeScene : MonoBehaviour
     private bool isPaused = false;
     [SerializeField] private RawImage _volume;
     [SerializeField] private RawImage _controls;
-    private bool isVolume = true;
+    
     void Start()
     {
         _transitionAnimator = GetComponentInChildren<Animator>();
@@ -113,20 +113,18 @@ public class ChangeScene : MonoBehaviour
         SceneManager.LoadScene("LevelTest");
     }
 
-    public void ToggleSettings()
+    public void SettingsControls()
     {
-        isVolume = !isVolume;
+        TogglePause();
+        _controls.gameObject.SetActive(true);
+        _volume.gameObject.SetActive(false);
+    }
 
-        if (isVolume)
-        {
-            _controls.gameObject.SetActive(false);
-            _volume.gameObject.SetActive(true);
-        }
-        else
-        {
-            _controls.gameObject.SetActive(true);
-            _volume.gameObject.SetActive(false);
-        }
+    public void SettingsVolume()
+    {
+        TogglePause();
+        _controls.gameObject.SetActive(false);
+        _volume.gameObject.SetActive(true);
     }
     public void Exit()
     {

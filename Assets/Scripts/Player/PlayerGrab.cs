@@ -8,7 +8,7 @@ public class PlayerGrab : MonoBehaviour
     public KeyCode _grabKey = KeyCode.F;
     private GameObject _grabbedObject;
     private Rigidbody _grabbedRb;
-
+    public bool isGrabbed = false;
 
 
     void Update()
@@ -80,12 +80,14 @@ public class PlayerGrab : MonoBehaviour
 
     void MoveGrabbedObject()
     {
+        isGrabbed = true;
         Vector3 targetPos = _grabPoint.position;
         _grabbedObject.transform.position = Vector3.Lerp(_grabbedObject.transform.position, targetPos, Time.deltaTime * 10f);
     }
 
     void Release()
     {
+        isGrabbed = false;
         Physics.IgnoreCollision(GetComponent<Collider>(), _grabbedObject.GetComponent<Collider>(), false);
         if (_grabbedRb != null)
         {

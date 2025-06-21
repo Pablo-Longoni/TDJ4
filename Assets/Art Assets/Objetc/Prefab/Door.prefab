@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3131971254170804046}
   - component: {fileID: 1961819141383596828}
   - component: {fileID: 8587042669638288331}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: Portal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -194,6 +194,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: e2770f07175c98c48adb8942c942b9e8, type: 3}
       propertyPath: m_Name
       value: Door
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: e2770f07175c98c48adb8942c942b9e8, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

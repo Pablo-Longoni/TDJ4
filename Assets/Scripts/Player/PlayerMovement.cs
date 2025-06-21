@@ -76,19 +76,19 @@ public class PlayerMovement : MonoBehaviour
         if (_input != Vector3.zero)
         {
             Vector3 moveDir = _input * _speed;
-            _rb.velocity = new Vector3(moveDir.x, _rb.velocity.y, moveDir.z);
+            _rb.linearVelocity = new Vector3(moveDir.x, _rb.linearVelocity.y, moveDir.z);
         }
         else
         {
             
-            _rb.velocity = new Vector3(0, _rb.velocity.y, 0);
+            _rb.linearVelocity = new Vector3(0, _rb.linearVelocity.y, 0);
         }
 
         _rb.constraints = RigidbodyConstraints.FreezeRotation;
     }
     else
     {
-        _rb.velocity = Vector3.zero;
+        _rb.linearVelocity = Vector3.zero;
         _rb.constraints = RigidbodyConstraints.FreezeAll;
     }
 }
@@ -144,9 +144,9 @@ public class PlayerMovement : MonoBehaviour
 
     void CheckCurrentCube()
     {
-        if (_input == Vector3.zero) return;
+      //  if (_input == Vector3.zero) return;
 
-        if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, groundCheckDistance + 0.5f))
+        if (Physics.SphereCast(transform.position, 0.2f, Vector3.down, out RaycastHit hit, groundCheckDistance + 0.5f))
         {
             CubeRotation detectedCube = hit.collider.GetComponent<CubeRotation>();
             if (detectedCube != null && detectedCube != _currentCube)
@@ -164,12 +164,18 @@ public class PlayerMovement : MonoBehaviour
                 {
                     int defaultLayer = LayerMask.NameToLayer(_defaultLayerName);
                     foreach (Transform t in _currentFigure.GetComponentsInChildren<Transform>(true))
+                    {
+                        if (t.CompareTag("Player")) continue;
                         t.gameObject.layer = defaultLayer;
+                    }
                 }
 
                 int minimapLayer = LayerMask.NameToLayer(_minimapLayerName);
                 foreach (Transform t in currentFigure.GetComponentsInChildren<Transform>(true))
+                {
+                    if (t.CompareTag("Player")) continue;
                     t.gameObject.layer = minimapLayer;
+                }
 
                 _currentFigure = currentFigure;
             }

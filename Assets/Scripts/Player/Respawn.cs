@@ -36,7 +36,7 @@ public class Respawn : MonoBehaviour
         col.enabled = false;
 
     
-    _rb.velocity = Vector3.zero;
+    _rb.linearVelocity = Vector3.zero;
     _rb.angularVelocity = Vector3.zero;
 
     
@@ -56,7 +56,7 @@ public class Respawn : MonoBehaviour
 private IEnumerator ApplyInitialImpulse()
 {
     yield return new WaitForFixedUpdate();
-    _rb.velocity = new Vector3(0, -2f, 0); 
+    _rb.linearVelocity = new Vector3(0, -2f, 0); 
 }
 
     void EnableCollider()

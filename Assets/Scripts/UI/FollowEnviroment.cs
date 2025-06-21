@@ -4,9 +4,9 @@ public class FollowEnviroment : MonoBehaviour
 {
     public PlayerMovement _player;
     public Transform target;
-   // public Vector3 offset = new Vector3(0, 20, 0);
+   // public Vector3 offset = new Vector3(10, 20, 30);
     [SerializeField] private GameObject _miniMap;
-    private bool _isMiniMap = true;
+    private bool _isMiniMap = false;
     void LateUpdate()
     {
         if (target != null)
@@ -21,7 +21,7 @@ public class FollowEnviroment : MonoBehaviour
         }
     }
 
-    private void MiniMapOn()
+    public void MiniMapOn()
     {
         _isMiniMap = !_isMiniMap;
         if (_isMiniMap)
