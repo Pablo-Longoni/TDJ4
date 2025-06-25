@@ -6,15 +6,17 @@ public class PlayerTransformation : MonoBehaviour
 {
     public int _totalTrans = 3;
     public int _currentTrans = 0;
-
+    public int _restartTrans;
     public CameraChange _cameraChange;
     public TextMeshProUGUI _textTrans;
 
     private bool _isBlinking = false;
-   // [SerializeField] Toggle _toggle;
+    [SerializeField] Button _cheatButton;
+    private bool _cheatOn = false;
     void Start()
     {
         _textTrans.text = "Flips: " + _currentTrans + "/" + _totalTrans;
+        _restartTrans = _totalTrans;
     }
 
     // Update is called once per frame
@@ -31,18 +33,13 @@ public class PlayerTransformation : MonoBehaviour
                     StartCoroutine(BlinkText());
                 }
             }
-        } 
-
-      /*  if (_toggle.isOn)
-        {
-            CheatTransformation();
-        }*/
+        }
     }
 
     public void PlayerTransformed()
     {
         _currentTrans = _currentTrans + 1;
-        _textTrans.text = "Swaps: " + _currentTrans + "/" + _totalTrans; 
+        _textTrans.text = "Flips: " + _currentTrans + "/" + _totalTrans; 
         Debug.Log("Transformations: " + _currentTrans);
     }
 
@@ -63,6 +60,16 @@ public class PlayerTransformation : MonoBehaviour
 
     public void CheatTransformation()
     {
-        _totalTrans = 1000;
+        _cheatOn = !_cheatOn;
+        if (_cheatOn)
+        {
+            _totalTrans = 1000;
+            _textTrans.text = "Flips: " + _currentTrans + "/" + _totalTrans;
+        }
+        else
+        {
+            _totalTrans = _restartTrans;
+            _textTrans.text = "Flips: " + _currentTrans + "/" + _totalTrans;
+        }
     }
 }
