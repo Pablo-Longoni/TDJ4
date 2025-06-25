@@ -13,7 +13,7 @@ public class PlayerGrab : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(_grabKey))
+        if (Input.GetKeyDown(_grabKey) || Input.GetKeyDown("joystick button 0"))
         {
             if (_grabbedObject == null)
             {

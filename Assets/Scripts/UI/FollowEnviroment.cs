@@ -4,7 +4,7 @@ public class FollowEnviroment : MonoBehaviour
 {
     public PlayerMovement _player;
     public Transform target;
-   // public Vector3 offset = new Vector3(10, 20, 30);
+    // public Vector3 offset = new Vector3(10, 20, 30);
     [SerializeField] private GameObject _miniMap;
     private bool _isMiniMap = false;
     void LateUpdate()
@@ -15,7 +15,7 @@ public class FollowEnviroment : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.H))
+        if (Input.GetKeyDown(KeyCode.H) || Input.GetKeyDown("joystick button 1"))
         {
             MiniMapOn();
         }
