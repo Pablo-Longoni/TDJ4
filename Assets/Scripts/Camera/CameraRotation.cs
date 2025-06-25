@@ -4,27 +4,32 @@ public class CameraRotation : MonoBehaviour
 {
     public float _rotationSpeed = 1000f;
     public CameraChange _cameraChange;
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButton(0) && _cameraChange._isIsometric) 
+        if (!_cameraChange._isIsometric) return;
+
+        // Rotación con mouse (manteniendo clic izquierdo)
+        if (Input.GetMouseButton(0))
         {
             float mouseX = Input.GetAxis("Mouse X");
             transform.Rotate(Vector3.up, mouseX * _rotationSpeed * Time.deltaTime);
         }
+
+        // Rotación con Gamepad (L1 / R1)
+        if (Input.GetButton("RotateLeft"))
+        {
+            transform.Rotate(Vector3.up, -_rotationSpeed * Time.deltaTime);
+        }
+
+        if (Input.GetButton("RotateRight"))
+        {
+            transform.Rotate(Vector3.up, _rotationSpeed * Time.deltaTime);
+        }
     }
 
-   public void ResetRotation()
+    public void ResetRotation()
     {
-        Vector3 angles = transform.eulerAngles;
-        angles.z = 0;
-        angles.y = 0;
-        angles.x = 0;
-        transform.rotation = Quaternion.Euler(angles);
+        transform.rotation = Quaternion.Euler(0, 0, 0);
     }
 }

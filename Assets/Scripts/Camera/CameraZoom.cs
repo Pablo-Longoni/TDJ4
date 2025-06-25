@@ -16,24 +16,42 @@ public class CameraZoom : MonoBehaviour
 
     void Start()
     {
-    } 
+    }
 
     private void Awake()
     {
         //  _cinemachineCamera = GetComponent<CinemachineCamera>();
 
-        // Obtener la cámara principal asociada
+        // Obtener la cï¿½mara principal asociada
         //  _mainCamera = Camera.main;
 
-        // Inicializar  zoom con el tamaño ortográfico actual de la cámara
+        // Inicializar  zoom con el tamaï¿½o ortogrï¿½fico actual de la cï¿½mara
         _currentZoom = _cinemachineCamera.Lens.OrthographicSize;
     }
 
     // Update is called once per frame
     void Update()
     {
-        _currentZoom = Mathf.Clamp(_currentZoom - Input.mouseScrollDelta.y * _zoomSpeed * Time.deltaTime, _minZoom, _maxZoom);
-   //   _mainCamera.orthographicSize = Mathf.Lerp(_mainCamera.orthographicSize, _currentZoom,_zoomSmoothness * Time.deltaTime);
-        _cinemachineCamera.Lens.OrthographicSize = Mathf.Lerp(_cinemachineCamera.Lens.OrthographicSize, _currentZoom, _zoomSmoothness * Time.deltaTime);
+
+        bool zoomIn = Input.GetKey("joystick button 6") || Input.mouseScrollDelta.y > 0f;
+        bool zoomOut = Input.GetKey("joystick button 7") || Input.mouseScrollDelta.y < 0f;
+
+        if (zoomIn)
+        {
+            _currentZoom -= _zoomSpeed * Time.deltaTime;
+        }
+
+        if (zoomOut)
+        {
+            _currentZoom += _zoomSpeed * Time.deltaTime;
+        }
+
+        _currentZoom = Mathf.Clamp(_currentZoom, _minZoom, _maxZoom);
+
+        _cinemachineCamera.Lens.OrthographicSize = Mathf.Lerp(
+            _cinemachineCamera.Lens.OrthographicSize,
+            _currentZoom,
+            _zoomSmoothness * Time.deltaTime
+        );
     }
 }
