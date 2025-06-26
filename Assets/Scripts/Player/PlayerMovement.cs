@@ -68,30 +68,30 @@ public class PlayerMovement : MonoBehaviour
             _input = rawInput.normalized;
         }
     }
-    
+
     void Move()
-{
-    if (_cameraChange._isIsometric)
     {
-        if (_input != Vector3.zero)
+        if (_cameraChange._isIsometric)
         {
-            Vector3 moveDir = _input * _speed;
-            _rb.linearVelocity = new Vector3(moveDir.x, _rb.linearVelocity.y, moveDir.z);
+            if (_input != Vector3.zero)
+            {
+                Vector3 moveDir = _input * _speed;
+                _rb.linearVelocity = new Vector3(moveDir.x, _rb.linearVelocity.y, moveDir.z);
+            }
+            else
+            {
+
+                _rb.linearVelocity = new Vector3(0, _rb.linearVelocity.y, 0);
+            }
+
+            _rb.constraints = RigidbodyConstraints.FreezeRotation;
         }
         else
         {
-            
-            _rb.linearVelocity = new Vector3(0, _rb.linearVelocity.y, 0);
+            _rb.linearVelocity = Vector3.zero;
+            _rb.constraints = RigidbodyConstraints.FreezeAll;
         }
-
-        _rb.constraints = RigidbodyConstraints.FreezeRotation;
     }
-    else
-    {
-        _rb.linearVelocity = Vector3.zero;
-        _rb.constraints = RigidbodyConstraints.FreezeAll;
-    }
-}
 
     void Look()
     {
@@ -113,38 +113,38 @@ public class PlayerMovement : MonoBehaviour
 
         Vector3 rotationAxis = Vector3.zero;
 
-        if (Input.GetKeyDown(KeyCode.W) || _input.z > 0.5f)
+        if (_input.z > 0.5f)
             rotationAxis = upAxis;
-
-        else if (Input.GetKeyDown(KeyCode.S) || _input.z < -0.5f)
+        else if (_input.z < -0.5f)
             rotationAxis = downAxis;
-
-        else if (Input.GetKeyDown(KeyCode.A) || _input.x < -0.5f)
+        else if (_input.x < -0.5f)
             rotationAxis = leftAxis;
-
-        else if (Input.GetKeyDown(KeyCode.D) || _input.x > 0.5f)
+        else if (_input.x > 0.5f)
             rotationAxis = rightAxis;
 
-        // Verificar cubo debajo
-        if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, groundCheckDistance + 0.5f))
+        if (rotationAxis != Vector3.zero)
         {
-            CubeRotation detectedCube = hit.collider.GetComponent<CubeRotation>();
-            if (detectedCube != null)
+            // Verificar cubo debajo
+            if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, groundCheckDistance + 0.5f))
             {
-                _currentCube = detectedCube;
-                _currentCube.StartBlinking();
+                CubeRotation detectedCube = hit.collider.GetComponent<CubeRotation>();
+                if (detectedCube != null)
+                {
+                    _currentCube = detectedCube;
+                    _currentCube.StartBlinking();
+                }
             }
-        }
 
-        if (_currentCube != null)
-        {
-            _currentCube.RotateCube(rotationAxis, transform);
+            if (_currentCube != null)
+            {
+                _currentCube.RotateCube(rotationAxis, transform);
+            }
         }
     }
 
     void CheckCurrentCube()
     {
-      //  if (_input == Vector3.zero) return;
+        //  if (_input == Vector3.zero) return;
 
         if (Physics.SphereCast(transform.position, 0.2f, Vector3.down, out RaycastHit hit, groundCheckDistance + 0.5f))
         {

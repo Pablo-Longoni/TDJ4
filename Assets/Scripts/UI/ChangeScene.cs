@@ -1,5 +1,3 @@
-
-
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,21 +14,31 @@ public class ChangeScene : MonoBehaviour
     private bool isPaused = false;
     [SerializeField] private RawImage _volume;
     [SerializeField] private RawImage _controls;
-    
+
+    private PlayerControls _inputActions;
+
+    void Awake()
+    {
+        _inputActions = new PlayerControls();
+        _inputActions.UI.MenuOpenClose.performed += ctx => TogglePause();
+    }
+
+    void OnEnable()
+    {
+        _inputActions.UI.Enable();
+    }
+
+    void OnDisable()
+    {
+        _inputActions.UI.Disable();
+    }
+
     void Start()
     {
         _transitionAnimator = GetComponentInChildren<Animator>();
     }
 
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.JoystickButton9))
-        {
-            TogglePause();
-        }
-    }
-
-   public void TogglePause()
+    public void TogglePause()
     {
         isPaused = !isPaused;
 
@@ -45,6 +53,7 @@ public class ChangeScene : MonoBehaviour
             Time.timeScale = 1f;
         }
     }
+
 
     public void NextLevel()
     {
@@ -69,15 +78,15 @@ public class ChangeScene : MonoBehaviour
         string currentSceneName = SceneManager.GetActiveScene().name;
         StartCoroutine(SceneLoad(nextLevel));
         Time.timeScale = 1f;
-       /* if (currentSceneName == "Level3" || currentSceneName == "Level7" || currentSceneName == "Level13")
-        {
-            StartCoroutine(SceneLoad(0)); // Volver al menú o selector
-        }
-        else
-        {
-            StartCoroutine(SceneLoad(nextLevel));
-            Time.timeScale = 1f;
-        }*/
+        /* if (currentSceneName == "Level3" || currentSceneName == "Level7" || currentSceneName == "Level13")
+         {
+             StartCoroutine(SceneLoad(0)); // Volver al menú o selector
+         }
+         else
+         {
+             StartCoroutine(SceneLoad(nextLevel));
+             Time.timeScale = 1f;
+         }*/
     }
 
     public IEnumerator SceneLoad(int sceneIndex)

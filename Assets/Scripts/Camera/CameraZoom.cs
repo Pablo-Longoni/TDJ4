@@ -1,12 +1,10 @@
 using Unity.Cinemachine;
 using UnityEngine;
-using UnityEngine.Rendering.Universal;
 
 public class CameraZoom : MonoBehaviour
 {
     public float _maxZoom = 20;
     public float _minZoom = 5;
-
     public float _zoomSpeed = 5;
     public float _zoomSmoothness = 1;
 
@@ -14,27 +12,20 @@ public class CameraZoom : MonoBehaviour
 
     public CinemachineCamera _cinemachineCamera;
 
-    void Start()
-    {
-    }
+    private PlayerInputReader _input;
 
     private void Awake()
     {
-        //  _cinemachineCamera = GetComponent<CinemachineCamera>();
-
-        // Obtener la c�mara principal asociada
-        //  _mainCamera = Camera.main;
-
-        // Inicializar  zoom con el tama�o ortogr�fico actual de la c�mara
         _currentZoom = _cinemachineCamera.Lens.OrthographicSize;
+        _input = FindObjectOfType<PlayerInputReader>();
     }
 
-    // Update is called once per frame
     void Update()
     {
+        if (_input == null) return;
 
-        bool zoomIn = Input.GetKey("joystick button 6") || Input.mouseScrollDelta.y > 0f;
-        bool zoomOut = Input.GetKey("joystick button 7") || Input.mouseScrollDelta.y < 0f;
+        bool zoomIn = _input.ZoomInHeld || Input.mouseScrollDelta.y > 0f;
+        bool zoomOut = _input.ZoomOutHeld || Input.mouseScrollDelta.y < 0f;
 
         if (zoomIn)
         {

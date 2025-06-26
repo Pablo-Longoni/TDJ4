@@ -1,7 +1,9 @@
-using TMPro;
 using UnityEngine;
-using System.Collections;
+using UnityEngine.InputSystem;
+using TMPro;
 using UnityEngine.UI;
+using System.Collections;
+
 public class PlayerTransformation : MonoBehaviour
 {
     public int _totalTrans = 3;
@@ -13,33 +15,46 @@ public class PlayerTransformation : MonoBehaviour
     private bool _isBlinking = false;
     [SerializeField] Button _cheatButton;
     private bool _cheatOn = false;
+
+    private PlayerControls _inputActions;
+    void Awake()
+    {
+        _inputActions = new PlayerControls();
+    }
+
+    void OnEnable()
+    {
+        _inputActions.Camera.Enable();
+        _inputActions.Camera.CameraFlip.performed += OnCameraFlipPressed;
+    }
+
+    void OnDisable()
+    {
+        _inputActions.Camera.CameraFlip.performed -= OnCameraFlipPressed;
+        _inputActions.Camera.Disable();
+    }
+
     void Start()
     {
         _textTrans.text = "Flips: " + _currentTrans + "/" + _totalTrans;
         _restartTrans = _totalTrans;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnCameraFlipPressed(InputAction.CallbackContext context)
     {
         if (_currentTrans >= _totalTrans)
         {
             _cameraChange._canChange = false;
 
-            if(Input.GetKeyDown(KeyCode.Space)) 
-            {
-                if (!_isBlinking)
-                {
-                    StartCoroutine(BlinkText());
-                }
-            }
+            if (!_isBlinking)
+                StartCoroutine(BlinkText());
         }
     }
 
     public void PlayerTransformed()
     {
-        _currentTrans = _currentTrans + 1;
-        _textTrans.text = "Flips: " + _currentTrans + "/" + _totalTrans; 
+        _currentTrans++;
+        _textTrans.text = "Flips: " + _currentTrans + "/" + _totalTrans;
         Debug.Log("Transformations: " + _currentTrans);
     }
 
@@ -47,7 +62,7 @@ public class PlayerTransformation : MonoBehaviour
     {
         _isBlinking = true;
 
-        for (int i = 0; i < 4; i++) 
+        for (int i = 0; i < 4; i++)
         {
             _textTrans.enabled = false;
             yield return new WaitForSeconds(0.15f);
@@ -64,12 +79,11 @@ public class PlayerTransformation : MonoBehaviour
         if (_cheatOn)
         {
             _totalTrans = 1000;
-            _textTrans.text = "Flips: " + _currentTrans + "/" + _totalTrans;
         }
         else
         {
             _totalTrans = _restartTrans;
-            _textTrans.text = "Flips: " + _currentTrans + "/" + _totalTrans;
         }
+        _textTrans.text = "Flips: " + _currentTrans + "/" + _totalTrans;
     }
 }

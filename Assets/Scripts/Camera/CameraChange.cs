@@ -4,6 +4,7 @@ using UnityEngine.Rendering.Universal;
 using System.Collections;
 using Unity.VisualScripting;
 using NUnit.Framework.Constraints;
+using UnityEngine.InputSystem;
 
 public class CameraChange : MonoBehaviour
 {
@@ -33,6 +34,12 @@ public class CameraChange : MonoBehaviour
     public SpaceBarState currentState = SpaceBarState.Cinematic;
     public float _holdTimer = 0;
     public float _holdDuration = 0f;
+    private PlayerInputReader _input;
+
+    private void Awake()
+    {
+        _input = FindObjectOfType<PlayerInputReader>();
+    }
 
     void Start()
     {
@@ -57,27 +64,27 @@ public class CameraChange : MonoBehaviour
 
     void Update()
     {
+        if (_input == null) return;
+
         switch (currentState)
         {
             case SpaceBarState.Cinematic:
-                if (Input.GetKeyDown(KeyCode.Space))
-                {
+                if (_input.CameraFlipTriggered)
                     SkipCinematic();
-                }
                 break;
 
             case SpaceBarState.Playing:
-                if ((Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.JoystickButton3)) && _canChange)
-                {
+                if (_input.CameraFlipTriggered && _canChange)
                     ChangeCamera();
-                }
                 break;
         }
 
-        if (Input.GetKey(KeyCode.R))
+        if (_input.RestartKeyPressed)
         {
             _changeScene.RestartLevel();
         }
+
+        _input.ResetFlags();
     }
 
     private void ChangeCamera()

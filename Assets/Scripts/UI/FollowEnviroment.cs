@@ -1,36 +1,41 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class FollowEnviroment : MonoBehaviour
 {
     public PlayerMovement _player;
     public Transform target;
-    // public Vector3 offset = new Vector3(10, 20, 30);
     [SerializeField] private GameObject _miniMap;
     private bool _isMiniMap = false;
-    void LateUpdate()
+
+    private PlayerControls _controls;
+
+    private void Awake()
+    {
+        _controls = new PlayerControls();
+
+        _controls.Camera.CameraHelp.performed += ctx => MiniMapOn();
+    }
+
+    private void OnEnable()
+    {
+        _controls.Camera.Enable();
+    }
+
+    private void OnDisable()
+    {
+        _controls.Camera.Disable();
+    }
+
+    private void LateUpdate()
     {
         if (target != null)
             transform.position = target.position;
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.H) || Input.GetKeyDown("joystick button 1"))
-        {
-            MiniMapOn();
-        }
-    }
-
     public void MiniMapOn()
     {
         _isMiniMap = !_isMiniMap;
-        if (_isMiniMap)
-        {
-            _miniMap.SetActive(true);
-        }
-        else
-        {
-            _miniMap.SetActive(false);
-        }
+        _miniMap.SetActive(_isMiniMap);
     }
 }
