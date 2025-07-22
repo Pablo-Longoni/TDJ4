@@ -1,21 +1,46 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
+using UnityEngine.InputSystem;
+
 public class TutorialDisplay : MonoBehaviour
 {
-    [SerializeField] public GameObject _wasdImage;
-    [SerializeField] public GameObject _spaceBarImage;
-    [SerializeField] public GameObject _mouseClickImage;
-    [SerializeField] public GameObject _mouseMoveImage;
-    [SerializeField] public GameObject _mouseMiddleImage;
+    [SerializeField] GameObject _wasdImage;
+    [SerializeField] GameObject _spaceBarImage;
+    [SerializeField] GameObject _mouseClickImage;
+    [SerializeField] GameObject _mouseMoveImage;
+    [SerializeField] GameObject _mouseMiddleImage;
+
     private bool _didClick = false;
     private bool _didMove = false;
     private bool _didZoom = false;
     private bool _didTrans = false;
     private bool _canDetectMovement = false;
-    private Vector3 _lastMousePosition;
 
-    public string _scene;
+    private Vector2 _mouseDelta;
+    private PlayerControls _input;
+    private string _scene;
+
+    void Awake()
+    {
+        _input = new PlayerControls();
+
+        // Guardamos el delta del mouse cada vez que se mueva
+        _input.Camera.MouseDelta.performed += ctx => _mouseDelta = ctx.ReadValue<Vector2>();
+    }
+
+    void OnEnable()
+    {
+        _input.Camera.Enable();
+        _input.Player.Enable(); // importante para el movimiento WASD
+    }
+
+    void OnDisable()
+    {
+        _input.Camera.Disable();
+        _input.Player.Disable();
+    }
+
     void Start()
     {
         _scene = SceneManager.GetActiveScene().name;
@@ -28,9 +53,8 @@ public class TutorialDisplay : MonoBehaviour
         {
             MouseTutorial();
         }
-
-        _lastMousePosition = Input.mousePosition;
     }
+
     void Update()
     {
         if (_scene == "Level2")
@@ -43,33 +67,27 @@ public class TutorialDisplay : MonoBehaviour
         }
     }
 
-    public void TransformTutorial()
+    void TransformTutorial()
     {
-        // Debug.Log("Tutorial Transform");
-
-        if ((Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.JoystickButton3)) && !_didTrans)
+        if (_input.Camera.CameraFlip.triggered && !_didTrans)
         {
             _spaceBarImage.SetActive(false);
             _wasdImage.SetActive(true);
             _didTrans = true;
         }
 
-        if (Input.GetKeyDown(KeyCode.W) ||
-            Input.GetKeyDown(KeyCode.A) ||
-            Input.GetKeyDown(KeyCode.S) ||
-            Input.GetKeyDown(KeyCode.D) ||
-            Mathf.Abs(Input.GetAxis("Horizontal")) > 0.5f ||
-            Mathf.Abs(Input.GetAxis("Vertical")) > 0.5f)
+        Vector2 moveInput = _input.Player.Movement.ReadValue<Vector2>();
+        if (moveInput.magnitude > 0.1f)
         {
             _wasdImage.SetActive(false);
         }
     }
 
-    public void MouseTutorial()
+    void MouseTutorial()
     {
-        //  Debug.Log("Tutorial mouse");
-        // Paso 1: Hizo click izquierdo
-        if (!_didClick && Input.GetMouseButtonDown(0))
+        bool clickPressed = _input.Camera.Click.triggered;
+
+        if (!_didClick && clickPressed)
         {
             _didClick = true;
             _mouseClickImage.SetActive(true);
@@ -77,35 +95,29 @@ public class TutorialDisplay : MonoBehaviour
             StartCoroutine(EnableMovementDetection());
         }
 
-        // Paso 2: Mueve el mouse mientras tiene el bot�n izquierdo
-        if (_didClick && !_didMove && _canDetectMovement && Input.GetMouseButton(0))
+        if (_didClick && !_didMove && _canDetectMovement && clickPressed)
         {
-            Vector3 currentMousePos = Input.mousePosition;
-            if (Vector3.Distance(currentMousePos, _lastMousePosition) > 5f)
+            if (_mouseDelta.magnitude > 5f)
             {
                 _didMove = true;
                 _mouseMoveImage.SetActive(false);
                 _mouseClickImage.SetActive(false);
                 _mouseMiddleImage.SetActive(true);
             }
-            _lastMousePosition = currentMousePos;
         }
 
-        // Paso 3: Hace zoom con la rueda del mouse
-        if (_didMove && !_didZoom)
+        if (_didMove && !_didZoom &&
+            (_input.Camera.ZoomIn.triggered || _input.Camera.ZoomOut.triggered))
         {
-            float scroll = Input.GetAxis("Mouse ScrollWheel");
-            if (Mathf.Abs(scroll) > 0.01f)
-            {
-                _didZoom = true;
-                _mouseMiddleImage.SetActive(false);
-            }
+            _didZoom = true;
+            _mouseMiddleImage.SetActive(false);
         }
     }
 
-    public IEnumerator EnableMovementDetection()
+    IEnumerator EnableMovementDetection()
     {
         yield return new WaitForSeconds(1.5f);
         _canDetectMovement = true;
     }
 }
+
