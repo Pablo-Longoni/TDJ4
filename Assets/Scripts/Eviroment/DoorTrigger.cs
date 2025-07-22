@@ -23,9 +23,9 @@ public class DoorTrigger : MonoBehaviour
         {
             _changeScene.NextLevel();
             StartCoroutine(MovePlayerToDoor(_target.transform.position));
-         //   _audioManager.playSound(_audioManager._portal);
+            AudioManager.Instance.soundSource.PlayOneShot(AudioManager.Instance._portal);
 
-           
+
 
             Debug.Log("Jugador entró en la puerta");
         }
@@ -35,17 +35,16 @@ public class DoorTrigger : MonoBehaviour
     {
         _player.enabled = false;
         //   isMoving = true;
-        _audioManager.playSound(_audioManager._portal);
+      //  _audioManager.playSound(_audioManager._portal);
         float timeElapsed = 0f;
         Vector3 initialPosition = _player.transform.position;
-
         while (timeElapsed < 2f)
         {
             timeElapsed += Time.deltaTime * moveSpeed; 
             _player.transform.position = Vector3.Lerp(initialPosition, targetPosition, timeElapsed);
             yield return null;
         }
-
+       
         Debug.Log("Jugador entró en la puerta");
         _player.enabled = true;
         // isMoving = false; 

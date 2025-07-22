@@ -1,10 +1,10 @@
-
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using static System.TimeZoneInfo;
+using UnityEngine.UI;
 
 public class ChangeScene : MonoBehaviour
 {
@@ -12,35 +12,33 @@ public class ChangeScene : MonoBehaviour
     public float _transitionTime;
     public GameObject pausePanel;
     private bool isPaused = false;
+    [SerializeField] private RawImage _volume;
+    [SerializeField] private RawImage _controls;
 
-    // etapas
-    private Dictionary<int, string> firstLevelsByStage = new Dictionary<int, string>()
+    private PlayerControls _inputActions;
+
+    void Awake()
     {
-        { 1, "Level1" },
-        { 2, "Level3.5" },
-        { 3, "Level7" }
-    };
+        _inputActions = new PlayerControls();
+        _inputActions.UI.MenuOpenClose.performed += ctx => TogglePause();
+    }
 
-    //lista de niveles
-    private List<string> levelsStage1 = new List<string>() { "Level1", "Level2", "Level3" };
-    private List<string> levelsStage2 = new List<string>() { "Level3.5", "Level4", "Level5" };
-    private List<string> levelsStage3 = new List<string>() { "Level7", "Level9", "Level10", "Level6" };
+    void OnEnable()
+    {
+        _inputActions.UI.Enable();
+    }
+
+    void OnDisable()
+    {
+        _inputActions.UI.Disable();
+    }
 
     void Start()
     {
         _transitionAnimator = GetComponentInChildren<Animator>();
     }
 
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            TogglePause();
-        }
-    }
-
-
-    void TogglePause()
+    public void TogglePause()
     {
         isPaused = !isPaused;
 
@@ -56,53 +54,46 @@ public class ChangeScene : MonoBehaviour
         }
     }
 
+
     public void NextLevel()
     {
+        int currentLevel = PlayerPrefs.GetInt("CurrentLevel", 0);
+        int unlockedLevels = PlayerPrefs.GetInt("UnlockedLevels", 0);
 
-        string currentScene = SceneManager.GetActiveScene().name;
-        string nextScene = GetNextLevel(currentScene);
-        if (nextScene != "")
+        Debug.Log("UnlockedLevels: " + unlockedLevels + " | CurrentLevel: " + currentLevel);
+
+        if (currentLevel >= unlockedLevels)
         {
-            StartCoroutine(SceneLoad(nextScene));
+            unlockedLevels++;
+            PlayerPrefs.SetInt("UnlockedLevels", unlockedLevels);
+            PlayerPrefs.Save();
+            Debug.Log("Nuevo nivel desbloqueado: " + unlockedLevels);
         }
-        else
-        {
-            StartCoroutine(SceneLoad("Stages"));
-        }
+
+        // Actualizar CurrentLevel al siguiente
+        int nextLevel = SceneManager.GetActiveScene().buildIndex + 1;
+        PlayerPrefs.SetInt("CurrentLevel", nextLevel);
+        PlayerPrefs.Save();
+
+        string currentSceneName = SceneManager.GetActiveScene().name;
+        StartCoroutine(SceneLoad(nextLevel));
+        Time.timeScale = 1f;
+        /* if (currentSceneName == "Level3" || currentSceneName == "Level7" || currentSceneName == "Level13")
+         {
+             StartCoroutine(SceneLoad(0)); // Volver al menú o selector
+         }
+         else
+         {
+             StartCoroutine(SceneLoad(nextLevel));
+             Time.timeScale = 1f;
+         }*/
     }
 
-    string GetNextLevel(string currentLevel)
-    {
-        int index;
-
-        if (levelsStage1.Contains(currentLevel))
-        {
-            index = levelsStage1.IndexOf(currentLevel);
-            if (index < levelsStage1.Count - 1)
-                return levelsStage1[index + 1];
-        }
-        else if (levelsStage2.Contains(currentLevel))
-        {
-            index = levelsStage2.IndexOf(currentLevel);
-            if (index < levelsStage2.Count - 1)
-                return levelsStage2[index + 1];
-        }
-        else if (levelsStage3.Contains(currentLevel))
-        {
-
-            index = levelsStage3.IndexOf(currentLevel);
-            if (index < levelsStage3.Count - 1)
-                return levelsStage3[index + 1];
-        }
-
-        return "";
-    }
-
-    public IEnumerator SceneLoad(string sceneName)
+    public IEnumerator SceneLoad(int sceneIndex)
     {
         _transitionAnimator.SetTrigger("StartTransition");
         yield return new WaitForSeconds(_transitionTime);
-        SceneManager.LoadScene(sceneName);
+        SceneManager.LoadScene(sceneIndex);
     }
 
     public void RestartLevel()
@@ -110,23 +101,10 @@ public class ChangeScene : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
-
-    public void StartButton()
-    {
-        SceneManager.LoadScene("Stages");
-    }
-
-    public void StageSelector(int stageNumber)
-    {
-        if (firstLevelsByStage.ContainsKey(stageNumber))
-        {
-            SceneManager.LoadScene(firstLevelsByStage[stageNumber]);
-        }
-    }
-
     public void BackToMenu()
     {
         SceneManager.LoadScene("Menu");
+        Time.timeScale = 1f;
     }
 
     public void GoToCredits()
@@ -134,16 +112,34 @@ public class ChangeScene : MonoBehaviour
         SceneManager.LoadScene("Credits");
     }
 
-    public void GoToStage()
+    public void GoToSettings()
     {
-        SceneManager.LoadScene("Stages");
+        SceneManager.LoadScene("Settings");
     }
 
+    public void GoToSandBox()
+    {
+        SceneManager.LoadScene("LevelTest");
+    }
+
+    public void SettingsControls()
+    {
+        TogglePause();
+        _controls.gameObject.SetActive(true);
+        _volume.gameObject.SetActive(false);
+    }
+
+    public void SettingsVolume()
+    {
+        TogglePause();
+        _controls.gameObject.SetActive(false);
+        _volume.gameObject.SetActive(true);
+    }
     public void Exit()
     {
         Debug.Log("Cerrando el juego...");
 #if UNITY_EDITOR
-    UnityEditor.EditorApplication.isPlaying = false;
+        UnityEditor.EditorApplication.isPlaying = false;
 #else
         Application.Quit();
 #endif

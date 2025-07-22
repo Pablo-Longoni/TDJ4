@@ -2,18 +2,27 @@ using UnityEngine;
 
 public class PlayerGrab : MonoBehaviour
 {
-    public bool _canGrab;
     public float _grabRange = 2f;
     public Transform _grabPoint;
-    public KeyCode _grabKey = KeyCode.F;
+
     private GameObject _grabbedObject;
     private Rigidbody _grabbedRb;
 
+    public bool isGrabbed = false;
+    private bool _canGrab = false;
 
+    private PlayerInputReader _input;
+
+    private void Awake()
+    {
+        _input = FindObjectOfType<PlayerInputReader>();
+    }
 
     void Update()
     {
-        if (Input.GetKeyDown(_grabKey))
+        if (_input == null) return;
+
+        if (_input.GrabPressed)
         {
             if (_grabbedObject == null)
             {
@@ -24,7 +33,6 @@ public class PlayerGrab : MonoBehaviour
                 Release();
             }
         }
-
 
         if (_grabbedObject != null)
         {
@@ -80,21 +88,21 @@ public class PlayerGrab : MonoBehaviour
 
     void MoveGrabbedObject()
     {
+        isGrabbed = true;
         Vector3 targetPos = _grabPoint.position;
         _grabbedObject.transform.position = Vector3.Lerp(_grabbedObject.transform.position, targetPos, Time.deltaTime * 10f);
     }
 
     void Release()
     {
+        isGrabbed = false;
         Physics.IgnoreCollision(GetComponent<Collider>(), _grabbedObject.GetComponent<Collider>(), false);
         if (_grabbedRb != null)
         {
             _grabbedRb.isKinematic = false;
-
         }
 
         _grabbedObject = null;
         _grabbedRb = null;
     }
-
 }

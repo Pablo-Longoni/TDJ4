@@ -1,35 +1,34 @@
 ﻿using UnityEngine;
-using UnityEngine.InputSystem;
-using System.Collections;
+
 public class PlayerMovement : MonoBehaviour
 {
-
-    public Vector3 _input;
+    public PlayerInputReader inputReader; // Asignar en el Inspector
 
     [SerializeField] private Rigidbody _rb;
     [SerializeField] private float _speed = 5;
-    [SerializeField] private float _turnSpeed = 360;
+    [SerializeField] private float _turnSpeed = 500;
     [SerializeField] private float groundCheckDistance = 0.2f;
+
+    public Vector3 _input;
 
     private CameraChange _cameraChange;
     public CubeRotation _currentCube;
 
-     private void Start()
+    public FollowEnviroment _minimapCameraFollow;
+    private Transform _currentFigure;
+    private string _minimapLayerName = "Enviroment";
+    private string _defaultLayerName = "Default";
+
+    private void Start()
     {
         _cameraChange = FindAnyObjectByType<CameraChange>();
     }
 
-
     void Update()
     {
-        GatherInput();
         CheckCurrentCube();
-        /*  if (_cameraChange._isIsometric)
-          {
-              Look();
 
-          }*/
-        if (!_cameraChange._isIsometric && _currentCube._canRotate == true)
+        if (!_cameraChange._isIsometric && _currentCube._canRotate)
         {
             Rotating();
         }
@@ -44,22 +43,18 @@ public class PlayerMovement : MonoBehaviour
         {
             Look();
         }
-        else if (!_cameraChange._isIsometric && _currentCube._canRotate == true)
-        {
-            Rotating();
-        }
     }
+
     void GatherInput()
     {
-        //  _input = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
-        Vector3 rawInput = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
+        Vector2 input2D = inputReader.MoveInput;
+        Vector3 rawInput = new Vector3(input2D.x, 0, input2D.y);
 
         if (_cameraChange._isIsometric && Camera.main != null)
         {
             Vector3 camForward = Camera.main.transform.forward;
             Vector3 camRight = Camera.main.transform.right;
 
-            // Aseguramos que estén en plano horizontal
             camForward.y = 0;
             camRight.y = 0;
 
@@ -70,7 +65,31 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
-            _input = rawInput;
+            _input = rawInput.normalized;
+        }
+    }
+
+    void Move()
+    {
+        if (_cameraChange._isIsometric)
+        {
+            if (_input != Vector3.zero)
+            {
+                Vector3 moveDir = _input * _speed;
+                _rb.linearVelocity = new Vector3(moveDir.x, _rb.linearVelocity.y, moveDir.z);
+            }
+            else
+            {
+
+                _rb.linearVelocity = new Vector3(0, _rb.linearVelocity.y, 0);
+            }
+
+            _rb.constraints = RigidbodyConstraints.FreezeRotation;
+        }
+        else
+        {
+            _rb.linearVelocity = Vector3.zero;
+            _rb.constraints = RigidbodyConstraints.FreezeAll;
         }
     }
 
@@ -78,89 +97,88 @@ public class PlayerMovement : MonoBehaviour
     {
         if (_input != Vector3.zero)
         {
-            /* var matrix = Matrix4x4.Rotate(Quaternion.Euler(0, 45, 0));
-
-             var skewdInput = matrix.MultiplyPoint3x4(_input);
-
-             var relative = (transform.position + skewdInput) - transform.position;
-             var rotation = Quaternion.LookRotation(relative, Vector3.up);
-
-             transform.rotation = Quaternion.RotateTowards(transform.rotation, rotation, _turnSpeed * Time.deltaTime);*/
             Quaternion rotation = Quaternion.LookRotation(_input, Vector3.up);
-             transform.rotation = Quaternion.RotateTowards(transform.rotation, rotation, _turnSpeed * Time.fixedDeltaTime);
-
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, rotation, _turnSpeed * Time.fixedDeltaTime);
         }
     }
 
-    public void Move()
-    {
-        if (_cameraChange._isIsometric)
-        {
-          //  _rb.MovePosition(transform.position + _input * _speed * Time.deltaTime);
-            _rb.MovePosition(transform.position + (transform.forward * _input.magnitude) * _speed * Time.deltaTime);
-            _rb.constraints = RigidbodyConstraints.FreezeRotation;
-            //    Debug.Log("Movimiento isometrico");
-        }
-        else
-        {
-
-            _rb.constraints = RigidbodyConstraints.FreezeAll;
-            //  Debug.Log("Movimiento cential");
-        }
-    }
-
-    // Rotacion de la figura
     public void Rotating()
     {
         if (_input == Vector3.zero) return;
 
-        //   Debug.Log("Rotating");
-        Physics.Raycast(transform.position, Vector3.down, out RaycastHit hitDown, groundCheckDistance);
+        Vector3 upAxis = Vector3.right;
+        Vector3 downAxis = Vector3.left;
+        Vector3 leftAxis = Vector3.forward;
+        Vector3 rightAxis = Vector3.back;
+
         Vector3 rotationAxis = Vector3.zero;
 
-        if (Input.GetKeyDown(KeyCode.W))
-            rotationAxis = Vector3.left;
-        else if (Input.GetKeyDown(KeyCode.S))
-            rotationAxis = Vector3.right;
-        else if (Input.GetKeyDown(KeyCode.A))
-            rotationAxis = Vector3.forward;
-        else if (Input.GetKeyDown(KeyCode.D))
-            rotationAxis = Vector3.back;
+        if (_input.z > 0.5f)
+            rotationAxis = upAxis;
+        else if (_input.z < -0.5f)
+            rotationAxis = downAxis;
+        else if (_input.x < -0.5f)
+            rotationAxis = leftAxis;
+        else if (_input.x > 0.5f)
+            rotationAxis = rightAxis;
 
-
-        //si detecta una figura actualiza _currentCube
-        if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, groundCheckDistance + 0.5f))
+        if (rotationAxis != Vector3.zero)
         {
-            CubeRotation detectedCube = hit.collider.GetComponent<CubeRotation>();
-            if (detectedCube != null)
+            // Verificar cubo debajo
+            if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, groundCheckDistance + 0.5f))
             {
-                _currentCube = detectedCube;
-                _currentCube.StartBlinking();
+                CubeRotation detectedCube = hit.collider.GetComponent<CubeRotation>();
+                if (detectedCube != null)
+                {
+                    _currentCube = detectedCube;
+                    _currentCube.StartBlinking();
+                }
             }
-        }
 
-        // si hay una figura guardada, la rota
-        if (_currentCube != null)
-        {
-            _currentCube.RotateCube(rotationAxis, transform);
+            if (_currentCube != null)
+            {
+                _currentCube.RotateCube(rotationAxis, transform);
+            }
         }
     }
 
-
     void CheckCurrentCube()
     {
-        if (_input == Vector3.zero) return;
-        if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, groundCheckDistance + 0.5f))
+        //  if (_input == Vector3.zero) return;
+
+        if (Physics.SphereCast(transform.position, 0.2f, Vector3.down, out RaycastHit hit, groundCheckDistance + 0.5f))
         {
             CubeRotation detectedCube = hit.collider.GetComponent<CubeRotation>();
             if (detectedCube != null && detectedCube != _currentCube)
             {
-             _currentCube.StopBlinking();
-             _currentCube = detectedCube;
-             _currentCube.StartBlinking();
+                _currentCube?.StopBlinking();
+                _currentCube = detectedCube;
+                _currentCube.StartBlinking();
+            }
+
+            Transform currentFigure = hit.collider.transform;
+
+            if (_currentFigure != currentFigure)
+            {
+                if (_currentFigure != null)
+                {
+                    int defaultLayer = LayerMask.NameToLayer(_defaultLayerName);
+                    foreach (Transform t in _currentFigure.GetComponentsInChildren<Transform>(true))
+                    {
+                        if (t.CompareTag("Player")) continue;
+                        t.gameObject.layer = defaultLayer;
+                    }
+                }
+
+                int minimapLayer = LayerMask.NameToLayer(_minimapLayerName);
+                foreach (Transform t in currentFigure.GetComponentsInChildren<Transform>(true))
+                {
+                    if (t.CompareTag("Player")) continue;
+                    t.gameObject.layer = minimapLayer;
+                }
+
+                _currentFigure = currentFigure;
             }
         }
     }
 }
-   
-     
