@@ -697,6 +697,24 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "RotateLeft",
+                    "type": "Button",
+                    "id": "45b0c8de-6920-4fe1-9c8d-55589f66557d",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "RotateRight",
+                    "type": "Button",
+                    "id": "fd715bf6-6ea4-4319-a4c4-8f55241ed5e3",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -706,7 +724,7 @@
                     "path": "<Gamepad>/leftShoulder",
                     "interactions": "",
                     "processors": "",
-                    "groups": ";Joystick;Gamepad",
+                    "groups": ";Joystick;Gamepad;Touch",
                     "action": "RotateCamera",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -717,7 +735,7 @@
                     "path": "<Gamepad>/rightShoulder",
                     "interactions": "",
                     "processors": "",
-                    "groups": ";Gamepad;Joystick",
+                    "groups": ";Gamepad;Joystick;Touch",
                     "action": "RotateCamera",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -729,6 +747,17 @@
                     "interactions": "Press,Hold",
                     "processors": "",
                     "groups": ";Keyboard&Mouse;Gamepad;Joystick",
+                    "action": "RotateCamera",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "bfe5f1ae-f485-44dc-b3d4-cfb55db80f3b",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
                     "action": "RotateCamera",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -761,7 +790,7 @@
                     "path": "<Gamepad>/buttonSouth",
                     "interactions": "",
                     "processors": "",
-                    "groups": ";Gamepad;Joystick",
+                    "groups": ";Gamepad;Joystick;Touch",
                     "action": "CameraHelp",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -783,7 +812,7 @@
                     "path": "<Gamepad>/buttonNorth",
                     "interactions": "",
                     "processors": "",
-                    "groups": ";Gamepad;Joystick",
+                    "groups": ";Gamepad;Joystick;Touch",
                     "action": "CameraFlip",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -794,7 +823,7 @@
                     "path": "<Gamepad>/leftTrigger",
                     "interactions": "",
                     "processors": "",
-                    "groups": ";Gamepad;Joystick",
+                    "groups": ";Gamepad;Joystick;Touch",
                     "action": "ZoomIn",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -812,11 +841,22 @@
                 },
                 {
                     "name": "",
+                    "id": "75a8879a-5542-4567-852e-caf062b55e73",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ZoomIn",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "26f90d1e-8971-4b6d-97d4-0765c0d647da",
                     "path": "<Gamepad>/rightTrigger",
                     "interactions": "",
                     "processors": "",
-                    "groups": ";Gamepad;Joystick",
+                    "groups": ";Gamepad;Joystick;Touch",
                     "action": "ZoomOut",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -851,6 +891,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "Click",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c43c244c-e4fc-4cce-9c77-443a937b5e0d",
+                    "path": "<Gamepad>/leftShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RotateLeft",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "90ef0008-e6a1-4891-83b6-ef93a81c5f1f",
+                    "path": "<Gamepad>/rightShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RotateRight",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -1007,7 +1069,7 @@
                     "path": "<Gamepad>/buttonWest",
                     "interactions": "",
                     "processors": "",
-                    "groups": ";Gamepad;Joystick",
+                    "groups": ";Gamepad;Joystick;Touch",
                     "action": "Grab",
                     "isComposite": false,
                     "isPartOfComposite": false

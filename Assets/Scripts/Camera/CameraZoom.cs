@@ -1,5 +1,6 @@
 using Unity.Cinemachine;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class CameraZoom : MonoBehaviour
 {
@@ -24,8 +25,11 @@ public class CameraZoom : MonoBehaviour
     {
         if (_input == null) return;
 
-        bool zoomIn = _input.ZoomInHeld || Input.mouseScrollDelta.y > 0f;
-        bool zoomOut = _input.ZoomOutHeld || Input.mouseScrollDelta.y < 0f;
+        
+        float scrollValue = Mouse.current?.scroll.ReadValue().y ?? 0f;
+
+        bool zoomIn = _input.ZoomInHeld || scrollValue > 0f;
+        bool zoomOut = _input.ZoomOutHeld || scrollValue < 0f;
 
         if (zoomIn)
         {

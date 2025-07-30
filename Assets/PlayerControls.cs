@@ -783,6 +783,24 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""RotateLeft"",
+                    ""type"": ""Button"",
+                    ""id"": ""45b0c8de-6920-4fe1-9c8d-55589f66557d"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""RotateRight"",
+                    ""type"": ""Button"",
+                    ""id"": ""fd715bf6-6ea4-4319-a4c4-8f55241ed5e3"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -792,7 +810,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""path"": ""<Gamepad>/leftShoulder"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": "";Joystick;Gamepad"",
+                    ""groups"": "";Joystick;Gamepad;Touch"",
                     ""action"": ""RotateCamera"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -803,7 +821,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""path"": ""<Gamepad>/rightShoulder"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": "";Gamepad;Joystick"",
+                    ""groups"": "";Gamepad;Joystick;Touch"",
                     ""action"": ""RotateCamera"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -815,6 +833,17 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""interactions"": ""Press,Hold"",
                     ""processors"": """",
                     ""groups"": "";Keyboard&Mouse;Gamepad;Joystick"",
+                    ""action"": ""RotateCamera"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""bfe5f1ae-f485-44dc-b3d4-cfb55db80f3b"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
                     ""action"": ""RotateCamera"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -847,7 +876,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""path"": ""<Gamepad>/buttonSouth"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": "";Gamepad;Joystick"",
+                    ""groups"": "";Gamepad;Joystick;Touch"",
                     ""action"": ""CameraHelp"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -869,7 +898,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""path"": ""<Gamepad>/buttonNorth"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": "";Gamepad;Joystick"",
+                    ""groups"": "";Gamepad;Joystick;Touch"",
                     ""action"": ""CameraFlip"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -880,7 +909,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""path"": ""<Gamepad>/leftTrigger"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": "";Gamepad;Joystick"",
+                    ""groups"": "";Gamepad;Joystick;Touch"",
                     ""action"": ""ZoomIn"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -898,11 +927,22 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""75a8879a-5542-4567-852e-caf062b55e73"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ZoomIn"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""26f90d1e-8971-4b6d-97d4-0765c0d647da"",
                     ""path"": ""<Gamepad>/rightTrigger"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": "";Gamepad;Joystick"",
+                    ""groups"": "";Gamepad;Joystick;Touch"",
                     ""action"": ""ZoomOut"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -937,6 +977,28 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Click"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c43c244c-e4fc-4cce-9c77-443a937b5e0d"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RotateLeft"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""90ef0008-e6a1-4891-83b6-ef93a81c5f1f"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RotateRight"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1093,7 +1155,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""path"": ""<Gamepad>/buttonWest"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": "";Gamepad;Joystick"",
+                    ""groups"": "";Gamepad;Joystick;Touch"",
                     ""action"": ""Grab"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -1189,6 +1251,8 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_Camera_ZoomIn = m_Camera.FindAction("ZoomIn", throwIfNotFound: true);
         m_Camera_ZoomOut = m_Camera.FindAction("ZoomOut", throwIfNotFound: true);
         m_Camera_Click = m_Camera.FindAction("Click", throwIfNotFound: true);
+        m_Camera_RotateLeft = m_Camera.FindAction("RotateLeft", throwIfNotFound: true);
+        m_Camera_RotateRight = m_Camera.FindAction("RotateRight", throwIfNotFound: true);
         // Player
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_Movement = m_Player.FindAction("Movement", throwIfNotFound: true);
@@ -1585,6 +1649,8 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Camera_ZoomIn;
     private readonly InputAction m_Camera_ZoomOut;
     private readonly InputAction m_Camera_Click;
+    private readonly InputAction m_Camera_RotateLeft;
+    private readonly InputAction m_Camera_RotateRight;
     /// <summary>
     /// Provides access to input actions defined in input action map "Camera".
     /// </summary>
@@ -1624,6 +1690,14 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Camera/Click".
         /// </summary>
         public InputAction @Click => m_Wrapper.m_Camera_Click;
+        /// <summary>
+        /// Provides access to the underlying input action "Camera/RotateLeft".
+        /// </summary>
+        public InputAction @RotateLeft => m_Wrapper.m_Camera_RotateLeft;
+        /// <summary>
+        /// Provides access to the underlying input action "Camera/RotateRight".
+        /// </summary>
+        public InputAction @RotateRight => m_Wrapper.m_Camera_RotateRight;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -1671,6 +1745,12 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Click.started += instance.OnClick;
             @Click.performed += instance.OnClick;
             @Click.canceled += instance.OnClick;
+            @RotateLeft.started += instance.OnRotateLeft;
+            @RotateLeft.performed += instance.OnRotateLeft;
+            @RotateLeft.canceled += instance.OnRotateLeft;
+            @RotateRight.started += instance.OnRotateRight;
+            @RotateRight.performed += instance.OnRotateRight;
+            @RotateRight.canceled += instance.OnRotateRight;
         }
 
         /// <summary>
@@ -1703,6 +1783,12 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Click.started -= instance.OnClick;
             @Click.performed -= instance.OnClick;
             @Click.canceled -= instance.OnClick;
+            @RotateLeft.started -= instance.OnRotateLeft;
+            @RotateLeft.performed -= instance.OnRotateLeft;
+            @RotateLeft.canceled -= instance.OnRotateLeft;
+            @RotateRight.started -= instance.OnRotateRight;
+            @RotateRight.performed -= instance.OnRotateRight;
+            @RotateRight.canceled -= instance.OnRotateRight;
         }
 
         /// <summary>
@@ -2064,6 +2150,20 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnClick(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "RotateLeft" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnRotateLeft(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "RotateRight" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnRotateRight(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "Player" which allows adding and removing callbacks.
