@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
-
+/*
 public class PlacementSystem : MonoBehaviour
 {
   //  [SerializeField] private GameObject _mouseIndicator;
@@ -103,3 +103,4 @@ public class PlacementSystem : MonoBehaviour
       
     }
 }
+*/

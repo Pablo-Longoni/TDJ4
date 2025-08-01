@@ -1,5 +1,83 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &937087364156072853
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 795848272144037109}
+  - component: {fileID: 8131995972199037381}
+  - component: {fileID: 3878095800039210630}
+  - component: {fileID: 7133756412275631773}
+  m_Layer: 0
+  m_Name: Input
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &795848272144037109
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 937087364156072853}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5463796937475754006}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8131995972199037381
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 937087364156072853}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0072f9c1fe852ae4f9a868c6195dbc11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inputReader: {fileID: 3878095800039210630}
+  _rb: {fileID: 9096623278276697544}
+  _speed: 9
+  _turnSpeed: 360
+  groundCheckDistance: 0.6
+  _input: {x: 0, y: 0, z: 0}
+  _currentCube: {fileID: 0}
+  _minimapCameraFollow: {fileID: 0}
+--- !u!114 &3878095800039210630
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 937087364156072853}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd947bf805944844788bf203e1494c50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7133756412275631773
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 937087364156072853}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1706eb63efa189e49a2f54de6b290852, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3360282486589152166
 GameObject:
   m_ObjectHideFlags: 0
@@ -87,12 +165,13 @@ Transform:
   m_GameObject: {fileID: 3682288352713064196}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -46.4, y: 74.3, z: -90.4}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6707730594594781736}
   - {fileID: 6830058306443090460}
+  - {fileID: 795848272144037109}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &6631565497606661173
@@ -208,12 +287,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0072f9c1fe852ae4f9a868c6195dbc11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inputReader: {fileID: 0}
-  _input: {x: 0, y: 0, z: 0}
+  inputReader: {fileID: 3878095800039210630}
   _rb: {fileID: 9096623278276697544}
-  _speed: 9
-  _turnSpeed: 360
+  _speed: 13
+  _turnSpeed: 500
   groundCheckDistance: 0.6
+  _input: {x: 0, y: 0, z: 0}
   _currentCube: {fileID: 0}
   _minimapCameraFollow: {fileID: 0}
 --- !u!114 &265388989196013889
@@ -228,10 +307,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ac8efd1d77c8cb4b957296331fdbfe9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _totalTrans: 40
+  _totalTrans: 0
   _currentTrans: 0
+  _restartTrans: 0
   _cameraChange: {fileID: 0}
   _textTrans: {fileID: 0}
+  _cheatButton: {fileID: 0}
 --- !u!114 &2935157485534680045
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -245,7 +326,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rb: {fileID: 9096623278276697544}
-  _limit: -10
+  _limit: -120
   _collisions: []
 --- !u!114 &6920679671438371367
 MonoBehaviour:
@@ -259,10 +340,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59eb192f8e0abbe42a0c266068f1e1bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _canGrab: 0
   _grabRange: 5
   _grabPoint: {fileID: 6707730594594781736}
-  _grabKey: 102
+  isGrabbed: 0
 --- !u!114 &1884153039599481702
 MonoBehaviour:
   m_ObjectHideFlags: 0

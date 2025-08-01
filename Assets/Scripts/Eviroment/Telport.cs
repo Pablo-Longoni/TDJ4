@@ -3,9 +3,9 @@ using System.Collections;
 using Unity.VisualScripting;
 public class Telport : MonoBehaviour
 {
-    [SerializeField] private Transform _destination;
+    [SerializeField] public Transform _destination;
     [SerializeField] private float cooldownTime = 0.5f;
-    [SerializeField] private PlayerGrab _playerGrab;
+    [SerializeField] public PlayerGrab _playerGrab;
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player") && _playerGrab.isGrabbed == false)

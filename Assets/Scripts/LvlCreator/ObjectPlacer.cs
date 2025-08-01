@@ -19,12 +19,14 @@ public class ObjectPlacer : MonoBehaviour
     {
        if (_placedGameObjects.Count <= gameObjectIndex || _placedGameObjects[gameObjectIndex] == null )
         {
+            Debug.Log("Object not destoryed");
             return;
         }
         else
         {
             Destroy(_placedGameObjects[gameObjectIndex]);
             _placedGameObjects[gameObjectIndex] = null;
+            Debug.Log("Object destroyed");
         }
     }
 }

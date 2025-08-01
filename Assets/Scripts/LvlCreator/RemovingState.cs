@@ -30,7 +30,7 @@ public class RemovingState : IBuildingState
     {
         GridData _selectedData = null;
 
-        if(_elementsData.CanPlaceObjectAt(_gridPosition, Vector2Int.one) == false)
+        if (_elementsData.CanPlaceObjectAt(_gridPosition, Vector2Int.one) == false)
         {
             _selectedData = _elementsData;
         }
@@ -39,7 +39,7 @@ public class RemovingState : IBuildingState
             _selectedData = _figuresData;
         }
 
-        if (_selectedData != null)
+        if (_selectedData == null)
         {
            //sound
         }
@@ -49,12 +49,14 @@ public class RemovingState : IBuildingState
             
             if(_gameObjectIndex == -1)
             {
+                Debug.Log("Object not destoryed");
                 return;
             }
             else
             {
                 _selectedData.RemoveObjectAt(_gridPosition);
                 _objectPlacer.RemoveObjectAt(_gameObjectIndex);
+                Debug.Log("Object destroyed");
             }
         }
         Vector3 _cellPosition = _grid.CellToWorld(_gridPosition);

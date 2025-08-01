@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class OpenPortal : MonoBehaviour
 {
-    [SerializeField] private GameObject _portal;
+    [SerializeField] public GameObject _portal;
     private int _objectsInside = 0;
     private void OnTriggerEnter(Collider other)
     {

@@ -13,7 +13,7 @@ public class PlayerTransformation : MonoBehaviour
     public TextMeshProUGUI _textTrans;
 
     private bool _isBlinking = false;
-    [SerializeField] Button _cheatButton;
+    [SerializeField] public Button _cheatButton;
     private bool _cheatOn = false;
 
     private PlayerControls _inputActions;

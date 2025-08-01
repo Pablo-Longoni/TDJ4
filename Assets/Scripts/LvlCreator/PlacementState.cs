@@ -1,5 +1,5 @@
 using UnityEngine;
-
+/*
 public class PlacementState : IBuildingState
 {
     private int _selectedObjectIndex = -1;
@@ -69,3 +69,4 @@ public class PlacementState : IBuildingState
         _previewSystem.UpdatePosition(_grid.CellToWorld(_gridPosition), _placementValidity);
     }
 }
+*/

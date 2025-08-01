@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 using System.Collections.Generic;
-
+/*
 [CreateAssetMenu]
 public class ObjectsDataBase : ScriptableObject
 {
@@ -20,4 +20,4 @@ public class ObjectData
     [field: SerializeField]
     public GameObject Prefab { get; private set; }
 
-}
+}*/
