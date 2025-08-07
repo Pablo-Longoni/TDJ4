@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEditor;
 using Unity.Cinemachine; 
-using System.Collections.Generic;
+/*using System.Collections.Generic;
 using System;
 using UnityEngine.XR;
 using NUnit.Framework.Constraints;
@@ -133,7 +133,7 @@ public class LvlCreatorWindow : EditorWindow
                 if (newScale != selectedObject.transform.localScale)
                 {
                     selectedObject.transform.localScale = newScale;
-                }*/
+                }
         }
 
         //  HandleKeyboardInput();
@@ -227,3 +227,4 @@ public class LvlCreatorWindow : EditorWindow
 
 
 }
+*/
