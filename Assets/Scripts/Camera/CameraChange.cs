@@ -91,10 +91,11 @@ public class CameraChange : MonoBehaviour
     {
         Debug.Log("ChangeCamera");
         _isIsometric = !_isIsometric;
-        _playerTransformation.PlayerTransformed();
+     //   _playerTransformation.PlayerTransformed();
         _cameraBrain.DefaultBlend.Time = 1;
         if (!_isIsometric)
         {
+           
             _cameraRotation.ResetRotation();
             _isometricCamera.Priority = 2;
             _overHeadCamera.Priority = 3;
@@ -103,6 +104,7 @@ public class CameraChange : MonoBehaviour
         }
         else
         {
+            _playerTransformation.PlayerTransformed();
             _isometricCamera.Priority = 3;
             _overHeadCamera.Priority = 2;
             // _cameraData.renderShadows = true;

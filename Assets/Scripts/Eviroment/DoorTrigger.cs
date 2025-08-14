@@ -6,12 +6,13 @@ public class DoorTrigger : MonoBehaviour
     private ChangeScene _changeScene;
     public CameraChange _cameraChange;
     [SerializeField] public PlayerMovement _player;
-
+    [SerializeField] public CubeAnimation _cubeAnimation;
     public float moveSpeed = 0.5f;
    // private bool isMoving = false;
     public GameObject _target;
     [SerializeField] public AudioManager _audioManager;
     string _sceneName = string.Empty;
+    [SerializeField] private CameraShake _cameraShake;
     void Start()
     {
         _changeScene = GameObject.FindGameObjectWithTag("GameController").GetComponent<ChangeScene>();
@@ -22,8 +23,9 @@ public class DoorTrigger : MonoBehaviour
         if (other.CompareTag("Player") && _cameraChange._isIsometric/* && !other.GetComponent<PlayerMovement>().justRespawned*/)
         {
             _changeScene.NextLevel();
+            _cameraShake.Shake(1, 1, 1);
             StartCoroutine(MovePlayerToDoor(_target.transform.position));
-            AudioManager.Instance.soundSource.PlayOneShot(AudioManager.Instance._portal);
+         //  AudioManager.Instance.soundSource.PlayOneShot(AudioManager.Instance._portal);
 
 
 
@@ -38,13 +40,14 @@ public class DoorTrigger : MonoBehaviour
       //  _audioManager.playSound(_audioManager._portal);
         float timeElapsed = 0f;
         Vector3 initialPosition = _player.transform.position;
+        _cubeAnimation.EnterPortalAnim();
         while (timeElapsed < 2f)
         {
             timeElapsed += Time.deltaTime * moveSpeed; 
             _player.transform.position = Vector3.Lerp(initialPosition, targetPosition, timeElapsed);
             yield return null;
         }
-       
+      
         Debug.Log("Jugador entró en la puerta");
         _player.enabled = true;
         // isMoving = false; 
