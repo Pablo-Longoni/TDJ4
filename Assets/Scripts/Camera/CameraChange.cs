@@ -91,7 +91,6 @@ public class CameraChange : MonoBehaviour
     {
         Debug.Log("ChangeCamera");
         _isIsometric = !_isIsometric;
-     //   _playerTransformation.PlayerTransformed();
         _cameraBrain.DefaultBlend.Time = 1;
         if (!_isIsometric)
         {
@@ -99,7 +98,6 @@ public class CameraChange : MonoBehaviour
             _cameraRotation.ResetRotation();
             _isometricCamera.Priority = 2;
             _overHeadCamera.Priority = 3;
-            // _cameraData.renderShadows = true;
             Debug.Log("Camara cenital" + _isIsometric);
         }
         else
@@ -107,7 +105,6 @@ public class CameraChange : MonoBehaviour
             _playerTransformation.PlayerTransformed();
             _isometricCamera.Priority = 3;
             _overHeadCamera.Priority = 2;
-            // _cameraData.renderShadows = true;
             Debug.Log("Camara Isometrica");
         }
     }
