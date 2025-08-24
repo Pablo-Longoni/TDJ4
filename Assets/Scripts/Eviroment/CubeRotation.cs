@@ -22,6 +22,7 @@ public class CubeRotation : MonoBehaviour
     public bool _isInCooldown = false;
     public CameraChange _cameraChange;
 
+   
     void Start()
     {
         _renderers = GetComponentsInChildren<MeshRenderer>();

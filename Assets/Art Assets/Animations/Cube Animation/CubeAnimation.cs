@@ -182,7 +182,21 @@ public class CubeAnimation : MonoBehaviour
             }
         }
     }
- 
+
+    public void IgnoreStretchAndSquash(float duration)
+    {
+        StartCoroutine(IgnoreTemporarily(duration));
+    }
+
+    private IEnumerator IgnoreTemporarily(float duration)
+    {
+        canStretchAndSquash = false;
+        StopActiveRoutine();
+        transform.localScale = originalScale; // reset seguro
+        yield return new WaitForSeconds(duration);
+        canStretchAndSquash = true;
+    }
+
     // Entering portal and Teleport / cube deformation
 
     public void EnterPortalAnim()
@@ -192,7 +206,6 @@ public class CubeAnimation : MonoBehaviour
         if (this != null)
         {
             StartCoroutine(ScaleObject(_cube, Vector3.zero, 0.7f));
-          //  Debug.Log("Enter anim");
         }
     }
 
@@ -215,6 +228,5 @@ public class CubeAnimation : MonoBehaviour
         transform.localScale = Vector3.zero;
         StartCoroutine(ScaleObject(_cube, originalScale, 0.7f));
         canStretchAndSquash = true;
-      //  Debug.Log("Exit anim");
     }
 }

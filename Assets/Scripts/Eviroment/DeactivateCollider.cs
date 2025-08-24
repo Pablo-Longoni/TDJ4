@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class DeactivateCollider : MonoBehaviour
 {
-    [SerializeField] private Collider _targetCollider;
+    [SerializeField] public Collider _targetCollider;
 
     private bool _isTriggered;
     private void OnTriggerEnter(Collider other)
@@ -29,7 +29,8 @@ public class DeactivateCollider : MonoBehaviour
 
     private IEnumerator EnabledCollider()
     {
-        yield return new WaitForSeconds(.5f);
+        yield return new WaitForSeconds(.7f);
         _targetCollider.enabled = true;
+        _isTriggered = false;
     }
 }

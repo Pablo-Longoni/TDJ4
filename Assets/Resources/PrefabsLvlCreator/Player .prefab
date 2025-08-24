@@ -207,7 +207,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 3e08e18352c0d8a449cde7004aeab5b9, type: 2}
+  - {fileID: 2100000, guid: 6944f1581e854974eb4865a0671363d1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -311,6 +311,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _totalTrans: 0
   _currentTrans: 0
+  _transformUpgrade: 1
   _restartTrans: 0
   _cameraChange: {fileID: 0}
   _textTrans: {fileID: 0}
@@ -344,7 +345,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _grabRange: 5
   _grabPoint: {fileID: 6707730594594781736}
+  _grabbedObject: {fileID: 0}
   isGrabbed: 0
+  _canGrab: 0
 --- !u!114 &1884153039599481702
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -383,6 +386,7 @@ MonoBehaviour:
   _dustPrefab: {fileID: 7512446778391803044, guid: 0bd8793734ebff845be3eab2b81567e6, type: 3}
   _miniDustPrefab: {fileID: 5255338958118048641, guid: a8b18898eb9dd6744bd71c1f2279215a, type: 3}
   squashCooldown: 0.3
+  _cube: {fileID: 0}
 --- !u!1 &5401483503954968331
 GameObject:
   m_ObjectHideFlags: 0

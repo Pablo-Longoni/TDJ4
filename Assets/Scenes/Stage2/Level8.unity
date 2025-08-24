@@ -183,6 +183,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1730600562756838400, guid: 73b0861027af1cf44a2fa0c0dea35a72, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 6944f1581e854974eb4865a0671363d1, type: 2}
     - target: {fileID: 8587042669638288331, guid: 73b0861027af1cf44a2fa0c0dea35a72, type: 3}
       propertyPath: _player
       value: 
@@ -1995,6 +1999,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _totalTrans: 1
   _currentTrans: 0
+  _transformUpgrade: 1
   _restartTrans: 0
   _cameraChange: {fileID: 1553909911}
   _textTrans: {fileID: 809490918}
@@ -2109,7 +2114,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 3e08e18352c0d8a449cde7004aeab5b9, type: 2}
+  - {fileID: 2100000, guid: 6944f1581e854974eb4865a0671363d1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

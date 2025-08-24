@@ -6,7 +6,7 @@ using UnityEngine.XR;
 public class InteractiveShadows : MonoBehaviour
 {
     [SerializeField] private Transform _shadowTransform;
-    [SerializeField] private Transform _lightTransform;
+    [SerializeField] public Transform _lightTransform;
     private LightType _lightType;
 
     [SerializeField] private LayerMask _targetLayerMask;

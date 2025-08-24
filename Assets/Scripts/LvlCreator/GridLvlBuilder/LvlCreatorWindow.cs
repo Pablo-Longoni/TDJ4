@@ -1,12 +1,12 @@
 using UnityEngine;
 using UnityEditor;
 using Unity.Cinemachine; 
-/*using System.Collections.Generic;
-using System;
+using System.Collections.Generic;
+/*using System;
 using UnityEngine.XR;
 using NUnit.Framework.Constraints;
 using static UnityEditor.Experimental.GraphView.GraphView;
-using System.Threading;
+using System.Threading;*/
 public class LvlCreatorWindow : EditorWindow
 {
 
@@ -100,13 +100,13 @@ public class LvlCreatorWindow : EditorWindow
         }
 
 
-        //ROTACIÓN
-        if (selectedObject != null)
+        //Escala
+       if (selectedObject != null)
         {
             GUILayout.Space(10);
             GUILayout.Label("Controles del objeto seleccionado", EditorStyles.boldLabel);
 
-            EditorGUILayout.BeginVertical(GUILayout.Width(100));
+         /*   EditorGUILayout.BeginVertical(GUILayout.Width(100));
             if (GUILayout.Button("UP", GUILayout.Height(30)))
             {
                 selectedObject.transform.Rotate(-90, 0, 0); // Mirar hacia arriba
@@ -127,16 +127,16 @@ public class LvlCreatorWindow : EditorWindow
             {
                 selectedObject.transform.Rotate(90, 0, 0); // Mirar hacia abajo
             }
-            EditorGUILayout.EndVertical();
+            EditorGUILayout.EndVertical();*/
 
-            /*    Vector3 newScale = EditorGUILayout.Vector3Field("Escala", selectedObject.transform.localScale);
+                Vector3 newScale = EditorGUILayout.Vector3Field("Escala", selectedObject.transform.localScale);
                 if (newScale != selectedObject.transform.localScale)
                 {
                     selectedObject.transform.localScale = newScale;
                 }
         }
 
-        //  HandleKeyboardInput();
+        //  HandleKeyboardInput();*/
     }
     
 
@@ -159,6 +159,9 @@ public class LvlCreatorWindow : EditorWindow
             var ui = GameObject.FindFirstObjectByType<UIreference>();
             var figures = instance.GetComponent<CubeRotation>();
             var pressed = instance.GetComponentInChildren<OpenPortal>();
+            var light = instance.GetComponent<InteractiveShadows>();
+            var deactivateCollider = instance.GetComponent <DeactivateCollider>();
+
             if (ui != null)
             {
                 if (playerTrans != null)
@@ -180,6 +183,8 @@ public class LvlCreatorWindow : EditorWindow
                     foreach (var t in teleport)
                     {
                         t._playerGrab = ui._playerGrab;
+                        t._cubeAnimation = ui._cubeAnimation;
+                        t._cameraShake = ui._cameraShake;
                     }
                     Debug.Log("Se cargaron los campos en todos los scripts Telport");
                 }
@@ -194,6 +199,16 @@ public class LvlCreatorWindow : EditorWindow
                 {
                     pressed._portal = ui._portal;
                     Debug.Log("Se cargaron los campos en pressed");
+                }
+
+                if(light != null)
+                {
+                    light._lightTransform = ui._lightTransform;            
+                }
+
+                if(deactivateCollider != null)
+                {
+                    deactivateCollider._targetCollider = ui._deactivateCollider;
                 }
             }
         }
@@ -227,4 +242,3 @@ public class LvlCreatorWindow : EditorWindow
 
 
 }
-*/

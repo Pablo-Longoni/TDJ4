@@ -1,9 +1,9 @@
 using UnityEngine;
 using System.Collections;
-using Unity.VisualScripting;
+/*using Unity.VisualScripting;
 using static UnityEditor.Experimental.GraphView.GraphView;
 using System.Runtime.CompilerServices;
-using Unity.Cinemachine;
+using Unity.Cinemachine;*/
 public class Telport : MonoBehaviour
 {
     [SerializeField] public Transform _destination;
@@ -11,7 +11,7 @@ public class Telport : MonoBehaviour
     [SerializeField] public PlayerGrab _playerGrab;
     [SerializeField] private float _moveSpeed = 3f;
     [SerializeField] public CubeAnimation _cubeAnimation;
-    [SerializeField] private CameraShake _cameraShake;
+    [SerializeField] public CameraShake _cameraShake;
  
 
     private void OnTriggerEnter(Collider other)
@@ -22,9 +22,9 @@ public class Telport : MonoBehaviour
             PlayerCooldown cooldown = other.GetComponent<PlayerCooldown>();
            if (cooldown != null && cooldown.canTeleport)
             {
-                //   StartCoroutine(Teleport(other, cooldown));
+                   StartCoroutine(Teleport(other, cooldown));
                 _cameraShake.Shake(0.5f, 0.5f, 0.5f);
-                StartCoroutine(MovePlayerToPortal(other.transform, cooldown));
+              //  StartCoroutine(MovePlayerToPortal(other.transform, cooldown));
             }
         }
         else
@@ -33,13 +33,13 @@ public class Telport : MonoBehaviour
         }
     }
 
-    /* private IEnumerator Teleport(Collider other, PlayerCooldown cooldown)
+     private IEnumerator Teleport(Collider other, PlayerCooldown cooldown)
      {
          cooldown.canTeleport = false;
          other.transform.position = _destination.position;
          yield return new WaitForSeconds(cooldownTime);
          cooldown.canTeleport = true;
-     }*/
+     }
  /*   private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Player"))

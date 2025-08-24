@@ -14,9 +14,15 @@ public class UIreference : MonoBehaviour
 
     //Teleport
     public PlayerGrab _playerGrab;
+    public CubeAnimation _cubeAnimation;
+    public CameraShake _cameraShake;
 
     //Pressed
     public GameObject _portal;
+
+    //Shadow objects
+    public Transform _lightTransform;
+    public Collider _deactivateCollider;
 
     public static UIreference Instance;
 
