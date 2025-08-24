@@ -22,6 +22,7 @@ public class CubeRotation : MonoBehaviour
     public bool _isInCooldown = false;
     public CameraChange _cameraChange;
 
+   
     void Start()
     {
         _renderers = GetComponentsInChildren<MeshRenderer>();
@@ -80,7 +81,7 @@ public class CubeRotation : MonoBehaviour
                 _targetRotation = newTargetRotation;
                 _shouldRotate = true;
 
-                AudioManager.Instance.soundSource.PlayOneShot(AudioManager.Instance._turning);
+             //   AudioManager.Instance.soundSource.PlayOneShot(AudioManager.Instance._turning);
                 StartCoroutine(RotationCooldown());
             }
         }

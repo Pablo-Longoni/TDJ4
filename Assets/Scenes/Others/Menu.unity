@@ -5813,7 +5813,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1810800668}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: df40fdb022d29994086add214c861a7e, type: 3}
   m_Name: 
@@ -5821,8 +5821,14 @@ MonoBehaviour:
   musicSource: {fileID: 1810800670}
   soundSource: {fileID: 1810800672}
   audioMixer: {fileID: 24100000, guid: 20dfd8fa34f10b64eaaab612a4ab10bc, type: 2}
+  _gameMusic:
+  - {fileID: 8300000, guid: 200dddc59d4988244a445395084d6c98, type: 3}
+  - {fileID: 8300000, guid: 8498d53625558bf48ba5d17fe8b8647e, type: 3}
+  _menuMusic: {fileID: 0}
   _turning: {fileID: 8300000, guid: 8bde3e0726cd063488bbbd57053648e3, type: 3}
   _portal: {fileID: 8300000, guid: 0f71ce1ad90644643a42eb571ee0502c, type: 3}
+  _activatePortal: {fileID: 0}
+  _pressedSound: {fileID: 0}
 --- !u!82 &1810800670
 AudioSource:
   m_ObjectHideFlags: 0
@@ -5833,12 +5839,12 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: -3623535862362009199, guid: 20dfd8fa34f10b64eaaab612a4ab10bc, type: 2}
-  m_audioClip: {fileID: 8300000, guid: 8498d53625558bf48ba5d17fe8b8647e, type: 3}
-  m_Resource: {fileID: 8300000, guid: 8498d53625558bf48ba5d17fe8b8647e, type: 3}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 1
+  Loop: 0
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0

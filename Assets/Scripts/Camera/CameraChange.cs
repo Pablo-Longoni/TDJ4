@@ -2,9 +2,10 @@ using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 using System.Collections;
-using Unity.VisualScripting;
+/*using Unity.VisualScripting;
 using NUnit.Framework.Constraints;
 using UnityEngine.InputSystem;
+using static UnityEditor.Experimental.GraphView.GraphView;*/
 
 public class CameraChange : MonoBehaviour
 {
@@ -36,6 +37,9 @@ public class CameraChange : MonoBehaviour
     public float _holdDuration = 0f;
     private PlayerInputReader _input;
 
+    //scale player
+    private Vector3 originalScale;
+
     private void Awake()
     {
         _input = FindObjectOfType<PlayerInputReader>();
@@ -50,6 +54,7 @@ public class CameraChange : MonoBehaviour
         _isIsometric = true;
         _blendTime = _cameraBrain.DefaultBlend.Time;
         StartCoroutine(DelayedCinematicStart());
+        originalScale = _playerTransformation.transform.localScale;
     }
 
     private IEnumerator DelayedCinematicStart()
@@ -91,22 +96,22 @@ public class CameraChange : MonoBehaviour
     {
         Debug.Log("ChangeCamera");
         _isIsometric = !_isIsometric;
-        _playerTransformation.PlayerTransformed();
         _cameraBrain.DefaultBlend.Time = 1;
         if (!_isIsometric)
         {
+           
             _cameraRotation.ResetRotation();
             _isometricCamera.Priority = 2;
             _overHeadCamera.Priority = 3;
-            // _cameraData.renderShadows = true;
             Debug.Log("Camara cenital" + _isIsometric);
         }
         else
         {
+            _playerTransformation.PlayerTransformed();
             _isometricCamera.Priority = 3;
             _overHeadCamera.Priority = 2;
-            // _cameraData.renderShadows = true;
             Debug.Log("Camara Isometrica");
+         //   _playerTransformation.GetComponent<CubeAnimation>().IgnoreStretchAndSquash(0.3f);
         }
     }
 
