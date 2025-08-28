@@ -53,7 +53,6 @@ public class CubeAnimation : MonoBehaviour
         {
             firstFrameChecked = true;
 
-            // Comprobamos si el jugador ya está en el aire al comenzar
             bool groundedAtStart = Physics.Raycast(groundCheck.position, Vector3.down, rayDistance, groundLayer);
 
             if (!groundedAtStart)
@@ -62,44 +61,13 @@ public class CubeAnimation : MonoBehaviour
                 fallStartTime = Time.time;
                 StopActiveRoutine();
                 currentRoutine = StartCoroutine(Stretch());
-            //    Debug.Log(">>> COMIENZA EN EL AIRE");
             }
         }
         CheckGrounded();
-      //  float currentYVelocity = rb.linearVelocity.y;
 
-        bool justLanded = isGrounded && !wasGroundedLastFrame && isActuallyFalling;
-       bool justStartedFalling = !isGrounded && wasGroundedLastFrame /* && rb.linearVelocity.y < 0*/;
-       // Debug.Log("VELOCITY Y: "+ rb.linearVelocity.y);
-      /*  if (justStartedFalling /*&& currentYVelocity < -0.1f && previousYVelocity >= -0.01f/)
-        {
-            isFalling = true;
-            fallStartTime = Time.time;
-            StopActiveRoutine();
-            currentRoutine = StartCoroutine(Stretch());
-             Debug.Log("VELOCITY Y: "+ rb.linearVelocity.y);
-        }*/
-
-   /*     if (justLanded && isFalling )
-        {
-            isFalling = false;
-            lastSquashTime = Time.time;
-            StopActiveRoutine();
-            currentRoutine = StartCoroutine(Squash());
-        }
-
-        wasGroundedLastFrame = isGrounded;*/
-
-        if (Input.GetKeyDown(KeyCode.T))
-        {
-            EnterPortalAnim();
-        }
-        if (Input.GetKeyDown(KeyCode.Y))
-        {
-            ExitPortalAnim();
-        }
+       bool justLanded = isGrounded && !wasGroundedLastFrame && isActuallyFalling;
+       bool justStartedFalling = !isGrounded && wasGroundedLastFrame;
     }
-
     void CheckGrounded()
     {
         if (ignoreGroundCheck)
@@ -149,24 +117,23 @@ public class CubeAnimation : MonoBehaviour
         transform.localScale = originalScale;
         ignoreGroundCheck = false;
         dustSpawned = false;
-     //   Debug.Log("Squash");
+        Debug.Log("Squash");
     }
 
     private void OnTriggerExit(Collider other)
     {
         if (canStretchAndSquash && other.gameObject.layer == LayerMask.NameToLayer("Enviroment"))
         {
-            if (!isActuallyFalling)
+            if (!isActuallyFalling && rb.linearVelocity.y < fallThreshold)
             {
                 isActuallyFalling = true;
                 fallStartTime = Time.time;
                 StopActiveRoutine();
                 currentRoutine = StartCoroutine(Stretch());
-          //      Debug.Log(">>> SALIÓ DEL SUELO");
             }
         }
     }
-
+    
     private void OnTriggerEnter(Collider other)
     {
 
@@ -182,7 +149,7 @@ public class CubeAnimation : MonoBehaviour
             }
         }
     }
-
+    
     public void IgnoreStretchAndSquash(float duration)
     {
         StartCoroutine(IgnoreTemporarily(duration));
@@ -230,3 +197,4 @@ public class CubeAnimation : MonoBehaviour
         canStretchAndSquash = true;
     }
 }
+ 

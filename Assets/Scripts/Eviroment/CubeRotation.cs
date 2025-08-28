@@ -1,5 +1,6 @@
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
+using System.Linq;
 
 public class CubeRotation : MonoBehaviour
 {
@@ -22,8 +23,26 @@ public class CubeRotation : MonoBehaviour
     public bool _isInCooldown = false;
     public CameraChange _cameraChange;
 
-   
-    void Start()
+    void Awake()
+    {
+        // 🔹 Filtrar los renderers que NO estén en "Objects"
+        int objectsLayer = LayerMask.NameToLayer("Objects");
+
+        _renderers = GetComponentsInChildren<MeshRenderer>(true)
+            .Where(r => r.gameObject.layer != objectsLayer)
+            .ToArray();
+
+        _originalColors = new Color[_renderers.Length];
+
+        for (int i = 0; i < _renderers.Length; i++)
+        {
+            _originalColors[i] = _renderers[i].material.color;
+        }
+
+        _targetColor = _originalColors[0] * 0.6f;
+    }
+
+ /*   void Start()
     {
         _renderers = GetComponentsInChildren<MeshRenderer>();
         _originalColors = new Color[_renderers.Length];
@@ -34,7 +53,7 @@ public class CubeRotation : MonoBehaviour
         }
 
         _targetColor = _originalColors[0] * 0.6f;
-    }
+    }*/
 
     void Update()
     {
