@@ -23,6 +23,7 @@ public class CubeRotation : MonoBehaviour
     public bool _isInCooldown = false;
     public CameraChange _cameraChange;
 
+    public bool _didRotate = false;
     void Awake()
     {
         // 🔹 Filtrar los renderers que NO estén en "Objects"
@@ -99,8 +100,8 @@ public class CubeRotation : MonoBehaviour
             {
                 _targetRotation = newTargetRotation;
                 _shouldRotate = true;
-
-             //   AudioManager.Instance.soundSource.PlayOneShot(AudioManager.Instance._turning);
+                _didRotate = true; 
+               AudioManager.Instance.soundSource.PlayOneShot(AudioManager.Instance._turning);
                 StartCoroutine(RotationCooldown());
             }
         }

@@ -12,7 +12,8 @@ public class OpenPortal : MonoBehaviour
             _objectsInside++;
             _portal.SetActive(true);
             MeshRenderer _renderer = GetComponent<MeshRenderer>();
-            _renderer.material.color = Color.gray;
+            _renderer.material.color = Color.black;
+            AudioManager.Instance.soundSource.PlayOneShot(AudioManager.Instance._portal);
         }
     }
 

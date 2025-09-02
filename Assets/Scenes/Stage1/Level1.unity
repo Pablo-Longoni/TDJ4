@@ -15373,7 +15373,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -3133498875991405556, guid: df8ee38214926bd4985a262b6cf2e685, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -2859109400176981367, guid: df8ee38214926bd4985a262b6cf2e685, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
@@ -15389,7 +15389,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: df8ee38214926bd4985a262b6cf2e685, type: 3}
       propertyPath: m_Name
-      value: OutlinedObjects-PortalCircle
+      value: Door
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: df8ee38214926bd4985a262b6cf2e685, type: 3}
       propertyPath: m_Layer
@@ -15957,7 +15957,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.1, y: 0.15, z: 0.1}
+  m_Size: {x: 0.2, y: 0.15, z: 0.2}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!212 &1039203540
 SpriteRenderer:
@@ -20889,6 +20889,7 @@ MonoBehaviour:
   currentState: 1
   _holdTimer: 0
   _holdDuration: 0.5
+  _cubeRotation: []
 --- !u!114 &1598393188
 MonoBehaviour:
   m_ObjectHideFlags: 0

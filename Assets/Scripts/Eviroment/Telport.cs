@@ -12,7 +12,7 @@ public class Telport : MonoBehaviour
     [SerializeField] private float _moveSpeed = 3f;
     [SerializeField] public CubeAnimation _cubeAnimation;
     [SerializeField] public CameraShake _cameraShake;
- 
+    [SerializeField] public AudioManager _audioManager;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -29,6 +29,8 @@ public class Telport : MonoBehaviour
         }
         else
         {
+            _cameraShake.Shake(0.5f, 0.5f, 0.5f);
+            AudioManager.Instance.soundSource.PlayOneShot(AudioManager.Instance._portal);
             Debug.Log("soltaa el cubooo");
         }
     }
