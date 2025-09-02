@@ -1,13 +1,13 @@
 using UnityEngine;
 using UnityEditor;
-using Unity.Cinemachine; 
+using Unity.Cinemachine;
 using System.Collections.Generic;
 /*using System;
 using UnityEngine.XR;
 using NUnit.Framework.Constraints;
 using static UnityEditor.Experimental.GraphView.GraphView;
 using System.Threading;*/
-public class LvlCreatorWindow : EditorWindow
+/*public class LvlCreatorWindow : EditorWindow
 {
 
     private List<GameObject> placedObjects = new List<GameObject>();
@@ -24,12 +24,12 @@ public class LvlCreatorWindow : EditorWindow
 
       private void OnGUI()
       {
-        //CAMBIAR CÁMARA
-        GUILayout.Label("Cambiar cámara", EditorStyles.boldLabel);
+        //CAMBIAR Cï¿½MARA
+        GUILayout.Label("Cambiar cï¿½mara", EditorStyles.boldLabel);
 
         GUILayout.Space(10);
         EditorGUILayout.BeginHorizontal(GUILayout.Width(100));
-        if (GUILayout.Button("Isométrica", GUILayout.Height(30)))
+        if (GUILayout.Button("Isomï¿½trica", GUILayout.Height(30)))
         {
             SwitchToCamera("Isometric Camera");
         }
@@ -43,7 +43,7 @@ public class LvlCreatorWindow : EditorWindow
         //AGREGAR ELEMENTOS
         if (prefabDatabase == null)
         {
-            EditorGUILayout.HelpBox("Asigná un Prefab Database", MessageType.Warning);
+            EditorGUILayout.HelpBox("Asignï¿½ un Prefab Database", MessageType.Warning);
             prefabDatabase = (ObjectsPrefab)EditorGUILayout.ObjectField("Prefab Database", prefabDatabase, typeof(ObjectsPrefab), false);
             return;
         }
@@ -84,7 +84,7 @@ public class LvlCreatorWindow : EditorWindow
                 }
                 if (GUILayout.Button("X", GUILayout.Width(20)))
                 {
-                    objectToRemove = obj; // Marcar para eliminar después
+                    objectToRemove = obj; // Marcar para eliminar despuï¿½s
                 }
                 EditorGUILayout.EndHorizontal();
             }
@@ -127,7 +127,7 @@ public class LvlCreatorWindow : EditorWindow
             {
                 selectedObject.transform.Rotate(90, 0, 0); // Mirar hacia abajo
             }
-            EditorGUILayout.EndVertical();*/
+            EditorGUILayout.EndVertical();
 
                 Vector3 newScale = EditorGUILayout.Vector3Field("Escala", selectedObject.transform.localScale);
                 if (newScale != selectedObject.transform.localScale)
@@ -136,7 +136,7 @@ public class LvlCreatorWindow : EditorWindow
                 }
         }
 
-        //  HandleKeyboardInput();*/
+        //  HandleKeyboardInput();
     }
     
 
@@ -219,7 +219,7 @@ public class LvlCreatorWindow : EditorWindow
         var vcam = GameObject.Find(cameraName)?.GetComponent<CinemachineCamera>();
         if (vcam == null)
         {
-            Debug.LogWarning("No se encontró la cámara: " + cameraName);
+            Debug.LogWarning("No se encontrï¿½ la cï¿½mara: " + cameraName);
             return;
         }
 
@@ -233,7 +233,7 @@ public class LvlCreatorWindow : EditorWindow
         
         if (sceneView != null)
         {
-            // Asignamos la posición y rotación de la virtual camera a la SceneView
+            // Asignamos la posiciï¿½n y rotaciï¿½n de la virtual camera a la SceneView
             sceneView.pivot = vcam.transform.position + vcam.transform.forward * 10;
             sceneView.rotation = vcam.transform.rotation;
             sceneView.Repaint();
@@ -241,4 +241,4 @@ public class LvlCreatorWindow : EditorWindow
     }
 
 
-}
+}*/

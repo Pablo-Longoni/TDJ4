@@ -13,27 +13,35 @@ public class PlayerGrab : MonoBehaviour
     public bool _canGrab = false;
 
     private PlayerInputReader _input;
+    private bool _grabButtonHandled = false;
 
     private void Awake()
     {
         _input = FindFirstObjectByType<PlayerInputReader>();
-      
+
     }
 
     void Update()
     {
         if (_input == null) return;
 
-        if (/*_input.GrabPressed ||*/ Input.GetKeyDown(KeyCode.F))
+        bool grabInput = _input.GrabPressed || Input.GetKeyDown(KeyCode.F);
+
+        if (grabInput)
         {
-            if (_grabbedObject == null)
+            if (!_grabButtonHandled)
             {
-                TryGrab();
+                if (_grabbedObject == null)
+                    TryGrab();
+                else
+                    Release();
+
+                _grabButtonHandled = true;
             }
-            else
-            {
-               Release();
-            }
+        }
+        else
+        {
+            _grabButtonHandled = false;
         }
 
         if (_grabbedObject != null)
@@ -41,7 +49,6 @@ public class PlayerGrab : MonoBehaviour
             MoveGrabbedObject();
         }
 
-      
     }
 
     private void OnTriggerEnter(Collider other)
@@ -80,7 +87,7 @@ public class PlayerGrab : MonoBehaviour
                 {
                     _grabbedRb.isKinematic = true;
                 }
-
+                isGrabbed = true;
                 break;
             }
         }

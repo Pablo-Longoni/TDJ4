@@ -82,4 +82,19 @@ public class PlayerInputReader : MonoBehaviour
         MenuTogglePressed = false;
 
     }
+
+    public void OnGrab(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            Debug.Log("Grab PRESSED (performed)");
+            GrabPressed = true;
+        }
+
+        if (context.canceled)
+        {
+            Debug.Log("Grab RELEASED (canceled)");
+            GrabPressed = false;
+        }
+    }
 }

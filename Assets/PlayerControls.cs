@@ -542,7 +542,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""9e92bb26-7e3b-4ec4-b06b-3c8f8e498ddc"",
-                    ""path"": ""<HID::Logitech Logitech Cordless RumblePad 2>/button2"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse;Gamepad;Touch;Joystick;XR"",
@@ -553,7 +553,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""82627dcc-3b13-4ba9-841d-e4b746d6553e"",
-                    ""path"": ""*/{Cancel}"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse;Gamepad;Touch;Joystick;XR"",
@@ -853,7 +853,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""0b843db7-0128-40af-b4b8-2236f2a10876"",
-                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";Gamepad;Joystick"",
@@ -875,7 +875,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""cd2c077c-9ac2-4e42-89c9-26392875bd4e"",
-                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";Gamepad;Joystick"",
