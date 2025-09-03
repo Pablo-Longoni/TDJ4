@@ -1,12 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-
-public class ChangeScene : MonoBehaviour
+using System.Collections;
+public class UIfromPause : MonoBehaviour
 {
     private Animator _transitionAnimator;
     public float _transitionTime;
@@ -14,25 +10,6 @@ public class ChangeScene : MonoBehaviour
     private bool isPaused = false;
     [SerializeField] private RawImage _volume;
     [SerializeField] private RawImage _controls;
-
-    private PlayerControls _inputActions;
-
-    void Awake()
-    {
-        _inputActions = new PlayerControls();
-        _inputActions.UI.MenuOpenClose.performed += ctx => TogglePause();
-    }
-
-    void OnEnable()
-    {
-        _inputActions.UI.Enable();
-    }
-
-    void OnDisable()
-    {
-        _inputActions.UI.Disable();
-    }
-  
     void Start()
     {
         _transitionAnimator = GetComponentInChildren<Animator>();
@@ -80,7 +57,7 @@ public class ChangeScene : MonoBehaviour
         Time.timeScale = 1f;
         /* if (currentSceneName == "Level3" || currentSceneName == "Level7" || currentSceneName == "Level13")
          {
-             StartCoroutine(SceneLoad(0)); // Volver al menÃº o selector
+             StartCoroutine(SceneLoad(0)); // Volver al menú o selector
          }
          else
          {
@@ -98,7 +75,9 @@ public class ChangeScene : MonoBehaviour
 
     public void RestartLevel()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        pausePanel.SetActive(false);
+        Time.timeScale = 1f;
     }
 
     public void BackToMenu()
@@ -148,10 +127,14 @@ public class ChangeScene : MonoBehaviour
     public void NextLvl()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        pausePanel.SetActive(false);
+        Time.timeScale = 1f;
     }
 
     public void PreviousLvl()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+        pausePanel.SetActive(false);
+        Time.timeScale = 1f;
     }
 }
