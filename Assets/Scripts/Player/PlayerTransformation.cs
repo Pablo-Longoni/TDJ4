@@ -105,5 +105,6 @@ public class PlayerTransformation : MonoBehaviour
     {
         _totalTrans = _totalTrans + _transformUpgrade;
         _textTrans.text = "Flips: " + _currentTrans + "/" + _totalTrans;
+        StartCoroutine(BlinkText());
     }
 }

@@ -37,12 +37,13 @@ public class CameraChange : MonoBehaviour
     public float _holdDuration = 0f;
     private PlayerInputReader _input;
 
-    //scale player
-    private Vector3 originalScale;
+    //Saber si rotó
+    public CubeRotation [] _cubeRotation;
 
     private void Awake()
     {
         _input = FindObjectOfType<PlayerInputReader>();
+        _cubeRotation = FindObjectsByType<CubeRotation>(FindObjectsSortMode.None);
     }
 
     void Start()
@@ -54,7 +55,7 @@ public class CameraChange : MonoBehaviour
         _isIsometric = true;
         _blendTime = _cameraBrain.DefaultBlend.Time;
         StartCoroutine(DelayedCinematicStart());
-        originalScale = _playerTransformation.transform.localScale;
+
     }
 
     private IEnumerator DelayedCinematicStart()
@@ -107,11 +108,19 @@ public class CameraChange : MonoBehaviour
         }
         else
         {
-            _playerTransformation.PlayerTransformed();
+            foreach (var cube in _cubeRotation)
+            {
+                if (cube._didRotate)
+                {
+                    _playerTransformation.PlayerTransformed();
+                    Debug.Log("Transformed + 1 en " + cube.name);
+                    cube._didRotate = false; // reseteo solo el que rotó
+                    break; // salgo del loop, ya no importa el resto
+                }
+            }
             _isometricCamera.Priority = 3;
             _overHeadCamera.Priority = 2;
-            Debug.Log("Camara Isometrica");
-         //   _playerTransformation.GetComponent<CubeAnimation>().IgnoreStretchAndSquash(0.3f);
+            //   _playerTransformation.GetComponent<CubeAnimation>().IgnoreStretchAndSquash(0.3f);
         }
     }
 

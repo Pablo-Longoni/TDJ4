@@ -25,6 +25,8 @@ public class AudioManager : MonoBehaviour
     private int lastMusicIndex;
     private AudioDistortionFilter _distortionFilter;
     private AudioLowPassFilter _lowPassFilter;
+
+    private bool _isMuted;
     void Awake()
     {
         if (Instance == null)
@@ -54,12 +56,19 @@ public class AudioManager : MonoBehaviour
 
     private void Update()
     {
-      /*  if(Input.GetKeyDown(KeyCode.D))
+        if (Input.GetKeyDown(KeyCode.M))
         {
-            DistoredMusic();
+            if (!_isMuted)
+            {
+                MuteAllVolume();
+                Debug.Log("Muteada");
+            }
+            else
+            {
+                UnMuteAllVolume();
+            }
         }
-
-        if (Input.GetKeyUp(KeyCode.A))
+      /*  if (Input.GetKeyUp(KeyCode.A))
         {
             RestoredMusic();
         }*/
@@ -98,7 +107,7 @@ public class AudioManager : MonoBehaviour
     private IEnumerator PlayMusicLoop()
     {
         MusicSelector();
-        yield return FadeIn(musicSource, 2f, 1f);
+        yield return FadeIn(musicSource, 2f, 5f);
         while (true)
         {
             yield return new WaitUntil(() => !musicSource.isPlaying);
@@ -150,6 +159,19 @@ public class AudioManager : MonoBehaviour
         Debug.Log("Volumen música prefs: " + sliderSFX);
     }
 
+    public void MuteAllVolume()
+    {
+        audioMixer.SetFloat("SFXVolume", -80f);
+        audioMixer.SetFloat("MusicVolume", -80f);
+        _isMuted = true;
+    }
+
+    public void UnMuteAllVolume()
+    {
+        audioMixer.SetFloat("SFXVolume", 0f);
+        audioMixer.SetFloat("MusicVolume", 0f);
+        _isMuted = false;
+    }
 
     public void DistoredMusic()
     {

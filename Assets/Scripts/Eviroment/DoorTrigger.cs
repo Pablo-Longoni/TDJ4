@@ -25,7 +25,7 @@ public class DoorTrigger : MonoBehaviour
             _changeScene.NextLevel();
             _cameraShake.Shake(1, 1, 1);
             StartCoroutine(MovePlayerToDoor(_target.transform.position));
-         //  AudioManager.Instance.soundSource.PlayOneShot(AudioManager.Instance._portal);
+           AudioManager.Instance.soundSource.PlayOneShot(AudioManager.Instance._portal);
 
 
 

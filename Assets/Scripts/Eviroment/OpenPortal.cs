@@ -11,6 +11,9 @@ public class OpenPortal : MonoBehaviour
             Debug.Log("Entró: " + other.name);
             _objectsInside++;
             _portal.SetActive(true);
+            MeshRenderer _renderer = GetComponent<MeshRenderer>();
+            _renderer.material.color = Color.black;
+            AudioManager.Instance.soundSource.PlayOneShot(AudioManager.Instance._portal);
         }
     }
 
@@ -26,6 +29,8 @@ public class OpenPortal : MonoBehaviour
             if (_objectsInside == 0)
             {
                 _portal.SetActive(false);
+                MeshRenderer _renderer = GetComponent<MeshRenderer>();
+                _renderer.material.color = Color.white;
             }
         }
     }

@@ -32,7 +32,7 @@ public class ChangeScene : MonoBehaviour
     {
         _inputActions.UI.Disable();
     }
-
+  
     void Start()
     {
         _transitionAnimator = GetComponentInChildren<Animator>();
@@ -98,7 +98,7 @@ public class ChangeScene : MonoBehaviour
 
     public void RestartLevel()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);;
     }
 
     public void BackToMenu()
