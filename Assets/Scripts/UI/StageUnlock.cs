@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 using TMPro;
 using Unity.Cinemachine;
 using System.Collections;
+using UnityEngine.EventSystems;
 public class StageUnlock : MonoBehaviour
 {
 
@@ -11,16 +12,16 @@ public class StageUnlock : MonoBehaviour
     [SerializeField] private CinemachineCamera _stageCamera;
     [SerializeField] private CinemachineCamera _canvasCamera;
     [SerializeField] private Canvas[] _canvas;
-    [SerializeField]  private Canvas _mainCanvas;
+    [SerializeField] private Canvas _mainCanvas;
     private bool _isCanvasCamera;
 
     [SerializeField] private CubeMenu _cubeMenu;
     [SerializeField] private GameObject _cube;
     public float _fadeDuration = 1f;
-      public Renderer _cubeRenderer;
-      private Material _cubeMaterial;
-      private Color originalColor;
-     
+    public Renderer _cubeRenderer;
+    private Material _cubeMaterial;
+    private Color originalColor;
+    [SerializeField] private GameObject firstLevelButton;
     void Start()
     {
         _isCanvasCamera = true;
@@ -30,7 +31,7 @@ public class StageUnlock : MonoBehaviour
 
     void Update()
     {
-        if(Input.GetKeyUp(KeyCode.P))
+        if (Input.GetKeyUp(KeyCode.P))
         {
             PlayerPrefs.DeleteAll();
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
@@ -48,7 +49,7 @@ public class StageUnlock : MonoBehaviour
     {
         _cubeMenu.StopRotation();
         _cube.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
-     //   FadeIn();
+        //   FadeIn();
         _isCanvasCamera = false;
         foreach (Canvas _canvas in _canvas)
         {
@@ -58,12 +59,15 @@ public class StageUnlock : MonoBehaviour
         _cubeMenu.onStage = true;
         _canvasCamera.Priority = 1;
         _stageCamera.Priority = 2;
-      //  StartCoroutine(ChangeRenderMode());
+        //  StartCoroutine(ChangeRenderMode())
+
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(firstLevelButton);
     }
 
     public void GoToMenuCanvas()
     {
-      //  FadeOut();
+        //  FadeOut();
         _isCanvasCamera = true;
         foreach (Canvas _canvas in _canvas)
         {
@@ -72,13 +76,13 @@ public class StageUnlock : MonoBehaviour
         _cubeMenu.onStage = false;
         _canvasCamera.Priority = 2;
         _stageCamera.Priority = 1;
-       // StartCoroutine(ChangeRenderMode());
+        // StartCoroutine(ChangeRenderMode());
     }
 
     //change canvas render
     IEnumerator ChangeRenderMode()
     {
-        if(_mainCanvas.renderMode == RenderMode.ScreenSpaceOverlay)
+        if (_mainCanvas.renderMode == RenderMode.ScreenSpaceOverlay)
         {
             yield return new WaitForSeconds(0.5f);
             _mainCanvas.renderMode = RenderMode.WorldSpace;

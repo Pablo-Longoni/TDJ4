@@ -1,16 +1,16 @@
-using System.Xml;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class ChangeFont : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class ChangeFont : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, ISelectHandler, IDeselectHandler
 {
     public TMP_FontAsset defaultFont;
     public TMP_FontAsset hoverFont;
-    public TextMeshProUGUI [] tmpText;
+    public TextMeshProUGUI[] tmpText;
     private TextMeshProUGUI textMesh;
 
     public bool isLocked = false;
+
     void Start()
     {
         textMesh = GetComponentInChildren<TextMeshProUGUI>();
@@ -24,7 +24,28 @@ public class ChangeFont : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if (textMesh != null && hoverFont != null)
+        ApplyHoverStyle();
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        ApplyDefaultStyle();
+    }
+
+
+    public void OnSelect(BaseEventData eventData)
+    {
+        ApplyHoverStyle();
+    }
+
+
+    public void OnDeselect(BaseEventData eventData)
+    {
+        ApplyDefaultStyle();
+    }
+
+    private void ApplyHoverStyle()
+    {
         if (isLocked) return;
 
         foreach (TextMeshProUGUI text in tmpText)
@@ -37,10 +58,8 @@ public class ChangeFont : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         }
     }
 
-    public void OnPointerExit(PointerEventData eventData)
+    private void ApplyDefaultStyle()
     {
-        if (textMesh != null && hoverFont != null)
-            
         foreach (TextMeshProUGUI text in tmpText)
         {
             if (text != null)

@@ -1,17 +1,17 @@
 using UnityEngine;
 using System.Collections;
-
 using UnityEngine.InputSystem;
+
 public class CubeMenu : MonoBehaviour
 {
-
-    public float rotationSpeed = 90f; // grados por segundo
+    public float rotationSpeed = 90f;
     public bool onStage = false;
     private Coroutine _rotationCoroutine;
-    //cooldown
-    private float _rotateCooldown = 1f;
 
+
+    private float _rotateCooldown = 1f;
     private bool _isInCooldown = false;
+
     private void Start()
     {
         _rotationCoroutine = StartCoroutine(RotateCycle());
@@ -21,14 +21,8 @@ public class CubeMenu : MonoBehaviour
     {
         while (true)
         {
-          /*  yield return RotateBy(Vector3.up);       // Rota 90° en Y
-            yield return new WaitForSeconds(3f);*/
-
-            yield return RotateBy(Vector3.forward);  // Rota 90° en Z
+            yield return RotateBy(Vector3.forward);
             yield return new WaitForSeconds(2f);
-
-          /*  yield return RotateBy(Vector3.right);    // Rota 90° en X
-            yield return new WaitForSeconds(3f);*/
         }
     }
 
@@ -43,7 +37,7 @@ public class CubeMenu : MonoBehaviour
             yield return null;
         }
 
-        // Corregir a exactamente 90° (por acumulación de flotantes)
+
         transform.Rotate(axis, 90f - rotated);
     }
 
@@ -55,23 +49,27 @@ public class CubeMenu : MonoBehaviour
             _rotationCoroutine = null;
         }
     }
+
     private void Update()
     {
         if (onStage && !_isInCooldown)
         {
-          //  StopCoroutine(_rotationCoroutine);
-            if (Input.GetKeyDown(KeyCode.A))
+
+            if (Input.GetKeyDown(KeyCode.A) ||
+               (Gamepad.current != null && Gamepad.current.leftShoulder.wasPressedThisFrame))
             {
-               StartCoroutine( RotateBy(Vector3.back));
+                StartCoroutine(RotateBy(Vector3.back));
                 StartCoroutine(RotationCooldown());
             }
-            else if (Input.GetKeyDown(KeyCode.D))
+
+
+            else if (Input.GetKeyDown(KeyCode.D) ||
+                    (Gamepad.current != null && Gamepad.current.rightShoulder.wasPressedThisFrame))
             {
                 StartCoroutine(RotateBy(Vector3.forward));
                 StartCoroutine(RotationCooldown());
             }
         }
-
     }
 
     private IEnumerator RotationCooldown()
