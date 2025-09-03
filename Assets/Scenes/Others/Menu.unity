@@ -1060,7 +1060,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1811572353959079045, guid: e6275670031f5b04981c2c8175dde84f, type: 3}
   m_PrefabInstance: {fileID: 789781130909299824}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1482770984}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
@@ -1601,7 +1601,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1533386892334632927, guid: 43fc1bc183aa3694fbab8e646cc0ac52, type: 3}
   m_PrefabInstance: {fileID: 319541645970500263}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 319541645970500264}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d2f2cbc33407f6e4bae4d09f10fdd98f, type: 3}
@@ -6049,6 +6049,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1450004211}
   m_CullTransparentMesh: 1
+--- !u!1 &1482770984 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 668262501782894158, guid: e6275670031f5b04981c2c8175dde84f, type: 3}
+  m_PrefabInstance: {fileID: 789781130909299824}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1489493235
 GameObject:
   m_ObjectHideFlags: 0
@@ -6302,7 +6307,7 @@ MonoBehaviour:
   _cube: {fileID: 1107251667}
   _fadeDuration: 1
   _cubeRenderer: {fileID: 1107251670}
-  firstLevelButton: {fileID: 0}
+  firstLevelButton: {fileID: 1482770984}
 --- !u!4 &1510329021
 Transform:
   m_ObjectHideFlags: 0
@@ -9215,8 +9220,48 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6626320571039917186, guid: 43fc1bc183aa3694fbab8e646cc0ac52, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 319541645970500265}
   m_SourcePrefab: {fileID: 100100000, guid: 43fc1bc183aa3694fbab8e646cc0ac52, type: 3}
+--- !u!1 &319541645970500264 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6626320571039917186, guid: 43fc1bc183aa3694fbab8e646cc0ac52, type: 3}
+  m_PrefabInstance: {fileID: 319541645970500263}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &319541645970500265
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 319541645970500264}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f27d6e7203c24964b956ff11a2117d1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  levelButtons:
+  - {fileID: 245322090}
+  - {fileID: 1413622561}
+  - {fileID: 1040194707}
+  - {fileID: 1423348963}
+  - {fileID: 1284444574}
+  - {fileID: 2041801235}
+  - {fileID: 2081033958}
+  - {fileID: 397671376}
+  - {fileID: 435958687}
+  - {fileID: 291915652}
+  - {fileID: 768328142}
+  - {fileID: 1855618588}
+  - {fileID: 1573287940}
+  - {fileID: 2121640930}
+  - {fileID: 1713734249}
+  - {fileID: 2084771389}
+  - {fileID: 834303162}
+  - {fileID: 1449444719}
+  - {fileID: 1795724513}
 --- !u!1001 &789781130909299824
 PrefabInstance:
   m_ObjectHideFlags: 0
