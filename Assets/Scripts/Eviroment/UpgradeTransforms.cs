@@ -65,8 +65,6 @@ public class UpgradeTransforms : MonoBehaviour
         Debug.Log("Termina de moverse el icono");
         this.gameObject.SetActive(false);
         Destroy(icon.gameObject);
-
-       
     }
 }
 

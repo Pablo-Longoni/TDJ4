@@ -67,7 +67,7 @@ public class PlayerGrab : MonoBehaviour
         {
             _canGrab = false;
             MeshRenderer _renderer = other.gameObject.GetComponent<MeshRenderer>();
-            _renderer.material.color = Color.yellow;
+            _renderer.material.color = Color.white;
         }
     }
 
