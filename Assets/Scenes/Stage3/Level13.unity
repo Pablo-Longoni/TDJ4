@@ -7439,6 +7439,10 @@ PrefabInstance:
       propertyPath: m_SortingOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4053578123705349284, guid: ab58fd9791f512845a6370275ae3439e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4057162578750627250, guid: ab58fd9791f512845a6370275ae3439e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 106.90929
@@ -13442,7 +13446,7 @@ PrefabInstance:
     - target: {fileID: 541022537178780967, guid: 7f94d295b1387034492187f8f51c457b, type: 3}
       propertyPath: _cameraChange
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 716789543}
     - target: {fileID: 2505466852517418599, guid: 7f94d295b1387034492187f8f51c457b, type: 3}
       propertyPath: m_LocalScale.x
       value: 39.015
@@ -13709,17 +13713,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7276884033784262349, guid: 7dbcc1dcd3d92bb4f815865d6730251a, type: 3}
   m_PrefabInstance: {fileID: 1914942797}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1914942806 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8573169219107720172, guid: 7dbcc1dcd3d92bb4f815865d6730251a, type: 3}
-  m_PrefabInstance: {fileID: 1914942797}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8fce5eba5bc2ab44daa042a9b1b45df0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1930177363
 GameObject:
   m_ObjectHideFlags: 0
@@ -14030,7 +14023,7 @@ MonoBehaviour:
   _turnSpeed: 360
   groundCheckDistance: 0.2
   _input: {x: 0, y: 0, z: 0}
-  _currentCube: {fileID: 1914942806}
+  _currentCube: {fileID: 1802435574}
   _minimapCameraFollow: {fileID: 0}
 --- !u!4 &2013149290
 Transform:
@@ -14143,7 +14136,7 @@ PrefabInstance:
     - target: {fileID: 265388989196013889, guid: 0b5db73dc98c91042bb5435334e5833a, type: 3}
       propertyPath: _cameraChange
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 716789543}
     - target: {fileID: 3037073062917153181, guid: 0b5db73dc98c91042bb5435334e5833a, type: 3}
       propertyPath: _speed
       value: 13
@@ -14208,6 +14201,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8131995972199037381, guid: 0b5db73dc98c91042bb5435334e5833a, type: 3}
+      propertyPath: _currentCube
+      value: 
+      objectReference: {fileID: 1802435574}
     m_RemovedComponents:
     - {fileID: -7389165434839575709, guid: 0b5db73dc98c91042bb5435334e5833a, type: 3}
     m_RemovedGameObjects: []
