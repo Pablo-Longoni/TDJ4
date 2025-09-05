@@ -12881,7 +12881,7 @@ Transform:
   m_GameObject: {fileID: 1332066476}
   serializedVersion: 2
   m_LocalRotation: {x: 0.23911765, y: 0.3696438, z: -0.09904577, w: 0.89239913}
-  m_LocalPosition: {x: -109.24655, y: 74.70001, z: -71.946556}
+  m_LocalPosition: {x: -48.00931, y: 24.7, z: -10.709311}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -12911,16 +12911,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a46d182a8f4e493429d3d13e6b3d6101, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxDistance: 300
-  platformMask:
-    serializedVersion: 2
-    m_Bits: 8
-  _cinemachineCamera: {fileID: 1332066483}
-  edgeDetectionDistance: 1
-  _player: {fileID: 0}
-  _planes: []
-  _defaultMaterial: {fileID: 0}
-  _alignedMaterial: {fileID: 0}
 --- !u!114 &1332066480
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12967,7 +12957,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 886251e9a18ece04ea8e61686c173e1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CameraDistance: 130
+  CameraDistance: 30
   DeadZoneDepth: 10
   Composition:
     ScreenPosition: {x: 0, y: 0}

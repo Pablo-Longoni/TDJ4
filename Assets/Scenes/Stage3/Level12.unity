@@ -5789,17 +5789,6 @@ PrefabInstance:
       addedObject: {fileID: 1085997944}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7dbcc1dcd3d92bb4f815865d6730251a, type: 3}
---- !u!114 &374116465 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8573169219107720172, guid: 7dbcc1dcd3d92bb4f815865d6730251a, type: 3}
-  m_PrefabInstance: {fileID: 374116464}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8fce5eba5bc2ab44daa042a9b1b45df0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &374116466 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7276884033784262349, guid: 7dbcc1dcd3d92bb4f815865d6730251a, type: 3}
@@ -11748,6 +11737,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fce5eba5bc2ab44daa042a9b1b45df0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1067972673 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3878095800039210630, guid: 0b5db73dc98c91042bb5435334e5833a, type: 3}
+  m_PrefabInstance: {fileID: 8592460671090511061}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd947bf805944844788bf203e1494c50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1085997942
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13689,7 +13689,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0072f9c1fe852ae4f9a868c6195dbc11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inputReader: {fileID: 2013149288}
+  inputReader: {fileID: 1067972673}
   _rb: {fileID: 8592460671090511063}
   _speed: 13
   _turnSpeed: 360
@@ -13882,7 +13882,7 @@ PrefabInstance:
     - target: {fileID: 3037073062917153181, guid: 0b5db73dc98c91042bb5435334e5833a, type: 3}
       propertyPath: _currentCube
       value: 
-      objectReference: {fileID: 374116465}
+      objectReference: {fileID: 0}
     - target: {fileID: 3037073062917153181, guid: 0b5db73dc98c91042bb5435334e5833a, type: 3}
       propertyPath: _minimapCameraFollow
       value: 
@@ -13931,6 +13931,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8131995972199037381, guid: 0b5db73dc98c91042bb5435334e5833a, type: 3}
+      propertyPath: _minimapCameraFollow
+      value: 
+      objectReference: {fileID: 97794909}
     m_RemovedComponents:
     - {fileID: -7389165434839575709, guid: 0b5db73dc98c91042bb5435334e5833a, type: 3}
     m_RemovedGameObjects: []
