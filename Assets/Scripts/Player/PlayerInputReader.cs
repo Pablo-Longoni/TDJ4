@@ -9,7 +9,7 @@ public class PlayerInputReader : MonoBehaviour
     public Vector2 MoveInput { get; private set; }
     public bool GrabPressed { get; private set; }
 
-
+    public Vector2 LookInput { get; private set; }
     public bool RotateCameraPressed { get; private set; }
     public Vector2 MouseDelta { get; private set; }
     public bool CameraHelpPressed { get; private set; }
@@ -58,6 +58,9 @@ public class PlayerInputReader : MonoBehaviour
 
         _controls.UI.Navigate.performed += ctx => NavigateInput = ctx.ReadValue<Vector2>();
         _controls.UI.Navigate.canceled += _ => NavigateInput = Vector2.zero;
+
+        _controls.Camera.Look.performed += ctx => LookInput = ctx.ReadValue<Vector2>();
+        _controls.Camera.Look.canceled += _ => LookInput = Vector2.zero;
     }
 
     private void OnEnable()
@@ -78,5 +81,25 @@ public class PlayerInputReader : MonoBehaviour
         CameraHelpPressed = false;
         MenuTogglePressed = false;
 
+    }
+
+    public void OnLook(InputAction.CallbackContext context)
+    {
+        LookInput = context.ReadValue<Vector2>();
+    }
+
+    public void OnGrab(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            Debug.Log("Grab PRESSED (performed)");
+            GrabPressed = true;
+        }
+
+        if (context.canceled)
+        {
+            Debug.Log("Grab RELEASED (canceled)");
+            GrabPressed = false;
+        }
     }
 }

@@ -12,10 +12,10 @@ public class RollingCredits : MonoBehaviour
     void Start()
     {
 
-        startY = -creditsText.rect.height - 50f;
+        startY = -creditsText.rect.height - 230f;
 
 
-        endY = viewport.rect.height + 290f;
+        endY = viewport.rect.height + 120f;
 
         creditsText.anchoredPosition = new Vector2(creditsText.anchoredPosition.x, startY);
     }

@@ -14,9 +14,13 @@ public class TutorialDisplay : MonoBehaviour
 
     [Header("Gamepad UI")]
     [SerializeField] GameObject _leftStickImage;
-    [SerializeField] GameObject _southButtonImage;
     [SerializeField] GameObject _rightStickImage;
-    [SerializeField] GameObject _zoom;
+    [SerializeField] GameObject _diagonal;
+    [SerializeField] GameObject _southButtonImage;
+    [SerializeField] GameObject _northButtonImage;
+    [SerializeField] GameObject _westButtonImage;
+    [SerializeField] GameObject _zoomL2;
+    [SerializeField] GameObject _zoomR2;
 
     private bool _didClick = false;
     private bool _didMove = false;
@@ -29,7 +33,11 @@ public class TutorialDisplay : MonoBehaviour
     private PlayerControls _input;
     private string _scene;
 
-    public string _currentScheme = "Keyboard"; 
+    [SerializeField] private Transform cameraTransform;
+    private float _lastX;
+    private float _accumulatedRotation;
+    private bool _didRotate;
+    //  public string _currentScheme = "Keyboard"; 
     void Awake()
     {
         _input = new PlayerControls();
@@ -37,57 +45,57 @@ public class TutorialDisplay : MonoBehaviour
         // Guardamos el delta del mouse cada vez que se mueva
         _input.Camera.MouseDelta.performed += ctx => _mouseDelta = ctx.ReadValue<Vector2>();
 
-        _input.Player.Movement.performed += DetectControlScheme;
-        _input.Camera.Click.performed += DetectControlScheme;
-        _input.Camera.ZoomIn.performed += DetectControlScheme;
+     //   _input.Player.Movement.performed += DetectControlScheme;
+     //   _input.Camera.Click.performed += DetectControlScheme;
+     ///   _input.Camera.ZoomIn.performed += DetectControlScheme;
     }
 
-    void DetectControlScheme(InputAction.CallbackContext ctx)
-    {
-        var device = ctx.control.device;
-        if (device is Gamepad)
+    /*    void DetectControlScheme(InputAction.CallbackContext ctx)
         {
-            if (_currentScheme != "Gamepad")
+            var device = ctx.control.device;
+            if (device is Gamepad)
             {
-                _currentScheme = "Gamepad";
-                SwitchToGamepadUI();
+                if (_currentScheme != "Gamepad")
+                {
+                    _currentScheme = "Gamepad";
+                    SwitchToGamepadUI();
+                }
+            }
+            else if (device is Keyboard || device is Mouse)
+            {
+                if (_currentScheme != "Keyboard")
+                {
+                    _currentScheme = "Keyboard";
+                    SwitchToKeyboardUI();
+                }
             }
         }
-        else if (device is Keyboard || device is Mouse)
+        void SwitchToKeyboardUI()
         {
-            if (_currentScheme != "Keyboard")
-            {
-                _currentScheme = "Keyboard";
-                SwitchToKeyboardUI();
-            }
+            // Apagar gamepad UI
+            _leftStickImage.SetActive(false);
+            _southButtonImage.SetActive(false);
+            _rightStickImage.SetActive(false);
+            _zoom.SetActive(false);
+
+            // Encender teclado/mouse UI inicial
+            _wasdImage.SetActive(true);
+            _spaceBarImage.SetActive(false);
         }
-    }
-    void SwitchToKeyboardUI()
-    {
-        // Apagar gamepad UI
-        _leftStickImage.SetActive(false);
-        _southButtonImage.SetActive(false);
-        _rightStickImage.SetActive(false);
-        _zoom.SetActive(false);
 
-        // Encender teclado/mouse UI inicial
-        _wasdImage.SetActive(true);
-        _spaceBarImage.SetActive(false);
-    }
+        void SwitchToGamepadUI()
+        {
+            // Apagar teclado/mouse UI
+            _wasdImage.SetActive(false);
+            _spaceBarImage.SetActive(false);
+            _mouseClickImage.SetActive(false);
+            _mouseMoveImage.SetActive(false);
+            _mouseMiddleImage.SetActive(false);
 
-    void SwitchToGamepadUI()
-    {
-        // Apagar teclado/mouse UI
-        _wasdImage.SetActive(false);
-        _spaceBarImage.SetActive(false);
-        _mouseClickImage.SetActive(false);
-        _mouseMoveImage.SetActive(false);
-        _mouseMiddleImage.SetActive(false);
-
-        // Encender gamepad UI inicial
-        _leftStickImage.SetActive(true);
-        _southButtonImage.SetActive(false);
-    }
+            // Encender gamepad UI inicial
+            _leftStickImage.SetActive(true);
+            _southButtonImage.SetActive(false);
+        }*/
     void OnEnable()
     {
         _input.Camera.Enable();
@@ -111,6 +119,8 @@ public class TutorialDisplay : MonoBehaviour
 
         else  if (_scene == "Level2")
         {
+            _lastX = cameraTransform.eulerAngles.y; 
+            Debug.Log("La cámara rotó" + _lastX);
             TransformTutorial();
         }
         else if (_scene == "Level3")
@@ -138,79 +148,87 @@ public class TutorialDisplay : MonoBehaviour
 
     void MoveTutorial()
     {
-        if (_currentScheme == "Keyboard")
-        {
-            _wasdImage.SetActive(true);
-            _leftStickImage.SetActive(false);
-        }
-        else
-        {
-            _leftStickImage.SetActive(true);
-            _wasdImage.SetActive(false);
-        }
+       _wasdImage.SetActive(true);
+       _leftStickImage.SetActive(true);
+       _diagonal.SetActive(true);
     }
+
     void TransformTutorial()
     {
-        if (_input.Camera.CameraFlip.triggered && !_didTrans)
-        {
-            if (_currentScheme == "Keyboard")
-            {
-                _spaceBarImage.SetActive(false);
-                _wasdImage.SetActive(true);
-            }
-            else
-            {
-                _southButtonImage.SetActive(false);
-                _leftStickImage.SetActive(true);
-            }
-
-            _didTrans = true;
-            Debug.Log("TUTORIAL " + _currentScheme);
+        Debug.Log("TUTORIAL TECLADO");
+        if (_input.Camera.CameraFlip.triggered && !_didTrans) 
+        { 
+            _spaceBarImage.SetActive(false); 
+            _southButtonImage.SetActive(false);
+            _wasdImage.SetActive(true);
+            _leftStickImage.SetActive(true);
+            _didTrans = true; 
+            Debug.Log("afuera space TUTORIAL TECLADO"); 
         }
 
         Vector2 moveInput = _input.Player.Movement.ReadValue<Vector2>();
-        if (moveInput.magnitude > 0.1f)
-        {
-            if (_currentScheme == "Keyboard")
-                _wasdImage.SetActive(false);
-            else
-                _leftStickImage.SetActive(false);
+
+        if (moveInput.magnitude > 0.1f && _didTrans) 
+        { 
+            _wasdImage.SetActive(false);
+            _leftStickImage.SetActive(false);
+            _diagonal.SetActive(false);
         }
 
     }
 
     void MouseTutorial()
     {
-        bool clickPressed = _input.Camera.Click.triggered;
-
-        if (!_didClick && clickPressed)
+        if (!_didRotate)
         {
-            _didClick = true;
-            _mouseClickImage.SetActive(true);
-            _mouseMoveImage.SetActive(true);
-            StartCoroutine(EnableMovementDetection());
-        }
+            float currentX = cameraTransform.eulerAngles.y;
+            float delta = Mathf.DeltaAngle(_lastX, currentX); // diferencia real entre frames
 
-        if (_didClick && !_didMove && _canDetectMovement)
-        {
-            Debug.Log("MOUSE RUEDA");
-           if (_mouseDelta.magnitude > 2f)
-           {
-             _didMove = true;
-             _mouseMoveImage.SetActive(false);
-             _mouseClickImage.SetActive(false);
-             _mouseMiddleImage.SetActive(true);
-           }
-        }
+            _accumulatedRotation += Mathf.Abs(delta);
 
-        if (_didMove && !_didZoom && (_input.Camera.ZoomIn.triggered || _input.Camera.ZoomOut.triggered))
-        {
+            if (_accumulatedRotation > 50f) // si la diferencia supera 10 grados
+            {
+                _didRotate = true;
 
-            _didZoom = true;
-            _mouseMiddleImage.SetActive(false);
-   
+                _mouseMoveImage.SetActive(false);
+                _mouseClickImage.SetActive(false);
+                _rightStickImage.SetActive(false);
+                _diagonal.SetActive(false);
+
+                _westButtonImage.SetActive(true);
+                _mouseMiddleImage.SetActive(true);
+                _zoomL2.SetActive(true);
+                _zoomR2.SetActive(true);
+                Debug.Log("La cámara rotó" + delta + currentX);
+            }
+
+            _lastX = currentX;
         }
-    }
+            /*  bool clickPressed = _input.Camera.Click.triggered; 
+
+              if (!_didClick && clickPressed)
+              {
+                  _didClick = true; _mouseClickImage.SetActive(true);
+                  _mouseMoveImage.SetActive(true);
+                  StartCoroutine(EnableMovementDetection());
+              }
+
+              if (_didClick && !_didMove && _canDetectMovement) 
+              {
+                  Debug.Log("MOUSE RUEDA");
+                  if (_mouseDelta.magnitude > 2f)
+                  { 
+                      _didMove = true; _mouseMoveImage.SetActive(false);
+                      _mouseClickImage.SetActive(false);
+                      _mouseMiddleImage.SetActive(true); 
+                  }
+              }
+
+              if (_didMove && !_didZoom && (_input.Camera.ZoomIn.triggered || _input.Camera.ZoomOut.triggered))
+              {
+                  _didZoom = true; _mouseMiddleImage.SetActive(false);
+              }*/
+        }
 
     IEnumerator EnableMovementDetection()
     {

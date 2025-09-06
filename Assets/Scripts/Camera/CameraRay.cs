@@ -7,7 +7,7 @@ using static Unity.Cinemachine.IInputAxisOwner.AxisDescriptor;
 
 public class CameraRay : MonoBehaviour
 {
-    //  public GameObject _player;
+   /* //  public GameObject _player;
     public float maxDistance = 1000f;
     public LayerMask platformMask;
     public CinemachineCamera _cinemachineCamera;
@@ -50,7 +50,7 @@ public class CameraRay : MonoBehaviour
                 }
             }*/
             //Debug.Log("Se alinean los planos");
-            System.Array.Sort(hits, (a, b) => a.distance.CompareTo(b.distance));
+         /*   System.Array.Sort(hits, (a, b) => a.distance.CompareTo(b.distance));
 
 
               Vector3 firstPlatformPoint = hits[0].point;
@@ -60,7 +60,7 @@ public class CameraRay : MonoBehaviour
               Debug.DrawLine(firstPlatformPoint, secondPlatformPoint, Color.green);
    
 
-              playerOnEdge(secondPlatformPoint);
+              playerOnEdge(secondPlatformPoint);*/
           }
         /*  else
           {
@@ -120,7 +120,7 @@ public class CameraRay : MonoBehaviour
                    StartCoroutine(MovePlayerSmoothly(newPlayerPos));
                }
            }*/
-    }
+ /*   }
 
     public void playerOnEdge(Vector3 targetPoint)
     {
@@ -155,3 +155,4 @@ public class CameraRay : MonoBehaviour
       
     }
 }
+*/

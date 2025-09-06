@@ -163,21 +163,17 @@ public class PlayerMovement : MonoBehaviour
                 if (_currentFigure != null)
                 {
                     int defaultLayer = LayerMask.NameToLayer(_defaultLayerName);
-                    int objectLayer = LayerMask.NameToLayer("Objects");
                     foreach (Transform t in _currentFigure.GetComponentsInChildren<Transform>(true))
                     {
                         if (t.CompareTag("Player")) continue;
-                        if (t.gameObject.layer == objectLayer) continue;
                         t.gameObject.layer = defaultLayer;
                     }
                 }
 
                 int minimapLayer = LayerMask.NameToLayer(_minimapLayerName);
-                int objectsLayer = LayerMask.NameToLayer("Objects");
                 foreach (Transform t in currentFigure.GetComponentsInChildren<Transform>(true))
                 {
                     if (t.CompareTag("Player")) continue;
-                    if (t.gameObject.layer == objectsLayer) continue;
                     t.gameObject.layer = minimapLayer;
                 }
 

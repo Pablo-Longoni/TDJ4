@@ -4,19 +4,20 @@ public class CameraRotation : MonoBehaviour
 {
     public float _rotationSpeed = 1000f;
     public CameraChange _cameraChange;
+    public PlayerInputReader inputReader;
 
     void Update()
     {
         if (!_cameraChange._isIsometric) return;
 
-        // Rotación con mouse (manteniendo clic izquierdo)
+
         if (Input.GetMouseButton(0))
         {
             float mouseX = Input.GetAxis("Mouse X");
             transform.Rotate(Vector3.up, mouseX * _rotationSpeed * Time.deltaTime);
         }
 
-        // Rotación con Gamepad (L1 / R1)
+
         if (Input.GetButton("RotateLeft"))
         {
             transform.Rotate(Vector3.up, -_rotationSpeed * Time.deltaTime);
@@ -26,7 +27,17 @@ public class CameraRotation : MonoBehaviour
         {
             transform.Rotate(Vector3.up, _rotationSpeed * Time.deltaTime);
         }
+
+
+        Vector2 look = inputReader.LookInput;
+
+        if (Mathf.Abs(look.x) > 0.1f)
+        {
+            transform.Rotate(Vector3.up, look.x * _rotationSpeed * Time.deltaTime);
+        }
     }
+
+
 
     public void ResetRotation()
     {
