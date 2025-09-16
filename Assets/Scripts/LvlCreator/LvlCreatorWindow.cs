@@ -1,4 +1,4 @@
-/*using UnityEngine;
+using UnityEngine;
 using UnityEditor;
 using Unity.Cinemachine;
 using System.Collections.Generic;
@@ -136,7 +136,7 @@ public class LvlCreatorWindow : EditorWindow
                 }
         }
 
-          HandleKeyboardInput();
+       //   HandleKeyboardInput();
     }
     
 
@@ -147,6 +147,13 @@ public class LvlCreatorWindow : EditorWindow
         if (prefab != null)
         {
             GameObject instance = (GameObject)PrefabUtility.InstantiatePrefab(prefab);
+
+            if (prefab.name == "PortalSetA" || prefab.name == "Pressed" || prefab.name == "PortalSetB")
+            {
+                PrefabUtility.UnpackPrefabInstance(instance, PrefabUnpackMode.Completely, InteractionMode.UserAction);
+                Debug.Log($"Prefab {prefab.name} desempaquetado");
+            }
+
             Undo.RegisterCreatedObjectUndo(instance, "Placed prefab");
             instance.transform.position = Vector3.zero;
             placedObjects.Add(instance);
@@ -242,4 +249,3 @@ public class LvlCreatorWindow : EditorWindow
 
 
 }
-*/

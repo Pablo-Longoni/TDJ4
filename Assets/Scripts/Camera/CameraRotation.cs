@@ -37,8 +37,6 @@ public class CameraRotation : MonoBehaviour
         }
     }
 
-
-
     public void ResetRotation()
     {
         transform.rotation = Quaternion.Euler(0, 0, 0);

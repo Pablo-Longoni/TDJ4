@@ -14,31 +14,31 @@ public class UpgradeTransforms : MonoBehaviour
         if (!other.CompareTag("Player")) return;
 
         _playerTransformation.TransformUpgrade();
+        Destroy(_item);
+        /*  // --- calcular posición inicial en coordenadas locales del Canvas ---
+          RectTransform canvasRect = _canvas.transform as RectTransform;
+          Camera cam = (_canvas.renderMode == RenderMode.ScreenSpaceOverlay) ? null : (_canvas.worldCamera != null ? _canvas.worldCamera : Camera.main);
 
-        // --- calcular posición inicial en coordenadas locales del Canvas ---
-        RectTransform canvasRect = _canvas.transform as RectTransform;
-        Camera cam = (_canvas.renderMode == RenderMode.ScreenSpaceOverlay) ? null : (_canvas.worldCamera != null ? _canvas.worldCamera : Camera.main);
+          Vector2 startLocal;
+          Vector3 itemScreen = Camera.main.WorldToScreenPoint(_item.transform.position);
+          RectTransformUtility.ScreenPointToLocalPointInRectangle(canvasRect, itemScreen, cam, out startLocal);
 
-        Vector2 startLocal;
-        Vector3 itemScreen = Camera.main.WorldToScreenPoint(_item.transform.position);
-        RectTransformUtility.ScreenPointToLocalPointInRectangle(canvasRect, itemScreen, cam, out startLocal);
+          // --- calcular posición objetivo en coordenadas locales del Canvas ---
+          Vector3 targetScreen = RectTransformUtility.WorldToScreenPoint(cam, _textDestination.rectTransform.position);
+          RectTransformUtility.ScreenPointToLocalPointInRectangle(canvasRect, targetScreen, cam, out Vector2 targetLocal);
 
-        // --- calcular posición objetivo en coordenadas locales del Canvas ---
-        Vector3 targetScreen = RectTransformUtility.WorldToScreenPoint(cam, _textDestination.rectTransform.position);
-        RectTransformUtility.ScreenPointToLocalPointInRectangle(canvasRect, targetScreen, cam, out Vector2 targetLocal);
+          // --- instanciar icono en Canvas ---
+          GameObject iconGO = Instantiate(_itemIconPrefab, _canvas.transform);
+          RectTransform iconRect = iconGO.GetComponent<RectTransform>();
+          iconRect.anchoredPosition = startLocal;
 
-        // --- instanciar icono en Canvas ---
-        GameObject iconGO = Instantiate(_itemIconPrefab, _canvas.transform);
-        RectTransform iconRect = iconGO.GetComponent<RectTransform>();
-        iconRect.anchoredPosition = startLocal;
+          // --- ocultar visual del item 3D sin desactivar su GameObject  ---
+          var rend = _item.GetComponent<Renderer>();
+          if (rend) rend.enabled = false;
+          var collider = _item.GetComponent<Collider>();
+          if (collider) collider.enabled = false;
 
-        // --- ocultar visual del item 3D sin desactivar su GameObject  ---
-        var rend = _item.GetComponent<Renderer>();
-        if (rend) rend.enabled = false;
-        var collider = _item.GetComponent<Collider>();
-        if (collider) collider.enabled = false;
-        
-        StartCoroutine(MoveIcon(iconRect, targetLocal, 0.3f));
+          StartCoroutine(MoveIcon(iconRect, targetLocal, 0.3f));*/
     }
 
     private IEnumerator MoveIcon(RectTransform icon, Vector2 targetLocalPos, float duration)
