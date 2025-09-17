@@ -148,7 +148,7 @@ public class LvlCreatorWindow : EditorWindow
         {
             GameObject instance = (GameObject)PrefabUtility.InstantiatePrefab(prefab);
 
-            if (prefab.name == "PortalSetA" || prefab.name == "Pressed" || prefab.name == "PortalSetB")
+            if (prefab.name == "PortalSetA" || prefab.name == "Pressed" || prefab.name == "PortalSetB" || prefab.name == "Mirror Frame")
             {
                 PrefabUtility.UnpackPrefabInstance(instance, PrefabUnpackMode.Completely, InteractionMode.UserAction);
                 Debug.Log($"Prefab {prefab.name} desempaquetado");

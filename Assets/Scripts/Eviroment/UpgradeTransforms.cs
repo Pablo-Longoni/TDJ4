@@ -5,16 +5,16 @@ public class UpgradeTransforms : MonoBehaviour
 {
     [SerializeField] private PlayerTransformation _playerTransformation;
     [SerializeField] private GameObject _item;
-    [SerializeField] private TextMeshProUGUI _textDestination;
-    [SerializeField] private Canvas _canvas;
-    [SerializeField] private GameObject _itemIconPrefab;
+ //   [SerializeField] private TextMeshProUGUI _textDestination;
+  //  [SerializeField] private Canvas _canvas;
+ //   [SerializeField] private GameObject _itemIconPrefab;
 
     private void OnTriggerEnter(Collider other)
     {
         if (!other.CompareTag("Player")) return;
 
         _playerTransformation.TransformUpgrade();
-        Destroy(_item);
+        _item.SetActive(false);
         /*  // --- calcular posición inicial en coordenadas locales del Canvas ---
           RectTransform canvasRect = _canvas.transform as RectTransform;
           Camera cam = (_canvas.renderMode == RenderMode.ScreenSpaceOverlay) ? null : (_canvas.worldCamera != null ? _canvas.worldCamera : Camera.main);
