@@ -120,7 +120,7 @@ public class TutorialDisplay : MonoBehaviour
         else  if (_scene == "Level2")
         {
             _lastX = cameraTransform.eulerAngles.y; 
-            Debug.Log("La cámara rotó" + _lastX);
+          //  Debug.Log("La cámara rotó" + _lastX);
             TransformTutorial();
         }
         else if (_scene == "Level3")
@@ -155,7 +155,7 @@ public class TutorialDisplay : MonoBehaviour
 
     void TransformTutorial()
     {
-        Debug.Log("TUTORIAL TECLADO");
+       // Debug.Log("TUTORIAL TECLADO");
         if (_input.Camera.CameraFlip.triggered && !_didTrans) 
         { 
             _spaceBarImage.SetActive(false); 
@@ -163,7 +163,7 @@ public class TutorialDisplay : MonoBehaviour
             _wasdImage.SetActive(true);
             _leftStickImage.SetActive(true);
             _didTrans = true; 
-            Debug.Log("afuera space TUTORIAL TECLADO"); 
+          //  Debug.Log("afuera space TUTORIAL TECLADO"); 
         }
 
         Vector2 moveInput = _input.Player.Movement.ReadValue<Vector2>();
@@ -199,7 +199,7 @@ public class TutorialDisplay : MonoBehaviour
                 _mouseMiddleImage.SetActive(true);
                 _zoomL2.SetActive(true);
                 _zoomR2.SetActive(true);
-                Debug.Log("La cámara rotó" + delta + currentX);
+               // Debug.Log("La cámara rotó" + delta + currentX);
             }
 
             _lastX = currentX;

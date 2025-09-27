@@ -12,8 +12,8 @@ public class ChangeScene : MonoBehaviour
     public float _transitionTime;
     public GameObject pausePanel;
     private bool isPaused = false;
-    [SerializeField] private RawImage _volume;
-    [SerializeField] private RawImage _controls;
+    [SerializeField] private GameObject _volume;
+    [SerializeField] private GameObject _controls;
 
     private PlayerControls _inputActions;
 
@@ -112,7 +112,7 @@ public class ChangeScene : MonoBehaviour
         SceneManager.LoadScene("Credits");
     }
 
-    public void GoToSettings()
+  /*  public void GoToSettings()
     {
         SceneManager.LoadScene("Settings");
     }
@@ -120,20 +120,20 @@ public class ChangeScene : MonoBehaviour
     public void GoToSandBox()
     {
         SceneManager.LoadScene("LevelTest");
-    }
+    }*/
 
     public void SettingsControls()
     {
         TogglePause();
-        _controls.gameObject.SetActive(true);
-        _volume.gameObject.SetActive(false);
+        _controls.SetActive(true);
+        _volume.SetActive(false);
     }
 
     public void SettingsVolume()
     {
         TogglePause();
-        _controls.gameObject.SetActive(false);
-        _volume.gameObject.SetActive(true);
+        _controls.SetActive(false);
+        _volume.SetActive(true);
     }
     public void Exit()
     {

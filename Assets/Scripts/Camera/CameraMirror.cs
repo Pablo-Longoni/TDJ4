@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class CameraMirror : MonoBehaviour
 {
-    public float _rotationSpeed = 1000f;
+   /* public float _rotationSpeed = 1000f;
     public PlayerInputReader inputReader;
     public Transform _mirrorCamera;
     public float minY = -45f;
@@ -10,9 +10,9 @@ public class CameraMirror : MonoBehaviour
 
     private float _currentYRotation;
     private float _fixedXRotation;
-    private float _fixedZRotation;
+    private float _fixedZRotation;*/
 
-    private void Start()
+  /*  private void Start()
     {
         // Guardar las inclinaciones iniciales de la cámara (X y Z no deberían cambiar)
         Vector3 startAngles = _mirrorCamera.localEulerAngles;
@@ -66,6 +66,6 @@ public class CameraMirror : MonoBehaviour
 
                 float angle = Vector3.SignedAngle(_side1, _side2, Vector3.up);
                 _mirrorCamera.localEulerAngles = new Vector3(0, angle, 0);
-            }*/
-    }
+            }
+    }*/
 }

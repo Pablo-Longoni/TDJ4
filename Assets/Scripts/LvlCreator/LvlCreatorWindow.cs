@@ -1,12 +1,12 @@
-/*using UnityEngine;
+using UnityEngine;
 using UnityEditor;
 using Unity.Cinemachine;
 using System.Collections.Generic;
-using System;
+/*using System;
 using UnityEngine.XR;
 using NUnit.Framework.Constraints;
 using static UnityEditor.Experimental.GraphView.GraphView;
-using System.Threading;
+using System.Threading;*/
 public class LvlCreatorWindow : EditorWindow
 {
 
@@ -168,6 +168,7 @@ public class LvlCreatorWindow : EditorWindow
             var pressed = instance.GetComponentInChildren<OpenPortal>();
             var light = instance.GetComponent<InteractiveShadows>();
             var deactivateCollider = instance.GetComponent <DeactivateCollider>();
+            var flip = instance.GetComponent<UpgradeTransforms>();
 
             if (ui != null)
             {
@@ -217,6 +218,11 @@ public class LvlCreatorWindow : EditorWindow
                 {
                     deactivateCollider._targetCollider = ui._deactivateCollider;
                 }
+
+                if(flip != null)
+                {
+                    flip._playerTransformation = ui._player;
+                }
             }
         }
     }
@@ -249,4 +255,3 @@ public class LvlCreatorWindow : EditorWindow
 
 
 }
-*/

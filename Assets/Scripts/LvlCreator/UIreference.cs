@@ -24,6 +24,11 @@ public class UIreference : MonoBehaviour
     public Transform _lightTransform;
     public Collider _deactivateCollider;
 
+    //Flip
+    public PlayerTransformation _player;
+
+    //Mirror
+
     public static UIreference Instance;
 
     private void Awake()

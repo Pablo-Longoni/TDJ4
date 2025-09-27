@@ -2,20 +2,24 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using System.Collections;
+using UnityEngine.Audio;
 public class UIfromPause : MonoBehaviour
 {
     private Animator _transitionAnimator;
     public float _transitionTime;
     public GameObject pausePanel;
     private bool isPaused = false;
-    [SerializeField] private RawImage _volume;
-    [SerializeField] private RawImage _controls;
+
+    [SerializeField] private GameObject [] _tabs;
+    [SerializeField] private Image [] _buttonTab;
+    public Vector2 _inactiveButtonSize, _activeButtonSize;
+    
     void Start()
     {
         _transitionAnimator = GetComponentInChildren<Animator>();
     }
 
-    public void TogglePause()
+  /*  public void TogglePause()
     {
         isPaused = !isPaused;
 
@@ -30,7 +34,7 @@ public class UIfromPause : MonoBehaviour
             Time.timeScale = 1f;
         }
     }
-
+    */
 
     public void NextLevel()
     {
@@ -91,7 +95,7 @@ public class UIfromPause : MonoBehaviour
         SceneManager.LoadScene("Credits");
     }
 
-    public void GoToSettings()
+  /*  public void GoToSettings()
     {
         SceneManager.LoadScene("Settings");
     }
@@ -100,8 +104,8 @@ public class UIfromPause : MonoBehaviour
     {
         SceneManager.LoadScene("LevelTest");
     }
-
-    public void SettingsControls()
+    */
+   /* public void SettingsControls()
     {
         TogglePause();
         _controls.gameObject.SetActive(true);
@@ -113,7 +117,26 @@ public class UIfromPause : MonoBehaviour
         TogglePause();
         _controls.gameObject.SetActive(false);
         _volume.gameObject.SetActive(true);
+    }*/
+
+    public void SwitchTabs(int TabId)
+    {
+        foreach (GameObject i in _tabs)
+        {
+            i.SetActive(false);
+        }
+        _tabs[TabId].SetActive(true);
+
+        foreach (Image i in _buttonTab)
+        {
+         //   i.color = Color.white;
+            i.rectTransform.sizeDelta = _inactiveButtonSize;
+        }
+      //  _buttonTab[TabId].color = Color.gray;
+        _buttonTab[TabId].rectTransform.sizeDelta = _activeButtonSize;
+
     }
+
     public void Exit()
     {
         Debug.Log("Cerrando el juego...");

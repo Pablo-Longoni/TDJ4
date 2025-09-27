@@ -20,6 +20,12 @@ public class CameraZoom : MonoBehaviour
         _input = FindObjectOfType<PlayerInputReader>();
     }
 
+    private void Start()
+    {
+        _zoomSpeed = PlayerPrefs.GetFloat("ZoomSpeed", 160);
+        Debug.Log("Zoom: "+  _zoomSpeed);
+    }
+
     void Update()
     {
         if (_input == null) return;
@@ -44,5 +50,10 @@ public class CameraZoom : MonoBehaviour
             _currentZoom,
             _zoomSmoothness * Time.deltaTime
         );
+    }
+
+    public void SetZoomSpeed(float newSpeed)
+    {
+        _zoomSpeed = newSpeed;
     }
 }

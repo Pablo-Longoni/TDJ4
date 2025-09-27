@@ -26,7 +26,8 @@ public class AudioManager : MonoBehaviour
     private AudioDistortionFilter _distortionFilter;
     private AudioLowPassFilter _lowPassFilter;
 
-    private bool _isMuted;
+    public bool _isMusicMuted;
+    public bool _isSfxMuted;
     void Awake()
     {
         if (Instance == null)
@@ -47,16 +48,22 @@ public class AudioManager : MonoBehaviour
         if( musicSource == null ) musicSource.loop = false;
         StartCoroutine(PlayMusicLoop());
 
-        _distortionFilter = musicSource.gameObject.AddComponent<AudioDistortionFilter>();
-        _distortionFilter.distortionLevel = 0;
+        /*  _distortionFilter = musicSource.gameObject.AddComponent<AudioDistortionFilter>();
+          _distortionFilter.distortionLevel = 0;
 
-        _lowPassFilter = musicSource.gameObject.AddComponent<AudioLowPassFilter>();
-        _lowPassFilter.enabled = false;
+          _lowPassFilter = musicSource.gameObject.AddComponent<AudioLowPassFilter>();
+          _lowPassFilter.enabled = false;*/
+
+     /*   _isMusicMuted = PlayerPrefs.GetInt("isMusicMuted", 0) == 1;
+        _isSfxMuted = PlayerPrefs.GetInt("isSfxMuted", 0) == 1;
+
+        if (_isMusicMuted) MuteMusic(true);
+        if (_isSfxMuted) MuteSfx(true);*/
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.M))
+      /*  if (Input.GetKeyDown(KeyCode.M))
         {
             if (!_isMuted)
             {
@@ -67,7 +74,7 @@ public class AudioManager : MonoBehaviour
             {
                 UnMuteAllVolume();
             }
-        }
+        }*/
       /*  if (Input.GetKeyUp(KeyCode.A))
         {
             RestoredMusic();
@@ -149,31 +156,61 @@ public class AudioManager : MonoBehaviour
     {
         audioMixer.SetFloat("MusicVolume", Mathf.Log10(sliderMusic) * 20);
         PlayerPrefs.SetFloat("MusicVolume", sliderMusic);
-        Debug.Log("Volumen música prefs: "+ sliderMusic);
+      // Debug.Log("Volumen música prefs: "+ sliderMusic);
     }
 
     public void VolumeSFX(float sliderSFX)
     {
         audioMixer.SetFloat("SFXVolume", Mathf.Log10(sliderSFX) * 20);
         PlayerPrefs.SetFloat("SFXVolume", sliderSFX);
-        Debug.Log("Volumen música prefs: " + sliderSFX);
+      //  Debug.Log("Volumen música prefs: " + sliderSFX);
     }
 
-    public void MuteAllVolume()
+   /* public void MuteMusic(bool isMusicMuted)
     {
-        audioMixer.SetFloat("SFXVolume", -80f);
-        audioMixer.SetFloat("MusicVolume", -80f);
-        _isMuted = true;
+        _isMusicMuted = isMusicMuted;
+
+        if (isMusicMuted)
+        {
+            audioMixer.SetFloat("MusicVolume", -80f);
+
+            Debug.Log("Música muteada");
+        }
+        else
+        {
+            // Restaurar volumen guardado en prefs
+            float savedMusicVolume = PlayerPrefs.GetFloat("MusicVolume", 1f);
+            VolumeMusic(savedMusicVolume);
+            Debug.Log("Música desmuteada");
+        }
+
+        PlayerPrefs.SetInt("isMusicMuted", isMusicMuted ? 1 : 0);
+        PlayerPrefs.Save();
     }
 
-    public void UnMuteAllVolume()
+    public void MuteSfx(bool isSfxMuted)
     {
-        audioMixer.SetFloat("SFXVolume", 0f);
-        audioMixer.SetFloat("MusicVolume", 0f);
-        _isMuted = false;
-    }
+        _isSfxMuted = isSfxMuted;
 
-    public void DistoredMusic()
+        if (isSfxMuted)
+        {
+            audioMixer.SetFloat("SFXVolume", -80f);
+            Debug.Log("Sfx muteada");
+        }
+        else
+        {
+            // Restaurar volumen guardado en prefs
+            float savedSFXVolume = PlayerPrefs.GetFloat("SFXVolume", 1f);
+
+            VolumeSFX(savedSFXVolume);
+            Debug.Log("Sfx desmuteada");
+        }
+
+        PlayerPrefs.SetInt("isSfxMuted", isSfxMuted ? 1 : 0);
+        PlayerPrefs.Save();
+    }*/
+
+ /*   public void DistoredMusic()
     {
         _lowPassFilter.enabled = true;
         _distortionFilter.distortionLevel = .7f;
@@ -191,6 +228,6 @@ public class AudioManager : MonoBehaviour
         audioMixer.SetFloat("LowPassCutOff", 22000f); 
         musicSource.pitch = 1f;
         Debug.Log("Music restored");
-    }
+    }*/
 
 }
