@@ -6,6 +6,11 @@ public class CameraRotation : MonoBehaviour
     public CameraChange _cameraChange;
     public PlayerInputReader inputReader;
 
+    private void Start()
+    {
+         _rotationSpeed = PlayerPrefs.GetFloat("RotationSpeed", 360);
+        Debug.Log("Rotation: " +  _rotationSpeed);
+    }
     void Update()
     {
         if (!_cameraChange._isIsometric) return;
@@ -37,10 +42,13 @@ public class CameraRotation : MonoBehaviour
         }
     }
 
-
-
     public void ResetRotation()
     {
         transform.rotation = Quaternion.Euler(0, 0, 0);
+    }
+
+    public void SetRotationSpeed(float newSpeed)
+    {
+        _rotationSpeed = newSpeed;
     }
 }

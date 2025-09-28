@@ -1,12 +1,12 @@
-/*using UnityEngine;
+using UnityEngine;
 using UnityEditor;
 using Unity.Cinemachine;
 using System.Collections.Generic;
-using System;
+/*using System;
 using UnityEngine.XR;
 using NUnit.Framework.Constraints;
 using static UnityEditor.Experimental.GraphView.GraphView;
-using System.Threading;
+using System.Threading;*/
 public class LvlCreatorWindow : EditorWindow
 {
 
@@ -136,7 +136,7 @@ public class LvlCreatorWindow : EditorWindow
                 }
         }
 
-          HandleKeyboardInput();
+       //   HandleKeyboardInput();
     }
     
 
@@ -147,6 +147,13 @@ public class LvlCreatorWindow : EditorWindow
         if (prefab != null)
         {
             GameObject instance = (GameObject)PrefabUtility.InstantiatePrefab(prefab);
+
+            if (prefab.name == "PortalSetA" || prefab.name == "Pressed" || prefab.name == "PortalSetB" || prefab.name == "Mirror Frame")
+            {
+                PrefabUtility.UnpackPrefabInstance(instance, PrefabUnpackMode.Completely, InteractionMode.UserAction);
+                Debug.Log($"Prefab {prefab.name} desempaquetado");
+            }
+
             Undo.RegisterCreatedObjectUndo(instance, "Placed prefab");
             instance.transform.position = Vector3.zero;
             placedObjects.Add(instance);
@@ -161,6 +168,7 @@ public class LvlCreatorWindow : EditorWindow
             var pressed = instance.GetComponentInChildren<OpenPortal>();
             var light = instance.GetComponent<InteractiveShadows>();
             var deactivateCollider = instance.GetComponent <DeactivateCollider>();
+            var flip = instance.GetComponent<UpgradeTransforms>();
 
             if (ui != null)
             {
@@ -210,6 +218,11 @@ public class LvlCreatorWindow : EditorWindow
                 {
                     deactivateCollider._targetCollider = ui._deactivateCollider;
                 }
+
+                if(flip != null)
+                {
+                    flip._playerTransformation = ui._player;
+                }
             }
         }
     }
@@ -242,4 +255,3 @@ public class LvlCreatorWindow : EditorWindow
 
 
 }
-*/

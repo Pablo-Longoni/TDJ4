@@ -22,6 +22,10 @@ public class PlayerMovement : MonoBehaviour
     private void Start()
     {
         _cameraChange = FindAnyObjectByType<CameraChange>();
+
+        //asignar layers para check
+  
+
     }
 
     void Update()
@@ -165,6 +169,7 @@ public class PlayerMovement : MonoBehaviour
                     int defaultLayer = LayerMask.NameToLayer(_defaultLayerName);
                     foreach (Transform t in _currentFigure.GetComponentsInChildren<Transform>(true))
                     {
+                        if (t.gameObject.layer == LayerMask.NameToLayer("MirrorObjects")) continue;
                         if (t.CompareTag("Player")) continue;
                         t.gameObject.layer = defaultLayer;
                     }
@@ -173,6 +178,7 @@ public class PlayerMovement : MonoBehaviour
                 int minimapLayer = LayerMask.NameToLayer(_minimapLayerName);
                 foreach (Transform t in currentFigure.GetComponentsInChildren<Transform>(true))
                 {
+                    if (t.gameObject.layer == LayerMask.NameToLayer("MirrorObjects")) continue;
                     if (t.CompareTag("Player")) continue;
                     t.gameObject.layer = minimapLayer;
                 }
