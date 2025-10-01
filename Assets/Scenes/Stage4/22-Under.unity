@@ -180,7 +180,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76c392e42b5098c458856cdf6ecaaaa1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_FirstSelected: {fileID: 0}
+  m_FirstSelected: {fileID: 768896701}
   m_sendNavigationEvents: 1
   m_DragThreshold: 10
 --- !u!4 &118712139
@@ -622,6 +622,11 @@ Transform:
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7883385547788890513, guid: 20cdd945b1fe0ce49adaa676242e9f7c, type: 3}
   m_PrefabInstance: {fileID: 702109389}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &768896701 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 476906136922235309, guid: 3f6850c954f7cb2439f14642eb136642, type: 3}
+  m_PrefabInstance: {fileID: 1571872218}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &806211590
 GameObject:
@@ -1937,6 +1942,7 @@ MonoBehaviour:
   _portal: {fileID: 702109391}
   _lightTransform: {fileID: 1101682592}
   _deactivateCollider: {fileID: 214673782}
+  _player: {fileID: 0}
 --- !u!114 &1571872226 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4963676324087262742, guid: 3f6850c954f7cb2439f14642eb136642, type: 3}
@@ -3135,11 +3141,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2da08f2bee3e17469c1c77d6fc26cca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rotationSpeed: 1000
-  inputReader: {fileID: 806211592}
-  _mirrorCamera: {fileID: 868488363302238552}
-  minY: 180
-  maxY: 180
 --- !u!4 &6770661989382397158
 Transform:
   m_ObjectHideFlags: 0

@@ -6,6 +6,7 @@ public class MenuNavigator : MonoBehaviour
 {
     public Button[] buttons;
     private int currentIndex = 0;
+    private bool isActive = true; // NUEVO
 
     void Start()
     {
@@ -14,6 +15,7 @@ public class MenuNavigator : MonoBehaviour
 
     void Update()
     {
+        if (!isActive) return; // NUEVO: No ejecutar si está desactivado
         if (Gamepad.current == null) return;
 
         if (Gamepad.current.dpad.down.wasPressedThisFrame)
@@ -36,6 +38,14 @@ public class MenuNavigator : MonoBehaviour
 
     void HighlightButton()
     {
+        if (!isActive) return; // NUEVO
         buttons[currentIndex].Select();
+    }
+
+    // NUEVO: Métodos públicos para activar/desactivar
+    public void SetActive(bool active)
+    {
+        isActive = active;
+        Debug.Log($"[MenuNavigator] Estado: {(active ? "ACTIVO" : "DESACTIVADO")}");
     }
 }
