@@ -9,6 +9,9 @@ public class LevelSelector : MonoBehaviour
 
     private void Start()
     {
+
+        if (!levelButtons[currentIndex].interactable)
+            Next();
         HighlightButton();
     }
 
@@ -24,18 +27,35 @@ public class LevelSelector : MonoBehaviour
     public void OnSubmit(InputAction.CallbackContext context)
     {
         if (!context.performed) return;
-        levelButtons[currentIndex].onClick.Invoke();
+
+
+        if (levelButtons[currentIndex].interactable)
+            levelButtons[currentIndex].onClick.Invoke();
+        else
+            Debug.Log("Nivel bloqueado");
     }
 
     private void Next()
     {
-        currentIndex = (currentIndex + 1) % levelButtons.Length;
+        int startIndex = currentIndex;
+        do
+        {
+            currentIndex = (currentIndex + 1) % levelButtons.Length;
+        }
+        while (!levelButtons[currentIndex].interactable && currentIndex != startIndex);
+
         HighlightButton();
     }
 
     private void Previous()
     {
-        currentIndex = (currentIndex - 1 + levelButtons.Length) % levelButtons.Length;
+        int startIndex = currentIndex;
+        do
+        {
+            currentIndex = (currentIndex - 1 + levelButtons.Length) % levelButtons.Length;
+        }
+        while (!levelButtons[currentIndex].interactable && currentIndex != startIndex);
+
         HighlightButton();
     }
 
