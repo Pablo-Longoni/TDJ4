@@ -112,18 +112,18 @@ public class TutorialDisplay : MonoBehaviour
     {
         _scene = SceneManager.GetActiveScene().name;
 
-        if(_scene == "Level1")
+        if(_scene == "Level1-Flat")
         {
             MoveTutorial();
         }
 
-        else  if (_scene == "Level2")
+        else  if (_scene == "Level2-Rotate")
         {
             _lastX = cameraTransform.eulerAngles.y; 
           //  Debug.Log("La cámara rotó" + _lastX);
             TransformTutorial();
         }
-        else if (_scene == "Level3")
+        else if (_scene == "Level3-Fall")
         {
             MouseTutorial();
         }
@@ -132,15 +132,15 @@ public class TutorialDisplay : MonoBehaviour
     void Update()
     {
 
-        if (_scene == "Level1")
+        if (_scene == "Level1-Flat")
         {
             MoveTutorial();
         }
-        else if (_scene == "Level2")
+        else if (_scene == "Level2-Rotate")
         {
             TransformTutorial();
         }
-        else if (_scene == "Level3")
+        else if (_scene == "Level3-Fall")
         {
             MouseTutorial();
         }
