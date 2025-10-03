@@ -74,7 +74,11 @@ PrefabInstance:
       objectReference: {fileID: 4493585093827132993, guid: 64dbccd9aabd428419f79e4e44e8248a, type: 3}
     - target: {fileID: 919132149155446097, guid: 64dbccd9aabd428419f79e4e44e8248a, type: 3}
       propertyPath: m_Name
-      value: Cube (2)
+      value: Cube - 2 faces
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 64dbccd9aabd428419f79e4e44e8248a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -120,6 +124,7 @@ MonoBehaviour:
   _audioManager: {fileID: 0}
   _isInCooldown: 0
   _cameraChange: {fileID: 0}
+  _didRotate: 0
 --- !u!65 &2677356783782809330
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -14,7 +15,7 @@ public class ChangeScene : MonoBehaviour
     private bool isPaused = false;
     [SerializeField] private GameObject _volume;
     [SerializeField] private GameObject _controls;
-
+    [SerializeField] private GameObject _settings;
     private PlayerControls _inputActions;
 
     void Awake()
@@ -22,6 +23,9 @@ public class ChangeScene : MonoBehaviour
         _inputActions = new PlayerControls();
         _inputActions.UI.MenuOpenClose.performed += ctx => TogglePause();
     }
+
+
+
 
     void OnEnable()
     {
@@ -127,6 +131,7 @@ public class ChangeScene : MonoBehaviour
         TogglePause();
         _controls.SetActive(true);
         _volume.SetActive(false);
+        _settings.SetActive(false);
     }
 
     public void SettingsVolume()
@@ -134,6 +139,7 @@ public class ChangeScene : MonoBehaviour
         TogglePause();
         _controls.SetActive(false);
         _volume.SetActive(true);
+        _settings.SetActive(false);
     }
     public void Exit()
     {
