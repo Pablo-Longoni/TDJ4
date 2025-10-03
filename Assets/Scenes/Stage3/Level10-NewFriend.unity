@@ -12622,13 +12622,21 @@ PrefabInstance:
     m_TransformParent: {fileID: 1930177364}
     m_Modifications:
     - target: {fileID: 3455655459470892419, guid: 9dd39e10835c19e4c8934fec473a4d6a, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3455655459470892419, guid: 9dd39e10835c19e4c8934fec473a4d6a, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 3e08e18352c0d8a449cde7004aeab5b9, type: 2}
+    - target: {fileID: 3455655459470892419, guid: 9dd39e10835c19e4c8934fec473a4d6a, type: 3}
+      propertyPath: 'm_Materials.Array.data[1]'
+      value: 
+      objectReference: {fileID: -7184819803674296287, guid: b9aa4fa3ac82e3743b0ee4c7000da4e1, type: 3}
     - target: {fileID: 4294115508895035548, guid: 9dd39e10835c19e4c8934fec473a4d6a, type: 3}
       propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+      objectReference: {fileID: 4493585093827132993, guid: a60b12801364565429769690e7454cd4, type: 3}
     - target: {fileID: 5422888553904602008, guid: 9dd39e10835c19e4c8934fec473a4d6a, type: 3}
       propertyPath: m_Name
       value: GrabCube
@@ -12667,7 +12675,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9120254592235464311, guid: 9dd39e10835c19e4c8934fec473a4d6a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.9
+      value: 2.991
       objectReference: {fileID: 0}
     - target: {fileID: 9120254592235464311, guid: 9dd39e10835c19e4c8934fec473a4d6a, type: 3}
       propertyPath: m_LocalPosition.z
