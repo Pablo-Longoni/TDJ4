@@ -18,46 +18,149 @@ public class ChangeScene : MonoBehaviour
     [SerializeField] private GameObject _settings;
     private PlayerControls _inputActions;
 
+    // NUEVO: Referencia al Canvas principal (el que contiene los botones del juego)
+    [SerializeField] private Canvas mainCanvas;
+
+    // Lista para guardar los botones que estaban activos antes de pausar
+    private List<Button> mainCanvasButtons = new List<Button>();
+
+    // NUEVO: Propiedad para que otros scripts sepan si está pausado
+    public static bool IsPaused { get; private set; } = false;
+
     void Awake()
     {
         _inputActions = new PlayerControls();
         _inputActions.UI.MenuOpenClose.performed += ctx => TogglePause();
     }
 
-
-
+    // NUEVO: Método para obtener las acciones del jugador desde otros scripts
+    public PlayerControls GetInputActions()
+    {
+        return _inputActions;
+    }
 
     void OnEnable()
     {
-        _inputActions.UI.Enable();
+        _inputActions.Enable();
     }
 
     void OnDisable()
     {
-        _inputActions.UI.Disable();
+        _inputActions.Disable();
     }
-  
+
     void Start()
     {
         _transitionAnimator = GetComponentInChildren<Animator>();
+
+        // NUEVO: Si no asignaste el Canvas manualmente, buscarlo
+        if (mainCanvas == null)
+        {
+            mainCanvas = GetComponent<Canvas>();
+        }
     }
 
     public void TogglePause()
     {
         isPaused = !isPaused;
+        IsPaused = isPaused; // Actualizar variable estática
 
         if (isPaused)
         {
+            // Activar panel de pausa
             pausePanel.SetActive(true);
             Time.timeScale = 0f;
+
+            // NUEVO: Desactivar todos los botones del canvas principal
+            DisableMainCanvasButtons();
+
+            // NUEVO: Desactivar las acciones del gameplay (Player, etc.)
+            DisableGameplayInputs();
         }
         else
         {
+            // Desactivar panel de pausa
             pausePanel.SetActive(false);
             Time.timeScale = 1f;
+
+            // NUEVO: Reactivar todos los botones del canvas principal
+            EnableMainCanvasButtons();
+
+            // NUEVO: Reactivar las acciones del gameplay
+            EnableGameplayInputs();
         }
     }
 
+    // NUEVO: Método para desactivar botones del canvas principal
+    private void DisableMainCanvasButtons()
+    {
+        if (mainCanvas == null) return;
+
+        // Limpiar la lista
+        mainCanvasButtons.Clear();
+
+        // Obtener todos los botones hijos del canvas
+        Button[] allButtons = mainCanvas.GetComponentsInChildren<Button>();
+
+        foreach (Button button in allButtons)
+        {
+            // Solo desactivar botones que NO estén dentro del panel de pausa
+            if (!button.transform.IsChildOf(pausePanel.transform) && button.interactable)
+            {
+                mainCanvasButtons.Add(button);
+                button.interactable = false;
+
+                // También desactivar navegación
+                Navigation nav = button.navigation;
+                nav.mode = Navigation.Mode.None;
+                button.navigation = nav;
+            }
+        }
+    }
+
+    // NUEVO: Método para reactivar botones del canvas principal
+    private void EnableMainCanvasButtons()
+    {
+        foreach (Button button in mainCanvasButtons)
+        {
+            if (button != null)
+            {
+                button.interactable = true;
+
+                // Restaurar navegación
+                Navigation nav = button.navigation;
+                nav.mode = Navigation.Mode.Automatic;
+                button.navigation = nav;
+            }
+        }
+
+        mainCanvasButtons.Clear();
+    }
+
+    // NUEVO: Desactivar inputs del gameplay cuando se pausa
+    private void DisableGameplayInputs()
+    {
+        // Desactivar completamente todas las acciones del gameplay
+        _inputActions.Player.Disable();
+        _inputActions.Gameplay.Disable();
+        _inputActions.Camera.Disable();
+
+        // Mantener solo UI activo
+        _inputActions.UI.Enable();
+
+        Debug.Log("Inputs de gameplay desactivados - Solo UI activo");
+    }
+
+    // NUEVO: Reactivar inputs del gameplay cuando se despausa
+    private void EnableGameplayInputs()
+    {
+        // Reactivar todas las acciones del gameplay
+        _inputActions.Player.Enable();
+        _inputActions.Gameplay.Enable();
+        _inputActions.Camera.Enable();
+
+        Debug.Log("Inputs de gameplay reactivados");
+    }
 
     public void NextLevel()
     {
@@ -82,15 +185,6 @@ public class ChangeScene : MonoBehaviour
         string currentSceneName = SceneManager.GetActiveScene().name;
         StartCoroutine(SceneLoad(nextLevel));
         Time.timeScale = 1f;
-        /* if (currentSceneName == "Level3" || currentSceneName == "Level7" || currentSceneName == "Level13")
-         {
-             StartCoroutine(SceneLoad(0)); // Volver al menú o selector
-         }
-         else
-         {
-             StartCoroutine(SceneLoad(nextLevel));
-             Time.timeScale = 1f;
-         }*/
     }
 
     public IEnumerator SceneLoad(int sceneIndex)
@@ -102,7 +196,7 @@ public class ChangeScene : MonoBehaviour
 
     public void RestartLevel()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     public void BackToMenu()
@@ -115,16 +209,6 @@ public class ChangeScene : MonoBehaviour
     {
         SceneManager.LoadScene("Credits");
     }
-
-  /*  public void GoToSettings()
-    {
-        SceneManager.LoadScene("Settings");
-    }
-
-    public void GoToSandBox()
-    {
-        SceneManager.LoadScene("LevelTest");
-    }*/
 
     public void SettingsControls()
     {
@@ -141,6 +225,7 @@ public class ChangeScene : MonoBehaviour
         _volume.SetActive(true);
         _settings.SetActive(false);
     }
+
     public void Exit()
     {
         Debug.Log("Cerrando el juego...");

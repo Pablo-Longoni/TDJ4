@@ -43,14 +43,9 @@ public class PlayerTransformation : MonoBehaviour
 
     private void OnCameraFlipPressed(InputAction.CallbackContext context)
     {
-      /*  if (_currentTrans >= _totalTrans)
-        {
-            _cameraChange._canChange = false;
+        // NUEVO: Verificar si el juego está pausado
+        if (ChangeScene.IsPaused) return;
 
-            if (!_isBlinking)
-                StartCoroutine(BlinkText());
-        }
-        */
         if (_currentTrans < _totalTrans)
         {
             _cameraChange._canChange = true; // permitir el cambio   
