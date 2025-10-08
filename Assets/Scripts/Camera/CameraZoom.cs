@@ -56,4 +56,13 @@ public class CameraZoom : MonoBehaviour
     {
         _zoomSpeed = newSpeed;
     }
+
+    public void ZoomIn(float _amountZoom)
+    {
+        _currentZoom -= _amountZoom * Time.deltaTime;
+
+        _currentZoom = Mathf.Clamp(_currentZoom, _minZoom, _maxZoom);
+
+        _cinemachineCamera.Lens.OrthographicSize = Mathf.Lerp( _cinemachineCamera.Lens.OrthographicSize, _currentZoom, 30 * Time.deltaTime);
+    }
 }
