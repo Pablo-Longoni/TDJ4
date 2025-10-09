@@ -101,7 +101,7 @@ public class CubeRotation : MonoBehaviour
                 _targetRotation = newTargetRotation;
                 _shouldRotate = true;
                 _didRotate = true; 
-               AudioManager.Instance.soundSource.PlayOneShot(AudioManager.Instance._turning);
+               //AudioManager.Instance.soundSource.PlayOneShot(AudioManager.Instance._turning);
                 StartCoroutine(RotationCooldown());
             }
         }
