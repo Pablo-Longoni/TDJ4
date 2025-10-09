@@ -13,8 +13,6 @@ GameObject:
   - component: {fileID: 8777064262513948805}
   - component: {fileID: 146207779837470975}
   - component: {fileID: 8535288797739753195}
-  - component: {fileID: 3882532492202597224}
-  - component: {fileID: 5135296697717043814}
   m_Layer: 10
   m_Name: Still Shadow
   m_TagString: Untagged
@@ -135,38 +133,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &3882532492202597224
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6794021348001371890}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7b6af5737a728ff458393f49b23bbbc2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _shadowTransform: {fileID: 82830286827880226}
-  _lightTransform: {fileID: 0}
-  _targetLayerMask:
-    serializedVersion: 2
-    m_Bits: 1280
-  _extrusionDirection: {x: 0, y: 0, z: 0}
-  _shadowColliderUpdateTime: 0.08
---- !u!114 &5135296697717043814
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6794021348001371890}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c46c1be9460e7034d948f4206fea4378, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _targetCollider: {fileID: 0}
 --- !u!1 &8536972637318655687
 GameObject:
   m_ObjectHideFlags: 0
@@ -311,7 +277,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 9.499977, y: 0, z: 9.727265}
-  m_Center: {x: -0.025018044, y: 0.0000009536743, z: -0.13639271}
+  m_Center: {x: -0.025018044, y: 0.5, z: -0.13639271}
 --- !u!1001 &7988327995136211575
 PrefabInstance:
   m_ObjectHideFlags: 0

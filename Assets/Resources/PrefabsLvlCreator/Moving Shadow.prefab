@@ -144,7 +144,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 9.403822, y: 0, z: 9.47995}
-  m_Center: {x: 0.029799927, y: -0.000000953852, z: 0.013678128}
+  m_Center: {x: 0.029799927, y: 0.5, z: 0.013678128}
 --- !u!1 &5560996568674064982
 GameObject:
   m_ObjectHideFlags: 0
@@ -158,8 +158,6 @@ GameObject:
   - component: {fileID: 7316261661865126106}
   - component: {fileID: 6013175110128889182}
   - component: {fileID: 7670729859719535814}
-  - component: {fileID: 4872726698628639533}
-  - component: {fileID: 7103851535505761645}
   - component: {fileID: 6264507231241179858}
   m_Layer: 10
   m_Name: Moving Shadow
@@ -281,38 +279,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1.0000002, z: 1.0000002}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &4872726698628639533
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5560996568674064982}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7b6af5737a728ff458393f49b23bbbc2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _shadowTransform: {fileID: 2052860918933849112}
-  _lightTransform: {fileID: 0}
-  _targetLayerMask:
-    serializedVersion: 2
-    m_Bits: 1288
-  _extrusionDirection: {x: 0, y: 0, z: 0}
-  _shadowColliderUpdateTime: 0.08
---- !u!114 &7103851535505761645
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5560996568674064982}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c46c1be9460e7034d948f4206fea4378, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _targetCollider: {fileID: 0}
 --- !u!114 &6264507231241179858
 MonoBehaviour:
   m_ObjectHideFlags: 0
