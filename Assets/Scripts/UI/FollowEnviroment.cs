@@ -35,6 +35,9 @@ public class FollowEnviroment : MonoBehaviour
 
     public void MiniMapOn()
     {
+        // NUEVO: Verificar si el juego está pausado
+        if (ChangeScene.IsPaused) return;
+
         _isMiniMap = !_isMiniMap;
         _miniMap.SetActive(_isMiniMap);
     }
