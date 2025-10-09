@@ -119,9 +119,9 @@ public class AudioManager : MonoBehaviour
         {
             yield return new WaitUntil(() => !musicSource.isPlaying);
 
-            yield return FadeOut(musicSource, 2f); 
+            yield return FadeOut(musicSource, 1.5f); 
             MusicSelector();
-            yield return FadeIn(musicSource, 2f, 1f); 
+            yield return FadeIn(musicSource, .5f, 1f); 
         }
     }
 

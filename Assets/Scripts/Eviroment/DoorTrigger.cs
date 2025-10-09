@@ -62,7 +62,7 @@ public class DoorTrigger : MonoBehaviour
         Vector3 initialPosition = _player.transform.position;
         _cubeAnimation.EnterPortalAnim();
         Instantiate(_particleEnterPortal, targetPosition, Quaternion.identity);
-
+        _changeScene.NextLevel();
         while (timeElapsed < 2f)
         {
             timeElapsed += Time.deltaTime * moveSpeed;
@@ -70,7 +70,6 @@ public class DoorTrigger : MonoBehaviour
             yield return null;
         }
 
-        _changeScene.NextLevel();
         Debug.Log("Jugador entró en la puerta");
         _player.enabled = true;
     }

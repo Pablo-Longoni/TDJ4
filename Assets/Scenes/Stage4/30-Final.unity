@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 2606881614cfe7b44a68b516c575fcbc, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -523,7 +523,7 @@ Camera:
   m_GameObject: {fileID: 196407022}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 2
+  m_ClearFlags: 1
   m_BackGroundColor: {r: 1, g: 1, b: 1, a: 1}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
@@ -866,7 +866,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2052860918933849112, guid: 1a59a6ba8e68df54b9fbe004f5a1060a, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -281.2
+      value: -280.1
       objectReference: {fileID: 0}
     - target: {fileID: 2052860918933849112, guid: 1a59a6ba8e68df54b9fbe004f5a1060a, type: 3}
       propertyPath: m_LocalRotation.w
@@ -902,7 +902,7 @@ PrefabInstance:
       objectReference: {fileID: 214673782}
     - target: {fileID: 4872726698628639533, guid: 1a59a6ba8e68df54b9fbe004f5a1060a, type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4872726698628639533, guid: 1a59a6ba8e68df54b9fbe004f5a1060a, type: 3}
       propertyPath: _lightTransform
@@ -922,7 +922,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7103851535505761645, guid: 1a59a6ba8e68df54b9fbe004f5a1060a, type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7103851535505761645, guid: 1a59a6ba8e68df54b9fbe004f5a1060a, type: 3}
       propertyPath: _targetCollider
@@ -1072,7 +1072,7 @@ PrefabInstance:
       objectReference: {fileID: 214673782}
     - target: {fileID: 4872726698628639533, guid: 1a59a6ba8e68df54b9fbe004f5a1060a, type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4872726698628639533, guid: 1a59a6ba8e68df54b9fbe004f5a1060a, type: 3}
       propertyPath: _lightTransform
@@ -1096,7 +1096,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7103851535505761645, guid: 1a59a6ba8e68df54b9fbe004f5a1060a, type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7103851535505761645, guid: 1a59a6ba8e68df54b9fbe004f5a1060a, type: 3}
       propertyPath: _targetCollider
@@ -1151,7 +1151,7 @@ Transform:
   m_GameObject: {fileID: 459557582}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -58.75, y: 210.59999, z: 243.42}
+  m_LocalPosition: {x: -58.75, y: 280.6, z: 243.42001}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1186,7 +1186,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 886251e9a18ece04ea8e61686c173e1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CameraDistance: 30
+  CameraDistance: 100
   DeadZoneDepth: 10
   Composition:
     ScreenPosition: {x: 0, y: 0}
@@ -1307,7 +1307,7 @@ PrefabInstance:
       objectReference: {fileID: 214673782}
     - target: {fileID: 4872726698628639533, guid: 1a59a6ba8e68df54b9fbe004f5a1060a, type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4872726698628639533, guid: 1a59a6ba8e68df54b9fbe004f5a1060a, type: 3}
       propertyPath: _lightTransform
@@ -1319,7 +1319,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7103851535505761645, guid: 1a59a6ba8e68df54b9fbe004f5a1060a, type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7103851535505761645, guid: 1a59a6ba8e68df54b9fbe004f5a1060a, type: 3}
       propertyPath: _targetCollider
@@ -2055,6 +2055,10 @@ PrefabInstance:
       propertyPath: _cameraChange
       value: 
       objectReference: {fileID: 1158862570}
+    - target: {fileID: 2935157485534680045, guid: 0b5db73dc98c91042bb5435334e5833a, type: 3}
+      propertyPath: _limit
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3037073062917153181, guid: 0b5db73dc98c91042bb5435334e5833a, type: 3}
       propertyPath: _speed
       value: 13
@@ -2201,11 +2205,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6265364806827599206, guid: 5e48db719809e1a48876812cec0dbff7, type: 3}
       propertyPath: m_LocalScale.y
-      value: 2999.9995
+      value: 2950.08
       objectReference: {fileID: 0}
     - target: {fileID: 6265364806827599206, guid: 5e48db719809e1a48876812cec0dbff7, type: 3}
       propertyPath: m_LocalScale.z
-      value: 842.69995
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 6265364806827599206, guid: 5e48db719809e1a48876812cec0dbff7, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2213,7 +2217,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6265364806827599206, guid: 5e48db719809e1a48876812cec0dbff7, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 137.4
+      value: 141.2
       objectReference: {fileID: 0}
     - target: {fileID: 6265364806827599206, guid: 5e48db719809e1a48876812cec0dbff7, type: 3}
       propertyPath: m_LocalPosition.z
@@ -3103,7 +3107,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2052860918933849112, guid: 1a59a6ba8e68df54b9fbe004f5a1060a, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -269.4
+      value: -261.8
       objectReference: {fileID: 0}
     - target: {fileID: 2052860918933849112, guid: 1a59a6ba8e68df54b9fbe004f5a1060a, type: 3}
       propertyPath: m_LocalRotation.w
@@ -3139,7 +3143,7 @@ PrefabInstance:
       objectReference: {fileID: 214673782}
     - target: {fileID: 4872726698628639533, guid: 1a59a6ba8e68df54b9fbe004f5a1060a, type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4872726698628639533, guid: 1a59a6ba8e68df54b9fbe004f5a1060a, type: 3}
       propertyPath: _lightTransform
@@ -3159,7 +3163,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7103851535505761645, guid: 1a59a6ba8e68df54b9fbe004f5a1060a, type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7103851535505761645, guid: 1a59a6ba8e68df54b9fbe004f5a1060a, type: 3}
       propertyPath: _targetCollider
@@ -3206,7 +3210,7 @@ Transform:
   m_GameObject: {fileID: 1332066476}
   serializedVersion: 2
   m_LocalRotation: {x: 0.23911765, y: 0.3696438, z: -0.09904577, w: 0.89239913}
-  m_LocalPosition: {x: -80.18303, y: 203.1, z: 221.98697}
+  m_LocalPosition: {x: -178.16263, y: 283.1, z: 124.00738}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3248,7 +3252,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3990522f09d0c944e88a6c36640501f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxZoom: 90
+  _maxZoom: 150
   _minZoom: 5
   _zoomSpeed: 160
   _zoomSmoothness: 30
@@ -3282,7 +3286,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 886251e9a18ece04ea8e61686c173e1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CameraDistance: 40
+  CameraDistance: 200
   DeadZoneDepth: 10
   Composition:
     ScreenPosition: {x: 0, y: 0}
@@ -3558,7 +3562,7 @@ PrefabInstance:
       objectReference: {fileID: 214673782}
     - target: {fileID: 4872726698628639533, guid: 1a59a6ba8e68df54b9fbe004f5a1060a, type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4872726698628639533, guid: 1a59a6ba8e68df54b9fbe004f5a1060a, type: 3}
       propertyPath: _lightTransform
@@ -3570,7 +3574,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7103851535505761645, guid: 1a59a6ba8e68df54b9fbe004f5a1060a, type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7103851535505761645, guid: 1a59a6ba8e68df54b9fbe004f5a1060a, type: 3}
       propertyPath: _targetCollider
@@ -3826,12 +3830,32 @@ PrefabInstance:
       value: PreviousLvl
       objectReference: {fileID: 0}
     - target: {fileID: 2714923803840239986, guid: 3f6850c954f7cb2439f14642eb136642, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2714923803840239986, guid: 3f6850c954f7cb2439f14642eb136642, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2714923803840239986, guid: 3f6850c954f7cb2439f14642eb136642, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 863092231}
     - target: {fileID: 2714923803840239986, guid: 3f6850c954f7cb2439f14642eb136642, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2714923803840239986, guid: 3f6850c954f7cb2439f14642eb136642, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: CheatTransformation
+      objectReference: {fileID: 0}
+    - target: {fileID: 2714923803840239986, guid: 3f6850c954f7cb2439f14642eb136642, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: PlayerTransformation, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 2714923803840239986, guid: 3f6850c954f7cb2439f14642eb136642, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 2857389055910094723, guid: 3f6850c954f7cb2439f14642eb136642, type: 3}
       propertyPath: m_Name
@@ -4230,7 +4254,7 @@ PrefabInstance:
       objectReference: {fileID: 214673782}
     - target: {fileID: 4872726698628639533, guid: 1a59a6ba8e68df54b9fbe004f5a1060a, type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4872726698628639533, guid: 1a59a6ba8e68df54b9fbe004f5a1060a, type: 3}
       propertyPath: _lightTransform
@@ -4242,7 +4266,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7103851535505761645, guid: 1a59a6ba8e68df54b9fbe004f5a1060a, type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7103851535505761645, guid: 1a59a6ba8e68df54b9fbe004f5a1060a, type: 3}
       propertyPath: _targetCollider
@@ -5830,6 +5854,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _portal: {fileID: 702109391}
+  _particles: {fileID: 0}
 --- !u!33 &6331159666011439731
 MeshFilter:
   m_ObjectHideFlags: 0

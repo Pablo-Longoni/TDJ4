@@ -2396,6 +2396,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6837268288150660730, guid: d37e7829b5cc5dc479ec029fdf2d713b, type: 3}
+      propertyPath: _cameraChange
+      value: 
+      objectReference: {fileID: 1158862570}
     - target: {fileID: 8378809059549273953, guid: d37e7829b5cc5dc479ec029fdf2d713b, type: 3}
       propertyPath: m_Name
       value: LpivotCorner
@@ -3592,6 +3596,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _portal: {fileID: 2070514702}
+  _particles: {fileID: 0}
 --- !u!212 &7502567582042521041
 SpriteRenderer:
   m_ObjectHideFlags: 0
