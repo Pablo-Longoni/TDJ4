@@ -11,7 +11,7 @@ public class LvlCreatorWindow : EditorWindow
 {
 
     private List<GameObject> placedObjects = new List<GameObject>();
-   
+
     private GameObject selectedObject;
     private Vector2 scrollPos;
     [SerializeField] private ObjectsPrefab prefabDatabase;
@@ -22,8 +22,8 @@ public class LvlCreatorWindow : EditorWindow
         GetWindow<LvlCreatorWindow>("Level Builder");
     }
 
-      private void OnGUI()
-      {
+    private void OnGUI()
+    {
         //CAMBIAR C�MARA
         GUILayout.Label("Cambiar c�mara", EditorStyles.boldLabel);
 
@@ -101,7 +101,7 @@ public class LvlCreatorWindow : EditorWindow
 
 
         //Escala
-       if (selectedObject != null)
+        if (selectedObject != null)
         {
             GUILayout.Space(10);
             GUILayout.Label("Controles del objeto seleccionado", EditorStyles.boldLabel);
@@ -129,16 +129,16 @@ public class LvlCreatorWindow : EditorWindow
             }
             EditorGUILayout.EndVertical();
 
-                Vector3 newScale = EditorGUILayout.Vector3Field("Escala", selectedObject.transform.localScale);
-                if (newScale != selectedObject.transform.localScale)
-                {
-                    selectedObject.transform.localScale = newScale;
-                }
+            Vector3 newScale = EditorGUILayout.Vector3Field("Escala", selectedObject.transform.localScale);
+            if (newScale != selectedObject.transform.localScale)
+            {
+                selectedObject.transform.localScale = newScale;
+            }
         }
 
-       //   HandleKeyboardInput();
+        //   HandleKeyboardInput();
     }
-    
+
 
     private void SpawnPrefab(object figure)
     {
@@ -167,7 +167,7 @@ public class LvlCreatorWindow : EditorWindow
             var figures = instance.GetComponent<CubeRotation>();
             var pressed = instance.GetComponentInChildren<OpenPortal>();
             var light = instance.GetComponent<InteractiveShadows>();
-            var deactivateCollider = instance.GetComponent <DeactivateCollider>();
+            var deactivateCollider = instance.GetComponent<DeactivateCollider>();
             var flip = instance.GetComponent<UpgradeTransforms>();
 
             if (ui != null)
@@ -203,30 +203,30 @@ public class LvlCreatorWindow : EditorWindow
                     Debug.Log("Se cargaron los campos en la figura");
                 }
 
-                if(pressed != null)
+                if (pressed != null)
                 {
                     pressed._portal = ui._portal;
                     Debug.Log("Se cargaron los campos en pressed");
                 }
 
-                if(light != null)
+                if (light != null)
                 {
-                    light._lightTransform = ui._lightTransform;            
+                    light._lightTransform = ui._lightTransform;
                 }
 
-                if(deactivateCollider != null)
+                if (deactivateCollider != null)
                 {
                     deactivateCollider._targetCollider = ui._deactivateCollider;
                 }
 
-                if(flip != null)
+                if (flip != null)
                 {
                     flip._playerTransformation = ui._player;
                 }
             }
         }
     }
-   
+
     private void SwitchToCamera(string cameraName)
     {
         var vcam = GameObject.Find(cameraName)?.GetComponent<CinemachineCamera>();
@@ -243,7 +243,7 @@ public class LvlCreatorWindow : EditorWindow
         }
 
         SceneView sceneView = SceneView.lastActiveSceneView;
-        
+
         if (sceneView != null)
         {
             // Asignamos la posici�n y rotaci�n de la virtual camera a la SceneView
@@ -255,4 +255,4 @@ public class LvlCreatorWindow : EditorWindow
 
 
 }
-*/
+
