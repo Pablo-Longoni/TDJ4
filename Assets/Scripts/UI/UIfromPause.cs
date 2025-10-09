@@ -13,7 +13,10 @@ public class UIfromPause : MonoBehaviour
     [SerializeField] private GameObject [] _tabs;
     [SerializeField] private Image [] _buttonTab;
     public Vector2 _inactiveButtonSize, _activeButtonSize;
-    
+
+    [SerializeField] private GameObject _gamePadControls;
+    [SerializeField] private GameObject _keyboardControls;
+
     void Start()
     {
         _transitionAnimator = GetComponentInChildren<Animator>();
@@ -135,6 +138,18 @@ public class UIfromPause : MonoBehaviour
       //  _buttonTab[TabId].color = Color.gray;
         _buttonTab[TabId].rectTransform.sizeDelta = _activeButtonSize;
 
+    }
+
+    public void SwitchToKeyboardImage()
+    {
+        _gamePadControls.SetActive(false);
+        _keyboardControls.SetActive(true);
+    }
+
+    public void SwitchToGamepadImage()
+    {
+        _keyboardControls.SetActive(false);
+        _gamePadControls.SetActive(true);
     }
 
     public void Exit()
