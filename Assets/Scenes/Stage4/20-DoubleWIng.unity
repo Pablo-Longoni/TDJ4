@@ -6076,6 +6076,8 @@ MonoBehaviour:
   _cameraShake: {fileID: 1332066478}
   _cameraZoom: {fileID: 0}
   _particleEnterPortal: {fileID: 0}
+  vibrationIntensity: 0.8
+  vibrationDuration: 2
 --- !u!65 &636527523
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6343,11 +6345,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1611601792810885657, guid: 11925ed718e50c444af8e97ef586b4a7, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -620
       objectReference: {fileID: 0}
     - target: {fileID: 1611601792810885657, guid: 11925ed718e50c444af8e97ef586b4a7, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -12
+      value: 27.9
       objectReference: {fileID: 0}
     - target: {fileID: 1611601792810885657, guid: 11925ed718e50c444af8e97ef586b4a7, type: 3}
       propertyPath: m_LocalPosition.z
@@ -6403,7 +6405,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2095968118593583267, guid: 11925ed718e50c444af8e97ef586b4a7, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2677356783782809330, guid: 11925ed718e50c444af8e97ef586b4a7, type: 3}
       propertyPath: m_Enabled
@@ -6750,7 +6752,7 @@ MonoBehaviour:
   _turnSpeed: 360
   groundCheckDistance: 0.2
   _input: {x: 0, y: 0, z: 0}
-  _currentCube: {fileID: 1255212391}
+  _currentCube: {fileID: 2022619215}
   _minimapCameraFollow: {fileID: 1848416803}
 --- !u!4 &806211594
 Transform:
@@ -12865,7 +12867,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 289530141115462909, guid: d686129b58ff4e443803c5e0fb2fb94d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -27.09
+      value: -26.878
       objectReference: {fileID: 0}
     - target: {fileID: 289530141115462909, guid: d686129b58ff4e443803c5e0fb2fb94d, type: 3}
       propertyPath: m_LocalPosition.z
@@ -13041,11 +13043,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 289530141115462909, guid: d686129b58ff4e443803c5e0fb2fb94d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.0007885715
+      value: -0.000844
       objectReference: {fileID: 0}
     - target: {fileID: 289530141115462909, guid: d686129b58ff4e443803c5e0fb2fb94d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.00023125036
+      value: -0.000231
       objectReference: {fileID: 0}
     - target: {fileID: 289530141115462909, guid: d686129b58ff4e443803c5e0fb2fb94d, type: 3}
       propertyPath: m_LocalPosition.z
@@ -14812,6 +14814,17 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.020000001, y: 0.0005330104, z: 0.020017555}
   m_Center: {x: 0, y: 0.009735476, z: -0.000008790334}
+--- !u!114 &2022619215 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9102913138357820887, guid: 11925ed718e50c444af8e97ef586b4a7, type: 3}
+  m_PrefabInstance: {fileID: 724984810}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2022619204}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8fce5eba5bc2ab44daa042a9b1b45df0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2022823991 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7919308771404680321, guid: 3f6850c954f7cb2439f14642eb136642, type: 3}

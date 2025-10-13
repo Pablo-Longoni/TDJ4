@@ -1,9 +1,18 @@
+using TMPro;
 using UnityEngine;
 
 public class OpenPortal : MonoBehaviour
 {
     [SerializeField] public GameObject _portal;
     private int _objectsInside = 0;
+    [SerializeField] private ParticleSystem _particles;
+
+    Vector3 _position;
+
+    private void Start()
+    {
+        _position = transform.position;
+    }
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player") || other.CompareTag("Movable"))
@@ -13,6 +22,7 @@ public class OpenPortal : MonoBehaviour
             _portal.SetActive(true);
             MeshRenderer _renderer = GetComponent<MeshRenderer>();
             _renderer.material.color = Color.black;
+        //    Instantiate(_particles, transform.position, Quaternion.identity);
             AudioManager.Instance.soundSource.PlayOneShot(AudioManager.Instance._portal);
         }
     }

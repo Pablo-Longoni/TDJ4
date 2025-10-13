@@ -127,6 +127,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 898049720655000602, guid: a785f425914710a48a90b36dab25dbaf, type: 3}
+      propertyPath: _cameraChange
+      value: 
+      objectReference: {fileID: 716789543}
     - target: {fileID: 3856373104790826326, guid: a785f425914710a48a90b36dab25dbaf, type: 3}
       propertyPath: m_Name
       value: Cube-2
@@ -2894,6 +2898,8 @@ MonoBehaviour:
   _cameraShake: {fileID: 914411328}
   _cameraZoom: {fileID: 914411326}
   _particleEnterPortal: {fileID: 1049920748381033707, guid: 192a7a661b1c89249829e437ef90e3ef, type: 3}
+  vibrationIntensity: 0.8
+  vibrationDuration: 2
 --- !u!65 &1302605531
 BoxCollider:
   m_ObjectHideFlags: 0

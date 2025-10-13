@@ -1,4 +1,6 @@
+using System.Collections;
 using Unity.Cinemachine;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class CameraZoom : MonoBehaviour
@@ -13,7 +15,6 @@ public class CameraZoom : MonoBehaviour
     public CinemachineCamera _cinemachineCamera;
 
     private PlayerInputReader _input;
-
     private void Awake()
     {
         _currentZoom = _cinemachineCamera.Lens.OrthographicSize;
@@ -55,14 +56,5 @@ public class CameraZoom : MonoBehaviour
     public void SetZoomSpeed(float newSpeed)
     {
         _zoomSpeed = newSpeed;
-    }
-
-    public void ZoomIn(float _amountZoom)
-    {
-        _currentZoom -= _amountZoom * Time.deltaTime;
-
-        _currentZoom = Mathf.Clamp(_currentZoom, _minZoom, _maxZoom);
-
-        _cinemachineCamera.Lens.OrthographicSize = Mathf.Lerp( _cinemachineCamera.Lens.OrthographicSize, _currentZoom, 30 * Time.deltaTime);
     }
 }
