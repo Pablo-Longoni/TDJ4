@@ -1188,6 +1188,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5778708965717899629, guid: bcc8cf99111e29140848c5fa0ec8a56f, type: 3}
   m_PrefabInstance: {fileID: 866167125}
   m_PrefabAsset: {fileID: 0}
+--- !u!65 &866167128 stripped
+BoxCollider:
+  m_CorrespondingSourceObject: {fileID: 4266216992931283569, guid: bcc8cf99111e29140848c5fa0ec8a56f, type: 3}
+  m_PrefabInstance: {fileID: 866167125}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &901503276 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 476906136922235309, guid: 3f6850c954f7cb2439f14642eb136642, type: 3}
@@ -2142,7 +2147,8 @@ MonoBehaviour:
   _rb: {fileID: 1606612549}
   _limit: -30
   _collisions:
-  - {fileID: 0}
+  - {fileID: 1269087355369351237}
+  - {fileID: 866167128}
 --- !u!114 &1606612546
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2342,8 +2348,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5d7e2877eeed4844bba74c7da2b7cfe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fallThreshold: -1
-  minFallDuration: 0.2
   stretchAmount: 1.3
   squashAmount: 0.8
   squashDuration: 0.1
@@ -2354,7 +2358,6 @@ MonoBehaviour:
   groundCheck: {fileID: 909880588}
   _dustPrefab: {fileID: 7512446778391803044, guid: 0bd8793734ebff845be3eab2b81567e6, type: 3}
   _miniDustPrefab: {fileID: 5255338958118048641, guid: a8b18898eb9dd6744bd71c1f2279215a, type: 3}
-  squashCooldown: 0.3
   _cube: {fileID: 1606612544}
 --- !u!1 &1887890750
 GameObject:
@@ -2957,6 +2960,11 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 664347098}
   m_SourcePrefab: {fileID: 100100000, guid: 44e8a7660ad2cc34e950654b8e24b6d4, type: 3}
+--- !u!65 &1269087355369351237 stripped
+BoxCollider:
+  m_CorrespondingSourceObject: {fileID: 5836960976467508506, guid: 44e8a7660ad2cc34e950654b8e24b6d4, type: 3}
+  m_PrefabInstance: {fileID: 1269087355369351236}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

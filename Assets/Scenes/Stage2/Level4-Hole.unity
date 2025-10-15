@@ -281,6 +281,7 @@ MonoBehaviour:
   _rotationTurn: 180
   _canRotate: 1
   _rotateCooldown: 0.7
+  _pivotPoint: {fileID: 0}
   _audioManager: {fileID: 0}
   _isInCooldown: 0
   _cameraChange: {fileID: 1050403306}
@@ -966,6 +967,19 @@ MonoBehaviour:
   _cameraShake: {fileID: 1071151465}
   _cameraZoom: {fileID: 0}
   _particleEnterPortal: {fileID: 0}
+  _portal: {fileID: 0}
+  _originalSize: 35
+  _zoomChange: -20
+  zoomDuration: 1.5
+  _originalPos: {x: 0, y: 0, z: 0}
+  _moveDistance: 200
+  _cinemachineCamera: {fileID: 0}
+  _minZoom: 0
+  _maxZoom: 0
+  _rb: {fileID: 0}
+  levitateDistance: 2
+  vibrationIntensity: 0.8
+  vibrationDuration: 2
 --- !u!65 &874897121
 BoxCollider:
   m_ObjectHideFlags: 0

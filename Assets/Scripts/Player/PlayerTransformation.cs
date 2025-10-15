@@ -63,7 +63,7 @@ public class PlayerTransformation : MonoBehaviour
     {
         _currentTrans++;
         _textTrans.text = "Flips: " + _currentTrans + "/" + _totalTrans;
-        Debug.Log("Transformations: " + _currentTrans);
+     //   Debug.Log("Transformations: " + _currentTrans);
     }
 
     IEnumerator BlinkText()

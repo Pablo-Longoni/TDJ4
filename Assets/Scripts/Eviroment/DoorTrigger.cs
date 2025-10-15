@@ -37,7 +37,6 @@ public class DoorTrigger : MonoBehaviour
     public float levitateDistance = 2;
     private Quaternion _rotationParticle = Quaternion.Euler(-90, 0, 0);
 
-
     [Header("Vibration Settings")]
     [SerializeField] private float vibrationIntensity = 0.8f;
     [SerializeField] private float vibrationDuration = 2f;
@@ -58,6 +57,7 @@ public class DoorTrigger : MonoBehaviour
     {
         _changeScene = GameObject.FindGameObjectWithTag("GameController").GetComponent<ChangeScene>();
         _rb = _player.GetComponent<Rigidbody>();
+        _audioManager = FindFirstObjectByType<AudioManager>();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -68,8 +68,8 @@ public class DoorTrigger : MonoBehaviour
             _rb.isKinematic = true;
             //    StartCoroutine(MovePlayerToDoor(_target.transform.position));
             StartCoroutine(EnterPortalSequence());
-            AudioManager.Instance.soundSource.PlayOneShot(AudioManager.Instance._portal);
-
+           // AudioManager.Instance.soundSource.PlayOneShot(AudioManager.Instance._portal);
+            _audioManager.DistoredMusic();
             Debug.Log("Jugador entró en la puerta");
         }
     }
@@ -77,13 +77,12 @@ public class DoorTrigger : MonoBehaviour
     private IEnumerator EnterPortalSequence()
     {
         _player.enabled = false;
-
+        _cubeAnimation.IgnoreStretchAndSquash(2);
         yield return StartCoroutine(ZoomIn());
 
         yield return StartCoroutine(MovePlayerToDoor(_target.transform.position));
 
         yield return StartCoroutine(ReturnToOriginal());
-
     }
 
     private IEnumerator MovePlayerToDoor(Vector3 targetPosition)
@@ -98,12 +97,14 @@ public class DoorTrigger : MonoBehaviour
         Instantiate(_particleEnterPortal, targetPosition + _offSet, _rotationParticle);
         _cameraShake.Shake(2f, 2, .4f);
 
+        _audioManager.soundSource.PlayOneShot(_audioManager._portal);
         while (timeElapsed < 2f)
         {
             timeElapsed += Time.deltaTime * moveSpeed;
              _player.transform.position = Vector3.Lerp(initialPosition, targetPosition, timeElapsed);
               yield return null;
         }
+   
         Debug.Log("Jugador entró en la puerta");
     }
 
@@ -164,6 +165,7 @@ public class DoorTrigger : MonoBehaviour
         Vector3 currentPos = _cinemachineCamera.transform.position;
         float currentSize = _cinemachineCamera.Lens.OrthographicSize;
         _changeScene.NextLevel();
+        _audioManager.RestoredMusic();
         float t = 0f;
         while (t < 1f)
         {
@@ -172,7 +174,6 @@ public class DoorTrigger : MonoBehaviour
             _cinemachineCamera.Lens.OrthographicSize = Mathf.Lerp(currentSize, _originalSize, t);
             yield return null;
         }
-
         // _cinemachineCamera.Target.TrackingTarget = null; 
     }
 

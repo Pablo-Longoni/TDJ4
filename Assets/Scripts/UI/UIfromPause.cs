@@ -8,7 +8,7 @@ public class UIfromPause : MonoBehaviour
     private Animator _transitionAnimator;
     public float _transitionTime;
     public GameObject pausePanel;
-    private bool isPaused = false;
+ //   private bool isPaused = false;
 
     [SerializeField] private GameObject [] _tabs;
     [SerializeField] private Image [] _buttonTab;
