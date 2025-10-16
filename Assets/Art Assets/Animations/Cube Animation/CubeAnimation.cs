@@ -4,18 +4,18 @@ using System.Collections;
 public class CubeAnimation : MonoBehaviour
 {
 
-    public float fallThreshold = -1f; // velocidadY m�nima para detectar ca�da
-    public float minFallDuration = 0.2f; // tiempo m�nimo cayendo para hacer stretch
+ //   public float fallThreshold = -1f; // velocidadY m�nima para detectar ca�da
+  //  public float minFallDuration = 0.2f; // tiempo m�nimo cayendo para hacer stretch
     public float stretchAmount = 1.3f; // cu�nto se estira al caer
     public float squashAmount = 0.8f;  // cu�nto se aplasta al aterrizar
   //  public float stretchDuration = 0.1f; // tiempo que dura el estiramiento
     public float squashDuration = 0.1f;  // tiempo que dura el squash
     public float rayDistance = 0.5f;
-    private Rigidbody rb;
+ //   private Rigidbody rb;
 
     private Vector3 originalScale;
  //   private bool isFalling = false;
-    private bool wasGroundedLastFrame = true;
+//    private bool wasGroundedLastFrame = true;
     private bool isGrounded = false;
     private Coroutine currentRoutine;
 
@@ -25,7 +25,7 @@ public class CubeAnimation : MonoBehaviour
     [SerializeField] private GameObject _miniDustPrefab;
 
     private bool dustSpawned = false;
-    public float squashCooldown = 0.3f;
+  //  public float squashCooldown = 0.3f;
     private float lastSquashTime = -10f;
     private bool ignoreGroundCheck = false;
     private float fallStartTime = 0f;
@@ -33,14 +33,14 @@ public class CubeAnimation : MonoBehaviour
     private bool isActuallyFalling;
     private bool firstFrameChecked = false;
 
-    private CameraChange _camera;
-    [SerializeField] private GameObject _cube;
+  //  private CameraChange _camera;
+    [SerializeField] private GameObject _cube; 
     private bool canStretchAndSquash = true;
     void Start()
     {
-        _camera = GameObject.FindAnyObjectByType<CameraChange>();
-        rb = GetComponent<Rigidbody>();
-        rb.collisionDetectionMode = CollisionDetectionMode.Continuous; 
+     //   _camera = GameObject.FindAnyObjectByType<CameraChange>();
+       /* rb = GetComponent<Rigidbody>();
+        rb.collisionDetectionMode = CollisionDetectionMode.Continuous; */
         originalScale = transform.localScale;
         isActuallyFalling = true;
     }
@@ -63,11 +63,14 @@ public class CubeAnimation : MonoBehaviour
                 currentRoutine = StartCoroutine(Stretch());
             }
         }
-        CheckGrounded();
-
-       bool justLanded = isGrounded && !wasGroundedLastFrame && isActuallyFalling;
-       bool justStartedFalling = !isGrounded && wasGroundedLastFrame;
+      //  CheckGrounded();
     }
+
+  /*  void LateUpdate()
+    {
+        if (!canStretchAndSquash)
+            transform.localScale = originalScale;
+    }*/
     void CheckGrounded()
     {
         if (ignoreGroundCheck)
@@ -87,14 +90,19 @@ public class CubeAnimation : MonoBehaviour
 
     IEnumerator Stretch()
     {
-        transform.localScale = new Vector3(originalScale.x, originalScale.y * stretchAmount, originalScale.z);
-        yield return null;
+        StopActiveRoutine();
+        Vector3 stretched = new Vector3(originalScale.x, originalScale.y * stretchAmount, originalScale.z);
+        currentRoutine = StartCoroutine(ScaleOverTime(transform.localScale, stretched, 0.1f));
+        yield return currentRoutine;
+     //   Debug.Log("Stretch");
     }
 
     IEnumerator Squash()
     {
+        StopActiveRoutine();
         ignoreGroundCheck = true;
 
+        // Spawn  partículas
         float fallDuration = Time.time - fallStartTime;
         if (!dustSpawned)
         {
@@ -109,27 +117,40 @@ public class CubeAnimation : MonoBehaviour
             dustSpawned = true;
         }
 
-        transform.localScale = new Vector3(originalScale.x, originalScale.y * squashAmount, originalScale.z);
-        yield return new WaitForSeconds(squashDuration);
-        transform.localScale = originalScale;
+        Vector3 squashed = new Vector3(originalScale.x, originalScale.y * squashAmount, originalScale.z);
 
-        yield return new WaitForSeconds(.5f); 
-        transform.localScale = originalScale;
+        yield return StartCoroutine(ScaleOverTime(transform.localScale, squashed, squashDuration));
+        yield return StartCoroutine(ScaleOverTime(squashed, originalScale, 0.15f));
+
         ignoreGroundCheck = false;
         dustSpawned = false;
-        Debug.Log("Squash");
+    }
+
+    IEnumerator ScaleOverTime(Vector3 startScale, Vector3 endScale, float duration)
+    {
+        float elapsed = 0f;
+        while (elapsed < duration)
+        {
+            float t = elapsed / duration;
+            transform.localScale = Vector3.Lerp(startScale, endScale, t);
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+        transform.localScale = endScale;
     }
 
     private void OnTriggerExit(Collider other)
     {
         if (canStretchAndSquash && other.gameObject.layer == LayerMask.NameToLayer("Enviroment"))
         {
-            if (!isActuallyFalling && rb.linearVelocity.y < fallThreshold)
+            bool groundBelow = Physics.Raycast(groundCheck.position, Vector3.down, rayDistance, groundLayer);
+            if (!isActuallyFalling && !groundBelow)
             {
                 isActuallyFalling = true;
                 fallStartTime = Time.time;
                 StopActiveRoutine();
                 currentRoutine = StartCoroutine(Stretch());
+                Debug.Log("on trigger exit");
             }
         }
     }
@@ -145,11 +166,12 @@ public class CubeAnimation : MonoBehaviour
                 lastSquashTime = Time.time;
                 StopActiveRoutine();
                 currentRoutine = StartCoroutine(Squash());
-           //     Debug.Log(">>> TOCÓ SUELO");
+                Debug.Log("on trigger enter");
             }
         }
     }
     
+    //se llama en CubeRotation
     public void IgnoreStretchAndSquash(float duration)
     {
         StartCoroutine(IgnoreTemporarily(duration));
@@ -163,33 +185,30 @@ public class CubeAnimation : MonoBehaviour
         yield return new WaitForSeconds(duration);
         canStretchAndSquash = true;
     }
-
+  
     // Entering portal and Teleport / cube deformation
 
     public void EnterPortalAnim()
     {
         canStretchAndSquash = false;
-        Vector3 originalScale = _cube.transform.localScale;
-        if (this != null)
-        {
-            StartCoroutine(ScaleObject(_cube, Vector3.zero, 0.7f));
-        }
+        StartCoroutine(ScaleObject(_cube, Vector3.zero, 0.7f));
+        Debug.Log("EnterPortalAnim");
     }
 
     IEnumerator ScaleObject(GameObject obj, Vector3 targetScale, float duration)
     {
         float t = 0f;
         Vector3 startScale = obj.transform.localScale;
-
+        StopActiveRoutine();
         while (t < duration)
         {
-            StopCoroutine(Stretch());
             t += Time.deltaTime;
             float normalized = t / duration;
             obj.transform.localScale = Vector3.Lerp(startScale, targetScale, normalized);
             yield return null;
         }
     }
+
     public void ExitPortalAnim()
     {
         transform.localScale = Vector3.zero;

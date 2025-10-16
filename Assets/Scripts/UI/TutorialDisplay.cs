@@ -22,11 +22,11 @@ public class TutorialDisplay : MonoBehaviour
     [SerializeField] GameObject _zoomL2;
     [SerializeField] GameObject _zoomR2;
 
-    private bool _didClick = false;
+ /*   private bool _didClick = false;
     private bool _didMove = false;
-    private bool _didZoom = false;
+    private bool _didZoom = false;*/
     private bool _didTrans = false;
-    private bool _canDetectMovement = false;
+ //   private bool _canDetectMovement = false;
 
 
     private Vector2 _mouseDelta;
@@ -230,11 +230,11 @@ public class TutorialDisplay : MonoBehaviour
               }*/
         }
 
-    IEnumerator EnableMovementDetection()
+  /*  IEnumerator EnableMovementDetection()
     {
         yield return new WaitForSeconds(1.5f);
         _canDetectMovement = true;
-    }
+    }*/
 
 }
 

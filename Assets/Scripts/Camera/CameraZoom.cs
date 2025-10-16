@@ -18,7 +18,7 @@ public class CameraZoom : MonoBehaviour
     private void Awake()
     {
         _currentZoom = _cinemachineCamera.Lens.OrthographicSize;
-        _input = FindObjectOfType<PlayerInputReader>();
+        _input = FindFirstObjectByType<PlayerInputReader>();
     }
 
     private void Start()

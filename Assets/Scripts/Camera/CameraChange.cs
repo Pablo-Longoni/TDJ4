@@ -42,7 +42,7 @@ public class CameraChange : MonoBehaviour
 
     private void Awake()
     {
-        _input = FindObjectOfType<PlayerInputReader>();
+        _input = FindFirstObjectByType<PlayerInputReader>();
         _cubeRotation = FindObjectsByType<CubeRotation>(FindObjectsSortMode.None);
     }
 

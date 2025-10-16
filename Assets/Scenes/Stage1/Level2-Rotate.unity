@@ -180,6 +180,18 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5066860337032717434, guid: b7ebc48ed9b54fe4284c816df36b24ed, type: 3}
+      propertyPath: cam
+      value: 
+      objectReference: {fileID: 1743133559}
+    - target: {fileID: 5066860337032717434, guid: b7ebc48ed9b54fe4284c816df36b24ed, type: 3}
+      propertyPath: crosshair
+      value: 
+      objectReference: {fileID: 2800000, guid: c4f08b195c67c7d488e82b4c65d33891, type: 3}
+    - target: {fileID: 5066860337032717434, guid: b7ebc48ed9b54fe4284c816df36b24ed, type: 3}
+      propertyPath: _pivotPoint
+      value: 
+      objectReference: {fileID: 865614082809462746, guid: 09ac8be195fe9284997b0e9566243a26, type: 3}
+    - target: {fileID: 5066860337032717434, guid: b7ebc48ed9b54fe4284c816df36b24ed, type: 3}
       propertyPath: _cameraChange
       value: 
       objectReference: {fileID: 1474532234}
@@ -396,7 +408,8 @@ MonoBehaviour:
   _rb: {fileID: 492641275}
   _limit: -30
   _collisions:
-  - {fileID: 0}
+  - {fileID: 2000629366}
+  - {fileID: 1041012686}
 --- !u!114 &492641274
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -601,7 +614,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 821946535816489002, guid: bcc8cf99111e29140848c5fa0ec8a56f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.00007
+      value: 0.00381
       objectReference: {fileID: 0}
     - target: {fileID: 821946535816489002, guid: bcc8cf99111e29140848c5fa0ec8a56f, type: 3}
       propertyPath: m_LocalPosition.y
@@ -5817,6 +5830,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!65 &1041012686 stripped
+BoxCollider:
+  m_CorrespondingSourceObject: {fileID: 4266216992931283569, guid: bcc8cf99111e29140848c5fa0ec8a56f, type: 3}
+  m_PrefabInstance: {fileID: 496234749}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1089742128
 GameObject:
   m_ObjectHideFlags: 0
@@ -7379,6 +7397,11 @@ MonoBehaviour:
   _zoomL2: {fileID: 0}
   _zoomR2: {fileID: 0}
   cameraTransform: {fileID: 961361888}
+--- !u!65 &2000629366 stripped
+BoxCollider:
+  m_CorrespondingSourceObject: {fileID: 6979264590170723809, guid: b7ebc48ed9b54fe4284c816df36b24ed, type: 3}
+  m_PrefabInstance: {fileID: 29403560}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2110972233
 GameObject:
   m_ObjectHideFlags: 0

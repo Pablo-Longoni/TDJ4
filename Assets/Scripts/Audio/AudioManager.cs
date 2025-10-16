@@ -48,11 +48,11 @@ public class AudioManager : MonoBehaviour
         if( musicSource == null ) musicSource.loop = false;
         StartCoroutine(PlayMusicLoop());
 
-        /*  _distortionFilter = musicSource.gameObject.AddComponent<AudioDistortionFilter>();
+          _distortionFilter = musicSource.gameObject.AddComponent<AudioDistortionFilter>();
           _distortionFilter.distortionLevel = 0;
 
           _lowPassFilter = musicSource.gameObject.AddComponent<AudioLowPassFilter>();
-          _lowPassFilter.enabled = false;*/
+          _lowPassFilter.enabled = false;
 
      /*   _isMusicMuted = PlayerPrefs.GetInt("isMusicMuted", 0) == 1;
         _isSfxMuted = PlayerPrefs.GetInt("isSfxMuted", 0) == 1;
@@ -75,10 +75,14 @@ public class AudioManager : MonoBehaviour
                 UnMuteAllVolume();
             }
         }*/
-      /*  if (Input.GetKeyUp(KeyCode.A))
+        if (Input.GetKeyUp(KeyCode.U))
         {
             RestoredMusic();
-        }*/
+        }
+        if (Input.GetKeyUp(KeyCode.Y))
+        {
+            DistoredMusic();
+        }
     }
     public void MusicSelector()
     {
@@ -210,24 +214,24 @@ public class AudioManager : MonoBehaviour
         PlayerPrefs.Save();
     }*/
 
- /*   public void DistoredMusic()
+    public void DistoredMusic()
     {
-        _lowPassFilter.enabled = true;
-        _distortionFilter.distortionLevel = .7f;
-        audioMixer.SetFloat("LowPassCutOff", 10000f);
+      /* _lowPassFilter.enabled = true;
+       _distortionFilter.distortionLevel = .1f;
+        audioMixer.SetFloat("LowPassCutOff", 22000);
 
-  
-        musicSource.pitch = 0.75f;
-        Debug.Log("Music distored");
+        
+        musicSource.pitch = 0.95f;
+        Debug.Log("Music distored");*/
     }
 
     public void RestoredMusic()
     {
-        _distortionFilter.distortionLevel = 0;
+      /*  _distortionFilter.distortionLevel = 0;
         _lowPassFilter.enabled = false;
         audioMixer.SetFloat("LowPassCutOff", 22000f); 
         musicSource.pitch = 1f;
-        Debug.Log("Music restored");
-    }*/
+        Debug.Log("Music restored");*/
+    }
 
 }
