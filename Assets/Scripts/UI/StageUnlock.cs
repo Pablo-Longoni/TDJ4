@@ -22,6 +22,7 @@ public class StageUnlock : MonoBehaviour
 
     [Header("Botones")]
     [SerializeField] private GameObject firstLevelButton;
+    [SerializeField] private GameObject backToMenuButton;
     [SerializeField] private Button menuPlayButton;
 
     [Header("Scripts")]
@@ -179,5 +180,19 @@ public class StageUnlock : MonoBehaviour
         Color finalColor = _cubeMaterial.color;
         finalColor.a = targetAlpha;
         _cubeMaterial.color = finalColor;
+    }
+
+    private GameObject GetFirstSelectableButton()
+    {
+        if (firstLevelButton != null)
+        {
+            Button button = firstLevelButton.GetComponent<Button>();
+            if (button != null && button.interactable)
+            {
+                return firstLevelButton;
+            }
+        }
+
+        return backToMenuButton;
     }
 }
