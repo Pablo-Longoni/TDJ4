@@ -572,7 +572,7 @@ Transform:
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
   m_LocalRotation: {x: 0.23911765, y: 0.3696438, z: -0.09904577, w: 0.89239913}
-  m_LocalPosition: {x: -133.71416, y: 124.28929, z: -142.61415}
+  m_LocalPosition: {x: -133.15166, y: 123.83001, z: -142.05165}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1111,7 +1111,7 @@ Transform:
   m_GameObject: {fileID: 914411321}
   serializedVersion: 2
   m_LocalRotation: {x: 0.23911765, y: 0.3696438, z: -0.09904577, w: 0.89239913}
-  m_LocalPosition: {x: -133.71416, y: 124.28929, z: -142.61415}
+  m_LocalPosition: {x: -133.15166, y: 123.83001, z: -142.05165}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1279,6 +1279,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e58d58d64ad3163498581dc1b1a5e9a7, type: 3}
+--- !u!65 &1324618558 stripped
+BoxCollider:
+  m_CorrespondingSourceObject: {fileID: 8538566114465637303, guid: e58d58d64ad3163498581dc1b1a5e9a7, type: 3}
+  m_PrefabInstance: {fileID: 1324618557}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1408734342
 GameObject:
   m_ObjectHideFlags: 0
@@ -2482,7 +2487,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 821946535816489002, guid: bcc8cf99111e29140848c5fa0ec8a56f, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 4.4799957
+      value: 11.3
       objectReference: {fileID: 0}
     - target: {fileID: 821946535816489002, guid: bcc8cf99111e29140848c5fa0ec8a56f, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2513,9 +2518,25 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2666013105224025388, guid: bcc8cf99111e29140848c5fa0ec8a56f, type: 3}
+      propertyPath: _rb
+      value: 
+      objectReference: {fileID: 8592460671090511063}
+    - target: {fileID: 2666013105224025388, guid: bcc8cf99111e29140848c5fa0ec8a56f, type: 3}
       propertyPath: _player
       value: 
       objectReference: {fileID: 8592460671090511062}
+    - target: {fileID: 2666013105224025388, guid: bcc8cf99111e29140848c5fa0ec8a56f, type: 3}
+      propertyPath: _maxZoom
+      value: 45
+      objectReference: {fileID: 0}
+    - target: {fileID: 2666013105224025388, guid: bcc8cf99111e29140848c5fa0ec8a56f, type: 3}
+      propertyPath: _minZoom
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2666013105224025388, guid: bcc8cf99111e29140848c5fa0ec8a56f, type: 3}
+      propertyPath: moveSpeed
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 2666013105224025388, guid: bcc8cf99111e29140848c5fa0ec8a56f, type: 3}
       propertyPath: _cameraZoom
       value: 
@@ -2532,6 +2553,10 @@ PrefabInstance:
       propertyPath: _cubeAnimation
       value: 
       objectReference: {fileID: 8592460671090511064}
+    - target: {fileID: 2666013105224025388, guid: bcc8cf99111e29140848c5fa0ec8a56f, type: 3}
+      propertyPath: _cinemachineCamera
+      value: 
+      objectReference: {fileID: 914411322}
     - target: {fileID: 3469121118655493282, guid: bcc8cf99111e29140848c5fa0ec8a56f, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -2792,6 +2817,18 @@ PrefabInstance:
       propertyPath: _limit
       value: 50
       objectReference: {fileID: 0}
+    - target: {fileID: 2935157485534680045, guid: 0b5db73dc98c91042bb5435334e5833a, type: 3}
+      propertyPath: _collisions.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2935157485534680045, guid: 0b5db73dc98c91042bb5435334e5833a, type: 3}
+      propertyPath: '_collisions.Array.data[0]'
+      value: 
+      objectReference: {fileID: 1324618558}
+    - target: {fileID: 2935157485534680045, guid: 0b5db73dc98c91042bb5435334e5833a, type: 3}
+      propertyPath: '_collisions.Array.data[1]'
+      value: 
+      objectReference: {fileID: 1324618558}
     - target: {fileID: 3037073062917153181, guid: 0b5db73dc98c91042bb5435334e5833a, type: 3}
       propertyPath: _speed
       value: 13

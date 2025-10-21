@@ -1,6 +1,5 @@
-using System.Collections;
+
 using Unity.Cinemachine;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class CameraZoom : MonoBehaviour
@@ -24,7 +23,7 @@ public class CameraZoom : MonoBehaviour
     private void Start()
     {
         _zoomSpeed = PlayerPrefs.GetFloat("ZoomSpeed", 160);
-        Debug.Log("Zoom: "+  _zoomSpeed);
+      //  Debug.Log("Zoom: "+  _zoomSpeed);
     }
 
     void Update()

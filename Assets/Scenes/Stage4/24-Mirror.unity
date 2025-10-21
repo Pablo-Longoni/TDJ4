@@ -264,11 +264,11 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 1
-  far clip plane: 500
+  near clip plane: 0.3
+  far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 15
+  orthographic size: 35
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -308,7 +308,7 @@ MonoBehaviour:
     DefaultMode: 2
   DefaultBlend:
     Style: 1
-    Time: 1
+    Time: 4
     CustomCurve:
       serializedVersion: 2
       m_Curve:
@@ -394,8 +394,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 196407022}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.23911765, y: 0.3696438, z: -0.09904577, w: 0.89239913}
-  m_LocalPosition: {x: -21.433033, y: 41.29, z: -21.433033}
+  m_LocalRotation: {x: 0, y: 0.99394566, z: -0.10987305, w: 0}
+  m_LocalPosition: {x: 0, y: 19.877853, z: 49.539238}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -434,7 +434,7 @@ Transform:
   m_GameObject: {fileID: 459557582}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 33.79, z: 0.000002980232}
+  m_LocalPosition: {x: 0, y: 33.789997, z: 0.000002980231}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -502,7 +502,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Priority:
     Enabled: 1
-    m_Value: 10
+    m_Value: 1
   OutputChannel: 1
   StandbyUpdate: 2
   m_StreamingVersion: 20241001
@@ -513,7 +513,7 @@ MonoBehaviour:
     CustomLookAtTarget: 0
   Lens:
     FieldOfView: 60
-    OrthographicSize: 20
+    OrthographicSize: 45.48751
     NearClipPlane: 1
     FarClipPlane: 1000
     Dutch: 0
@@ -797,6 +797,10 @@ PrefabInstance:
       propertyPath: _cameraChange
       value: 
       objectReference: {fileID: 1158862570}
+    - target: {fileID: 2935157485534680045, guid: 0b5db73dc98c91042bb5435334e5833a, type: 3}
+      propertyPath: _limit
+      value: -10
+      objectReference: {fileID: 0}
     - target: {fileID: 3037073062917153181, guid: 0b5db73dc98c91042bb5435334e5833a, type: 3}
       propertyPath: _speed
       value: 13
@@ -955,13 +959,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1006480958}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.106289305, y: 0.2517853, z: -0.02783293, w: 0.961526}
-  m_LocalPosition: {x: -10.622579, y: 12.408707, z: -37.62761}
+  m_LocalRotation: {x: 0, y: 0.99394566, z: -0.10987305, w: 0}
+  m_LocalPosition: {x: 0, y: 19.877853, z: 49.539238}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1158862569}
-  m_LocalEulerAnglesHint: {x: 12.616, y: 29.348, z: 0}
+  m_LocalEulerAnglesHint: {x: 12.616, y: 180, z: 0}
 --- !u!114 &1006480960
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -974,7 +978,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 886251e9a18ece04ea8e61686c173e1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CameraDistance: 40
+  CameraDistance: 50
   DeadZoneDepth: 10
   Composition:
     ScreenPosition: {x: 0, y: 0}
@@ -1007,18 +1011,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Priority:
     Enabled: 1
-    m_Value: 10
+    m_Value: 3
   OutputChannel: 1
   StandbyUpdate: 2
   m_StreamingVersion: 20241001
   m_LegacyPriority: 0
   Target:
-    TrackingTarget: {fileID: 2088465311}
+    TrackingTarget: {fileID: 863092229}
     LookAtTarget: {fileID: 0}
     CustomLookAtTarget: 0
   Lens:
     FieldOfView: 60
-    OrthographicSize: 15
+    OrthographicSize: 35
     NearClipPlane: 0.3
     FarClipPlane: 1000
     Dutch: 0
@@ -1195,8 +1199,8 @@ Transform:
   m_Children:
   - {fileID: 1332066477}
   - {fileID: 459557583}
-  - {fileID: 1848416806}
   - {fileID: 1006480959}
+  - {fileID: 1848416806}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1158862570
@@ -1270,7 +1274,7 @@ Transform:
   m_GameObject: {fileID: 1332066476}
   serializedVersion: 2
   m_LocalRotation: {x: 0.23911765, y: 0.3696438, z: -0.09904577, w: 0.89239913}
-  m_LocalPosition: {x: -21.433033, y: 41.29, z: -21.433033}
+  m_LocalPosition: {x: -27.556759, y: 46.290005, z: -27.556759}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1331,8 +1335,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   NoiseProfile: {fileID: 11400000, guid: 69ce8388f6785dd4c8c39915efece2f4, type: 2}
   PivotOffset: {x: 0, y: 0, z: 0}
-  AmplitudeGain: 1
-  FrequencyGain: 1
+  AmplitudeGain: 0
+  FrequencyGain: 0
   m_NoiseOffsets: {x: 0, y: 0, z: 0}
 --- !u!114 &1332066482
 MonoBehaviour:
@@ -1346,7 +1350,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 886251e9a18ece04ea8e61686c173e1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CameraDistance: 40
+  CameraDistance: 50
   DeadZoneDepth: 10
   Composition:
     ScreenPosition: {x: 0, y: 0}
@@ -1379,7 +1383,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Priority:
     Enabled: 1
-    m_Value: 20
+    m_Value: 2
   OutputChannel: 1
   StandbyUpdate: 2
   m_StreamingVersion: 20241001
@@ -1390,7 +1394,7 @@ MonoBehaviour:
     CustomLookAtTarget: 0
   Lens:
     FieldOfView: 60
-    OrthographicSize: 15
+    OrthographicSize: 35
     NearClipPlane: 1
     FarClipPlane: 500
     Dutch: 0
@@ -1474,11 +1478,20 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5066860337032717434, guid: b7ebc48ed9b54fe4284c816df36b24ed, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5066860337032717434, guid: b7ebc48ed9b54fe4284c816df36b24ed, type: 3}
+      propertyPath: _pivotPoint
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5066860337032717434, guid: b7ebc48ed9b54fe4284c816df36b24ed, type: 3}
       propertyPath: _cameraChange
       value: 
       objectReference: {fileID: 1158862570}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 2922356206860524413, guid: b7ebc48ed9b54fe4284c816df36b24ed, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b7ebc48ed9b54fe4284c816df36b24ed, type: 3}
@@ -1488,7 +1501,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 1537906232}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8fce5eba5bc2ab44daa042a9b1b45df0, type: 3}
   m_Name: 
@@ -2522,9 +2535,25 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2666013105224025388, guid: bcc8cf99111e29140848c5fa0ec8a56f, type: 3}
+      propertyPath: _rb
+      value: 
+      objectReference: {fileID: 863092233}
+    - target: {fileID: 2666013105224025388, guid: bcc8cf99111e29140848c5fa0ec8a56f, type: 3}
       propertyPath: _player
       value: 
       objectReference: {fileID: 863092232}
+    - target: {fileID: 2666013105224025388, guid: bcc8cf99111e29140848c5fa0ec8a56f, type: 3}
+      propertyPath: _maxZoom
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 2666013105224025388, guid: bcc8cf99111e29140848c5fa0ec8a56f, type: 3}
+      propertyPath: _minZoom
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2666013105224025388, guid: bcc8cf99111e29140848c5fa0ec8a56f, type: 3}
+      propertyPath: moveSpeed
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 2666013105224025388, guid: bcc8cf99111e29140848c5fa0ec8a56f, type: 3}
       propertyPath: _cameraZoom
       value: 
@@ -2541,6 +2570,10 @@ PrefabInstance:
       propertyPath: _cubeAnimation
       value: 
       objectReference: {fileID: 1663208019}
+    - target: {fileID: 2666013105224025388, guid: bcc8cf99111e29140848c5fa0ec8a56f, type: 3}
+      propertyPath: _cinemachineCamera
+      value: 
+      objectReference: {fileID: 1332066483}
     - target: {fileID: 3469121118655493282, guid: bcc8cf99111e29140848c5fa0ec8a56f, type: 3}
       propertyPath: m_Layer
       value: 10
@@ -2642,7 +2675,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _portal: {fileID: 2088465312}
-  _particles: {fileID: 0}
 --- !u!54 &1404707273868002955
 Rigidbody:
   m_ObjectHideFlags: 0

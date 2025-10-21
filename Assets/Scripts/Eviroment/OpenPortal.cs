@@ -5,7 +5,7 @@ public class OpenPortal : MonoBehaviour
 {
     [SerializeField] public GameObject _portal;
     private int _objectsInside = 0;
-    [SerializeField] private ParticleSystem _particles;
+ //   [SerializeField] private ParticleSystem _particles;
 
     Vector3 _position;
 

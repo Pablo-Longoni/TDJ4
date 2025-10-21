@@ -1,6 +1,7 @@
 using Unity.Cinemachine;
 using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 //using Unity.VisualScripting;
 //using static UnityEditor.Experimental.GraphView.GraphView;
 public class TrailerAnim : MonoBehaviour
@@ -26,6 +27,18 @@ public class TrailerAnim : MonoBehaviour
   //  [SerializeField] private Material _opaqueMaterial;
     [SerializeField] private Canvas _canvas;
 
+    [SerializeField] private Material _skybox;
+
+    public Transform obj1;
+    public Transform obj2;
+    public Transform obj3;
+    public Transform obj4;
+
+    public Vector3 targetRot1 = new Vector3(0, 0, 0);
+    public Vector3 targetRot2 = new Vector3(0, 0, 0);
+    public Vector3 targetRot3 = new Vector3(0, 0, 0);
+    public Vector3 targetRot4 = new Vector3(0, 0, -0);
+
     private void Start()
     {
         timerFigure = 3f;
@@ -36,6 +49,11 @@ public class TrailerAnim : MonoBehaviour
         {
             isPlaying = true;
             StartCoroutine(PlayCinematic());
+        }
+
+        if(Input.GetKeyDown(KeyCode.R))
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
     }
 
@@ -60,49 +78,121 @@ public class TrailerAnim : MonoBehaviour
             yield return null;
         }
 
-    /*    MeshRenderer renderer = _cubeFinal.gameObject.GetComponent<MeshRenderer>();
-        renderer.material = _opaqueMaterial;*/
+        yield return new WaitForSeconds(.5f);
 
-        SwithCamera();
-
-        yield return new WaitForSeconds(3.5f);
-
-        // Rotar cubo en eje Y
         _player.transform.SetParent(_cubeFinal.transform);
-        _canvas.gameObject.SetActive(true);
-        yield return StartCoroutine(RotateCube(_cubeFinal, Vector3.left, 90f, 1.5f));
 
-        // Esperar 1 segundo
-        yield return new WaitForSeconds(3f);
-
-        // Rotar cubo en eje X
-     //   yield return StartCoroutine(RotateCube(_cubeFinal, Vector3.left, 90f, 2f));
+        yield return StartCoroutine(RotateTitle());
         Debug.Log("Cinemática finalizada");
+        isPlaying = false;
     }
 
-    private void SwithCamera()
+    private IEnumerator MoveUp(Transform cubeFinal)
     {
-        _camera.Priority = 1;
-        _cenitalCamera.Priority = 2;
-    }
-
-    private IEnumerator RotateCube(Transform target, Vector3 axis, float angle, float duration)
-    {
-        Quaternion startRotation = target.rotation;
-        Quaternion endRotation = startRotation * Quaternion.AngleAxis(angle, axis);
-
-        float elapsed = 0f;
-        while (elapsed < duration)
+        Vector3 _startPosition = cubeFinal.position;
+        Vector3 _finalPosition = new Vector3(-40.14f, 4.19f, 0);
+        float duration = 1;
+        float t = 0f;
+        while (t < duration)
         {
-            elapsed += Time.deltaTime;
-            float t = elapsed / duration;
-            target.rotation = Quaternion.Slerp(startRotation, endRotation, t);
+            t += Time.deltaTime;
+            float normalized = t / duration;
+
+            cubeFinal.position = Vector3.Lerp(_startPosition, _finalPosition, normalized);
+            yield return null;
+        }
+        cubeFinal.position = _finalPosition;
+    }
+
+    /*   private void SwithCamera()
+       {
+           _camera.Priority = 1;
+           _cenitalCamera.Priority = 2;
+       }
+
+       private IEnumerator RotateCube(Transform target, Vector3 axis, float angle, float duration)
+       {
+           Quaternion startRotation = target.rotation;
+           Quaternion endRotation = startRotation * Quaternion.AngleAxis(angle, axis);
+
+           float elapsed = 0f;
+           while (elapsed < duration)
+           {
+               elapsed += Time.deltaTime;
+               float t = elapsed / duration;
+               target.rotation = Quaternion.Slerp(startRotation, endRotation, t);
+               yield return null;
+           }
+
+           target.rotation = endRotation;
+       }*/
+
+    private IEnumerator RotateTitle()
+    {
+        StartCoroutine(MoveUp(_cubeFinal));
+        // Rotaciones iniciales locales
+        Quaternion start1 = obj1.localRotation;
+        Quaternion start2 = obj2.localRotation;
+        Quaternion start3 = obj3.localRotation;
+        Quaternion start4 = obj4.localRotation;
+
+        // Rotaciones finales locales (estas las ponés vos en el inspector)
+        Quaternion end1 = Quaternion.Euler(targetRot1);
+        Quaternion end2 = Quaternion.Euler(targetRot2);
+        Quaternion end3 = Quaternion.Euler(targetRot3);
+        Quaternion end4 = Quaternion.Euler(targetRot4);
+
+        // tiempos distintos para cada letra
+        float dur1 = 1f;
+        float dur2 = 1.5f;
+        float dur3 = 2f;
+        float dur4 = 2.5f;
+
+        float elapsed1 = 0f;
+        float elapsed2 = 0f;
+        float elapsed3 = 0f;
+        float elapsed4 = 0f;
+
+        // Ejecutamos todas a la vez hasta que terminen
+        while (elapsed1 < dur1 || elapsed2 < dur2 || elapsed3 < dur3 || elapsed4 < dur4)
+        {
+            if (elapsed1 < dur1)
+            {
+                elapsed1 += Time.deltaTime;
+                float t1 = Mathf.Clamp01(elapsed1 / dur1);
+                obj1.localRotation = Quaternion.Slerp(start1, end1, t1);
+            }
+
+            if (elapsed2 < dur2)
+            {
+                elapsed2 += Time.deltaTime;
+                float t2 = Mathf.Clamp01(elapsed2 / dur2);
+                obj2.localRotation = Quaternion.Slerp(start2, end2, t2);
+            }
+
+            if (elapsed3 < dur3)
+            {
+                elapsed3 += Time.deltaTime;
+                float t3 = Mathf.Clamp01(elapsed3 / dur3);
+                obj3.localRotation = Quaternion.Slerp(start3, end3, t3);
+            }
+
+            if (elapsed4 < dur4)
+            {
+                elapsed4 += Time.deltaTime;
+                float t4 = Mathf.Clamp01(elapsed4 / dur4);
+                obj4.localRotation = Quaternion.Slerp(start4, end4, t4);
+            }
+
             yield return null;
         }
 
-        target.rotation = endRotation;
+        // aseguramos que lleguen exacto
+        obj1.localRotation = end1;
+        obj2.localRotation = end2;
+        obj3.localRotation = end3;
+        obj4.localRotation = end4;
     }
-
     private void ChangeFigures()
     {
         // Desactivar todos

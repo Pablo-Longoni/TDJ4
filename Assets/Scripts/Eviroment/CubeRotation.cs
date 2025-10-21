@@ -180,8 +180,9 @@ public class CubeRotation : MonoBehaviour
 
     private void ShowPivotPoint()
     {
-        _pivotPoint = Instantiate(_pivotPoint, transform.position, Quaternion.identity);
         _pivotPoint.SetActive(true);
+     /*   _pivotPoint.transform.SetParent(transform, false);
+        _pivotPoint.transform.localScale = Vector3.one;*/
         Debug.Log("Se instancio el pivot point");
     }
 

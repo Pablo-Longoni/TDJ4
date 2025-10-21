@@ -821,6 +821,7 @@ MonoBehaviour:
   _rotationTurn: 180
   _canRotate: 1
   _rotateCooldown: 2
+  _pivotPoint: {fileID: 0}
   _audioManager: {fileID: 0}
   _isInCooldown: 0
   _cameraChange: {fileID: 1158862570}
@@ -2302,6 +2303,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2666013105224025388, guid: bcc8cf99111e29140848c5fa0ec8a56f, type: 3}
       propertyPath: _minZoom
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2666013105224025388, guid: bcc8cf99111e29140848c5fa0ec8a56f, type: 3}
+      propertyPath: moveSpeed
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2666013105224025388, guid: bcc8cf99111e29140848c5fa0ec8a56f, type: 3}
@@ -5664,7 +5669,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _portal: {fileID: 0}
-  _particles: {fileID: 0}
 --- !u!212 &7782806543109265954
 SpriteRenderer:
   m_ObjectHideFlags: 0
