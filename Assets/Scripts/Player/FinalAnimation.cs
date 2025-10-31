@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections;
 using Unity.Cinemachine;
 
-using UnityEngine.SceneManagement; 
+using UnityEngine.SceneManagement;
 public class FinalAnimation : MonoBehaviour
 {
     //player
@@ -15,6 +15,9 @@ public class FinalAnimation : MonoBehaviour
     [SerializeField] private float _growDuration = 5f;
     [SerializeField] private float _targetScale = 50f;
 
+    [SerializeField] private GameObject _playerFinal;
+    [SerializeField] private Transform _playerFinalTransform ;
+    [SerializeField] private GameObject _playerBase;
     //material
     [SerializeField] private Renderer _playerRenderer;
     [SerializeField] private Material _targetMaterial;
@@ -42,9 +45,13 @@ public class FinalAnimation : MonoBehaviour
     [SerializeField] private GameObject _figure;
     [SerializeField] private GameObject[] _allFigures;
     [SerializeField] private Vector3 _finalPosition;
+
+    // AUDIO
+    private AudioManager _audioManager;
     private void Start()
     {
         _cameraBrain = _mainCamera.GetComponent<CinemachineBrain>();
+        _audioManager = FindFirstObjectByType<AudioManager>();
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -57,6 +64,7 @@ public class FinalAnimation : MonoBehaviour
 
     private IEnumerator FinalAnimationSequence()
     {
+        _audioManager.DistoredMusic();
         _camera.Target.TrackingTarget = null;
         _cameraRotation.enabled = false;
         _cameraZoom.enabled = false;
@@ -66,7 +74,7 @@ public class FinalAnimation : MonoBehaviour
         _input2.enabled = false;
         yield return LevitatePlayer();
         yield return ChangeColor();
-      //  yield return CameraRotationAndZoomOut();
+        //  yield return CameraRotationAndZoomOut();
     }
 
     private IEnumerator LevitatePlayer()
@@ -81,7 +89,7 @@ public class FinalAnimation : MonoBehaviour
         Instantiate(_particleRipple, _playerTransform.position, Quaternion.identity);
 
         // pequeño retardo dramático
-        yield return new WaitForSecondsRealtime(1f);
+        yield return new WaitForSecondsRealtime(3f);
     }
 
     private IEnumerator Blinking()
@@ -115,31 +123,31 @@ public class FinalAnimation : MonoBehaviour
         // StartCoroutine(Blinking());
         HideAllFigures();
         _cameraShake.Shake(3f, 0.3f, 2f);
-
+        ChangePlayer();
         _gameplayCanvas.gameObject.SetActive(false);
         _title.SetActive(false);
 
-        _finalPosition = new Vector3(1000,1000,1000);
+        _finalPosition = new Vector3(1000, 1000, 1000);
         _figure.transform.position = _finalPosition;
 
-        Vector3 originalScale = _playerTransform.localScale;
+        Vector3 originalScale = _playerFinalTransform.localScale;
         Vector3 finalScale = Vector3.one * _targetScale;
 
         float originalOrthoSize = _camera.Lens.OrthographicSize;
         float targetOrthoSize = originalOrthoSize * 2.5f;
 
-        _player.transform.localRotation = Quaternion.Euler(0, 72, 0);
+       // _playerFinalTransform.transform.localRotation = Quaternion.Euler(0, 72, 0);
         StartCoroutine(CameraRotationAndZoomOut());
         float elapsed = 0f;
         while (elapsed < _growDuration)
         {
             elapsed += Time.deltaTime;
             float t = elapsed / _growDuration;
-            _playerTransform.localScale = Vector3.Lerp(originalScale, finalScale, t);
+            _playerFinalTransform.localScale = Vector3.Lerp(originalScale, finalScale, t);
             _camera.Lens.OrthographicSize = Mathf.Lerp(originalOrthoSize, targetOrthoSize, t);
             yield return null;
         }
-        _playerTransform.localScale = finalScale;
+        _playerFinalTransform.localScale = finalScale;
         _camera.Lens.OrthographicSize = targetOrthoSize;
         isBlinking = false;
         Time.timeScale = 1f;
@@ -150,28 +158,28 @@ public class FinalAnimation : MonoBehaviour
     private IEnumerator ChangeColor()
     {
         StartCoroutine(ChangePlayerSize());
+        /*  Material startMat = _playerRenderer.material;
+          Material tempMat = new Material(startMat); // copia temporal
+          _playerRenderer.material = tempMat;
 
-        Material startMat = _playerRenderer.material;
-        Material tempMat = new Material(startMat); // copia temporal
-        _playerRenderer.material = tempMat;
+          float elapsed = 0f;
 
-        float elapsed = 0f;
+          // Nos aseguramos que ambos materiales tengan el mismo shader con _Color o _BaseColor
+          Color startColor = startMat.color;
+          Color endColor = _targetMaterial.color;
 
-        // Nos aseguramos que ambos materiales tengan el mismo shader con _Color o _BaseColor
-        Color startColor = startMat.color;
-        Color endColor = _targetMaterial.color;
+          while (elapsed < _blendDuration)
+          {
+              elapsed += Time.deltaTime;
+              float t = elapsed / _blendDuration;
 
-        while (elapsed < _blendDuration)
-        {
-            elapsed += Time.deltaTime;
-            float t = elapsed / _blendDuration;
+              tempMat.color = Color.Lerp(startColor, endColor, t);
 
-            tempMat.color = Color.Lerp(startColor, endColor, t);
+              yield return null;
+          }
 
-            yield return null;
-        }
-
-        _playerRenderer.material = _targetMaterial;
+          _playerRenderer.material = _targetMaterial;*/
+        yield return null;
     }
 
     private void HideAllFigures()
@@ -183,7 +191,7 @@ public class FinalAnimation : MonoBehaviour
     }
     private IEnumerator CameraRotationAndZoomOut()
     {
-        _cameraParent.transform.localRotation = Quaternion.Euler(0,0,0);
+        _cameraParent.transform.localRotation = Quaternion.Euler(0, 0, 0);
         _cameraBrain.DefaultBlend.Time = 6;
         _menuCanvas.gameObject.SetActive(true);
         _camera.Priority = 0;
@@ -191,11 +199,11 @@ public class FinalAnimation : MonoBehaviour
 
         Camera cam = Camera.main;
 
-        // Cambiar gradualmente a color sólido
+        // Cambiar  a color sólido
         cam.clearFlags = CameraClearFlags.SolidColor;
 
         Color startColor = cam.backgroundColor;
-        Color endColor = Color.white; // o el que quieras
+        Color endColor = Color.white; 
 
         float duration = 2f;
         float elapsed = 0f;
@@ -208,12 +216,21 @@ public class FinalAnimation : MonoBehaviour
         }
 
         cam.backgroundColor = endColor;
-
-        _player.transform.localRotation = Quaternion.Euler(0, 72, 0);
+        _audioManager.RestoredMusic();
+        //  _player.transform.localRotation = Quaternion.Euler(0, 72, 0);
         // Mostrar el menú final
         Debug.Log("Canvas final mostrado");
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(6);
         SceneManager.LoadScene("Credits");
     }
 
+
+    private void ChangePlayer()
+    {
+        Vector3 pos = _playerBase.transform.position;
+        Quaternion rot = _playerBase.transform.rotation;
+
+        _playerBase.SetActive(false);
+        _playerFinal.transform.position = pos;
+    }
 }

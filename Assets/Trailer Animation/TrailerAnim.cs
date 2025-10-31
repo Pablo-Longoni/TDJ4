@@ -45,7 +45,7 @@ public class TrailerAnim : MonoBehaviour
     }
     void Update()
     {
-        if (Input.GetMouseButtonDown(0) && !isPlaying)
+        if (Input.GetMouseButtonDown(0) || (Input.GetKeyDown(KeyCode.Space)) && !isPlaying)
         {
             isPlaying = true;
             StartCoroutine(PlayCinematic());
@@ -144,9 +144,9 @@ public class TrailerAnim : MonoBehaviour
 
         // tiempos distintos para cada letra
         float dur1 = 1f;
-        float dur2 = 1.5f;
-        float dur3 = 2f;
-        float dur4 = 2.5f;
+        float dur2 = 1.4f;
+        float dur3 = 1.8f;
+        float dur4 = 2f;
 
         float elapsed1 = 0f;
         float elapsed2 = 0f;

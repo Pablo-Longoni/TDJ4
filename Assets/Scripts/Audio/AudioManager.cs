@@ -216,22 +216,35 @@ public class AudioManager : MonoBehaviour
 
     public void DistoredMusic()
     {
-      /* _lowPassFilter.enabled = true;
-       _distortionFilter.distortionLevel = .1f;
-        audioMixer.SetFloat("LowPassCutOff", 22000);
+        // Activar filtros
+        _lowPassFilter.enabled = true;
+        _lowPassFilter.cutoffFrequency = 800f; 
 
-        
-        musicSource.pitch = 0.95f;
-        Debug.Log("Music distored");*/
+        // Bajar el pitch hace que suene más lento y profundo
+     //   musicSource.pitch = Time.timeScale; // más bajo = más lento/grave
+
+        // Eco / Reverb
+        var reverb = musicSource.GetComponent<AudioReverbFilter>();
+        if (reverb == null)
+            reverb = musicSource.gameObject.AddComponent<AudioReverbFilter>();
+
+        reverb.enabled = true;
+        reverb.reverbPreset = AudioReverbPreset.Cave; // o Hallway, Cathedral, etc.
+
+        Debug.Log("Music distorted and slowed");
     }
 
     public void RestoredMusic()
     {
-      /*  _distortionFilter.distortionLevel = 0;
-        _lowPassFilter.enabled = false;
-        audioMixer.SetFloat("LowPassCutOff", 22000f); 
-        musicSource.pitch = 1f;
-        Debug.Log("Music restored");*/
+        _lowPassFilter.cutoffFrequency = 22000f;
+
+    //    musicSource.pitch = 1f;
+
+        var reverb = musicSource.GetComponent<AudioReverbFilter>();
+        if (reverb != null)
+            reverb.enabled = false;
+
+        Debug.Log("music restored to normal");
     }
 
 }

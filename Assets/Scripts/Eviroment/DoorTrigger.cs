@@ -64,7 +64,6 @@ public class DoorTrigger : MonoBehaviour
             //    StartCoroutine(MovePlayerToDoor(_target.transform.position));
             StartCoroutine(EnterPortalSequence());
            // AudioManager.Instance.soundSource.PlayOneShot(AudioManager.Instance._portal);
-       //     _audioManager.DistoredMusic();
             Debug.Log("Jugador entró en la puerta");
         }
     }
@@ -91,7 +90,7 @@ public class DoorTrigger : MonoBehaviour
         Instantiate(_particleEnterPortal, targetPosition + _offSet, _rotationParticle); 
         _cameraShake.Shake(2f, 2, .4f);
 
-        //_audioManager.soundSource.PlayOneShot(_audioManager._portal);
+        _audioManager.soundSource.PlayOneShot(_audioManager._portal);
         while (timeElapsed < 2f)
         {
             timeElapsed += Time.deltaTime * moveSpeed; 
@@ -135,7 +134,6 @@ public class DoorTrigger : MonoBehaviour
         Vector3 currentPos = _cinemachineCamera.transform.position;
         float currentSize = _cinemachineCamera.Lens.OrthographicSize;
         _changeScene.NextLevel();
-      //  _audioManager.RestoredMusic();
         float t = 0f;
         while (t < 1f)
         {
