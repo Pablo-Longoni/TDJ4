@@ -21,7 +21,7 @@ public class FinalAnimation : MonoBehaviour
     //material
     [SerializeField] private Renderer _playerRenderer;
     [SerializeField] private Material _targetMaterial;
-    [SerializeField] private float _blendDuration = 3f;
+ //   [SerializeField] private float _blendDuration = 3f;
 
     //camera
     [SerializeField] private CinemachineCamera _camera;
@@ -64,7 +64,7 @@ public class FinalAnimation : MonoBehaviour
 
     private IEnumerator FinalAnimationSequence()
     {
-        _audioManager.DistoredMusic();
+    //    _audioManager.DistoredMusic();
         _camera.Target.TrackingTarget = null;
         _cameraRotation.enabled = false;
         _cameraZoom.enabled = false;
@@ -216,7 +216,7 @@ public class FinalAnimation : MonoBehaviour
         }
 
         cam.backgroundColor = endColor;
-        _audioManager.RestoredMusic();
+     //   _audioManager.RestoredMusic();
         //  _player.transform.localRotation = Quaternion.Euler(0, 72, 0);
         // Mostrar el menú final
         Debug.Log("Canvas final mostrado");

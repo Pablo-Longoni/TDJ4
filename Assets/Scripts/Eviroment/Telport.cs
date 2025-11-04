@@ -30,13 +30,14 @@ public class Telport : MonoBehaviour
         else
         {
           //  _cameraShake.Shake(0.5f, 0.5f, 0.5f);
-          //  AudioManager.Instance.soundSource.PlayOneShot(AudioManager.Instance._portal);
+            AudioManager.Instance.soundSource.PlayOneShot(AudioManager.Instance._triggerTeleport);
             Debug.Log("soltaa el cubooo");
         }
     }
 
      private IEnumerator Teleport(Collider other, PlayerCooldown cooldown)
      {
+         AudioManager.Instance.soundSource.PlayOneShot(AudioManager.Instance._teleportPlayer);
          cooldown.canTeleport = false;
          other.transform.position = _destination.position;
          yield return new WaitForSeconds(cooldownTime);

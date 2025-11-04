@@ -1928,6 +1928,7 @@ MonoBehaviour:
   _isInCooldown: 0
   _cameraChange: {fileID: 1553909911}
   _didRotate: 0
+  isChildCube: 0
 --- !u!4 &995247393 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: c5dff5bdd606c464ab93b02fdc5cb6f8, type: 3}
@@ -3377,6 +3378,18 @@ PrefabInstance:
       propertyPath: _cameraChange
       value: 
       objectReference: {fileID: 1553909911}
+    - target: {fileID: 3403250844229953340, guid: 7015d7187534390498bf1f249367d4fd, type: 3}
+      propertyPath: m_Convex
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3403250844229953340, guid: 7015d7187534390498bf1f249367d4fd, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3403250844229953340, guid: 7015d7187534390498bf1f249367d4fd, type: 3}
+      propertyPath: m_ProvidesContacts
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8243546732918066666, guid: 7015d7187534390498bf1f249367d4fd, type: 3}
       propertyPath: m_Name
       value: 5

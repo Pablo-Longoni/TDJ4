@@ -555,6 +555,14 @@ PrefabInstance:
     m_TransformParent: {fileID: 48117505}
     m_Modifications:
     - target: {fileID: 1406719956087284479, guid: 443fa5ddd4002a546a56cec3934d36ee, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1406719956087284479, guid: 443fa5ddd4002a546a56cec3934d36ee, type: 3}
+      propertyPath: isChildCube
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1406719956087284479, guid: 443fa5ddd4002a546a56cec3934d36ee, type: 3}
       propertyPath: _cameraChange
       value: 
       objectReference: {fileID: 1158862570}
@@ -614,7 +622,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ls
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1406719956087284479, guid: 443fa5ddd4002a546a56cec3934d36ee, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -821,6 +830,7 @@ MonoBehaviour:
   _isInCooldown: 0
   _cameraChange: {fileID: 1158862570}
   _didRotate: 0
+  isChildCube: 0
 --- !u!64 &505706784
 MeshCollider:
   m_ObjectHideFlags: 0

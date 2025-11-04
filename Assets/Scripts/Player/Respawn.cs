@@ -15,7 +15,7 @@ public class Respawn : MonoBehaviour
     void Start()
     {
         _startPosition = transform.position;
-        Debug.Log("Posición inicial: " + _startPosition);
+      //  Debug.Log("Posición inicial: " + _startPosition);
 
         _changeScene = GameObject.FindGameObjectWithTag("GameController").GetComponent<ChangeScene>();
     }

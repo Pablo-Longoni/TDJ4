@@ -2013,9 +2013,21 @@ PrefabInstance:
       value: Lns
       objectReference: {fileID: 0}
     - target: {fileID: 997881035871607706, guid: 4b436a85db80e9e4792b2705322fd549, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 997881035871607706, guid: 4b436a85db80e9e4792b2705322fd549, type: 3}
+      propertyPath: _canRotate
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 997881035871607706, guid: 4b436a85db80e9e4792b2705322fd549, type: 3}
       propertyPath: _pivotPoint
       value: 
       objectReference: {fileID: 2121171383}
+    - target: {fileID: 997881035871607706, guid: 4b436a85db80e9e4792b2705322fd549, type: 3}
+      propertyPath: isChildCube
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 997881035871607706, guid: 4b436a85db80e9e4792b2705322fd549, type: 3}
       propertyPath: _cameraChange
       value: 
@@ -2076,7 +2088,8 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 997881035871607706, guid: 4b436a85db80e9e4792b2705322fd549, type: 3}
     m_RemovedGameObjects:
     - {fileID: 3431794057006165132, guid: 4b436a85db80e9e4792b2705322fd549, type: 3}
     m_AddedGameObjects:
