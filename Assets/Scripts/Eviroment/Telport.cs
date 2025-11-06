@@ -30,7 +30,6 @@ public class Telport : MonoBehaviour
         else
         {
           //  _cameraShake.Shake(0.5f, 0.5f, 0.5f);
-            AudioManager.Instance.soundSource.PlayOneShot(AudioManager.Instance._triggerTeleport);
             Debug.Log("soltaa el cubooo");
         }
     }

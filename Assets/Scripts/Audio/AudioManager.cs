@@ -24,12 +24,12 @@ public class AudioManager : MonoBehaviour
     public AudioClip _playerLand;
 
     [Header("Sound Teleport")]
-    public AudioClip _triggerTeleport;
+  //  public AudioClip _triggerTeleport;
     public AudioClip _teleportPlayer;
 
     [Header("Sound Portal and Pressed")]
     public AudioClip _portal;
-    public AudioClip _activatePortal;
+ //   public AudioClip _activatePortal;
     public AudioClip _pressedSound;
     public AudioClip _releasedSound;
 

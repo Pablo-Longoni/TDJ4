@@ -9432,7 +9432,6 @@ MonoBehaviour:
   - {fileID: 1846635245}
   - {fileID: 484948744}
   - {fileID: 1380209740}
-  - {fileID: 0}
   - {fileID: 6623516193581770076}
   _finalPosition: {x: 4000, y: 4000, z: 4000}
 --- !u!1 &1297553847
@@ -9652,7 +9651,7 @@ Transform:
   m_GameObject: {fileID: 1332066476}
   serializedVersion: 2
   m_LocalRotation: {x: 0.23911765, y: 0.3696438, z: -0.09904577, w: 0.89239913}
-  m_LocalPosition: {x: -23.367615, y: 176.90417, z: -526.82764}
+  m_LocalPosition: {x: -35.120056, y: 186.50002, z: -538.5801}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -9728,7 +9727,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 886251e9a18ece04ea8e61686c173e1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CameraDistance: 200
+  CameraDistance: 220
   DeadZoneDepth: 10
   Composition:
     ScreenPosition: {x: 0, y: 0}
@@ -15999,7 +15998,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2959133953709052858, guid: 63b1a23f26b85a44fa0482fc381abb67, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 35.692726
+      value: 35.5
       objectReference: {fileID: 0}
     - target: {fileID: 2959133953709052858, guid: 63b1a23f26b85a44fa0482fc381abb67, type: 3}
       propertyPath: m_LocalPosition.z
@@ -23166,6 +23165,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5636005676100745318, guid: 8536d7442e2058e4fb020a897e73dc59, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 6944f1581e854974eb4865a0671363d1, type: 2}
     - target: {fileID: 8336214623349492366, guid: 8536d7442e2058e4fb020a897e73dc59, type: 3}
       propertyPath: m_LocalPosition.x
       value: 55.5
