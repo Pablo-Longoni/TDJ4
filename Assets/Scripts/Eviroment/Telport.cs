@@ -57,7 +57,7 @@ public class Telport : MonoBehaviour
         _playerGrab.enabled = false;
         cooldown.canTeleport = false;
 
-        // 1. Mover al jugador hacia el centro del portal (posición del collider)
+        // 1. Mover al jugador hacia el centro del portal (posiciï¿½n del collider)
         Vector3 startPos = playerTransform.position;
         Vector3 targetPos = transform.position;
         float timeElapsed = 0f;
