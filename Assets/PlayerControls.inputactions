@@ -521,11 +521,11 @@
                 },
                 {
                     "name": "",
-                    "id": "4faf7dc9-b979-4210-aa8c-e808e1ef89f5",
+                    "id": "a85c486d-77e9-4daf-b7d7-3c0f42491447",
                     "path": "<Mouse>/leftButton",
                     "interactions": "",
                     "processors": "",
-                    "groups": ";Keyboard&Mouse",
+                    "groups": "",
                     "action": "Click",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -656,15 +656,6 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "MouseDelta",
-                    "type": "Value",
-                    "id": "2933f9bb-2236-40f1-a461-4abca24a53c9",
-                    "expectedControlType": "Vector2",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": true
-                },
-                {
                     "name": "CameraHelp",
                     "type": "Button",
                     "id": "d5cd95b2-ebef-4afe-a811-f2e0e134ebbe",
@@ -717,6 +708,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "PinchZoom",
+                    "type": "Value",
+                    "id": "dabd20e6-9ed2-4b24-b779-5b6911cfd8f4",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -739,28 +739,6 @@
                     "processors": "",
                     "groups": ";Gamepad;Joystick",
                     "action": "RotateCamera",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "3e1bea62-ec5c-4b8b-b870-1e072a17e1c5",
-                    "path": "<Mouse>/leftButton",
-                    "interactions": "Press,Hold",
-                    "processors": "",
-                    "groups": ";Keyboard&Mouse;Gamepad;Joystick",
-                    "action": "RotateCamera",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "84458bcf-5e9d-4b62-b58f-90535274b8d6",
-                    "path": "<Mouse>/delta",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";Keyboard&Mouse",
-                    "action": "MouseDelta",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -884,6 +862,39 @@
                     "action": "Look",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "Two Modifiers",
+                    "id": "ac4a9928-5aea-44db-b3e4-2e796ce0a441",
+                    "path": "TwoModifiers",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PinchZoom",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "modifier1",
+                    "id": "4cf6f77c-d298-4a89-bc8b-2498353e347c",
+                    "path": "<Touchscreen>/touch0/press",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PinchZoom",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "modifier2",
+                    "id": "fbf13072-9c19-4151-b4bf-f55b79649def",
+                    "path": "<Touchscreen>/touch1/press",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PinchZoom",
+                    "isComposite": false,
+                    "isPartOfComposite": true
                 }
             ]
         },

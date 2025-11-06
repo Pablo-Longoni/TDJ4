@@ -633,6 +633,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2639714344221954401, guid: 443fa5ddd4002a546a56cec3934d36ee, type: 3}
   m_PrefabInstance: {fileID: 294511455}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &302536651 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5092401219735567500, guid: 3f6850c954f7cb2439f14642eb136642, type: 3}
+  m_PrefabInstance: {fileID: 1571872218}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba0d0e7a039f526499c356a3c5cd6d3f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &314817725 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3416190913014580634, guid: 3f6850c954f7cb2439f14642eb136642, type: 3}
@@ -698,6 +709,9 @@ MonoBehaviour:
   _maxZoom: 90
   _minZoom: 5
   _zoomSpeed: 160
+  pinchZoomSpeed: 4
+  pinchSensitivity: 0.01
+  normalizeByScreen: 1
   _zoomSmoothness: 30
   _cinemachineCamera: {fileID: 459557586}
 --- !u!114 &459557585
@@ -1864,6 +1878,7 @@ MonoBehaviour:
   _rotationSpeed: 360
   _cameraChange: {fileID: 1158862570}
   inputReader: {fileID: 806211592}
+  cameraJoystick: {fileID: 302536651}
 --- !u!114 &1256251571 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4963676324087262742, guid: 3f6850c954f7cb2439f14642eb136642, type: 3}
@@ -1951,6 +1966,9 @@ MonoBehaviour:
   _maxZoom: 90
   _minZoom: 5
   _zoomSpeed: 160
+  pinchZoomSpeed: 4
+  pinchSensitivity: 0.01
+  normalizeByScreen: 1
   _zoomSmoothness: 30
   _cinemachineCamera: {fileID: 1332066483}
 --- !u!114 &1332066481
@@ -2106,6 +2124,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 652009114002287851, guid: 3f6850c954f7cb2439f14642eb136642, type: 3}
       propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1355813806718388729, guid: 3f6850c954f7cb2439f14642eb136642, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1838318323910319078, guid: 3f6850c954f7cb2439f14642eb136642, type: 3}

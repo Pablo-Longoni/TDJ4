@@ -529,6 +529,9 @@ MonoBehaviour:
   _maxZoom: 35
   _minZoom: 5
   _zoomSpeed: 160
+  pinchZoomSpeed: 4
+  pinchSensitivity: 0.01
+  normalizeByScreen: 1
   _zoomSmoothness: 30
   _cinemachineCamera: {fileID: 301011484}
 --- !u!114 &301011486
@@ -669,6 +672,9 @@ MonoBehaviour:
   _maxZoom: 35
   _minZoom: 5
   _zoomSpeed: 160
+  pinchZoomSpeed: 4
+  pinchSensitivity: 0.01
+  normalizeByScreen: 1
   _zoomSmoothness: 30
   _cinemachineCamera: {fileID: 307318987}
 --- !u!114 &307318990
@@ -1348,6 +1354,10 @@ PrefabInstance:
     - target: {fileID: 473390432743023334, guid: 3f6850c954f7cb2439f14642eb136642, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: UIfromPause, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 1355813806718388729, guid: 3f6850c954f7cb2439f14642eb136642, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1561807083386827117, guid: 3f6850c954f7cb2439f14642eb136642, type: 3}
       propertyPath: m_Navigation.m_Mode
@@ -2649,6 +2659,7 @@ MonoBehaviour:
   _rotationSpeed: 360
   _cameraChange: {fileID: 1553909911}
   inputReader: {fileID: 431921321}
+  cameraJoystick: {fileID: 2092099634}
 --- !u!4 &1553909913
 Transform:
   m_ObjectHideFlags: 0
@@ -3024,6 +3035,17 @@ MonoBehaviour:
   _dustPrefab: {fileID: 7512446778391803044, guid: 0bd8793734ebff845be3eab2b81567e6, type: 3}
   _miniDustPrefab: {fileID: 5255338958118048641, guid: a8b18898eb9dd6744bd71c1f2279215a, type: 3}
   _cube: {fileID: 1962134559}
+--- !u!114 &2092099634 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5092401219735567500, guid: 3f6850c954f7cb2439f14642eb136642, type: 3}
+  m_PrefabInstance: {fileID: 809490914}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba0d0e7a039f526499c356a3c5cd6d3f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2121171381
 PrefabInstance:
   m_ObjectHideFlags: 0

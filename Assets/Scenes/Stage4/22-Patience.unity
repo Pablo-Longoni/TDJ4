@@ -708,6 +708,9 @@ MonoBehaviour:
   _maxZoom: 90
   _minZoom: 5
   _zoomSpeed: 160
+  pinchZoomSpeed: 4
+  pinchSensitivity: 0.01
+  normalizeByScreen: 1
   _zoomSmoothness: 30
   _cinemachineCamera: {fileID: 459557586}
 --- !u!114 &459557585
@@ -2097,6 +2100,7 @@ MonoBehaviour:
   _rotationSpeed: 360
   _cameraChange: {fileID: 1158862570}
   inputReader: {fileID: 806211592}
+  cameraJoystick: {fileID: 2142004001}
 --- !u!114 &1255929452 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2444540309361065422, guid: 3f6850c954f7cb2439f14642eb136642, type: 3}
@@ -2289,6 +2293,9 @@ MonoBehaviour:
   _maxZoom: 90
   _minZoom: 5
   _zoomSpeed: 160
+  pinchZoomSpeed: 4
+  pinchSensitivity: 0.01
+  normalizeByScreen: 1
   _zoomSmoothness: 30
   _cinemachineCamera: {fileID: 1332066483}
 --- !u!114 &1332066481
@@ -4385,6 +4392,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2142004001 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5092401219735567500, guid: 3f6850c954f7cb2439f14642eb136642, type: 3}
+  m_PrefabInstance: {fileID: 1571872218}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba0d0e7a039f526499c356a3c5cd6d3f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

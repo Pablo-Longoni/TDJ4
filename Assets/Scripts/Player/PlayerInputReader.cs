@@ -11,7 +11,7 @@ public class PlayerInputReader : MonoBehaviour
 
     public Vector2 LookInput { get; private set; }
     public bool RotateCameraPressed { get; private set; }
-    public Vector2 MouseDelta { get; private set; }
+    //public Vector2 MouseDelta { get; private set; }
     public bool CameraHelpPressed { get; private set; }
     public bool CameraFlipTriggered { get; private set; }
 
@@ -21,6 +21,20 @@ public class PlayerInputReader : MonoBehaviour
     public Vector2 NavigateInput { get; private set; }
 
     public bool RestartKeyPressed { get; private set; }
+    public bool IsPinching
+    {
+        get
+        {
+            if (ChangeScene.IsPaused) return false;
+            return Touchscreen.current != null &&
+                   Touchscreen.current.touches.Count >= 2 &&
+                   Touchscreen.current.touches[0].isInProgress &&
+                   Touchscreen.current.touches[1].isInProgress;
+        }
+    }
+
+    public Vector2 Touch0Position => Touchscreen.current?.touches[0].position.ReadValue() ?? Vector2.zero;
+    public Vector2 Touch1Position => Touchscreen.current?.touches[1].position.ReadValue() ?? Vector2.zero;
 
     private float _restartHoldTime = 3f;
     private float _buttonBPressStart = -1f;
@@ -51,13 +65,13 @@ public class PlayerInputReader : MonoBehaviour
         };
         _controls.Camera.RotateCamera.canceled += _ => RotateCameraPressed = false;
 
-        _controls.Camera.MouseDelta.performed += ctx =>
+        /*_controls.Camera.MouseDelta.performed += ctx =>
         {
             if (ChangeScene.IsPaused) return;
             MouseDelta = ctx.ReadValue<Vector2>();
         };
         _controls.Camera.MouseDelta.canceled += _ => MouseDelta = Vector2.zero;
-
+*/
         _controls.Camera.CameraHelp.performed += _ =>
         {
             if (ChangeScene.IsPaused) return;

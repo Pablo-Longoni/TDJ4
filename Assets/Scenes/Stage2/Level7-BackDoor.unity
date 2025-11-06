@@ -175,6 +175,7 @@ MonoBehaviour:
   _isInCooldown: 0
   _cameraChange: {fileID: 1575529871}
   _didRotate: 0
+  isChildCube: 0
 --- !u!65 &258407131
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1230,6 +1231,7 @@ MonoBehaviour:
   _isInCooldown: 0
   _cameraChange: {fileID: 0}
   _didRotate: 0
+  isChildCube: 0
 --- !u!1 &745201366
 GameObject:
   m_ObjectHideFlags: 0
@@ -1488,6 +1490,7 @@ MonoBehaviour:
   _isInCooldown: 0
   _cameraChange: {fileID: 1575529871}
   _didRotate: 0
+  isChildCube: 0
 --- !u!64 &799563674
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -1730,6 +1733,7 @@ MonoBehaviour:
   _isInCooldown: 0
   _cameraChange: {fileID: 1575529871}
   _didRotate: 0
+  isChildCube: 0
 --- !u!64 &1025398931
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -1807,6 +1811,10 @@ PrefabInstance:
     - target: {fileID: 473390432743023334, guid: 3f6850c954f7cb2439f14642eb136642, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: UIfromPause, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 1355813806718388729, guid: 3f6850c954f7cb2439f14642eb136642, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1561807083386827117, guid: 3f6850c954f7cb2439f14642eb136642, type: 3}
       propertyPath: m_Navigation.m_Mode
@@ -2826,6 +2834,7 @@ MonoBehaviour:
   _isInCooldown: 0
   _cameraChange: {fileID: 1575529871}
   _didRotate: 0
+  isChildCube: 0
 --- !u!65 &1475460459
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2931,6 +2940,7 @@ MonoBehaviour:
   _rotationSpeed: 360
   _cameraChange: {fileID: 1575529871}
   inputReader: {fileID: 1341035792}
+  cameraJoystick: {fileID: 1730491666}
 --- !u!4 &1575529873
 Transform:
   m_ObjectHideFlags: 0
@@ -3235,6 +3245,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!114 &1730491666 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5092401219735567500, guid: 3f6850c954f7cb2439f14642eb136642, type: 3}
+  m_PrefabInstance: {fileID: 1171993820}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba0d0e7a039f526499c356a3c5cd6d3f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1829064821
 GameObject:
   m_ObjectHideFlags: 0
@@ -3312,6 +3333,9 @@ MonoBehaviour:
   _maxZoom: 35
   _minZoom: 5
   _zoomSpeed: 160
+  pinchZoomSpeed: 4
+  pinchSensitivity: 0.01
+  normalizeByScreen: 1
   _zoomSmoothness: 30
   _cinemachineCamera: {fileID: 1829064822}
 --- !u!114 &1829064824
@@ -3467,6 +3491,9 @@ MonoBehaviour:
   _maxZoom: 40
   _minZoom: 5
   _zoomSpeed: 160
+  pinchZoomSpeed: 4
+  pinchSensitivity: 0.01
+  normalizeByScreen: 1
   _zoomSmoothness: 30
   _cinemachineCamera: {fileID: 2125992658}
 --- !u!114 &2125992661

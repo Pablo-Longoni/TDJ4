@@ -844,6 +844,9 @@ MonoBehaviour:
   _maxZoom: 60
   _minZoom: 5
   _zoomSpeed: 160
+  pinchZoomSpeed: 4
+  pinchSensitivity: 0.01
+  normalizeByScreen: 1
   _zoomSmoothness: 30
   _cinemachineCamera: {fileID: 307989635}
 --- !u!1 &330585543
@@ -1750,6 +1753,17 @@ Canvas:
   m_CorrespondingSourceObject: {fileID: 5452520635691743336, guid: 3f6850c954f7cb2439f14642eb136642, type: 3}
   m_PrefabInstance: {fileID: 1426879326}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &683838276 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5092401219735567500, guid: 3f6850c954f7cb2439f14642eb136642, type: 3}
+  m_PrefabInstance: {fileID: 1426879326}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba0d0e7a039f526499c356a3c5cd6d3f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &716789540
 GameObject:
   m_ObjectHideFlags: 0
@@ -1803,6 +1817,7 @@ MonoBehaviour:
   _rotationSpeed: 360
   _cameraChange: {fileID: 716789543}
   inputReader: {fileID: 2013149288}
+  cameraJoystick: {fileID: 683838276}
 --- !u!114 &716789543
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2328,6 +2343,9 @@ MonoBehaviour:
   _maxZoom: 60
   _minZoom: 5
   _zoomSpeed: 160
+  pinchZoomSpeed: 4
+  pinchSensitivity: 0.01
+  normalizeByScreen: 1
   _zoomSmoothness: 30
   _cinemachineCamera: {fileID: 914411322}
 --- !u!114 &914411327

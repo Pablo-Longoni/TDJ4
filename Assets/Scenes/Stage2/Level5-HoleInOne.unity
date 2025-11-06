@@ -469,6 +469,9 @@ MonoBehaviour:
   _maxZoom: 35
   _minZoom: 5
   _zoomSpeed: 160
+  pinchZoomSpeed: 4
+  pinchSensitivity: 0.01
+  normalizeByScreen: 1
   _zoomSmoothness: 30
   _cinemachineCamera: {fileID: 301011484}
 --- !u!114 &301011486
@@ -609,6 +612,9 @@ MonoBehaviour:
   _maxZoom: 35
   _minZoom: 5
   _zoomSpeed: 160
+  pinchZoomSpeed: 4
+  pinchSensitivity: 0.01
+  normalizeByScreen: 1
   _zoomSmoothness: 30
   _cinemachineCamera: {fileID: 307318987}
 --- !u!114 &307318990
@@ -1037,6 +1043,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 652009114002287851, guid: 3f6850c954f7cb2439f14642eb136642, type: 3}
       propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1355813806718388729, guid: 3f6850c954f7cb2439f14642eb136642, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1561807083386827117, guid: 3f6850c954f7cb2439f14642eb136642, type: 3}
@@ -1584,6 +1594,17 @@ Canvas:
   m_CorrespondingSourceObject: {fileID: 5452520635691743336, guid: 3f6850c954f7cb2439f14642eb136642, type: 3}
   m_PrefabInstance: {fileID: 766509531}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &766509536 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5092401219735567500, guid: 3f6850c954f7cb2439f14642eb136642, type: 3}
+  m_PrefabInstance: {fileID: 766509531}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba0d0e7a039f526499c356a3c5cd6d3f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &766509539 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8185402685752102212, guid: 3f6850c954f7cb2439f14642eb136642, type: 3}
@@ -2543,6 +2564,7 @@ MonoBehaviour:
   _rotationSpeed: 360
   _cameraChange: {fileID: 1553909911}
   inputReader: {fileID: 115950414}
+  cameraJoystick: {fileID: 766509536}
 --- !u!4 &1553909913
 Transform:
   m_ObjectHideFlags: 0

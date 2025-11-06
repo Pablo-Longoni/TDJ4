@@ -607,11 +607,11 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""4faf7dc9-b979-4210-aa8c-e808e1ef89f5"",
+                    ""id"": ""a85c486d-77e9-4daf-b7d7-3c0f42491447"",
                     ""path"": ""<Mouse>/leftButton"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": "";Keyboard&Mouse"",
+                    ""groups"": """",
                     ""action"": ""Click"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -742,15 +742,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""MouseDelta"",
-                    ""type"": ""Value"",
-                    ""id"": ""2933f9bb-2236-40f1-a461-4abca24a53c9"",
-                    ""expectedControlType"": ""Vector2"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": true
-                },
-                {
                     ""name"": ""CameraHelp"",
                     ""type"": ""Button"",
                     ""id"": ""d5cd95b2-ebef-4afe-a811-f2e0e134ebbe"",
@@ -803,6 +794,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""PinchZoom"",
+                    ""type"": ""Value"",
+                    ""id"": ""dabd20e6-9ed2-4b24-b779-5b6911cfd8f4"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -825,28 +825,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": "";Gamepad;Joystick"",
                     ""action"": ""RotateCamera"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""3e1bea62-ec5c-4b8b-b870-1e072a17e1c5"",
-                    ""path"": ""<Mouse>/leftButton"",
-                    ""interactions"": ""Press,Hold"",
-                    ""processors"": """",
-                    ""groups"": "";Keyboard&Mouse;Gamepad;Joystick"",
-                    ""action"": ""RotateCamera"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""84458bcf-5e9d-4b62-b58f-90535274b8d6"",
-                    ""path"": ""<Mouse>/delta"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";Keyboard&Mouse"",
-                    ""action"": ""MouseDelta"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -970,6 +948,39 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""Look"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""Two Modifiers"",
+                    ""id"": ""ac4a9928-5aea-44db-b3e4-2e796ce0a441"",
+                    ""path"": ""TwoModifiers"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PinchZoom"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""modifier1"",
+                    ""id"": ""4cf6f77c-d298-4a89-bc8b-2498353e347c"",
+                    ""path"": ""<Touchscreen>/touch0/press"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PinchZoom"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""modifier2"",
+                    ""id"": ""fbf13072-9c19-4151-b4bf-f55b79649def"",
+                    ""path"": ""<Touchscreen>/touch1/press"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PinchZoom"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 }
             ]
         },
@@ -1214,13 +1225,13 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         // Camera
         m_Camera = asset.FindActionMap("Camera", throwIfNotFound: true);
         m_Camera_RotateCamera = m_Camera.FindAction("RotateCamera", throwIfNotFound: true);
-        m_Camera_MouseDelta = m_Camera.FindAction("MouseDelta", throwIfNotFound: true);
         m_Camera_CameraHelp = m_Camera.FindAction("CameraHelp", throwIfNotFound: true);
         m_Camera_CameraFlip = m_Camera.FindAction("CameraFlip", throwIfNotFound: true);
         m_Camera_ZoomIn = m_Camera.FindAction("ZoomIn", throwIfNotFound: true);
         m_Camera_ZoomOut = m_Camera.FindAction("ZoomOut", throwIfNotFound: true);
         m_Camera_Click = m_Camera.FindAction("Click", throwIfNotFound: true);
         m_Camera_Look = m_Camera.FindAction("Look", throwIfNotFound: true);
+        m_Camera_PinchZoom = m_Camera.FindAction("PinchZoom", throwIfNotFound: true);
         // Player
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_Movement = m_Player.FindAction("Movement", throwIfNotFound: true);
@@ -1611,13 +1622,13 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Camera;
     private List<ICameraActions> m_CameraActionsCallbackInterfaces = new List<ICameraActions>();
     private readonly InputAction m_Camera_RotateCamera;
-    private readonly InputAction m_Camera_MouseDelta;
     private readonly InputAction m_Camera_CameraHelp;
     private readonly InputAction m_Camera_CameraFlip;
     private readonly InputAction m_Camera_ZoomIn;
     private readonly InputAction m_Camera_ZoomOut;
     private readonly InputAction m_Camera_Click;
     private readonly InputAction m_Camera_Look;
+    private readonly InputAction m_Camera_PinchZoom;
     /// <summary>
     /// Provides access to input actions defined in input action map "Camera".
     /// </summary>
@@ -1633,10 +1644,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Camera/RotateCamera".
         /// </summary>
         public InputAction @RotateCamera => m_Wrapper.m_Camera_RotateCamera;
-        /// <summary>
-        /// Provides access to the underlying input action "Camera/MouseDelta".
-        /// </summary>
-        public InputAction @MouseDelta => m_Wrapper.m_Camera_MouseDelta;
         /// <summary>
         /// Provides access to the underlying input action "Camera/CameraHelp".
         /// </summary>
@@ -1661,6 +1668,10 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Camera/Look".
         /// </summary>
         public InputAction @Look => m_Wrapper.m_Camera_Look;
+        /// <summary>
+        /// Provides access to the underlying input action "Camera/PinchZoom".
+        /// </summary>
+        public InputAction @PinchZoom => m_Wrapper.m_Camera_PinchZoom;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -1690,9 +1701,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @RotateCamera.started += instance.OnRotateCamera;
             @RotateCamera.performed += instance.OnRotateCamera;
             @RotateCamera.canceled += instance.OnRotateCamera;
-            @MouseDelta.started += instance.OnMouseDelta;
-            @MouseDelta.performed += instance.OnMouseDelta;
-            @MouseDelta.canceled += instance.OnMouseDelta;
             @CameraHelp.started += instance.OnCameraHelp;
             @CameraHelp.performed += instance.OnCameraHelp;
             @CameraHelp.canceled += instance.OnCameraHelp;
@@ -1711,6 +1719,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Look.started += instance.OnLook;
             @Look.performed += instance.OnLook;
             @Look.canceled += instance.OnLook;
+            @PinchZoom.started += instance.OnPinchZoom;
+            @PinchZoom.performed += instance.OnPinchZoom;
+            @PinchZoom.canceled += instance.OnPinchZoom;
         }
 
         /// <summary>
@@ -1725,9 +1736,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @RotateCamera.started -= instance.OnRotateCamera;
             @RotateCamera.performed -= instance.OnRotateCamera;
             @RotateCamera.canceled -= instance.OnRotateCamera;
-            @MouseDelta.started -= instance.OnMouseDelta;
-            @MouseDelta.performed -= instance.OnMouseDelta;
-            @MouseDelta.canceled -= instance.OnMouseDelta;
             @CameraHelp.started -= instance.OnCameraHelp;
             @CameraHelp.performed -= instance.OnCameraHelp;
             @CameraHelp.canceled -= instance.OnCameraHelp;
@@ -1746,6 +1754,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Look.started -= instance.OnLook;
             @Look.performed -= instance.OnLook;
             @Look.canceled -= instance.OnLook;
+            @PinchZoom.started -= instance.OnPinchZoom;
+            @PinchZoom.performed -= instance.OnPinchZoom;
+            @PinchZoom.canceled -= instance.OnPinchZoom;
         }
 
         /// <summary>
@@ -2066,13 +2077,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnRotateCamera(InputAction.CallbackContext context);
         /// <summary>
-        /// Method invoked when associated input action "MouseDelta" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
-        /// </summary>
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnMouseDelta(InputAction.CallbackContext context);
-        /// <summary>
         /// Method invoked when associated input action "CameraHelp" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
@@ -2114,6 +2118,13 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnLook(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "PinchZoom" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnPinchZoom(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "Player" which allows adding and removing callbacks.

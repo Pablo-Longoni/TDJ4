@@ -81,6 +81,23 @@ public class CubeMenu : MonoBehaviour
         }
     }
 
+    public void RotateLeft()
+    {
+        if (!_isInCooldown)
+        {
+            StartCoroutine(RotateBy(Vector3.back));
+            StartCoroutine(RotationCooldown());
+        }
+    }
+
+    public void RotateRight()
+    {
+        if (!_isInCooldown)
+        {
+            StartCoroutine(RotateBy(Vector3.forward));
+            StartCoroutine(RotationCooldown());
+        }
+    }
     private void Update()
     {
         // Inicializar solo cuando onStage se activa por primera vez
