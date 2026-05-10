@@ -30,13 +30,13 @@ public class Telport : MonoBehaviour
         else
         {
           //  _cameraShake.Shake(0.5f, 0.5f, 0.5f);
-          //  AudioManager.Instance.soundSource.PlayOneShot(AudioManager.Instance._portal);
             Debug.Log("soltaa el cubooo");
         }
     }
 
      private IEnumerator Teleport(Collider other, PlayerCooldown cooldown)
      {
+         AudioManager.Instance.soundSource.PlayOneShot(AudioManager.Instance._teleportPlayer);
          cooldown.canTeleport = false;
          other.transform.position = _destination.position;
          yield return new WaitForSeconds(cooldownTime);
@@ -56,7 +56,7 @@ public class Telport : MonoBehaviour
         _playerGrab.enabled = false;
         cooldown.canTeleport = false;
 
-        // 1. Mover al jugador hacia el centro del portal (posición del collider)
+        // 1. Mover al jugador hacia el centro del portal (posiciï¿½n del collider)
         Vector3 startPos = playerTransform.position;
         Vector3 targetPos = transform.position;
         float timeElapsed = 0f;

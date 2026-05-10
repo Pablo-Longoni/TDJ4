@@ -33,11 +33,11 @@ public class StageUnlock : MonoBehaviour
     private Material _cubeMaterial;
     private Color originalColor;
 
-    private bool _isCanvasCamera;
+  //  private bool _isCanvasCamera;
 
     void Start()
     {
-        _isCanvasCamera = true;
+      //  _isCanvasCamera = true;
         _cubeMaterial = _cubeRenderer.material;
         originalColor = _cubeMaterial.color;
 
@@ -62,7 +62,7 @@ public class StageUnlock : MonoBehaviour
     {
         _cubeMenu.StopRotation();
         _cube.transform.rotation = Quaternion.identity;
-        _isCanvasCamera = false;
+      //  _isCanvasCamera = false;
 
         // CRÍTICO: Desactivar MenuNavigator
         if (menuNavigator != null)
@@ -111,7 +111,7 @@ public class StageUnlock : MonoBehaviour
 
     public void GoToMenuCanvas()
     {
-        _isCanvasCamera = true;
+      //  _isCanvasCamera = true;
 
         // Apago selector canvases
         foreach (Canvas c in _selectorCanvases)

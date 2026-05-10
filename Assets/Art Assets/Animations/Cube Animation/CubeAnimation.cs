@@ -101,8 +101,7 @@ public class CubeAnimation : MonoBehaviour
     {
         StopActiveRoutine();
         ignoreGroundCheck = true;
-
-        // Spawn  partículas
+        AudioManager.Instance.soundSource.PlayOneShot(AudioManager.Instance._playerLand); 
         float fallDuration = Time.time - fallStartTime;
         if (!dustSpawned)
         {
@@ -150,7 +149,7 @@ public class CubeAnimation : MonoBehaviour
                 fallStartTime = Time.time;
                 StopActiveRoutine();
                 currentRoutine = StartCoroutine(Stretch());
-                Debug.Log("on trigger exit");
+             //   Debug.Log("on trigger exit");
             }
         }
     }
@@ -166,7 +165,7 @@ public class CubeAnimation : MonoBehaviour
                 lastSquashTime = Time.time;
                 StopActiveRoutine();
                 currentRoutine = StartCoroutine(Squash());
-                Debug.Log("on trigger enter");
+             //   Debug.Log("on trigger enter");
             }
         }
     }

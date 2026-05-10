@@ -1,13 +1,15 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Windows;
 
 public class DeactivateCollider : MonoBehaviour
 {
     [SerializeField] public Collider _targetCollider;
     [SerializeField] public ParticleSystem _ripplePrefab;
     [SerializeField] public ParticleSystem _waterSplashPrefab;
-    [SerializeField] public GameObject _playerInput;
+    [SerializeField] public GameObject _playerInput, _Input;
+   
     private bool _isTriggered;
 
     private Quaternion _rotation = Quaternion.Euler(-90,0,0);
@@ -15,10 +17,12 @@ public class DeactivateCollider : MonoBehaviour
     {
         if (other.CompareTag("Player") && !_isTriggered)
         {
+            AudioManager.Instance.soundSource.PlayOneShot(AudioManager.Instance._splashWater);
             _targetCollider.enabled = false;
             _isTriggered = true;
 
             _playerInput.SetActive(false);
+            _Input.SetActive(false);
 
             Instantiate(_ripplePrefab, _targetCollider.transform.position, Quaternion.identity);
             Instantiate(_waterSplashPrefab, _targetCollider.transform.position, _rotation);
@@ -45,7 +49,7 @@ public class DeactivateCollider : MonoBehaviour
         yield return new WaitForSeconds(.7f);
 
         _playerInput.SetActive(true);
-
+        _Input.SetActive(true);
         _targetCollider.enabled = true;
         _isTriggered = false;
        

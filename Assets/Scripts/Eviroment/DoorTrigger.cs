@@ -1,11 +1,6 @@
 using UnityEngine;
 using System.Collections;
-using UnityEngine.SceneManagement;
-using UnityEngine.InputSystem;
 using System.Runtime.InteropServices;
-using static UnityEditor.Experimental.GraphView.GraphView;
-using TMPro;
-using System;
 using Unity.Cinemachine;
 public class DoorTrigger : MonoBehaviour
 {
@@ -69,7 +64,6 @@ public class DoorTrigger : MonoBehaviour
             //    StartCoroutine(MovePlayerToDoor(_target.transform.position));
             StartCoroutine(EnterPortalSequence());
            // AudioManager.Instance.soundSource.PlayOneShot(AudioManager.Instance._portal);
-            _audioManager.DistoredMusic();
             Debug.Log("Jugador entró en la puerta");
         }
     }
@@ -78,6 +72,7 @@ public class DoorTrigger : MonoBehaviour
     {
         _player.enabled = false;
         _cubeAnimation.IgnoreStretchAndSquash(2);
+
         yield return StartCoroutine(ZoomIn());
 
         yield return StartCoroutine(MovePlayerToDoor(_target.transform.position));
@@ -87,47 +82,22 @@ public class DoorTrigger : MonoBehaviour
 
     private IEnumerator MovePlayerToDoor(Vector3 targetPosition)
     {
-        // Iniciar vibración
         StartCoroutine(VibrateGamepadXInput(vibrationIntensity, vibrationDuration));
-
         _cubeAnimation.EnterPortalAnim();
         float timeElapsed = 0f;
         Vector3 initialPosition = _player.transform.position;
-        Vector3 _offSet = new Vector3(0, -2, 0);
-        Instantiate(_particleEnterPortal, targetPosition + _offSet, _rotationParticle);
+        Vector3 _offSet = new Vector3(0, -2, 0); 
+        Instantiate(_particleEnterPortal, targetPosition + _offSet, _rotationParticle); 
         _cameraShake.Shake(2f, 2, .4f);
 
         _audioManager.soundSource.PlayOneShot(_audioManager._portal);
         while (timeElapsed < 2f)
         {
-            timeElapsed += Time.deltaTime * moveSpeed;
-             _player.transform.position = Vector3.Lerp(initialPosition, targetPosition, timeElapsed);
-              yield return null;
-        }
-   
-        Debug.Log("Jugador entró en la puerta");
-    }
-
-  /*  private IEnumerator LevitatePlayer()
-    {
-     //   _player.enabled = false;
-
-        Vector3 levitateDirection = _target.transform.up; // o .forward, según orientación de tu portal
-        float levitateDistance = 2f; // ajustable
-        Vector3 startPos = _player.transform.position;
-        Vector3 targetPos = startPos + levitateDirection * levitateDistance;
-
-        float t = 0f;
-        while (t < 1f)
-        {
-            t += Time.deltaTime * moveSpeed;
-            _player.transform.position = Vector3.Lerp(startPos, targetPos, t);
+            timeElapsed += Time.deltaTime * moveSpeed; 
+            _player.transform.position = Vector3.Lerp(initialPosition, targetPosition, timeElapsed);
             yield return null;
         }
-
-        Debug.Log("Jugador levita");
     }
-    */
 
     public IEnumerator ZoomIn()
     {
@@ -157,7 +127,6 @@ public class DoorTrigger : MonoBehaviour
             _player.transform.position = Vector3.Lerp(startPosLevitate, targetPosLevitate, t);
             yield return null;
         }
-
     }
 
     public IEnumerator ReturnToOriginal()
@@ -165,7 +134,6 @@ public class DoorTrigger : MonoBehaviour
         Vector3 currentPos = _cinemachineCamera.transform.position;
         float currentSize = _cinemachineCamera.Lens.OrthographicSize;
         _changeScene.NextLevel();
-        _audioManager.RestoredMusic();
         float t = 0f;
         while (t < 1f)
         {
@@ -213,7 +181,7 @@ public class DoorTrigger : MonoBehaviour
         vibration.wRightMotorSpeed = 0;
         XInputSetState(0, ref vibration);
 
-        Debug.Log("[XInput] Vibración detenida");
+       // Debug.Log("[XInput] Vibración detenida");
     }
 
     private void OnDestroy()

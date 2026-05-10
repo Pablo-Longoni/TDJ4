@@ -12,7 +12,7 @@ public class UpgradeTransforms : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (!other.CompareTag("Player")) return;
-
+        AudioManager.Instance.soundSource.PlayOneShot(AudioManager.Instance._flip);
         _playerTransformation.TransformUpgrade();
         _item.SetActive(false);
         /*  // --- calcular posición inicial en coordenadas locales del Canvas ---

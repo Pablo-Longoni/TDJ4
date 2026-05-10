@@ -26,6 +26,8 @@ public class CubeRotation : MonoBehaviour
     public CameraChange _cameraChange;
     private CubeAnimation _cubeAnimation;
     public bool _didRotate = false;
+
+    public bool isChildCube = false;
     void Awake()
     {
         _renderers = GetComponentsInChildren<MeshRenderer>();
@@ -94,13 +96,16 @@ public class CubeRotation : MonoBehaviour
 
     public void RotateCube(Vector3 rotationAxis, Transform player)
     {
+        if (isChildCube) return;
+
         if (_canRotate && !_shouldRotate && !_isInCooldown)
         {
             Quaternion newTargetRotation = Quaternion.AngleAxis(_rotationTurn, rotationAxis) * transform.rotation;
 
             if (Quaternion.Angle(transform.rotation, newTargetRotation) > 0.1f)
             {
-                _cubeAnimation.IgnoreStretchAndSquash(.7f);
+                Debug.Log("Rotando figura");
+                _cubeAnimation.IgnoreStretchAndSquash(1f);
                 _targetRotation = newTargetRotation;
                 _shouldRotate = true;
                 _didRotate = true; 
@@ -180,15 +185,16 @@ public class CubeRotation : MonoBehaviour
 
     private void ShowPivotPoint()
     {
-        _pivotPoint = Instantiate(_pivotPoint, transform.position, Quaternion.identity);
         _pivotPoint.SetActive(true);
-        Debug.Log("Se instancio el pivot point");
+     /*   _pivotPoint.transform.SetParent(transform, false);
+        _pivotPoint.transform.localScale = Vector3.one;*/
+      //  Debug.Log("Se instancio el pivot point");
     }
 
     private void DestroyPivotPoint()
     {
        _pivotPoint.SetActive(false);
-        Debug.Log("Se destruypo el pivot point");
+    //    Debug.Log("Se destruypo el pivot point");
     }
 }
 

@@ -3,12 +3,13 @@ using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
 using System.Collections;
+using static Unity.VisualScripting.Member;
 public class AudioManager : MonoBehaviour
 {
     public static AudioManager Instance;
 
     [Header("Sources")]
-    [SerializeField] public AudioSource musicSource;
+ //   [SerializeField] public AudioSource musicSource;
     [SerializeField] public AudioSource soundSource;
     [SerializeField] private AudioMixer audioMixer;
 
@@ -16,11 +17,25 @@ public class AudioManager : MonoBehaviour
     public AudioClip [] _gameMusic;
     public AudioClip _menuMusic;
   
-    [Header("Sound")]
+    [Header("Sound Figures")]
     public AudioClip _turning;
+ 
+    [Header("Sound Player")]
+    public AudioClip _playerLand;
+
+    [Header("Sound Teleport")]
+  //  public AudioClip _triggerTeleport;
+    public AudioClip _teleportPlayer;
+
+    [Header("Sound Portal and Pressed")]
     public AudioClip _portal;
-    public AudioClip _activatePortal;
+ //   public AudioClip _activatePortal;
     public AudioClip _pressedSound;
+    public AudioClip _releasedSound;
+
+    [Header("Sound Other")]
+    public AudioClip _splashWater;
+    public AudioClip _flip;
 
     private int lastMusicIndex;
     private AudioDistortionFilter _distortionFilter;
@@ -28,6 +43,16 @@ public class AudioManager : MonoBehaviour
 
     public bool _isMusicMuted;
     public bool _isSfxMuted;
+
+    //new music
+    [Header("Sources")]
+    [SerializeField] private AudioSource musicSourceA;
+    [SerializeField] private AudioSource musicSourceB;
+ //   [SerializeField] private AudioSource sfxSource;
+
+    private AudioSource currentSource;
+    private AudioSource nextSource;
+
     void Awake()
     {
         if (Instance == null)
@@ -45,14 +70,22 @@ public class AudioManager : MonoBehaviour
 
     private void Start()
     {
-        if( musicSource == null ) musicSource.loop = false;
+        if (_gameMusic == null || _gameMusic.Length == 0) return;
+
+        // Configurar los dos sources
+        musicSourceA.loop = false;
+        musicSourceB.loop = false;
+
+        currentSource = musicSourceA;
+        nextSource = musicSourceB;
+
         StartCoroutine(PlayMusicLoop());
 
-          _distortionFilter = musicSource.gameObject.AddComponent<AudioDistortionFilter>();
+       /* _distortionFilter = musicSource.gameObject.AddComponent<AudioDistortionFilter>();
           _distortionFilter.distortionLevel = 0;
 
           _lowPassFilter = musicSource.gameObject.AddComponent<AudioLowPassFilter>();
-          _lowPassFilter.enabled = false;
+          _lowPassFilter.enabled = false;*/
 
      /*   _isMusicMuted = PlayerPrefs.GetInt("isMusicMuted", 0) == 1;
         _isSfxMuted = PlayerPrefs.GetInt("isSfxMuted", 0) == 1;
@@ -74,7 +107,7 @@ public class AudioManager : MonoBehaviour
             {
                 UnMuteAllVolume();
             }
-        }*/
+        }
         if (Input.GetKeyUp(KeyCode.U))
         {
             RestoredMusic();
@@ -82,9 +115,24 @@ public class AudioManager : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.Y))
         {
             DistoredMusic();
-        }
+        }*/
     }
-    public void MusicSelector()
+
+    private AudioClip GetNextTrack()
+    {
+        if (_gameMusic.Length == 1) return _gameMusic[0];
+
+        int randomIndex;
+        do
+        {
+            randomIndex = Random.Range(0, _gameMusic.Length);
+        } while (randomIndex == lastMusicIndex);
+
+        lastMusicIndex = randomIndex;
+        return _gameMusic[randomIndex];
+    }
+
+  /*  public void MusicSelector()
     {
         if (_gameMusic == null || _gameMusic.Length == 0)
         {
@@ -113,23 +161,56 @@ public class AudioManager : MonoBehaviour
         musicSource.Play();
 
         Debug.Log($"AudioManager: Reproduciendo [{randomIndex}] {_gameMusic[randomIndex].name}");
-    }
+    }*/
 
     private IEnumerator PlayMusicLoop()
     {
-        MusicSelector();
-        yield return FadeIn(musicSource, 2f, 5f);
+        currentSource.clip = GetNextTrack();
+        currentSource.volume = 0;
+        currentSource.Play();
+
+        yield return FadeIn(currentSource, 2f, 1f);
+
         while (true)
         {
-            yield return new WaitUntil(() => !musicSource.isPlaying);
+            float remainingTime = currentSource.clip.length - currentSource.time;
+            if (remainingTime <= 10f) // empieza el crossfade 3 segundos antes de terminar
+            {
+                nextSource.clip = GetNextTrack();
+                nextSource.volume = 0;
+                nextSource.Play();
 
-            yield return FadeOut(musicSource, 1.5f); 
-            MusicSelector();
-            yield return FadeIn(musicSource, .5f, 1f); 
+                yield return CrossFade(currentSource, nextSource, 3f);
+
+                // intercambiar referencias
+                var temp = currentSource;
+                currentSource = nextSource;
+                nextSource = temp;
+            }
+            yield return null;
         }
     }
 
-    public IEnumerator FadeOut(AudioSource audioSource, float duration)
+    private IEnumerator CrossFade(AudioSource from, AudioSource to, float duration)
+    {
+        float time = 0;
+        while (time < duration)
+        {
+            time += Time.deltaTime;
+            float t = time / duration;
+
+            from.volume = Mathf.Lerp(1f, 0f, t);
+            to.volume = Mathf.Lerp(0f, 1f, t);
+
+            yield return null;
+        }
+
+        from.Stop();
+        from.volume = 0;
+        to.volume = 1f;
+    }
+
+  /*  public IEnumerator FadeOut(AudioSource audioSource, float duration)
     {
         float startVolume = audioSource.volume;
 
@@ -141,17 +222,15 @@ public class AudioManager : MonoBehaviour
 
         audioSource.volume = 0;
     }
-
+    */
     public IEnumerator FadeIn(AudioSource audioSource, float duration, float targetVolume)
     {
         audioSource.volume = 0;
-
         for (float t = 0; t < duration; t += Time.deltaTime)
         {
             audioSource.volume = Mathf.Lerp(0, targetVolume, t / duration);
             yield return null;
         }
-
         audioSource.volume = targetVolume;
     }
 
@@ -214,24 +293,33 @@ public class AudioManager : MonoBehaviour
         PlayerPrefs.Save();
     }*/
 
-    public void DistoredMusic()
+  /*  public void DistoredMusic()
     {
-      /* _lowPassFilter.enabled = true;
-       _distortionFilter.distortionLevel = .1f;
-        audioMixer.SetFloat("LowPassCutOff", 22000);
+        // Activar filtros
+        _lowPassFilter.enabled = true;
+        _lowPassFilter.cutoffFrequency = 800f; 
 
-        
-        musicSource.pitch = 0.95f;
-        Debug.Log("Music distored");*/
+        // Eco / Reverb
+        var reverb = musicSource.GetComponent<AudioReverbFilter>();
+        if (reverb == null)
+            reverb = musicSource.gameObject.AddComponent<AudioReverbFilter>();
+
+        reverb.enabled = true;
+        reverb.reverbPreset = AudioReverbPreset.Cave; // o Hallway, Cathedral, etc.
+
+        Debug.Log("Music distorted and slowed");
     }
 
     public void RestoredMusic()
     {
-      /*  _distortionFilter.distortionLevel = 0;
-        _lowPassFilter.enabled = false;
-        audioMixer.SetFloat("LowPassCutOff", 22000f); 
-        musicSource.pitch = 1f;
-        Debug.Log("Music restored");*/
-    }
+        _lowPassFilter.cutoffFrequency = 22000f;
 
+
+        var reverb = musicSource.GetComponent<AudioReverbFilter>();
+        if (reverb != null)
+            reverb.enabled = false;
+
+        Debug.Log("music restored to normal");
+    }
+  */
 }
