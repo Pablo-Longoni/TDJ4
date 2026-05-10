@@ -1,3 +1,4 @@
+
 using Unity.Cinemachine;
 using UnityEngine;
 
@@ -13,11 +14,16 @@ public class CameraZoom : MonoBehaviour
     public CinemachineCamera _cinemachineCamera;
 
     private PlayerInputReader _input;
-
     private void Awake()
     {
         _currentZoom = _cinemachineCamera.Lens.OrthographicSize;
-        _input = FindObjectOfType<PlayerInputReader>();
+        _input = FindFirstObjectByType<PlayerInputReader>();
+    }
+
+    private void Start()
+    {
+        _zoomSpeed = PlayerPrefs.GetFloat("ZoomSpeed", 160);
+      //  Debug.Log("Zoom: "+  _zoomSpeed);
     }
 
     void Update()
@@ -44,5 +50,10 @@ public class CameraZoom : MonoBehaviour
             _currentZoom,
             _zoomSmoothness * Time.deltaTime
         );
+    }
+
+    public void SetZoomSpeed(float newSpeed)
+    {
+        _zoomSpeed = newSpeed;
     }
 }

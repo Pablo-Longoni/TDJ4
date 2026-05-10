@@ -22,6 +22,9 @@ public class PlayerMovement : MonoBehaviour
     private void Start()
     {
         _cameraChange = FindAnyObjectByType<CameraChange>();
+
+        //asignar layers para check
+        _currentCube.StartBlinking();
     }
 
     void Update()
@@ -138,6 +141,7 @@ public class PlayerMovement : MonoBehaviour
             if (_currentCube != null)
             {
                 _currentCube.RotateCube(rotationAxis, transform);
+               // Debug.Log("Por rotar figura");
             }
         }
     }
@@ -148,15 +152,15 @@ public class PlayerMovement : MonoBehaviour
 
         if (Physics.SphereCast(transform.position, 0.2f, Vector3.down, out RaycastHit hit, groundCheckDistance + 0.5f))
         {
-            CubeRotation detectedCube = hit.collider.GetComponent<CubeRotation>();
-            if (detectedCube != null && detectedCube != _currentCube)
-            {
-                _currentCube?.StopBlinking();
-                _currentCube = detectedCube;
-                _currentCube.StartBlinking();
-            }
-
-            Transform currentFigure = hit.collider.transform;
+              CubeRotation detectedCube = hit.collider.GetComponent<CubeRotation>();
+              if (detectedCube != null && detectedCube != _currentCube)
+              {
+                  _currentCube?.StopBlinking();
+                  _currentCube = detectedCube;
+                  _currentCube.StartBlinking();
+              }
+             
+              Transform currentFigure = hit.collider.transform;
 
             if (_currentFigure != currentFigure)
             {
@@ -165,6 +169,7 @@ public class PlayerMovement : MonoBehaviour
                     int defaultLayer = LayerMask.NameToLayer(_defaultLayerName);
                     foreach (Transform t in _currentFigure.GetComponentsInChildren<Transform>(true))
                     {
+                        if (t.gameObject.layer == LayerMask.NameToLayer("MirrorObjects")) continue;
                         if (t.CompareTag("Player")) continue;
                         t.gameObject.layer = defaultLayer;
                     }
@@ -173,6 +178,7 @@ public class PlayerMovement : MonoBehaviour
                 int minimapLayer = LayerMask.NameToLayer(_minimapLayerName);
                 foreach (Transform t in currentFigure.GetComponentsInChildren<Transform>(true))
                 {
+                    if (t.gameObject.layer == LayerMask.NameToLayer("MirrorObjects")) continue;
                     if (t.CompareTag("Player")) continue;
                     t.gameObject.layer = minimapLayer;
                 }

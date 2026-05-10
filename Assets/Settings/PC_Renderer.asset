@@ -12,13 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b00045f12942b46c698459096c89274e, type: 3}
   m_Name: Outlines
   m_EditorClassIdentifier: 
-  m_Active: 1
+  m_Active: 0
   injectionPoint: 550
   fetchColorBuffer: 1
   requirements: -1
   passMaterial: {fileID: 2100000, guid: 44f9b5f37c342724babdd13512eb0106, type: 2}
   passIndex: 0
   bindDepthStencilAttachment: 1
+  ignoredScenes:
+  - Menu
+  - OtraEscena
+  ignoredLayers:
+  - UI
+  - Objects
   m_Version: 1
 --- !u!114 &-1148929456270907589
 MonoBehaviour:

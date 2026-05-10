@@ -8,12 +8,13 @@ public class PlayerTransformation : MonoBehaviour
 {
     public int _totalTrans = 3;
     public int _currentTrans = 0;
+    public int _transformUpgrade = 1;
     public int _restartTrans;
     public CameraChange _cameraChange;
     public TextMeshProUGUI _textTrans;
 
     private bool _isBlinking = false;
-    [SerializeField] Button _cheatButton;
+    [SerializeField] public Button _cheatButton;
     private bool _cheatOn = false;
 
     private PlayerControls _inputActions;
@@ -42,7 +43,14 @@ public class PlayerTransformation : MonoBehaviour
 
     private void OnCameraFlipPressed(InputAction.CallbackContext context)
     {
-        if (_currentTrans >= _totalTrans)
+        // NUEVO: Verificar si el juego está pausado
+        if (ChangeScene.IsPaused) return;
+
+        if (_currentTrans < _totalTrans)
+        {
+            _cameraChange._canChange = true; // permitir el cambio   
+        }
+        else
         {
             _cameraChange._canChange = false;
 
@@ -55,7 +63,7 @@ public class PlayerTransformation : MonoBehaviour
     {
         _currentTrans++;
         _textTrans.text = "Flips: " + _currentTrans + "/" + _totalTrans;
-        Debug.Log("Transformations: " + _currentTrans);
+     //   Debug.Log("Transformations: " + _currentTrans);
     }
 
     IEnumerator BlinkText()
@@ -85,5 +93,13 @@ public class PlayerTransformation : MonoBehaviour
             _totalTrans = _restartTrans;
         }
         _textTrans.text = "Flips: " + _currentTrans + "/" + _totalTrans;
+    }
+
+
+    public void TransformUpgrade()
+    {
+        _totalTrans = _totalTrans + _transformUpgrade;
+        _textTrans.text = "Flips: " + _currentTrans + "/" + _totalTrans;
+        StartCoroutine(BlinkText());
     }
 }

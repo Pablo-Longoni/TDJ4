@@ -2,9 +2,10 @@ using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 using System.Collections;
-using Unity.VisualScripting;
+/*using Unity.VisualScripting;
 using NUnit.Framework.Constraints;
 using UnityEngine.InputSystem;
+using static UnityEditor.Experimental.GraphView.GraphView;*/
 
 public class CameraChange : MonoBehaviour
 {
@@ -36,9 +37,13 @@ public class CameraChange : MonoBehaviour
     public float _holdDuration = 0f;
     private PlayerInputReader _input;
 
+    //Saber si rotó
+    public CubeRotation [] _cubeRotation;
+
     private void Awake()
     {
-        _input = FindObjectOfType<PlayerInputReader>();
+        _input = FindFirstObjectByType<PlayerInputReader>();
+        _cubeRotation = FindObjectsByType<CubeRotation>(FindObjectsSortMode.None);
     }
 
     void Start()
@@ -50,6 +55,7 @@ public class CameraChange : MonoBehaviour
         _isIsometric = true;
         _blendTime = _cameraBrain.DefaultBlend.Time;
         StartCoroutine(DelayedCinematicStart());
+
     }
 
     private IEnumerator DelayedCinematicStart()
@@ -89,24 +95,32 @@ public class CameraChange : MonoBehaviour
 
     private void ChangeCamera()
     {
-        Debug.Log("ChangeCamera");
+      //  Debug.Log("ChangeCamera");
         _isIsometric = !_isIsometric;
-        _playerTransformation.PlayerTransformed();
         _cameraBrain.DefaultBlend.Time = 1;
         if (!_isIsometric)
         {
+           
             _cameraRotation.ResetRotation();
             _isometricCamera.Priority = 2;
             _overHeadCamera.Priority = 3;
-            // _cameraData.renderShadows = true;
-            Debug.Log("Camara cenital" + _isIsometric);
+         //   Debug.Log("Camara cenital" + _isIsometric);
         }
         else
         {
+            foreach (var cube in _cubeRotation)
+            {
+                if (cube._didRotate)
+                {
+                    _playerTransformation.PlayerTransformed();
+                    Debug.Log("Transformed + 1 en " + cube.name);
+                    cube._didRotate = false; // reseteo solo el que rotó
+                    break; // salgo del loop, ya no importa el resto
+                }
+            }
             _isometricCamera.Priority = 3;
             _overHeadCamera.Priority = 2;
-            // _cameraData.renderShadows = true;
-            Debug.Log("Camara Isometrica");
+            //   _playerTransformation.GetComponent<CubeAnimation>().IgnoreStretchAndSquash(0.3f);
         }
     }
 
@@ -136,7 +150,7 @@ public class CameraChange : MonoBehaviour
         // Recién ahora cambia de estado
         currentState = SpaceBarState.Playing;
         _cameraBrain.DefaultBlend.Time = 1;
-        Debug.Log("Cinematica terminada y blend finalizado");
+     //   Debug.Log("Cinematica terminada y blend finalizado");
     }
 
     void SkipCinematic()

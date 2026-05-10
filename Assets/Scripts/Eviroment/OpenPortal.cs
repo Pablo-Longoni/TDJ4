@@ -1,16 +1,33 @@
+using TMPro;
 using UnityEngine;
 
 public class OpenPortal : MonoBehaviour
 {
-    [SerializeField] private GameObject _portal;
+    [SerializeField] public GameObject _portal;
     private int _objectsInside = 0;
+ //   [SerializeField] private ParticleSystem _particles;
+
+    Vector3 _position;
+
+    private void Start()
+    {
+        _position = transform.position;
+    }
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player") || other.CompareTag("Movable"))
         {
+            if (_objectsInside == 0)
+            {
+                AudioManager.Instance.soundSource.PlayOneShot(AudioManager.Instance._pressedSound);
+            }
+
             Debug.Log("Entró: " + other.name);
             _objectsInside++;
             _portal.SetActive(true);
+            MeshRenderer _renderer = GetComponent<MeshRenderer>();
+            _renderer.material.color = Color.black;
+            //    Instantiate(_particles, transform.position, Quaternion.identity);
         }
     }
 
@@ -23,9 +40,17 @@ public class OpenPortal : MonoBehaviour
             // Evita valores negativos si algo sale mal
             _objectsInside = Mathf.Max(0, _objectsInside);
 
+           /* if (other.CompareTag("Player") && other.CompareTag("Movable"))
+            {
+                AudioManager.Instance.soundSource.PlayOneShot(AudioManager.Instance._releasedSound);
+            }*/
+
             if (_objectsInside == 0)
             {
+                AudioManager.Instance.soundSource.PlayOneShot(AudioManager.Instance._releasedSound);
                 _portal.SetActive(false);
+                MeshRenderer _renderer = GetComponent<MeshRenderer>();
+                _renderer.material.color = Color.white;
             }
         }
     }

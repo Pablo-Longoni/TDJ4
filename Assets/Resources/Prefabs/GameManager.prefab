@@ -161,7 +161,7 @@ GameObject:
   - component: {fileID: 8769871704500449345}
   - component: {fileID: 6393275539276596262}
   - component: {fileID: 149615324397555683}
-  - component: {fileID: 892415939525997092}
+  - component: {fileID: 6677637559233248898}
   m_Layer: 0
   m_Name: RawImage
   m_TagString: Untagged
@@ -223,7 +223,7 @@ MonoBehaviour:
     y: 0
     width: 1
     height: 1
---- !u!225 &892415939525997092
+--- !u!225 &6677637559233248898
 CanvasGroup:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -296,7 +296,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_TargetDisplay: 0
 --- !u!114 &9154655813494032386
 MonoBehaviour:
@@ -370,6 +370,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4057162578750627250}
   - component: {fileID: 6063771657278128886}
+  - component: {fileID: 979236741928657784}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: GameController
@@ -407,9 +408,34 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _transitionTime: 1.3
-  pausePanel: {fileID: 647905135965181595, guid: b17606ae7df3b0f4bb9c2d0326f9c6af, type: 3}
+  pausePanel: {fileID: 0}
   _volume: {fileID: 0}
   _controls: {fileID: 0}
+  _settings: {fileID: 0}
+--- !u!114 &979236741928657784
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4255393980352114731}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3f884c56ff19fb4d8a936ce7233b992, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _transitionTime: 1.3
+  pausePanel: {fileID: 0}
+  _tabs:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  _buttonTab:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  _inactiveButtonSize: {x: 200, y: 120}
+  _activeButtonSize: {x: 200, y: 140}
 --- !u!1 &7073219474359358732
 GameObject:
   m_ObjectHideFlags: 0

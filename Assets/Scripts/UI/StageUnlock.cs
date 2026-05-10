@@ -1,95 +1,157 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-using TMPro;
 using Unity.Cinemachine;
 using System.Collections;
+using UnityEngine.EventSystems;
+
 public class StageUnlock : MonoBehaviour
 {
-
-
+    [Header("Cámaras")]
     [SerializeField] private CinemachineCamera _stageCamera;
     [SerializeField] private CinemachineCamera _canvasCamera;
-    [SerializeField] private Canvas[] _canvas;
-    [SerializeField]  private Canvas _mainCanvas;
-    private bool _isCanvasCamera;
 
+    [Header("Canvas")]
+    [SerializeField] private Canvas _mainCanvas;
+    [SerializeField] private Canvas[] _selectorCanvases;
+
+    [Header("Cube")]
     [SerializeField] private CubeMenu _cubeMenu;
     [SerializeField] private GameObject _cube;
+    [SerializeField] private Renderer _cubeRenderer;
+
+    [Header("Botones")]
+    [SerializeField] private GameObject firstLevelButton;
+    [SerializeField] private GameObject backToMenuButton;
+    [SerializeField] private Button menuPlayButton;
+
+    [Header("Scripts")]
+    [SerializeField] private MenuNavigator menuNavigator;
+
+    [Header("Fade")]
     public float _fadeDuration = 1f;
-      public Renderer _cubeRenderer;
-      private Material _cubeMaterial;
-      private Color originalColor;
-     
+    private Material _cubeMaterial;
+    private Color originalColor;
+
+  //  private bool _isCanvasCamera;
+
     void Start()
     {
-        _isCanvasCamera = true;
+      //  _isCanvasCamera = true;
         _cubeMaterial = _cubeRenderer.material;
         originalColor = _cubeMaterial.color;
+
+        if (_mainCanvas != null) _mainCanvas.gameObject.SetActive(true);
+        foreach (Canvas c in _selectorCanvases)
+            c.gameObject.SetActive(false);
+
+        if (menuPlayButton != null)
+            EventSystem.current.SetSelectedGameObject(menuPlayButton.gameObject);
     }
 
     void Update()
     {
-        if(Input.GetKeyUp(KeyCode.P))
+        if (Input.GetKeyUp(KeyCode.P))
         {
             PlayerPrefs.DeleteAll();
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        }
-        if (_isCanvasCamera)
-        {
-            foreach (Canvas _canvas in _canvas)
-            {
-                _canvas.gameObject.SetActive(false);
-            }
         }
     }
 
     public void GoToSelector()
     {
         _cubeMenu.StopRotation();
-        _cube.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
-     //   FadeIn();
-        _isCanvasCamera = false;
-        foreach (Canvas _canvas in _canvas)
+        _cube.transform.rotation = Quaternion.identity;
+      //  _isCanvasCamera = false;
+
+        // CRÍTICO: Desactivar MenuNavigator
+        if (menuNavigator != null)
         {
-            _canvas.gameObject.SetActive(true);
+            menuNavigator.enabled = false;
+            Debug.Log("[StageUnlock] MenuNavigator DESACTIVADO");
         }
+
+        // Apago menú principal
+        if (_mainCanvas != null)
+            _mainCanvas.gameObject.SetActive(false);
+
+        // Enciendo canvases del selector
+        foreach (Canvas c in _selectorCanvases)
+            c.gameObject.SetActive(true);
 
         _cubeMenu.onStage = true;
         _canvasCamera.Priority = 1;
         _stageCamera.Priority = 2;
-      //  StartCoroutine(ChangeRenderMode());
+
+        StartCoroutine(SelectFirstCoroutine());
+    }
+
+    IEnumerator SelectFirstCoroutine()
+    {
+        // Limpiar la selección anterior
+        EventSystem.current.SetSelectedGameObject(null);
+        yield return new WaitForEndOfFrame();
+
+        // Esperar frames adicionales
+        yield return null;
+
+        // Asignar el primer botón del selector
+        if (firstLevelButton != null)
+        {
+            EventSystem.current.SetSelectedGameObject(firstLevelButton);
+        }
+
+        yield return null;
+
+        Debug.Log("[StageUnlock] Selector activo. Botón seleccionado: " +
+            (EventSystem.current.currentSelectedGameObject != null
+            ? EventSystem.current.currentSelectedGameObject.name
+            : "null"));
     }
 
     public void GoToMenuCanvas()
     {
-      //  FadeOut();
-        _isCanvasCamera = true;
-        foreach (Canvas _canvas in _canvas)
+      //  _isCanvasCamera = true;
+
+        // Apago selector canvases
+        foreach (Canvas c in _selectorCanvases)
+            c.gameObject.SetActive(false);
+
+        // Prendo menú principal
+        if (_mainCanvas != null)
+            _mainCanvas.gameObject.SetActive(true);
+
+        // CRÍTICO: Reactivar MenuNavigator
+        if (menuNavigator != null)
         {
-            _canvas.gameObject.SetActive(false);
+            menuNavigator.enabled = true;
+            Debug.Log("[StageUnlock] MenuNavigator ACTIVADO");
         }
+
         _cubeMenu.onStage = false;
         _canvasCamera.Priority = 2;
         _stageCamera.Priority = 1;
-       // StartCoroutine(ChangeRenderMode());
+
+        StartCoroutine(SelectPlayCoroutine());
     }
 
-    //change canvas render
-    IEnumerator ChangeRenderMode()
+    IEnumerator SelectPlayCoroutine()
     {
-        if(_mainCanvas.renderMode == RenderMode.ScreenSpaceOverlay)
-        {
-            yield return new WaitForSeconds(0.5f);
-            _mainCanvas.renderMode = RenderMode.WorldSpace;
-        }
-        else
-        {
-            yield return new WaitForSeconds(1.5f);
-            _mainCanvas.renderMode = RenderMode.ScreenSpaceOverlay;
-        }
+        yield return new WaitForEndOfFrame();
+
+        EventSystem.current.SetSelectedGameObject(null);
+        yield return null;
+
+        if (menuPlayButton != null)
+            EventSystem.current.SetSelectedGameObject(menuPlayButton.gameObject);
+
+        Debug.Log("[StageUnlock] Volvió al menú, botón seleccionado: " +
+            (EventSystem.current.currentSelectedGameObject != null
+            ? EventSystem.current.currentSelectedGameObject.name
+            : "null"));
     }
-    //fades 
+
+    // Fades
     public void FadeOut()
     {
         StartCoroutine(FadeTo(1f));
@@ -97,7 +159,7 @@ public class StageUnlock : MonoBehaviour
 
     public void FadeIn()
     {
-        StartCoroutine(FadeTo(1f));
+        StartCoroutine(FadeTo(0f));
     }
 
     IEnumerator FadeTo(float targetAlpha)
@@ -114,9 +176,23 @@ public class StageUnlock : MonoBehaviour
             _cubeMaterial.color = newColor;
             yield return null;
         }
-        Debug.Log("fade terminado");
-        Color _finalColor = _cubeMaterial.color;
-        _finalColor.a = targetAlpha;
-        _cubeMaterial.color = _finalColor;
+
+        Color finalColor = _cubeMaterial.color;
+        finalColor.a = targetAlpha;
+        _cubeMaterial.color = finalColor;
+    }
+
+    private GameObject GetFirstSelectableButton()
+    {
+        if (firstLevelButton != null)
+        {
+            Button button = firstLevelButton.GetComponent<Button>();
+            if (button != null && button.interactable)
+            {
+                return firstLevelButton;
+            }
+        }
+
+        return backToMenuButton;
     }
 }

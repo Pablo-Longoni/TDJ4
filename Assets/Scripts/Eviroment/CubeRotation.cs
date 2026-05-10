@@ -1,5 +1,7 @@
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
+using System.Linq;
+using Unity.VisualScripting;
 
 public class CubeRotation : MonoBehaviour
 {
@@ -16,13 +18,17 @@ public class CubeRotation : MonoBehaviour
     private Coroutine _blinkCoroutine;
     private float _fadeSpeed = 0.6f;
     private Color _targetColor;
-
+    public GameObject _pivotPoint;
+    private GameObject _pivotInstance;
     [SerializeField] public AudioManager _audioManager;
 
     public bool _isInCooldown = false;
     public CameraChange _cameraChange;
+    private CubeAnimation _cubeAnimation;
+    public bool _didRotate = false;
 
-    void Start()
+    public bool isChildCube = false;
+    void Awake()
     {
         _renderers = GetComponentsInChildren<MeshRenderer>();
         _originalColors = new Color[_renderers.Length];
@@ -32,7 +38,26 @@ public class CubeRotation : MonoBehaviour
             _originalColors[i] = _renderers[i].material.color;
         }
 
-        _targetColor = _originalColors[0] * 0.6f;
+        _targetColor = _originalColors[0] * 0.6f; 
+    }
+
+    void Start()
+    {
+        //  Filtrar los renderers que NO estén en "Objects"
+        /*   int objectsLayer = LayerMask.NameToLayer("Objects");
+
+           _renderers = GetComponentsInChildren<MeshRenderer>(true)
+               .Where(r => r.gameObject.layer != objectsLayer)
+               .ToArray();
+
+           _originalColors = new Color[_renderers.Length];
+
+           for (int i = 0; i < _renderers.Length; i++)
+           {
+               _originalColors[i] = _renderers[i].material.color;
+           }*/
+
+        _cubeAnimation = FindAnyObjectByType<CubeAnimation>();
     }
 
     void Update()
@@ -71,16 +96,20 @@ public class CubeRotation : MonoBehaviour
 
     public void RotateCube(Vector3 rotationAxis, Transform player)
     {
+        if (isChildCube) return;
+
         if (_canRotate && !_shouldRotate && !_isInCooldown)
         {
             Quaternion newTargetRotation = Quaternion.AngleAxis(_rotationTurn, rotationAxis) * transform.rotation;
 
             if (Quaternion.Angle(transform.rotation, newTargetRotation) > 0.1f)
             {
+                Debug.Log("Rotando figura");
+                _cubeAnimation.IgnoreStretchAndSquash(1f);
                 _targetRotation = newTargetRotation;
                 _shouldRotate = true;
-
-                AudioManager.Instance.soundSource.PlayOneShot(AudioManager.Instance._turning);
+                _didRotate = true; 
+               AudioManager.Instance.soundSource.PlayOneShot(AudioManager.Instance._turning);
                 StartCoroutine(RotationCooldown());
             }
         }
@@ -103,6 +132,7 @@ public class CubeRotation : MonoBehaviour
         if (_blinkCoroutine == null)
         {
             _blinkCoroutine = StartCoroutine(Blink());
+            ShowPivotPoint();
         }
         _canRotate = true;
     }
@@ -113,7 +143,7 @@ public class CubeRotation : MonoBehaviour
         {
             StopCoroutine(_blinkCoroutine);
             _blinkCoroutine = null;
-
+            DestroyPivotPoint();
             for (int i = 0; i < _renderers.Length; i++)
             {
                 _renderers[i].material.color = _originalColors[i];
@@ -152,4 +182,19 @@ public class CubeRotation : MonoBehaviour
             yield return null;
         }
     }
+
+    private void ShowPivotPoint()
+    {
+        _pivotPoint.SetActive(true);
+     /*   _pivotPoint.transform.SetParent(transform, false);
+        _pivotPoint.transform.localScale = Vector3.one;*/
+      //  Debug.Log("Se instancio el pivot point");
+    }
+
+    private void DestroyPivotPoint()
+    {
+       _pivotPoint.SetActive(false);
+    //    Debug.Log("Se destruypo el pivot point");
+    }
 }
+

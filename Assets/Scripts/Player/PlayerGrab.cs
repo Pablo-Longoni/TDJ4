@@ -1,37 +1,47 @@
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class PlayerGrab : MonoBehaviour
 {
     public float _grabRange = 2f;
     public Transform _grabPoint;
 
-    private GameObject _grabbedObject;
+    public GameObject _grabbedObject;
     private Rigidbody _grabbedRb;
 
     public bool isGrabbed = false;
-    private bool _canGrab = false;
+    public bool _canGrab = false;
 
     private PlayerInputReader _input;
+    private bool _grabButtonHandled = false;
 
     private void Awake()
     {
-        _input = FindObjectOfType<PlayerInputReader>();
+        _input = FindFirstObjectByType<PlayerInputReader>();
+
     }
 
     void Update()
     {
         if (_input == null) return;
 
-        if (_input.GrabPressed)
+        bool grabInput = _input.GrabPressed || Input.GetKeyDown(KeyCode.F);
+
+        if (grabInput)
         {
-            if (_grabbedObject == null)
+            if (!_grabButtonHandled)
             {
-                TryGrab();
+                if (_grabbedObject == null)
+                    TryGrab();
+                else
+                    Release();
+
+                _grabButtonHandled = true;
             }
-            else
-            {
-                Release();
-            }
+        }
+        else
+        {
+            _grabButtonHandled = false;
         }
 
         if (_grabbedObject != null)
@@ -39,10 +49,6 @@ public class PlayerGrab : MonoBehaviour
             MoveGrabbedObject();
         }
 
-        if (!_canGrab && _grabbedObject != null)
-        {
-            Release();
-        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -50,6 +56,8 @@ public class PlayerGrab : MonoBehaviour
         if (other.CompareTag("Movable"))
         {
             _canGrab = true;
+            MeshRenderer _renderer = other.gameObject.GetComponent<MeshRenderer>();
+            _renderer.material.color = Color.gray;
         }
     }
 
@@ -58,15 +66,14 @@ public class PlayerGrab : MonoBehaviour
         if (other.CompareTag("Movable"))
         {
             _canGrab = false;
-            if (_grabbedObject != null)
-            {
-                Release();
-            }
+            MeshRenderer _renderer = other.gameObject.GetComponent<MeshRenderer>();
+            _renderer.material.color = Color.white;
         }
     }
 
     void TryGrab()
     {
+        if (!_canGrab) return;
         Collider[] hits = Physics.OverlapSphere(transform.position, _grabRange);
         foreach (var hit in hits)
         {
@@ -80,7 +87,7 @@ public class PlayerGrab : MonoBehaviour
                 {
                     _grabbedRb.isKinematic = true;
                 }
-
+                isGrabbed = true;
                 break;
             }
         }
@@ -88,6 +95,9 @@ public class PlayerGrab : MonoBehaviour
 
     void MoveGrabbedObject()
     {
+        //  Debug.Log("Move object");
+        MeshRenderer _renderer = _grabbedObject.gameObject.GetComponent<MeshRenderer>();
+        _renderer.material.color = Color.grey;
         isGrabbed = true;
         Vector3 targetPos = _grabPoint.position;
         _grabbedObject.transform.position = Vector3.Lerp(_grabbedObject.transform.position, targetPos, Time.deltaTime * 10f);
@@ -95,6 +105,7 @@ public class PlayerGrab : MonoBehaviour
 
     void Release()
     {
+        Debug.Log("Release object");
         isGrabbed = false;
         Physics.IgnoreCollision(GetComponent<Collider>(), _grabbedObject.GetComponent<Collider>(), false);
         if (_grabbedRb != null)
