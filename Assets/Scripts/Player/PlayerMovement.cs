@@ -19,6 +19,7 @@ public class PlayerMovement : MonoBehaviour
     private string _minimapLayerName = "Enviroment";
     private string _defaultLayerName = "Default";
 
+    [SerializeField] private PlayerAnimationController _playerAnimator;
     private void Start()
     {
         _cameraChange = FindAnyObjectByType<CameraChange>();
@@ -78,19 +79,21 @@ public class PlayerMovement : MonoBehaviour
         {
             if (_input != Vector3.zero)
             {
+                _playerAnimator.PlayAnimation("Walk");
                 Vector3 moveDir = _input * _speed;
                 _rb.linearVelocity = new Vector3(moveDir.x, _rb.linearVelocity.y, moveDir.z);
             }
             else
             {
-
+                _playerAnimator.PlayAnimation("Idle");
                 _rb.linearVelocity = new Vector3(0, _rb.linearVelocity.y, 0);
             }
 
-            _rb.constraints = RigidbodyConstraints.FreezeRotation;
+            _rb.constraints = RigidbodyConstraints.FreezeRotation;       
         }
         else
         {
+            _playerAnimator.PlayAnimation("Idle", false);
             _rb.linearVelocity = Vector3.zero;
             _rb.constraints = RigidbodyConstraints.FreezeAll;
         }
