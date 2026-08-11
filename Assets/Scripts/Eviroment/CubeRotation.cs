@@ -30,7 +30,7 @@ public class CubeRotation : MonoBehaviour
     public bool isChildCube = false;
     void Awake()
     {
-        _renderers = GetComponentsInChildren<MeshRenderer>();
+      /*  _renderers = GetComponentsInChildren<MeshRenderer>();
         _originalColors = new Color[_renderers.Length];
 
         for (int i = 0; i < _renderers.Length; i++)
@@ -38,7 +38,7 @@ public class CubeRotation : MonoBehaviour
             _originalColors[i] = _renderers[i].material.color;
         }
 
-        _targetColor = _originalColors[0] * 0.6f; 
+        _targetColor = _originalColors[0] * 0.6f; */
     }
 
     void Start()

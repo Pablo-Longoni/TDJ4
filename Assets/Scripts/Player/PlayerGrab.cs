@@ -15,6 +15,7 @@ public class PlayerGrab : MonoBehaviour
     private PlayerInputReader _input;
     private bool _grabButtonHandled = false;
 
+    [SerializeField] private PlayerAnimationController _playerAnimator;
     private void Awake()
     {
         _input = FindFirstObjectByType<PlayerInputReader>();
@@ -47,8 +48,8 @@ public class PlayerGrab : MonoBehaviour
         if (_grabbedObject != null)
         {
             MoveGrabbedObject();
+            _playerAnimator.PlayAnimation("WalkAndGrab", true, true);
         }
-
     }
 
     private void OnTriggerEnter(Collider other)
@@ -100,7 +101,8 @@ public class PlayerGrab : MonoBehaviour
         _renderer.material.color = Color.grey;
         isGrabbed = true;
         Vector3 targetPos = _grabPoint.position;
-        _grabbedObject.transform.position = Vector3.Lerp(_grabbedObject.transform.position, targetPos, Time.deltaTime * 10f);
+        //_grabbedObject.transform.position = Vector3.Lerp(_grabbedObject.transform.position, targetPos, Time.deltaTime * 10f);
+        _grabbedObject.transform.position = _grabPoint.position;
     }
 
     void Release()

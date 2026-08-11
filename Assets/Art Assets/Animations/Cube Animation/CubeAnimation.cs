@@ -36,6 +36,8 @@ public class CubeAnimation : MonoBehaviour
   //  private CameraChange _camera;
     [SerializeField] private GameObject _cube; 
     private bool canStretchAndSquash = true;
+
+    [SerializeField] private PlayerAnimationController _playerAnimator;
     void Start()
     {
      //   _camera = GameObject.FindAnyObjectByType<CameraChange>();
@@ -90,39 +92,50 @@ public class CubeAnimation : MonoBehaviour
 
     IEnumerator Stretch()
     {
+        Debug.Log("Falling");
+        _playerAnimator.PlayAnimation("Fall", false, true);
+        _playerAnimator.LockAnimation();
+
         StopActiveRoutine();
-        Vector3 stretched = new Vector3(originalScale.x, originalScale.y * stretchAmount, originalScale.z);
-        currentRoutine = StartCoroutine(ScaleOverTime(transform.localScale, stretched, 0.1f));
+     /*   Vector3 stretched = new Vector3(originalScale.x, originalScale.y * stretchAmount, originalScale.z);
+        currentRoutine = StartCoroutine(ScaleOverTime(transform.localScale, stretched, 0.1f));*/
         yield return currentRoutine;
      //   Debug.Log("Stretch");
     }
 
     IEnumerator Squash()
     {
+        Debug.Log("Landing");
+        _playerAnimator.PlayAnimation("Land", true, true);
         StopActiveRoutine();
         ignoreGroundCheck = true;
-        AudioManager.Instance.soundSource.PlayOneShot(AudioManager.Instance._playerLand); 
+     //   AudioManager.Instance.soundSource.PlayOneShot(AudioManager.Instance._playerLand); 
         float fallDuration = Time.time - fallStartTime;
         if (!dustSpawned)
         {
             if (fallDuration >= 1.2f)
             {
                 Instantiate(_dustPrefab, groundCheck.position, _dustPrefab.transform.rotation);
+                Debug.Log("Big Dust");
             }
             else
             {
                 Instantiate(_miniDustPrefab, groundCheck.position, _miniDustPrefab.transform.rotation);
+                Debug.Log("Small Dust");
             }
             dustSpawned = true;
         }
 
-        Vector3 squashed = new Vector3(originalScale.x, originalScale.y * squashAmount, originalScale.z);
+    /*    Vector3 squashed = new Vector3(originalScale.x, originalScale.y * squashAmount, originalScale.z);
 
         yield return StartCoroutine(ScaleOverTime(transform.localScale, squashed, squashDuration));
-        yield return StartCoroutine(ScaleOverTime(squashed, originalScale, 0.15f));
-
+        yield return StartCoroutine(ScaleOverTime(squashed, originalScale, 0.15f));*/
+        
         ignoreGroundCheck = false;
         dustSpawned = false;
+
+        yield return null;
+        Debug.Log("Terminó el squash");
     }
 
     IEnumerator ScaleOverTime(Vector3 startScale, Vector3 endScale, float duration)
@@ -190,7 +203,7 @@ public class CubeAnimation : MonoBehaviour
     public void EnterPortalAnim()
     {
         canStretchAndSquash = false;
-        StartCoroutine(ScaleObject(_cube, Vector3.zero, 0.7f));
+        StartCoroutine(ScaleObject(_cube, Vector3.zero, 0.15f));
         Debug.Log("EnterPortalAnim");
     }
 
