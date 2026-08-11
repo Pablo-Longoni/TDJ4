@@ -342,6 +342,11 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!82 &401709453 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 3648475147099945209, guid: 3f6850c954f7cb2439f14642eb136642, type: 3}
+  m_PrefabInstance: {fileID: 1271134087}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &415670791
 GameObject:
   m_ObjectHideFlags: 0
@@ -1763,6 +1768,10 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3648475147099945209, guid: 3f6850c954f7cb2439f14642eb136642, type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3672573018689538261, guid: 3f6850c954f7cb2439f14642eb136642, type: 3}
       propertyPath: m_Navigation.m_Mode
       value: -1
@@ -2245,6 +2254,13 @@ MonoBehaviour:
   _restartTrans: 0
   _cameraChange: {fileID: 415670792}
   _textTrans: {fileID: 1271134090}
+  _normalColor: {r: 0, g: 0, b: 0, a: 1}
+  _lastFlipColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  _zeroFlipColor: {r: 1, g: 0, b: 0, a: 1}
+  _pulseScale: 1.3
+  _pulseDuration: 0.2
+  _audioSource: {fileID: 401709453}
+  _noFlipsSound: {fileID: 8300000, guid: 643dbad9c0fe2324fbc9dbcebf8c6ea1, type: 3}
   _cheatButton: {fileID: 1271134089}
 --- !u!114 &1606612548
 MonoBehaviour:

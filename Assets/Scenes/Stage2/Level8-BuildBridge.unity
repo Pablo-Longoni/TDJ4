@@ -345,6 +345,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 598830137108701039, guid: 73b0861027af1cf44a2fa0c0dea35a72, type: 3}
   m_PrefabInstance: {fileID: 70991718}
   m_PrefabAsset: {fileID: 0}
+--- !u!82 &144986651 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 3648475147099945209, guid: 3f6850c954f7cb2439f14642eb136642, type: 3}
+  m_PrefabInstance: {fileID: 809490914}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &198949546
 GameObject:
   m_ObjectHideFlags: 0
@@ -2829,6 +2834,13 @@ MonoBehaviour:
   _restartTrans: 0
   _cameraChange: {fileID: 1553909911}
   _textTrans: {fileID: 809490918}
+  _normalColor: {r: 0, g: 0, b: 0, a: 1}
+  _lastFlipColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  _zeroFlipColor: {r: 1, g: 0, b: 0, a: 1}
+  _pulseScale: 1.3
+  _pulseDuration: 0.2
+  _audioSource: {fileID: 144986651}
+  _noFlipsSound: {fileID: 8300000, guid: 643dbad9c0fe2324fbc9dbcebf8c6ea1, type: 3}
   _cheatButton: {fileID: 809490916}
 --- !u!114 &1962134563
 MonoBehaviour:

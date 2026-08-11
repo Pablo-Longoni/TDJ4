@@ -1012,6 +1012,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 82830286827880226, guid: 445ac89c10ca91140ba10b3b829afec2, type: 3}
   m_PrefabInstance: {fileID: 1293107781}
   m_PrefabAsset: {fileID: 0}
+--- !u!82 &730203251 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 3648475147099945209, guid: 3f6850c954f7cb2439f14642eb136642, type: 3}
+  m_PrefabInstance: {fileID: 1571872218}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &806211590
 GameObject:
   m_ObjectHideFlags: 0
@@ -1341,6 +1346,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 265388989196013889, guid: 0b5db73dc98c91042bb5435334e5833a, type: 3}
+      propertyPath: _audioSource
+      value: 
+      objectReference: {fileID: 730203251}
+    - target: {fileID: 265388989196013889, guid: 0b5db73dc98c91042bb5435334e5833a, type: 3}
       propertyPath: _cheatButton
       value: 
       objectReference: {fileID: 1571872222}
@@ -1348,6 +1357,10 @@ PrefabInstance:
       propertyPath: _cameraChange
       value: 
       objectReference: {fileID: 1158862570}
+    - target: {fileID: 265388989196013889, guid: 0b5db73dc98c91042bb5435334e5833a, type: 3}
+      propertyPath: _noFlipsSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 643dbad9c0fe2324fbc9dbcebf8c6ea1, type: 3}
     - target: {fileID: 2935157485534680045, guid: 0b5db73dc98c91042bb5435334e5833a, type: 3}
       propertyPath: _limit
       value: -50

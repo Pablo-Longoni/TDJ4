@@ -352,6 +352,11 @@ BoxCollider:
   m_CorrespondingSourceObject: {fileID: 5728486013633246411, guid: 443fa5ddd4002a546a56cec3934d36ee, type: 3}
   m_PrefabInstance: {fileID: 155090441}
   m_PrefabAsset: {fileID: 0}
+--- !u!82 &219640161 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 3648475147099945209, guid: 3f6850c954f7cb2439f14642eb136642, type: 3}
+  m_PrefabInstance: {fileID: 975418467}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &293456983
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3282,6 +3287,10 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 265388989196013889, guid: 0b5db73dc98c91042bb5435334e5833a, type: 3}
+      propertyPath: _audioSource
+      value: 
+      objectReference: {fileID: 219640161}
+    - target: {fileID: 265388989196013889, guid: 0b5db73dc98c91042bb5435334e5833a, type: 3}
       propertyPath: _cheatButton
       value: 
       objectReference: {fileID: 975418468}
@@ -3289,6 +3298,22 @@ PrefabInstance:
       propertyPath: _cameraChange
       value: 
       objectReference: {fileID: 716789543}
+    - target: {fileID: 265388989196013889, guid: 0b5db73dc98c91042bb5435334e5833a, type: 3}
+      propertyPath: _noFlipsSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 643dbad9c0fe2324fbc9dbcebf8c6ea1, type: 3}
+    - target: {fileID: 265388989196013889, guid: 0b5db73dc98c91042bb5435334e5833a, type: 3}
+      propertyPath: _normalColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 265388989196013889, guid: 0b5db73dc98c91042bb5435334e5833a, type: 3}
+      propertyPath: _normalColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 265388989196013889, guid: 0b5db73dc98c91042bb5435334e5833a, type: 3}
+      propertyPath: _normalColor.r
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2935157485534680045, guid: 0b5db73dc98c91042bb5435334e5833a, type: 3}
       propertyPath: _limit
       value: 40

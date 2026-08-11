@@ -380,6 +380,13 @@ MonoBehaviour:
   _restartTrans: 0
   _cameraChange: {fileID: 1474532234}
   _textTrans: {fileID: 1153090523}
+  _normalColor: {r: 0, g: 0, b: 0, a: 1}
+  _lastFlipColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  _zeroFlipColor: {r: 1, g: 0, b: 0, a: 1}
+  _pulseScale: 1.3
+  _pulseDuration: 0.2
+  _audioSource: {fileID: 1153090525}
+  _noFlipsSound: {fileID: 8300000, guid: 643dbad9c0fe2324fbc9dbcebf8c6ea1, type: 3}
   _cheatButton: {fileID: 1153090522}
 --- !u!4 &492641272
 Transform:
@@ -6011,6 +6018,10 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3648475147099945209, guid: 3f6850c954f7cb2439f14642eb136642, type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3672573018689538261, guid: 3f6850c954f7cb2439f14642eb136642, type: 3}
       propertyPath: m_Navigation.m_Mode
       value: -1
@@ -6254,6 +6265,11 @@ MonoBehaviour:
 --- !u!1 &1153090524 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6248099312379414107, guid: 3f6850c954f7cb2439f14642eb136642, type: 3}
+  m_PrefabInstance: {fileID: 1153090520}
+  m_PrefabAsset: {fileID: 0}
+--- !u!82 &1153090525 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 3648475147099945209, guid: 3f6850c954f7cb2439f14642eb136642, type: 3}
   m_PrefabInstance: {fileID: 1153090520}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1172215398

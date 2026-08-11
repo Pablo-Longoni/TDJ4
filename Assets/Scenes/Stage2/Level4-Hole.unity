@@ -286,6 +286,7 @@ MonoBehaviour:
   _isInCooldown: 0
   _cameraChange: {fileID: 1050403306}
   _didRotate: 0
+  isChildCube: 0
 --- !u!65 &38723015
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -777,6 +778,11 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!82 &589520505 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 3648475147099945209, guid: 3f6850c954f7cb2439f14642eb136642, type: 3}
+  m_PrefabInstance: {fileID: 7778851218308412313}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &849612488
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1953,6 +1959,13 @@ MonoBehaviour:
   _restartTrans: 0
   _cameraChange: {fileID: 1050403306}
   _textTrans: {fileID: 1948856391}
+  _normalColor: {r: 0, g: 0, b: 0, a: 1}
+  _lastFlipColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  _zeroFlipColor: {r: 1, g: 0, b: 0, a: 1}
+  _pulseScale: 1.3
+  _pulseDuration: 0.2
+  _audioSource: {fileID: 589520505}
+  _noFlipsSound: {fileID: 8300000, guid: 643dbad9c0fe2324fbc9dbcebf8c6ea1, type: 3}
   _cheatButton: {fileID: 123982066}
 --- !u!114 &1931030348
 MonoBehaviour:
