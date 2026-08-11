@@ -74,6 +74,11 @@ public class PlayerMovement : MonoBehaviour
 
     void Move()
     {
+        // Mientras cualquier PlayerDash está dasheando (flag estático compartido),
+        // no tocamos la velocidad acá, para no pisar el impulso del dash.
+        if (PlayerDash.IsAnyDashing)
+            return;
+
         if (_cameraChange._isIsometric)
         {
             if (_input != Vector3.zero)
@@ -141,7 +146,7 @@ public class PlayerMovement : MonoBehaviour
             if (_currentCube != null)
             {
                 _currentCube.RotateCube(rotationAxis, transform);
-               // Debug.Log("Por rotar figura");
+                // Debug.Log("Por rotar figura");
             }
         }
     }
@@ -152,15 +157,15 @@ public class PlayerMovement : MonoBehaviour
 
         if (Physics.SphereCast(transform.position, 0.2f, Vector3.down, out RaycastHit hit, groundCheckDistance + 0.5f))
         {
-              CubeRotation detectedCube = hit.collider.GetComponent<CubeRotation>();
-              if (detectedCube != null && detectedCube != _currentCube)
-              {
-                  _currentCube?.StopBlinking();
-                  _currentCube = detectedCube;
-                  _currentCube.StartBlinking();
-              }
-             
-              Transform currentFigure = hit.collider.transform;
+            CubeRotation detectedCube = hit.collider.GetComponent<CubeRotation>();
+            if (detectedCube != null && detectedCube != _currentCube)
+            {
+                _currentCube?.StopBlinking();
+                _currentCube = detectedCube;
+                _currentCube.StartBlinking();
+            }
+
+            Transform currentFigure = hit.collider.transform;
 
             if (_currentFigure != currentFigure)
             {

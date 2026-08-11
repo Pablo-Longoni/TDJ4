@@ -35,7 +35,7 @@ public class DoorTrigger : MonoBehaviour
     [Header("Vibration Settings")]
     [SerializeField] private float vibrationIntensity = 0.8f;
     [SerializeField] private float vibrationDuration = 2f;
-   
+
 
     // XInput para Windows (Logitech F710 en modo X)
     [DllImport("XInput1_4.dll")]
@@ -63,7 +63,7 @@ public class DoorTrigger : MonoBehaviour
             _rb.isKinematic = true;
             //    StartCoroutine(MovePlayerToDoor(_target.transform.position));
             StartCoroutine(EnterPortalSequence());
-           // AudioManager.Instance.soundSource.PlayOneShot(AudioManager.Instance._portal);
+            // AudioManager.Instance.soundSource.PlayOneShot(AudioManager.Instance._portal);
             Debug.Log("Jugador entró en la puerta");
         }
     }
@@ -71,6 +71,12 @@ public class DoorTrigger : MonoBehaviour
     private IEnumerator EnterPortalSequence()
     {
         _player.enabled = false;
+
+        // Al desactivar PlayerMovement, PlayerDash deja de consumir el input de
+        // Dash. Si quedó DashTriggered=true en este instante, lo limpiamos acá
+        // para que no se arrastre "colgado" hacia la siguiente escena/nivel.
+        _player.inputReader.ConsumeDash();
+
         _cubeAnimation.IgnoreStretchAndSquash(2);
 
         yield return StartCoroutine(ZoomIn());
@@ -86,14 +92,14 @@ public class DoorTrigger : MonoBehaviour
         _cubeAnimation.EnterPortalAnim();
         float timeElapsed = 0f;
         Vector3 initialPosition = _player.transform.position;
-        Vector3 _offSet = new Vector3(0, -2, 0); 
-        Instantiate(_particleEnterPortal, targetPosition + _offSet, _rotationParticle); 
+        Vector3 _offSet = new Vector3(0, -2, 0);
+        Instantiate(_particleEnterPortal, targetPosition + _offSet, _rotationParticle);
         _cameraShake.Shake(2f, 2, .4f);
 
         _audioManager.soundSource.PlayOneShot(_audioManager._portal);
         while (timeElapsed < 2f)
         {
-            timeElapsed += Time.deltaTime * moveSpeed; 
+            timeElapsed += Time.deltaTime * moveSpeed;
             _player.transform.position = Vector3.Lerp(initialPosition, targetPosition, timeElapsed);
             yield return null;
         }
@@ -105,7 +111,7 @@ public class DoorTrigger : MonoBehaviour
         _cinemachineCamera.Target.TrackingTarget = _portal;
         _originalSize = _cinemachineCamera.Lens.OrthographicSize;
 
-        Vector3 levitateDirection = _target.transform.up; 
+        Vector3 levitateDirection = _target.transform.up;
         Vector3 startPosLevitate = _player.transform.position;
         Vector3 targetPosLevitate = startPosLevitate + levitateDirection * levitateDistance;
 
@@ -181,7 +187,7 @@ public class DoorTrigger : MonoBehaviour
         vibration.wRightMotorSpeed = 0;
         XInputSetState(0, ref vibration);
 
-       // Debug.Log("[XInput] Vibración detenida");
+        // Debug.Log("[XInput] Vibración detenida");
     }
 
     private void OnDestroy()

@@ -2524,6 +2524,7 @@ GameObject:
   - component: {fileID: 1962134565}
   - component: {fileID: 1962134569}
   - component: {fileID: 1962134570}
+  - component: {fileID: 1962134571}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -2764,6 +2765,23 @@ MonoBehaviour:
   _dustPrefab: {fileID: 7512446778391803044, guid: 0bd8793734ebff845be3eab2b81567e6, type: 3}
   _miniDustPrefab: {fileID: 5255338958118048641, guid: a8b18898eb9dd6744bd71c1f2279215a, type: 3}
   _cube: {fileID: 1962134559}
+--- !u!114 &1962134571
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1962134559}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fd5c5d014a4c2b4eb18c3d3a2179674, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _rb: {fileID: 1962134564}
+  _inputReader: {fileID: 25483843}
+  _movement: {fileID: 1962134563}
+  dashSpeed: 45
+  dashDuration: 0.5
 --- !u!1 &1982445977
 GameObject:
   m_ObjectHideFlags: 0

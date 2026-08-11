@@ -1369,6 +1369,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 20d302f9-c0c4-46ff-931a-002f46829827
     m_ActionName: 'Player/Grab[/Keyboard/f,/XInputControllerWindows/buttonWest]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: ff7c026b-f7be-4caf-8823-8bddc412ce19
+    m_ActionName: 'Player/Dash[/Keyboard/leftShift,/Keyboard/shift]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Gameplay
@@ -6952,6 +6956,7 @@ GameObject:
   - component: {fileID: 2111671653}
   - component: {fileID: 2111671662}
   - component: {fileID: 2111671663}
+  - component: {fileID: 2111671664}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -7193,6 +7198,23 @@ MonoBehaviour:
   _dustPrefab: {fileID: 7512446778391803044, guid: 0bd8793734ebff845be3eab2b81567e6, type: 3}
   _miniDustPrefab: {fileID: 5255338958118048641, guid: a8b18898eb9dd6744bd71c1f2279215a, type: 3}
   _cube: {fileID: 2111671652}
+--- !u!114 &2111671664
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2111671652}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fd5c5d014a4c2b4eb18c3d3a2179674, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _rb: {fileID: 2111671657}
+  _inputReader: {fileID: 1006522905}
+  _movement: {fileID: 2111671656}
+  dashSpeed: 45
+  dashDuration: 0.5
 --- !u!1001 &2131590124
 PrefabInstance:
   m_ObjectHideFlags: 0
