@@ -13,11 +13,24 @@ public class PlayerTransformation : MonoBehaviour
     public CameraChange _cameraChange;
     public TextMeshProUGUI _textTrans;
 
+    [Header("Feedback visual")]
+    public Color _normalColor = Color.white;
+    public Color _lastFlipColor = Color.yellow;
+    public Color _zeroFlipColor = Color.red;
+    public float _pulseScale = 1.3f;
+    public float _pulseDuration = 0.2f;
+
+    [Header("Feedback sonoro")]
+    [SerializeField] private AudioSource _audioSource;
+    [SerializeField] private AudioClip _noFlipsSound;
+
     private bool _isBlinking = false;
+    private bool _isPulsing = false;
     [SerializeField] public Button _cheatButton;
     private bool _cheatOn = false;
 
     private PlayerControls _inputActions;
+
     void Awake()
     {
         _inputActions = new PlayerControls();
@@ -37,33 +50,65 @@ public class PlayerTransformation : MonoBehaviour
 
     void Start()
     {
-        _textTrans.text = "Flips: " + _currentTrans + "/" + _totalTrans;
         _restartTrans = _totalTrans;
+        UpdateTransText();
     }
 
     private void OnCameraFlipPressed(InputAction.CallbackContext context)
     {
-        // NUEVO: Verificar si el juego está pausado
         if (ChangeScene.IsPaused) return;
 
         if (_currentTrans < _totalTrans)
         {
-            _cameraChange._canChange = true; // permitir el cambio   
+            _cameraChange._canChange = true;
         }
         else
         {
             _cameraChange._canChange = false;
 
             if (!_isBlinking)
+            {
+                PlayNoFlipsSound();
                 StartCoroutine(BlinkText());
+            }
+        }
+    }
+
+    private void PlayNoFlipsSound()
+    {
+        if (_audioSource != null && _noFlipsSound != null)
+        {
+            _audioSource.PlayOneShot(_noFlipsSound);
         }
     }
 
     public void PlayerTransformed()
     {
         _currentTrans++;
-        _textTrans.text = "Flips: " + _currentTrans + "/" + _totalTrans;
-     //   Debug.Log("Transformations: " + _currentTrans);
+        UpdateTransText();
+    }
+
+    private void UpdateTransText()
+    {
+        int remaining = _totalTrans - _currentTrans;
+        if (remaining < 0) remaining = 0;
+
+        _textTrans.text = "Flips: " + remaining;
+
+        if (remaining <= 0)
+        {
+            _textTrans.color = _zeroFlipColor;
+        }
+        else if (remaining == 1)
+        {
+            _textTrans.color = _lastFlipColor;
+            if (!_isPulsing)
+                StartCoroutine(PulseText());
+        }
+        else
+        {
+            _textTrans.color = _normalColor;
+        }
     }
 
     IEnumerator BlinkText()
@@ -81,6 +126,32 @@ public class PlayerTransformation : MonoBehaviour
         _isBlinking = false;
     }
 
+    IEnumerator PulseText()
+    {
+        _isPulsing = true;
+        Vector3 originalScale = _textTrans.transform.localScale;
+        Vector3 targetScale = originalScale * _pulseScale;
+
+        float t = 0f;
+        while (t < _pulseDuration)
+        {
+            t += Time.deltaTime;
+            _textTrans.transform.localScale = Vector3.Lerp(originalScale, targetScale, t / _pulseDuration);
+            yield return null;
+        }
+
+        t = 0f;
+        while (t < _pulseDuration)
+        {
+            t += Time.deltaTime;
+            _textTrans.transform.localScale = Vector3.Lerp(targetScale, originalScale, t / _pulseDuration);
+            yield return null;
+        }
+
+        _textTrans.transform.localScale = originalScale;
+        _isPulsing = false;
+    }
+
     public void CheatTransformation()
     {
         _cheatOn = !_cheatOn;
@@ -92,14 +163,13 @@ public class PlayerTransformation : MonoBehaviour
         {
             _totalTrans = _restartTrans;
         }
-        _textTrans.text = "Flips: " + _currentTrans + "/" + _totalTrans;
+        UpdateTransText();
     }
-
 
     public void TransformUpgrade()
     {
         _totalTrans = _totalTrans + _transformUpgrade;
-        _textTrans.text = "Flips: " + _currentTrans + "/" + _totalTrans;
+        UpdateTransText();
         StartCoroutine(BlinkText());
     }
 }

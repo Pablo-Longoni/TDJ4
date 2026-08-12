@@ -38,7 +38,7 @@ public class CameraChange : MonoBehaviour
     private PlayerInputReader _input;
 
     //Saber si rotó
-    public CubeRotation [] _cubeRotation;
+    public CubeRotation[] _cubeRotation;
 
     private void Awake()
     {
@@ -89,22 +89,30 @@ public class CameraChange : MonoBehaviour
         {
             _changeScene.RestartLevel();
         }
+    }
+
+    void LateUpdate()
+    {
+        // Se resetean los flags recién acá, después de que TODOS los
+        // Update() de la escena ya los leyeron, para evitar que el orden
+        // de ejecución entre scripts borre un flag antes de que se use.
+        if (_input == null) return;
 
         _input.ResetFlags();
     }
 
     private void ChangeCamera()
     {
-      //  Debug.Log("ChangeCamera");
+        //  Debug.Log("ChangeCamera");
         _isIsometric = !_isIsometric;
         _cameraBrain.DefaultBlend.Time = 1;
         if (!_isIsometric)
         {
-           
+
             _cameraRotation.ResetRotation();
             _isometricCamera.Priority = 2;
             _overHeadCamera.Priority = 3;
-         //   Debug.Log("Camara cenital" + _isIsometric);
+            //   Debug.Log("Camara cenital" + _isIsometric);
         }
         else
         {
@@ -150,7 +158,7 @@ public class CameraChange : MonoBehaviour
         // Recién ahora cambia de estado
         currentState = SpaceBarState.Playing;
         _cameraBrain.DefaultBlend.Time = 1;
-     //   Debug.Log("Cinematica terminada y blend finalizado");
+        //   Debug.Log("Cinematica terminada y blend finalizado");
     }
 
     void SkipCinematic()
