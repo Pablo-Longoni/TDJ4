@@ -650,7 +650,6 @@ MonoBehaviour:
   _input: {x: 0, y: 0, z: 0}
   _currentCube: {fileID: 681476068}
   _minimapCameraFollow: {fileID: 1308013920}
-  _playerAnimator: {fileID: 1599534049}
 --- !u!4 &170218870
 Transform:
   m_ObjectHideFlags: 0
@@ -2015,6 +2014,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4507193146192517315, guid: 0adb64aeee7f51a4a9dca3691b9aa961, type: 3}
+      propertyPath: _inputReader
+      value: 
+      objectReference: {fileID: 170218868}
     - target: {fileID: 7243655114432101501, guid: 0adb64aeee7f51a4a9dca3691b9aa961, type: 3}
       propertyPath: m_Name
       value: NewPlayer
@@ -2070,17 +2073,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3ac8efd1d77c8cb4b957296331fdbfe9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1599534049 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2247850963641750605, guid: 0adb64aeee7f51a4a9dca3691b9aa961, type: 3}
-  m_PrefabInstance: {fileID: 1311963208}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 447545b575e322645b2f662d7fb6fd1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1605917726 stripped

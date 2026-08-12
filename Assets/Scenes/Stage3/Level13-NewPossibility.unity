@@ -187,7 +187,6 @@ MonoBehaviour:
   _input: {x: 0, y: 0, z: 0}
   _currentCube: {fileID: 864567534}
   _minimapCameraFollow: {fileID: 0}
-  _playerAnimator: {fileID: 441526154}
 --- !u!4 &272454440
 Transform:
   m_ObjectHideFlags: 0
@@ -946,6 +945,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4023019975840672093, guid: 0adb64aeee7f51a4a9dca3691b9aa961, type: 3}
+      propertyPath: _audioSource
+      value: 
+      objectReference: {fileID: 1436603533}
+    - target: {fileID: 4023019975840672093, guid: 0adb64aeee7f51a4a9dca3691b9aa961, type: 3}
       propertyPath: _cheatButton
       value: 
       objectReference: {fileID: 1900368241}
@@ -1002,17 +1005,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0adb64aeee7f51a4a9dca3691b9aa961, type: 3}
---- !u!114 &441526154 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2247850963641750605, guid: 0adb64aeee7f51a4a9dca3691b9aa961, type: 3}
-  m_PrefabInstance: {fileID: 441526153}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 447545b575e322645b2f662d7fb6fd1a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &441526155 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4023019975840672093, guid: 0adb64aeee7f51a4a9dca3691b9aa961, type: 3}
@@ -2622,6 +2614,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3f884c56ff19fb4d8a936ce7233b992, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!82 &1436603533 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 2457446999334026253, guid: ab58fd9791f512845a6370275ae3439e, type: 3}
+  m_PrefabInstance: {fileID: 1436603530}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1512916542
 GameObject:
   m_ObjectHideFlags: 0
