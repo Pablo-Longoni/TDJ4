@@ -109,7 +109,7 @@ public class CubeAnimation : MonoBehaviour
         _playerAnimator.PlayAnimation("Land", true, true);
         StopActiveRoutine();
         ignoreGroundCheck = true;
-     //   AudioManager.Instance.soundSource.PlayOneShot(AudioManager.Instance._playerLand); 
+        AudioManager.Instance.soundSource.PlayOneShot(AudioManager.Instance._playerLand); 
         float fallDuration = Time.time - fallStartTime;
         if (!dustSpawned)
         {

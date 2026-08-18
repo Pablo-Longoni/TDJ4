@@ -8,7 +8,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float _speed = 5;
     [SerializeField] private float _turnSpeed = 500;
     [SerializeField] private float groundCheckDistance = 0.2f;
-
+    [SerializeField] private PlayerAnimationController _playerAnimator;
     public Vector3 _input;
 
     private CameraChange _cameraChange;
@@ -85,13 +85,15 @@ public class PlayerMovement : MonoBehaviour
             {
                 Vector3 moveDir = _input * _speed;
                 _rb.linearVelocity = new Vector3(moveDir.x, _rb.linearVelocity.y, moveDir.z);
+                _playerAnimator.PlayAnimation("Walk");
             }
             else
             {
 
                 _rb.linearVelocity = new Vector3(0, _rb.linearVelocity.y, 0);
+                _playerAnimator.PlayAnimation("Idle");
             }
-
+            
             _rb.constraints = RigidbodyConstraints.FreezeRotation;
         }
         else

@@ -575,6 +575,7 @@ GameObject:
   - component: {fileID: 4023019975840672093}
   - component: {fileID: 8695880744436238994}
   - component: {fileID: 4507193146192517315}
+  - component: {fileID: 2745344777387925824}
   m_Layer: 6
   m_Name: NewPlayer
   m_TagString: Player
@@ -690,6 +691,7 @@ MonoBehaviour:
   _speed: 13
   _turnSpeed: 500
   groundCheckDistance: 0.6
+  _playerAnimator: {fileID: 2247850963641750605}
   _input: {x: 0, y: 0, z: 0}
   _currentCube: {fileID: 0}
   _minimapCameraFollow: {fileID: 0}
@@ -838,6 +840,19 @@ MonoBehaviour:
   _movement: {fileID: 794171907680762304}
   dashSpeed: 40
   dashDuration: 0.5
+--- !u!114 &2745344777387925824
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7243655114432101501}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b12bdcaa4c6cc2b4a8fd2a03a22ee3e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canTeleport: 1
 --- !u!1 &7512177444428323409
 GameObject:
   m_ObjectHideFlags: 0
