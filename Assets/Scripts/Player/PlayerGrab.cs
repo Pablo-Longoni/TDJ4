@@ -87,7 +87,9 @@ public class PlayerGrab : MonoBehaviour
                 if (_grabbedRb != null)
                 {
                     _grabbedRb.isKinematic = true;
+                    _grabbedRb.constraints = RigidbodyConstraints.None;
                 }
+
                 isGrabbed = true;
                 break;
             }

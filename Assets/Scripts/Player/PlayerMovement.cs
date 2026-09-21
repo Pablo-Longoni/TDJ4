@@ -9,6 +9,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float _turnSpeed = 500;
     [SerializeField] private float groundCheckDistance = 0.2f;
     [SerializeField] private PlayerAnimationController _playerAnimator;
+    [SerializeField] private PlayerTransformation _playerTransformation;
     public Vector3 _input;
 
     private CameraChange _cameraChange;
@@ -31,7 +32,7 @@ public class PlayerMovement : MonoBehaviour
     {
         CheckCurrentCube();
 
-        if (!_cameraChange._isIsometric && _currentCube._canRotate)
+        if (!_cameraChange._isIsometric && _currentCube._canRotate &&  _playerTransformation.CanTransform())
         {
             Rotating();
         }
@@ -74,14 +75,12 @@ public class PlayerMovement : MonoBehaviour
 
     void Move()
     {
-        // Mientras cualquier PlayerDash está dasheando (flag estático compartido),
-        // no tocamos la velocidad acá, para no pisar el impulso del dash.
         if (PlayerDash.IsAnyDashing)
             return;
 
         if (_cameraChange._isIsometric)
         {
-            if (_input != Vector3.zero)
+            if (_input != Vector3.zero && !_cameraChange._cinematicPlaying)
             {
                 Vector3 moveDir = _input * _speed;
                 _rb.linearVelocity = new Vector3(moveDir.x, _rb.linearVelocity.y, moveDir.z);
@@ -148,7 +147,6 @@ public class PlayerMovement : MonoBehaviour
             if (_currentCube != null)
             {
                 _currentCube.RotateCube(rotationAxis, transform);
-                // Debug.Log("Por rotar figura");
             }
         }
     }

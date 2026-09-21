@@ -7,6 +7,6 @@ public class VersionDisplay : MonoBehaviour
     private void Awake()
     {
         TMP_Text text = GetComponent<TMP_Text>();
-        text.text = Application.version + " (14.08.2026)";
+        text.text = Application.version + " (20.09.2026)";
     }
 }

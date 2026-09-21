@@ -71,26 +71,6 @@ public class CubeRotation : MonoBehaviour
                 transform.rotation = _targetRotation;
                 _shouldRotate = false;
             }
-
-         /*   float horizontal = Input.GetAxis("Horizontal");
-            float vertical = Input.GetAxis("Vertical");
-
-            if (horizontal < -0.5f)
-            {
-                RotateCube(Vector3.up, transform);
-            }
-            else if (horizontal > 0.5f)
-            {
-                RotateCube(Vector3.down, transform);
-            }
-            else if (vertical > 0.5f)
-            {
-                RotateCube(Vector3.right, transform);
-            }
-            else if (vertical < -0.5f)
-            {
-                RotateCube(Vector3.left, transform);
-            }*/
         }
     }
 
@@ -104,12 +84,15 @@ public class CubeRotation : MonoBehaviour
 
             if (Quaternion.Angle(transform.rotation, newTargetRotation) > 0.1f)
             {
-                Debug.Log("Rotando figura");
                 _cubeAnimation.IgnoreStretchAndSquash(1f);
                 _targetRotation = newTargetRotation;
                 _shouldRotate = true;
-                _didRotate = true; 
-               AudioManager.Instance.soundSource.PlayOneShot(AudioManager.Instance._turning);
+                _didRotate = true;
+                if (AudioManager.Instance != null)
+                {
+                    AudioManager.Instance.soundSource.PlayOneShot(AudioManager.Instance._turning);
+                }
+              
                 StartCoroutine(RotationCooldown());
             }
         }
@@ -186,15 +169,11 @@ public class CubeRotation : MonoBehaviour
     private void ShowPivotPoint()
     {
         _pivotPoint.SetActive(true);
-     /*   _pivotPoint.transform.SetParent(transform, false);
-        _pivotPoint.transform.localScale = Vector3.one;*/
-      //  Debug.Log("Se instancio el pivot point");
     }
 
     private void DestroyPivotPoint()
     {
        _pivotPoint.SetActive(false);
-    //    Debug.Log("Se destruypo el pivot point");
     }
 }
 

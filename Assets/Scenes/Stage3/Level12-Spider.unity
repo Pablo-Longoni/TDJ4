@@ -14,7 +14,7 @@ OcclusionCullingSettings:
 RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 10
-  m_Fog: 1
+  m_Fog: 0
   m_FogColor: {r: 0.67058825, g: 0.67058825, b: 0.67058825, a: 1}
   m_FogMode: 1
   m_FogDensity: 0.01
@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 2100000, guid: 2606881614cfe7b44a68b516c575fcbc, type: 2}
+  m_SkyboxMaterial: {fileID: 2100000, guid: c30b939491d29bc4aa22874c1b826347, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -180,6 +180,7 @@ MonoBehaviour:
   _turnSpeed: 360
   groundCheckDistance: 0.2
   _playerAnimator: {fileID: 765045207}
+  _playerTransformation: {fileID: 0}
   _input: {x: 0, y: 0, z: 0}
   _currentCube: {fileID: 50798096}
   _minimapCameraFollow: {fileID: 1797790187}
@@ -1541,6 +1542,8 @@ MonoBehaviour:
   _rotationSpeed: 360
   _cameraChange: {fileID: 716789543}
   inputReader: {fileID: 29197254}
+  dragTutorial: {fileID: 0}
+  tutorialDuration: 2
 --- !u!114 &716789543
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1559,6 +1562,7 @@ MonoBehaviour:
   _mainCamera: {fileID: 330585545}
   _isIsometric: 1
   _canChange: 1
+  _cinematicPlaying: 1
   _cameraRotation: {fileID: 716789542}
   _playerTransformation: {fileID: 866019152}
   _changeScene: {fileID: 1436603531}

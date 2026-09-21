@@ -23,7 +23,7 @@ public class CubeAnimation : MonoBehaviour
     [SerializeField] private Transform groundCheck;
     [SerializeField] private GameObject _dustPrefab;
     [SerializeField] private GameObject _miniDustPrefab;
-
+    
     private bool dustSpawned = false;
   //  public float squashCooldown = 0.3f;
     private float lastSquashTime = -10f;
