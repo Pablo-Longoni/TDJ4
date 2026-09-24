@@ -11,10 +11,11 @@ public class LevelManager : MonoBehaviour
 
     public void onClickLevel(int level)
     {
-        _currentLevel = level;
-        PlayerPrefs.SetInt("CurrentLevel", _currentLevel);
+        _currentLevel = level + 1; // el +1 es porque se agregó el splash al indice
+        PlayerPrefs.SetInt("CurrentLevel", _currentLevel); 
+        Debug.Log("n° del indice es: " + _currentLevel);
         PlayerPrefs.Save();
-        SceneManager.LoadScene(level);
+        SceneManager.LoadScene(_currentLevel);
     }
 
     void Start()

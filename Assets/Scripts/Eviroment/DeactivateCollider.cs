@@ -6,6 +6,7 @@ using UnityEngine.Windows;
 public class DeactivateCollider : MonoBehaviour
 {
     [SerializeField] public Collider _targetCollider;
+    [SerializeField] public Collider _groundCollider;
     [SerializeField] public ParticleSystem _ripplePrefab;
     [SerializeField] public ParticleSystem _waterSplashPrefab;
     [SerializeField] public GameObject _playerInput, _Input;
@@ -17,8 +18,13 @@ public class DeactivateCollider : MonoBehaviour
     {
         if (other.CompareTag("Player") && !_isTriggered)
         {
-            AudioManager.Instance.soundSource.PlayOneShot(AudioManager.Instance._splashWater);
+            if (AudioManager.Instance != null)
+            {
+                AudioManager.Instance.soundSource.PlayOneShot(AudioManager.Instance._splashWater);
+            }
+       
             _targetCollider.enabled = false;
+            _groundCollider.enabled = false;
             _isTriggered = true;
 
             _playerInput.SetActive(false);
@@ -41,6 +47,7 @@ public class DeactivateCollider : MonoBehaviour
         if (other.CompareTag("Player") && _isTriggered)
         {
             _targetCollider.enabled = true;
+            _groundCollider.enabled = true;
             _isTriggered = false;
             Debug.Log("Salio de la sombra");
         }
@@ -52,6 +59,7 @@ public class DeactivateCollider : MonoBehaviour
         _playerInput.SetActive(true);
         _Input.SetActive(true);
         _targetCollider.enabled = true;
+        _groundCollider.enabled = true;
         _isTriggered = false;
     }
 }

@@ -39,6 +39,8 @@ public class CubeRotation : MonoBehaviour
         }
 
         _targetColor = _originalColors[0] * 0.6f; */
+
+        _cameraChange = FindFirstObjectByType<CameraChange>();
     }
 
     void Start()
