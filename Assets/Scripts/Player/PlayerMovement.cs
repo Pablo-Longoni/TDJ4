@@ -26,7 +26,7 @@ public class PlayerMovement : MonoBehaviour
         _cameraChange = FindAnyObjectByType<CameraChange>();
 
         //asignar layers para check
-        _currentCube.StartBlinking();
+      //  _currentCube.StartBlinking();
     }
 
     void Update()

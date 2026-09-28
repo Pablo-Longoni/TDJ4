@@ -27,7 +27,7 @@ public class HideUI : MonoBehaviour
     }
 
 
-    private void Hide()
+    public void Hide()
     {
         foreach (GameObject go in _canvasUI)
         {
@@ -35,7 +35,7 @@ public class HideUI : MonoBehaviour
         }
     }
 
-    private void Show()
+    public void Show()
     {
         foreach (GameObject go in _canvasUI)
         {

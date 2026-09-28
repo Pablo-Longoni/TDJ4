@@ -616,6 +616,10 @@ MonoBehaviour:
   _input: {x: 0, y: 0, z: 0}
   _currentCube: {fileID: 1367761362}
   _minimapCameraFollow: {fileID: 1848416803}
+  _groundCheck: {fileID: 0}
+  _layerMask:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!4 &806211594
 Transform:
   m_ObjectHideFlags: 0
@@ -1282,6 +1286,22 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 45.505264
       objectReference: {fileID: 0}
+    - target: {fileID: 5213337095178937147, guid: b03290099639a05439e23b9a2f787fda, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.961526
+      objectReference: {fileID: 0}
+    - target: {fileID: 5213337095178937147, guid: b03290099639a05439e23b9a2f787fda, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.106289305
+      objectReference: {fileID: 0}
+    - target: {fileID: 5213337095178937147, guid: b03290099639a05439e23b9a2f787fda, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.2517853
+      objectReference: {fileID: 0}
+    - target: {fileID: 5213337095178937147, guid: b03290099639a05439e23b9a2f787fda, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.02783293
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1823,6 +1843,22 @@ PrefabInstance:
     - target: {fileID: 3865031677300057217, guid: 3f6850c954f7cb2439f14642eb136642, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: TogglePause
+      objectReference: {fileID: 0}
+    - target: {fileID: 3897692935735250721, guid: 3f6850c954f7cb2439f14642eb136642, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 843703532}
+    - target: {fileID: 3897692935735250721, guid: 3f6850c954f7cb2439f14642eb136642, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: TogglePause
+      objectReference: {fileID: 0}
+    - target: {fileID: 3897692935735250721, guid: 3f6850c954f7cb2439f14642eb136642, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: ChangeScene, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 3897692935735250721, guid: 3f6850c954f7cb2439f14642eb136642, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 3988613738608116724, guid: 3f6850c954f7cb2439f14642eb136642, type: 3}
       propertyPath: m_AnchorMax.x
@@ -3519,6 +3555,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _portal: {fileID: 2070514702}
+  _particles: {fileID: 0}
   _innerCircle: {fileID: 0}
 --- !u!33 &7769885041860269370
 MeshFilter:
