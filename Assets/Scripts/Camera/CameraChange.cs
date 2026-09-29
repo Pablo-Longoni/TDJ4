@@ -19,6 +19,7 @@ public class CameraChange : MonoBehaviour
 
     public bool _isIsometric;
     public bool _canChange = false;
+    public bool _cinematicPlaying = true; 
 
     public CameraRotation _cameraRotation;
     public PlayerTransformation _playerTransformation;
@@ -158,12 +159,13 @@ public class CameraChange : MonoBehaviour
         // Recién ahora cambia de estado
         currentState = SpaceBarState.Playing;
         _cameraBrain.DefaultBlend.Time = 1;
-        //   Debug.Log("Cinematica terminada y blend finalizado");
+        _cinematicPlaying = false;
     }
 
     void SkipCinematic()
     {
         currentState = SpaceBarState.Playing;
         _cinematicCamera.Target = _isometricCamera.Target;
+        _cinematicPlaying = false; 
     }
 }

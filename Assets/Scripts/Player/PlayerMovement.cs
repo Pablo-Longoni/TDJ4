@@ -7,8 +7,9 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Rigidbody _rb;
     [SerializeField] private float _speed = 5;
     [SerializeField] private float _turnSpeed = 500;
-    [SerializeField] private float groundCheckDistance = 0.2f;
+    [SerializeField] private float groundCheckDistance = 5f;
     [SerializeField] private PlayerAnimationController _playerAnimator;
+    [SerializeField] private PlayerTransformation _playerTransformation;
     public Vector3 _input;
 
     private CameraChange _cameraChange;
@@ -18,20 +19,21 @@ public class PlayerMovement : MonoBehaviour
     private Transform _currentFigure;
     private string _minimapLayerName = "Enviroment";
     private string _defaultLayerName = "Default";
-
+    [SerializeField] private Transform _groundCheck;
+    [SerializeField] private LayerMask _layerMask;
     private void Start()
     {
         _cameraChange = FindAnyObjectByType<CameraChange>();
 
         //asignar layers para check
-        _currentCube.StartBlinking();
+      //  _currentCube.StartBlinking();
     }
 
     void Update()
     {
         CheckCurrentCube();
 
-        if (!_cameraChange._isIsometric && _currentCube._canRotate)
+        if (!_cameraChange._isIsometric && _currentCube._canRotate && _playerTransformation.CanTransform())
         {
             Rotating();
         }
@@ -74,14 +76,12 @@ public class PlayerMovement : MonoBehaviour
 
     void Move()
     {
-        // Mientras cualquier PlayerDash está dasheando (flag estático compartido),
-        // no tocamos la velocidad acá, para no pisar el impulso del dash.
         if (PlayerDash.IsAnyDashing)
             return;
 
         if (_cameraChange._isIsometric)
         {
-            if (_input != Vector3.zero)
+            if (_input != Vector3.zero && !_cameraChange._cinematicPlaying)
             {
                 Vector3 moveDir = _input * _speed;
                 _rb.linearVelocity = new Vector3(moveDir.x, _rb.linearVelocity.y, moveDir.z);
@@ -93,7 +93,7 @@ public class PlayerMovement : MonoBehaviour
                 _rb.linearVelocity = new Vector3(0, _rb.linearVelocity.y, 0);
                 _playerAnimator.PlayAnimation("Idle");
             }
-            
+
             _rb.constraints = RigidbodyConstraints.FreezeRotation;
         }
         else
@@ -148,45 +148,66 @@ public class PlayerMovement : MonoBehaviour
             if (_currentCube != null)
             {
                 _currentCube.RotateCube(rotationAxis, transform);
-                // Debug.Log("Por rotar figura");
             }
         }
     }
 
     void CheckCurrentCube()
     {
-        //  if (_input == Vector3.zero) return;
-
-        if (Physics.SphereCast(transform.position, 0.2f, Vector3.down, out RaycastHit hit, groundCheckDistance + 0.5f))
+        if (Physics.Raycast(_groundCheck.position, Vector3.down, out RaycastHit hit, groundCheckDistance, _layerMask))
         {
             CubeRotation detectedCube = hit.collider.GetComponent<CubeRotation>();
+
+            if (detectedCube == null)
+            {
+                detectedCube = hit.collider.GetComponentInParent<CubeRotation>();
+            }
+
             if (detectedCube != null && detectedCube != _currentCube)
             {
                 _currentCube?.StopBlinking();
+
                 _currentCube = detectedCube;
+
                 _currentCube.StartBlinking();
+
+                Debug.Log($"CURRENT CUBE: {_currentCube.name}");
             }
 
-            Transform currentFigure = hit.collider.transform;
+            if (detectedCube == null)
+                return;
+
+            Transform currentFigure = detectedCube.transform;
 
             if (_currentFigure != currentFigure)
             {
                 if (_currentFigure != null)
                 {
-                    int defaultLayer = LayerMask.NameToLayer(_defaultLayerName);
+                    int defaultLayer =
+                        LayerMask.NameToLayer(_defaultLayerName);
+
                     foreach (Transform t in _currentFigure.GetComponentsInChildren<Transform>(true))
                     {
-                        if (t.gameObject.layer == LayerMask.NameToLayer("MirrorObjects")) continue;
-                        if (t.CompareTag("Player")) continue;
+                        if (t.gameObject.layer == LayerMask.NameToLayer("MirrorObjects"))
+                            continue;
+
+                        if (t.CompareTag("Player"))
+                            continue;
+
                         t.gameObject.layer = defaultLayer;
                     }
                 }
 
                 int minimapLayer = LayerMask.NameToLayer(_minimapLayerName);
+
                 foreach (Transform t in currentFigure.GetComponentsInChildren<Transform>(true))
                 {
-                    if (t.gameObject.layer == LayerMask.NameToLayer("MirrorObjects")) continue;
-                    if (t.CompareTag("Player")) continue;
+                    if (t.gameObject.layer == LayerMask.NameToLayer("MirrorObjects"))
+                        continue;
+
+                    if (t.CompareTag("Player"))
+                        continue;
+
                     t.gameObject.layer = minimapLayer;
                 }
 

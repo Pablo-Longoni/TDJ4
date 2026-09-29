@@ -17,6 +17,13 @@ public class UIfromPause : MonoBehaviour
     [SerializeField] private GameObject _gamePadControls;
     [SerializeField] private GameObject _keyboardControls;
 
+    //new pause blur
+    [SerializeField] private HideUI _uiInGame;
+    [SerializeField] private GameObject _blur;
+    private void Awake()
+    {
+        _uiInGame = FindAnyObjectByType<HideUI>();
+    }
     void Start()
     {
         _transitionAnimator = GetComponentInChildren<Animator>();

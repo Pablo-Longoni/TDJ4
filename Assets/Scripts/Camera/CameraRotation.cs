@@ -17,7 +17,7 @@ public class CameraRotation : MonoBehaviour
     private void Start()
     {
         _rotationSpeed = PlayerPrefs.GetFloat("RotationSpeed", 360);
-        Debug.Log("Rotation: " + _rotationSpeed);
+
 
         // El tutorial comienza visible
         if (dragTutorial != null)

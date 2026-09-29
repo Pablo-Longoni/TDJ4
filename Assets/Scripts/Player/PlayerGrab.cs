@@ -87,7 +87,9 @@ public class PlayerGrab : MonoBehaviour
                 if (_grabbedRb != null)
                 {
                     _grabbedRb.isKinematic = true;
+                    _grabbedRb.constraints = RigidbodyConstraints.None;
                 }
+
                 isGrabbed = true;
                 break;
             }
@@ -113,6 +115,7 @@ public class PlayerGrab : MonoBehaviour
         if (_grabbedRb != null)
         {
             _grabbedRb.isKinematic = false;
+            _grabbedRb.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ;
         }
 
         _grabbedObject = null;

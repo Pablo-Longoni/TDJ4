@@ -7,9 +7,15 @@ public class PlayerShadow : MonoBehaviour
     [SerializeField] private Transform _playerTransform;
 
     [SerializeField] private float _rayDistance = 300f;
-    [SerializeField] private float _sphereRadius = 0.2f;
+    [SerializeField] private float _sphereRadius = 2f;
     [SerializeField] private float _shadowOffset = 0.01f;
-    [SerializeField] private float _rayOriginHeight = 3f;
+
+    [SerializeField] private PlayerGroundDetection _groundDetection;
+
+    private void Awake()
+    {
+        _fakeShadow.SetActive(true);
+    }
 
     private void Update()
     {
@@ -18,9 +24,7 @@ public class PlayerShadow : MonoBehaviour
 
     private void RelocateShadow()
     {
-        Vector3 rayOrigin =
-            _playerTransform.position +
-            Vector3.up * _rayOriginHeight;
+        Vector3 rayOrigin = _playerTransform.position;
 
         Debug.DrawRay(
             rayOrigin,
@@ -28,13 +32,30 @@ public class PlayerShadow : MonoBehaviour
             Color.red
         );
 
-        if (Physics.SphereCast(
+        bool hasGroundBelow = Physics.SphereCast(
             rayOrigin,
             _sphereRadius,
             Vector3.down,
             out RaycastHit hit,
             _rayDistance,
-            _layerMask))
+            _layerMask
+        );
+
+        // PLAYER ESTÁ EN EL SUELO
+        if (_groundDetection.IsGrounded)
+        {
+            _fakeShadow.SetActive(true);
+
+            Vector3 shadowPosition = _playerTransform.position;
+            shadowPosition.y -= _shadowOffset;
+
+            _fakeShadow.transform.position = shadowPosition;
+
+            return;
+        }
+
+        // PLAYER ESTÁ EN EL AIRE Y HAY UNA FIGURA DEBAJO
+        if (hasGroundBelow)
         {
             _fakeShadow.SetActive(true);
 
@@ -48,10 +69,11 @@ public class PlayerShadow : MonoBehaviour
                 hit.point,
                 Color.green
             );
+
+            return;
         }
-        else
-        {
-            _fakeShadow.SetActive(false);
-        }
+
+        // PLAYER ESTÁ EN EL AIRE Y NO HAY NADA DEBAJO
+        _fakeShadow.SetActive(false);
     }
 }

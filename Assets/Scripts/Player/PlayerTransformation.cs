@@ -54,24 +54,47 @@ public class PlayerTransformation : MonoBehaviour
         UpdateTransText();
     }
 
+    /*  private void OnCameraFlipPressed(InputAction.CallbackContext context)
+      {
+          if (ChangeScene.IsPaused) return;
+
+          if (_currentTrans < _totalTrans)
+          {
+              _cameraChange._canChange = true;           
+          }
+          else
+          {
+              _cameraChange._canChange = false;
+
+              if (!_isBlinking)
+              {
+                  PlayNoFlipsSound();
+                  StartCoroutine(BlinkText());
+              }
+          }
+      }*/
+
     private void OnCameraFlipPressed(InputAction.CallbackContext context)
     {
         if (ChangeScene.IsPaused) return;
 
-        if (_currentTrans < _totalTrans)
-        {
-            _cameraChange._canChange = true;
-        }
-        else
-        {
-            _cameraChange._canChange = false;
+        // La cámara siempre puede cambiar.
+        _cameraChange._canChange = true;
 
+        // Si no quedan transformaciones, solo mostramos feedback.
+        if (_currentTrans >= _totalTrans)
+        {
             if (!_isBlinking)
             {
                 PlayNoFlipsSound();
                 StartCoroutine(BlinkText());
             }
         }
+    }
+
+    public bool CanTransform()
+    {
+        return _currentTrans < _totalTrans;
     }
 
     private void PlayNoFlipsSound()
