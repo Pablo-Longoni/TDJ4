@@ -5,7 +5,8 @@ public class OpenPortal : MonoBehaviour
 {
     [SerializeField] public GameObject _portal;
     private int _objectsInside = 0;
- //   [SerializeField] private ParticleSystem _particles;
+    [SerializeField] private ParticleSystem _particles;
+    [SerializeField] private GameObject _innerCircle;
 
     Vector3 _position;
 
@@ -17,17 +18,17 @@ public class OpenPortal : MonoBehaviour
     {
         if (other.CompareTag("Player") || other.CompareTag("Movable"))
         {
-            if (_objectsInside == 0)
+           /* if (_objectsInside == 0 && AudioManager.Instance != null)
             {
                 AudioManager.Instance.soundSource.PlayOneShot(AudioManager.Instance._pressedSound);
-            }
-
+            }*/
+            
             Debug.Log("Entró: " + other.name);
             _objectsInside++;
             _portal.SetActive(true);
-            MeshRenderer _renderer = GetComponent<MeshRenderer>();
-            _renderer.material.color = Color.black;
-            //    Instantiate(_particles, transform.position, Quaternion.identity);
+            _innerCircle.SetActive(true);
+
+         //   Instantiate(_particles, transform.position, Quaternion.identity);
         }
     }
 
@@ -40,17 +41,17 @@ public class OpenPortal : MonoBehaviour
             // Evita valores negativos si algo sale mal
             _objectsInside = Mathf.Max(0, _objectsInside);
 
-           /* if (other.CompareTag("Player") && other.CompareTag("Movable"))
+      /*      if (other.CompareTag("Player") && other.CompareTag("Movable") && AudioManager.Instance != null)
             {
                 AudioManager.Instance.soundSource.PlayOneShot(AudioManager.Instance._releasedSound);
             }*/
 
             if (_objectsInside == 0)
             {
-                AudioManager.Instance.soundSource.PlayOneShot(AudioManager.Instance._releasedSound);
+              //  AudioManager.Instance.soundSource.PlayOneShot(AudioManager.Instance._releasedSound);
                 _portal.SetActive(false);
-                MeshRenderer _renderer = GetComponent<MeshRenderer>();
-                _renderer.material.color = Color.white;
+                _innerCircle.SetActive(false);
+
             }
         }
     }

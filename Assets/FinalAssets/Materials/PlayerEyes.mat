@@ -1,18 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-2272078385323917986
-MonoBehaviour:
-  m_ObjectHideFlags: 11
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  version: 9
 --- !u!21 &2100000
 Material:
   serializedVersion: 8
@@ -20,12 +7,11 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Robot
+  m_Name: PlayerEyes
   m_Shader: {fileID: 4800000, guid: bee44b4a58655ee4cbff107302a3e131, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
-  - DR_RIM_ON
   - _CELPRIMARYMODE_SINGLE
   - _DETAILMAPBLENDINGMODE_MULTIPLY
   - _GRADIENTSPACE_WORLD
@@ -41,7 +27,7 @@ Material:
   disabledShaderPasses:
   - MOTIONVECTORS
   - SRPDEFAULTUNLIT
-  m_LockedProperties: 
+  m_LockedProperties: _Flatness
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -137,13 +123,13 @@ Material:
     - _DstBlend: 0
     - _DstBlendAlpha: 0
     - _EnvironmentReflections: 1
-    - _FlatRimEdgeSmoothness: 0.848
-    - _FlatRimLightAlign: 0.573
-    - _FlatRimSize: 0.427
-    - _FlatSpecularEdgeSmoothness: 0.5
-    - _FlatSpecularSize: 0.1
-    - _Flatness: 1
-    - _FlatnessExtra: 1
+    - _FlatRimEdgeSmoothness: 0.1
+    - _FlatRimLightAlign: 0
+    - _FlatRimSize: 0.3
+    - _FlatSpecularEdgeSmoothness: 0.157
+    - _FlatSpecularSize: 0.854
+    - _Flatness: 0.162
+    - _FlatnessExtra: 0
     - _GlossMapScale: 1
     - _Glossiness: 0
     - _GlossyReflections: 1
@@ -168,11 +154,11 @@ Material:
     - _Parallax: 0.02
     - _QueueOffset: 0
     - _ReceiveShadows: 1
-    - _RimEnabled: 1
-    - _SelfShadingSize: 0.69
-    - _SelfShadingSizeExtra: 0.5
-    - _ShadowEdgeSize: 0.166
-    - _ShadowEdgeSizeExtra: 0.05
+    - _RimEnabled: 0
+    - _SelfShadingSize: 0.264
+    - _SelfShadingSizeExtra: 1
+    - _ShadowEdgeSize: 0.348
+    - _ShadowEdgeSizeExtra: 0.022
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
     - _SpecularEnabled: 0
@@ -191,20 +177,33 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - _BaseColor: {r: 0.45490196, g: 0.45490196, b: 0.45490196, a: 1}
+    - _BaseColor: {r: 0.26415092, g: 0.26415092, b: 0.26415092, a: 1}
     - _Color: {r: 1, g: 0.6618828, b: 0.2688679, a: 1}
-    - _ColorDim: {r: 0.47058824, g: 0.47058824, b: 0.47058824, a: 1}
+    - _ColorDim: {r: 0.4339623, g: 0.4339623, b: 0.4339623, a: 1}
     - _ColorDimCurve: {r: 0.85, g: 0.85, b: 0.85, a: 0.85}
-    - _ColorDimExtra: {r: 0.85, g: 0.85, b: 0.85, a: 0.85}
+    - _ColorDimExtra: {r: 0.3301887, g: 0.3301887, b: 0.3301887, a: 0.85}
     - _ColorDimSteps: {r: 0.85, g: 0.85, b: 0.85, a: 0.85}
     - _ColorGradient: {r: 0.65, g: 0.65, b: 0.65, a: 1}
     - _DetailMapColor: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 4.9245777, g: 0, b: 0, a: 1}
-    - _FlatRimColor: {r: 0.49056602, g: 0.46511212, b: 0.46511212, a: 1}
-    - _FlatSpecularColor: {r: 0.13536845, g: 0.14362335, b: 0.16981131, a: 1}
+    - _FlatRimColor: {r: 0.52358484, g: 0.6375387, b: 1, a: 1}
+    - _FlatSpecularColor: {r: 0.1981132, g: 0.1981132, b: 0.1981132, a: 1}
     - _LightmapDirection: {r: 0, g: 1, b: 0, a: 0}
     - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
     - _UnityShadowColor: {r: 0.65, g: 0.65, b: 0.65, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
+--- !u!114 &537147589715153570
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 9

@@ -6,6 +6,7 @@ using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.Rendering;
 
 public class ChangeScene : MonoBehaviour
 {
@@ -27,10 +28,15 @@ public class ChangeScene : MonoBehaviour
     // NUEVO: Propiedad para que otros scripts sepan si está pausado
     public static bool IsPaused { get; private set; } = false;
 
+    //new pause blur
+    [SerializeField] private HideUI _uiInGame;
+    [SerializeField] private Volume _blur;
+
     void Awake()
     {
         _inputActions = new PlayerControls();
         _inputActions.UI.MenuOpenClose.performed += ctx => TogglePause();
+        _uiInGame = FindAnyObjectByType<HideUI>();
     }
 
     // NUEVO: Método para obtener las acciones del jugador desde otros scripts
@@ -68,6 +74,8 @@ public class ChangeScene : MonoBehaviour
         if (isPaused)
         {
             // Activar panel de pausa
+            _blur.gameObject.SetActive(true);
+            _uiInGame.Hide();
             pausePanel.SetActive(true);
             Time.timeScale = 0f;
 
@@ -80,6 +88,8 @@ public class ChangeScene : MonoBehaviour
         else
         {
             // Desactivar panel de pausa
+            _blur.gameObject.SetActive(false);
+            _uiInGame.Show();
             pausePanel.SetActive(false);
             Time.timeScale = 1f;
 
@@ -201,8 +211,9 @@ public class ChangeScene : MonoBehaviour
 
     public void BackToMenu()
     {
-        SceneManager.LoadScene("Menu");
+        TogglePause();
         Time.timeScale = 1f;
+        SceneManager.LoadScene("Menu");
     }
 
     public void GoToCredits()

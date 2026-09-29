@@ -1,5 +1,5 @@
-using UnityEngine;
 using System.Collections;
+using UnityEngine;
 /*using Unity.VisualScripting;
 using static UnityEditor.Experimental.GraphView.GraphView;
 using System.Runtime.CompilerServices;
@@ -20,37 +20,37 @@ public class Telport : MonoBehaviour
         if (other.CompareTag("Player") && _playerGrab.isGrabbed == false)
         {
             PlayerCooldown cooldown = other.GetComponent<PlayerCooldown>();
-           if (cooldown != null && cooldown.canTeleport)
+            if (cooldown != null && cooldown.canTeleport)
             {
-                   StartCoroutine(Teleport(other, cooldown));
+                StartCoroutine(Teleport(other, cooldown));
                 _cameraShake.Shake(0.5f, 0.5f, 0.5f);
-              //  StartCoroutine(MovePlayerToPortal(other.transform, cooldown));
+                //  StartCoroutine(MovePlayerToPortal(other.transform, cooldown));
             }
         }
         else
         {
-          //  _cameraShake.Shake(0.5f, 0.5f, 0.5f);
+            //  _cameraShake.Shake(0.5f, 0.5f, 0.5f);
             Debug.Log("soltaa el cubooo");
         }
     }
 
-     private IEnumerator Teleport(Collider other, PlayerCooldown cooldown)
-     {
-         AudioManager.Instance.soundSource.PlayOneShot(AudioManager.Instance._teleportPlayer);
-         cooldown.canTeleport = false;
-         other.transform.position = _destination.position;
-         yield return new WaitForSeconds(cooldownTime);
-         cooldown.canTeleport = true;
-     }
- /*   private void OnTriggerExit(Collider other)
+    private IEnumerator Teleport(Collider other, PlayerCooldown cooldown)
     {
-        if (other.CompareTag("Player"))
-        {
-            PlayerCooldown cooldown = other.GetComponent<PlayerCooldown>();
-            if (cooldown != null)
-                cooldown.canTeleport = true;
-        }
-    }*/
+        //  AudioManager.Instance.soundSource.PlayOneShot(AudioManager.Instance._teleportPlayer);
+        cooldown.canTeleport = false;
+        other.transform.position = _destination.position;
+        yield return new WaitForSeconds(cooldownTime);
+        cooldown.canTeleport = true;
+    }
+    /*   private void OnTriggerExit(Collider other)
+       {
+           if (other.CompareTag("Player"))
+           {
+               PlayerCooldown cooldown = other.GetComponent<PlayerCooldown>();
+               if (cooldown != null)
+                   cooldown.canTeleport = true;
+           }
+       }*/
     private IEnumerator MovePlayerToPortal(Transform playerTransform, PlayerCooldown cooldown)
     {
         _playerGrab.enabled = false;
@@ -64,10 +64,10 @@ public class Telport : MonoBehaviour
 
         _cubeAnimation.EnterPortalAnim();
         while (timeElapsed < moveDuration)
-        { 
-            timeElapsed += Time.deltaTime * _moveSpeed; 
+        {
+            timeElapsed += Time.deltaTime * _moveSpeed;
             playerTransform.position = Vector3.Lerp(startPos, targetPos, timeElapsed / moveDuration);
-            yield return null; 
+            yield return null;
         }
         // 2 Teletransportar
         playerTransform.position = _destination.position;

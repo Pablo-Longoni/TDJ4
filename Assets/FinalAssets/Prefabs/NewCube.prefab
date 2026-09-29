@@ -69,6 +69,10 @@ PrefabInstance:
       value: NewCube
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: d903d8fdf3b08de47939d682258e5eb0, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d903d8fdf3b08de47939d682258e5eb0, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
@@ -124,7 +128,7 @@ MonoBehaviour:
   _shouldRotate: 0
   _rotationTurn: 90
   _canRotate: 1
-  _rotateCooldown: 2
+  _rotateCooldown: 0.7
   _pivotPoint: {fileID: 865614082809462746, guid: 09ac8be195fe9284997b0e9566243a26, type: 3}
   _audioManager: {fileID: 0}
   _isInCooldown: 0

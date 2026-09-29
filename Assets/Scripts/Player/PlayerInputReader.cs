@@ -22,6 +22,8 @@ public class PlayerInputReader : MonoBehaviour
 
     public bool RestartKeyPressed { get; private set; }
 
+    public bool DashTriggered { get; private set; }
+
     private float _restartHoldTime = 3f;
     private float _buttonBPressStart = -1f;
 
@@ -98,6 +100,12 @@ public class PlayerInputReader : MonoBehaviour
             LookInput = ctx.ReadValue<Vector2>();
         };
         _controls.Camera.Look.canceled += _ => LookInput = Vector2.zero;
+
+        _controls.Player.Dash.performed += _ =>
+        {
+            if (ChangeScene.IsPaused) return;
+            DashTriggered = true;
+        };
     }
 
     private void OnEnable()
@@ -146,10 +154,19 @@ public class PlayerInputReader : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
+    // Consume el flag apenas se usa, para que no dependa de que otro script
+    // llegue a llamar ResetFlags() a tiempo.
+    public void ConsumeDash()
+    {
+        DashTriggered = false;
+    }
+
     public void ResetFlags()
     {
         CameraFlipTriggered = false;
         CameraHelpPressed = false;
         MenuTogglePressed = false;
+        // Reset de seguridad, por si ConsumeDash() no llegó a llamarse este frame.
+        DashTriggered = false;
     }
 }
