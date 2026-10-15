@@ -5,9 +5,9 @@ public class UpgradeTransforms : MonoBehaviour
 {
     [SerializeField] public PlayerTransformation _playerTransformation;
     [SerializeField] private GameObject _item;
- //   [SerializeField] private TextMeshProUGUI _textDestination;
-  //  [SerializeField] private Canvas _canvas;
- //   [SerializeField] private GameObject _itemIconPrefab;
+    //   [SerializeField] private TextMeshProUGUI _textDestination;
+    //  [SerializeField] private Canvas _canvas;
+    //   [SerializeField] private GameObject _itemIconPrefab;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -17,7 +17,6 @@ public class UpgradeTransforms : MonoBehaviour
         {
             AudioManager.Instance.soundSource.PlayOneShot(AudioManager.Instance._flip);
         }
-      
         _playerTransformation.TransformUpgrade();
         _item.SetActive(false);
     }

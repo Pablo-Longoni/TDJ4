@@ -11,42 +11,61 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private PlayerAnimationController _playerAnimator;
     [SerializeField] private PlayerTransformation _playerTransformation;
     public Vector3 _input;
-
+    public bool _movementBlocked = false;
     private CameraChange _cameraChange;
     public CubeRotation _currentCube;
 
-    public FollowEnviroment _minimapCameraFollow;
     private Transform _currentFigure;
     private string _minimapLayerName = "Enviroment";
     private string _defaultLayerName = "Default";
     [SerializeField] private Transform _groundCheck;
     [SerializeField] private LayerMask _layerMask;
+
+
     private void Start()
     {
         _cameraChange = FindAnyObjectByType<CameraChange>();
-
-        //asignar layers para check
       //  _currentCube.StartBlinking();
     }
 
     void Update()
     {
+        if (_movementBlocked)
+        {
+            _input = Vector3.zero;
+            return;
+        }
+
+
         CheckCurrentCube();
 
         if (!_cameraChange._isIsometric && _currentCube._canRotate && _playerTransformation.CanTransform())
         {
             Rotating();
         }
+        else
+        {
+            return;
+        }
     }
-
+    
     void FixedUpdate()
     {
-        GatherInput();
-        Move();
-
-        if (_cameraChange._isIsometric)
+        if (_movementBlocked)
         {
-            Look();
+            _input = Vector3.zero;
+            _rb.linearVelocity = new Vector3( 0f, _rb.linearVelocity.y, 0f);
+            return;
+        }
+        else
+        {
+            GatherInput();
+            Move();
+
+            if (_cameraChange._isIsometric)
+            {
+                Look();
+            }
         }
     }
 
@@ -165,11 +184,11 @@ public class PlayerMovement : MonoBehaviour
 
             if (detectedCube != null && detectedCube != _currentCube)
             {
-                _currentCube?.StopBlinking();
+                _currentCube?.StopOutline();
 
                 _currentCube = detectedCube;
 
-                _currentCube.StartBlinking();
+                _currentCube.StartOutline();
 
                 Debug.Log($"CURRENT CUBE: {_currentCube.name}");
             }

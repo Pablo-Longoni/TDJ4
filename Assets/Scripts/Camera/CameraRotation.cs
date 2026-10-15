@@ -4,22 +4,26 @@ using TMPro;
 
 public class CameraRotation : MonoBehaviour
 {
-    public float _rotationSpeed = 1000f;
-    public CameraChange _cameraChange;
-    public PlayerInputReader inputReader;
+    [Header("Rotation settings")]
+    public float _rotationSpeed = 360f;
+    [SerializeField] private CameraChange _cameraChange;
+    [SerializeField] private PlayerInputReader _inputReader;
 
-    [Header("Tutorial")]
+    [Header("Tutorial drag")]
     [SerializeField] private TMP_Text dragTutorial;
     [SerializeField] private float tutorialDuration = 2f;
 
     private bool rotationDetected = false;
 
+    private void Awake()
+    {
+        _inputReader = FindFirstObjectByType<PlayerInputReader>();
+    }
+
     private void Start()
     {
         _rotationSpeed = PlayerPrefs.GetFloat("RotationSpeed", 360);
 
-
-        // El tutorial comienza visible
         if (dragTutorial != null)
         {
             dragTutorial.gameObject.SetActive(true);
@@ -42,10 +46,7 @@ public class CameraRotation : MonoBehaviour
             {
                 isRotating = true;
 
-                transform.Rotate(
-                    Vector3.up,
-                    mouseX * _rotationSpeed * Time.deltaTime
-                );
+                transform.Rotate( Vector3.up, mouseX * _rotationSpeed * Time.deltaTime);
             }
         }
 
@@ -53,10 +54,7 @@ public class CameraRotation : MonoBehaviour
         {
             isRotating = true;
 
-            transform.Rotate(
-                Vector3.up,
-                -_rotationSpeed * Time.deltaTime
-            );
+            transform.Rotate(Vector3.up, -_rotationSpeed * Time.deltaTime);
         }
 
 
@@ -64,37 +62,28 @@ public class CameraRotation : MonoBehaviour
         {
             isRotating = true;
 
-            transform.Rotate(
-                Vector3.up,
-                _rotationSpeed * Time.deltaTime
-            );
+            transform.Rotate(Vector3.up,_rotationSpeed * Time.deltaTime);
         }
 
-
-        Vector2 look = inputReader.LookInput;
+        Vector2 look = _inputReader.LookInput;
 
         if (Mathf.Abs(look.x) > 0.1f)
         {
             isRotating = true;
 
-            transform.Rotate(
-                Vector3.up,
-                look.x * _rotationSpeed * Time.deltaTime
-            );
+            transform.Rotate( Vector3.up,look.x * _rotationSpeed * Time.deltaTime);
         }
-
-       
+   
         if (isRotating && !rotationDetected)
         {
             rotationDetected = true;
 
-            StartCoroutine(OcultarDragTutorial());
+            StartCoroutine(HideDragTutorial());
         }
     }
 
-    private IEnumerator OcultarDragTutorial()
+    private IEnumerator HideDragTutorial()
     {
-        // El tutorial permanece visible durante 2 segundos
         yield return new WaitForSeconds(tutorialDuration);
 
         if (dragTutorial != null)

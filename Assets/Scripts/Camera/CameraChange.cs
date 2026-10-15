@@ -9,54 +9,45 @@ using static UnityEditor.Experimental.GraphView.GraphView;*/
 
 public class CameraChange : MonoBehaviour
 {
+    [Header("Camera settings")]
     [SerializeField] private CinemachineCamera _isometricCamera;
     [SerializeField] private CinemachineCamera _overHeadCamera;
     [SerializeField] private CinemachineCamera _cinematicCamera;
     [SerializeField] private Camera _mainCamera;
-
-    // private UniversalAdditionalCameraData _cameraData;
+    [SerializeField] private CameraRotation _cameraRotation;
     private CinemachineBrain _cameraBrain;
 
     public bool _isIsometric;
     public bool _canChange = false;
-    public bool _cinematicPlaying = true; 
+    public bool _cinematicPlaying = true;
 
-    public CameraRotation _cameraRotation;
-    public PlayerTransformation _playerTransformation;
-
-    // Funciones del espacio
-    public ChangeScene _changeScene;
-    private float _blendTime;
-    public enum SpaceBarState
-    {
-        Cinematic,
-        Playing
-    }
-
-    public SpaceBarState currentState = SpaceBarState.Cinematic;
-    public float _holdTimer = 0;
-    public float _holdDuration = 0f;
+    [Header("Other settings")]
+    [SerializeField] private PlayerTransformation _playerTransformation;
+    [SerializeField] private ChangeScene _changeScene;
     private PlayerInputReader _input;
+    private CubeRotation[] _cubeRotation;
 
-    //Saber si rotó
-    public CubeRotation[] _cubeRotation;
+    [Header("Domain settings")]
+    [SerializeField] private GameObject _sphere;
+    [SerializeField] private int _scaleAmount = 650;
+
+    [Header("Cinematic settings")]
+
+    [SerializeField] private float _holdTimer = 0;
+    [SerializeField] private float _holdDuration = 0f;
+    [SerializeField] private enum SpaceBarState {Cinematic, Playing}
+    [SerializeField] private SpaceBarState currentState = SpaceBarState.Cinematic;
 
     private void Awake()
     {
         _input = FindFirstObjectByType<PlayerInputReader>();
+        _cameraBrain = _mainCamera.GetComponent<CinemachineBrain>();
         _cubeRotation = FindObjectsByType<CubeRotation>(FindObjectsSortMode.None);
     }
 
     void Start()
     {
-        // _isometricCamera.Priority = 2;
-        _overHeadCamera.Priority = 2;
-        // _cameraData = _mainCamera.GetComponent<UniversalAdditionalCameraData>();
-        _cameraBrain = _mainCamera.GetComponent<CinemachineBrain>();
-        _isIsometric = true;
-        _blendTime = _cameraBrain.DefaultBlend.Time;
         StartCoroutine(DelayedCinematicStart());
-
     }
 
     private IEnumerator DelayedCinematicStart()
@@ -104,33 +95,54 @@ public class CameraChange : MonoBehaviour
 
     private void ChangeCamera()
     {
-        //  Debug.Log("ChangeCamera");
-        _isIsometric = !_isIsometric;
-        _cameraBrain.DefaultBlend.Time = 1;
-        if (!_isIsometric)
+        StartCoroutine(ChangeCameraRoutine());
+    }
+    private IEnumerator ChangeCameraRoutine()
+    {
+        _canChange = false;
+
+        if (_isIsometric)
         {
+            _isIsometric = false;
 
             _cameraRotation.ResetRotation();
+
             _isometricCamera.Priority = 2;
             _overHeadCamera.Priority = 3;
-            //   Debug.Log("Camara cenital" + _isIsometric);
+
+            if (_sphere != null)
+            {
+                yield return StartCoroutine(ScaleSphere());
+            }      
         }
         else
         {
+            _isIsometric = true;
+
             foreach (var cube in _cubeRotation)
             {
                 if (cube._didRotate)
                 {
                     _playerTransformation.PlayerTransformed();
+
                     Debug.Log("Transformed + 1 en " + cube.name);
-                    cube._didRotate = false; // reseteo solo el que rotó
-                    break; // salgo del loop, ya no importa el resto
+
+                    cube._didRotate = false;
+                    break;
                 }
             }
+
             _isometricCamera.Priority = 3;
             _overHeadCamera.Priority = 2;
-            //   _playerTransformation.GetComponent<CubeAnimation>().IgnoreStretchAndSquash(0.3f);
+
+
+            if (_sphere != null)
+            {
+                yield return StartCoroutine(UnscaleSphere());
+            }
         }
+
+        _canChange = true;
     }
 
     public void CinematicCamera()
@@ -164,8 +176,62 @@ public class CameraChange : MonoBehaviour
 
     void SkipCinematic()
     {
+        _cameraBrain.DefaultBlend.Time = 1;
         currentState = SpaceBarState.Playing;
         _cinematicCamera.Target = _isometricCamera.Target;
         _cinematicPlaying = false; 
+    }
+
+
+    private IEnumerator ScaleSphere()
+    {
+        float duration = 1;
+
+        Vector3 startScale = Vector3.zero;
+        Vector3 targetScale = Vector3.one * _scaleAmount;
+
+        float timer = 0f;
+
+        _sphere.transform.localScale = startScale;
+
+        while (timer < duration)
+        {
+            timer += Time.deltaTime;
+
+            float t = timer / duration;
+
+            t = Mathf.SmoothStep(0f, 1f, t);
+
+            _sphere.transform.localScale = Vector3.Lerp(startScale, targetScale, t);
+
+            yield return null;
+        }
+
+        _sphere.transform.localScale = targetScale;
+    }
+
+    private IEnumerator UnscaleSphere()
+    {
+        float duration = 1;
+
+        Vector3 startScale = Vector3.one * _scaleAmount;
+        Vector3 targetScale = Vector3.zero;
+
+        float timer = 0f;
+
+        while (timer < duration)
+        {
+            timer += Time.deltaTime;
+
+            float t = timer / duration;
+
+            t = Mathf.SmoothStep(0f, 1f, t);
+
+            _sphere.transform.localScale = Vector3.Lerp(startScale, targetScale, t);
+
+            yield return null;
+        }
+
+        _sphere.transform.localScale = targetScale;
     }
 }

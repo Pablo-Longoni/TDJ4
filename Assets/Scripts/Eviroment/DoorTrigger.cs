@@ -1,41 +1,45 @@
-using UnityEngine;
 using System.Collections;
 using System.Runtime.InteropServices;
 using Unity.Cinemachine;
+using UnityEngine;
 public class DoorTrigger : MonoBehaviour
 {
-    private ChangeScene _changeScene;
-    public CameraChange _cameraChange;
-    [SerializeField] public PlayerMovement _player;
-    [SerializeField] public CubeAnimation _cubeAnimation;
-    public float moveSpeed = 5f;
-    public GameObject _target;
-    [SerializeField] public AudioManager _audioManager;
-    string _sceneName = string.Empty;
+    [Header("Portal settings")]
+    [SerializeField] private Transform _portal;
+    [SerializeField] private GameObject _target;
+    [SerializeField] private BoxCollider _portalCollider;
+
+    [Header("Camera settings")]
     [SerializeField] private CameraShake _cameraShake;
-    [SerializeField] public CameraZoom _cameraZoom;
-    [SerializeField] private ParticleSystem _particleEnterPortal;
-
-
-
-    [Header("Dolly effect Settings")]
-    public Transform _portal;
-    public float _originalSize = 35;
-    public float _zoomChange = -20;
-    public float zoomDuration = 1.5f;
-    public Vector3 _originalPos;
+    [SerializeField] private CameraZoom _cameraZoom;
+    [SerializeField] private CameraChange _cameraChange;
+    [SerializeField] private float _zoomChange = -20;
+    [SerializeField] private float zoomDuration = 1.5f;
     [SerializeField] private float _moveDistance = 200f;
-    public CinemachineCamera _cinemachineCamera;
-    public float _minZoom;
-    public float _maxZoom;
-    public Rigidbody _rb;
-    public float levitateDistance = 2;
-    private Quaternion _rotationParticle = Quaternion.Euler(-90, 0, 0);
+    [SerializeField] private CinemachineCamera _cinemachineCamera;
+    [SerializeField] private float _minZoom = 5;
+    [SerializeField] private float _maxZoom = 150;
+
+
+    [Header("Player settings")]
+    [SerializeField] private Vector3 _offSetPlayerEnter = new Vector3(0, 2, 0);
+    [SerializeField] private PlayerMovement _player;
+    [SerializeField] private CubeAnimation _cubeAnimation;
+    [SerializeField] private float moveSpeed = 5f;
+    private Rigidbody _rb;
+
+    [Header("Dust settings")]
+    [SerializeField] private ParticleSystem _particleEnterPortal;
+    private Quaternion _rotationParticle = Quaternion.Euler (-90, 0, 0);
+    private Vector3 _offSet = new Vector3 (0, -2, 0);
+
+    [Header("Others")]
+    private ChangeScene _changeScene;
 
     [Header("Vibration Settings")]
     [SerializeField] private float vibrationIntensity = 0.8f;
     [SerializeField] private float vibrationDuration = 2f;
-   
+
 
     // XInput para Windows (Logitech F710 en modo X)
     [DllImport("XInput1_4.dll")]
@@ -52,19 +56,28 @@ public class DoorTrigger : MonoBehaviour
     {
         _changeScene = GameObject.FindGameObjectWithTag("GameController").GetComponent<ChangeScene>();
         _rb = _player.GetComponent<Rigidbody>();
-        _audioManager = FindFirstObjectByType<AudioManager>();
+
+
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player") && _cameraChange._isIsometric)
         {
+            _portalCollider.enabled = false;
 
             _rb.isKinematic = true;
-            //    StartCoroutine(MovePlayerToDoor(_target.transform.position));
+
             StartCoroutine(EnterPortalSequence());
-           // AudioManager.Instance.soundSource.PlayOneShot(AudioManager.Instance._portal);
-            Debug.Log("Jugador entró en la puerta");
+
+            if (AudioManager.Instance != null)
+            {
+                AudioManager.Instance.soundSource.PlayOneShot(AudioManager.Instance._portal);
+            }
+            else
+            {
+                return;
+            }
         }
     }
 
@@ -73,81 +86,78 @@ public class DoorTrigger : MonoBehaviour
         _player.enabled = false;
         _cubeAnimation.IgnoreStretchAndSquash(2);
 
+        if (_cameraZoom != null)
+            _cameraZoom.enabled = false;
+
         yield return StartCoroutine(ZoomIn());
-
-        yield return StartCoroutine(MovePlayerToDoor(_target.transform.position));
-
-        yield return StartCoroutine(ReturnToOriginal());
     }
+
 
     private IEnumerator MovePlayerToDoor(Vector3 targetPosition)
     {
         StartCoroutine(VibrateGamepadXInput(vibrationIntensity, vibrationDuration));
-        _cubeAnimation.EnterPortalAnim();
-        float timeElapsed = 0f;
+
+        _cubeAnimation.EnterPortalAnim(0.5f);
+
         Vector3 initialPosition = _player.transform.position;
-        Vector3 _offSet = new Vector3(0, -2, 0); 
-        Instantiate(_particleEnterPortal, targetPosition + _offSet, _rotationParticle); 
+
+        Instantiate(_particleEnterPortal, targetPosition + _offSet, _rotationParticle);
+
         _cameraShake.Shake(2f, 2, .4f);
 
-        _audioManager.soundSource.PlayOneShot(_audioManager._portal);
-        while (timeElapsed < 2f)
+        float duration = 1f;
+        float timeElapsed = 0f;
+
+        while (timeElapsed < duration)
         {
-            timeElapsed += Time.deltaTime * moveSpeed; 
-            _player.transform.position = Vector3.Lerp(initialPosition, targetPosition, timeElapsed);
+            timeElapsed += Time.deltaTime;
+
+            float t = Mathf.Clamp01(timeElapsed / duration);
+
+            _player.transform.position = Vector3.Lerp(initialPosition, targetPosition + _offSetPlayerEnter, t);
+
             yield return null;
         }
+
+        _player.transform.position = targetPosition + _offSetPlayerEnter;
+        _player.gameObject.SetActive(false);
     }
 
     public IEnumerator ZoomIn()
     {
+        Vector3 startPos = _cinemachineCamera.transform.position;
+
+        float startSize = _cinemachineCamera.Lens.OrthographicSize;
+
+        Vector3 targetPos = startPos + (_portal.position - startPos).normalized * _moveDistance;
+
+        float targetSize = Mathf.Clamp(startSize + _zoomChange ,_minZoom, _maxZoom);
 
         _cinemachineCamera.Target.TrackingTarget = _portal;
-        _originalSize = _cinemachineCamera.Lens.OrthographicSize;
 
-        Vector3 levitateDirection = _target.transform.up; 
-        Vector3 startPosLevitate = _player.transform.position;
-        Vector3 targetPosLevitate = startPosLevitate + levitateDirection * levitateDistance;
+        StartCoroutine(MovePlayerToDoor(_target.transform.position));
 
-        Vector3 startPos = _originalPos;
-        Vector3 targetPos = startPos + (_portal.position - startPos).normalized * _moveDistance;
-        float startSize = _originalSize;
-        float targetSize = _originalSize + _zoomChange;
-
-        targetSize = Mathf.Clamp(targetSize, _minZoom, _maxZoom);
         float t = 0f;
+
         while (t < 1f)
         {
             t += Time.deltaTime / zoomDuration;
+            t = Mathf.Clamp01(t);
 
-            _cinemachineCamera.transform.position = Vector3.Lerp(startPos, targetPos, t);
+            _cinemachineCamera.transform.position =
+                Vector3.Lerp(startPos, targetPos, t);
 
-            _cinemachineCamera.Lens.OrthographicSize = Mathf.Lerp(startSize, targetSize, t);
+            _cinemachineCamera.Lens.OrthographicSize =
+                Mathf.Lerp(startSize, targetSize, t);
 
-            _player.transform.position = Vector3.Lerp(startPosLevitate, targetPosLevitate, t);
             yield return null;
         }
-    }
 
-    public IEnumerator ReturnToOriginal()
-    {
-        Vector3 currentPos = _cinemachineCamera.transform.position;
-        float currentSize = _cinemachineCamera.Lens.OrthographicSize;
         _changeScene.NextLevel();
-        float t = 0f;
-        while (t < 1f)
-        {
-            t += Time.deltaTime / zoomDuration;
-            _cinemachineCamera.transform.position = Vector3.Lerp(currentPos, _originalPos, t);
-            _cinemachineCamera.Lens.OrthographicSize = Mathf.Lerp(currentSize, _originalSize, t);
-            yield return null;
-        }
-        // _cinemachineCamera.Target.TrackingTarget = null; 
+
+        _cinemachineCamera.transform.position = targetPos;
+        _cinemachineCamera.Lens.OrthographicSize = targetSize;
     }
-
-
-
-
 
     // Método usando XInput directamente (para Logitech F710)
     private IEnumerator VibrateGamepadXInput(float intensity, float duration)
@@ -181,7 +191,7 @@ public class DoorTrigger : MonoBehaviour
         vibration.wRightMotorSpeed = 0;
         XInputSetState(0, ref vibration);
 
-       // Debug.Log("[XInput] Vibración detenida");
+        // Debug.Log("[XInput] Vibración detenida");
     }
 
     private void OnDestroy()

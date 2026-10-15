@@ -1,12 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using TMPro;
-using Unity.Cinemachine;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using UnityEngine.Rendering;
 
 public class ChangeScene : MonoBehaviour
 {
@@ -31,7 +28,7 @@ public class ChangeScene : MonoBehaviour
     //new pause blur
     [SerializeField] private HideUI _uiInGame;
     [SerializeField] private Volume _blur;
-
+    public bool isCredits = false;
     void Awake()
     {
         _inputActions = new PlayerControls();
@@ -211,7 +208,11 @@ public class ChangeScene : MonoBehaviour
 
     public void BackToMenu()
     {
-        TogglePause();
+        if (!isCredits)
+        {
+            TogglePause();
+        }
+
         Time.timeScale = 1f;
         SceneManager.LoadScene("Menu");
     }

@@ -13,18 +13,20 @@ Material:
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
   - DR_CEL_EXTRA_ON
+  - DR_OUTLINE_SMOOTH_NORMALS
   - _CELPRIMARYMODE_SINGLE
   - _DETAILMAPBLENDINGMODE_MULTIPLY
   - _GRADIENTSPACE_WORLD
-  - _OUTLINESPACE_SCREEN
+  - _OUTLINESPACE_OBJECT
   - _TEXTUREBLENDINGMODE_MULTIPLY
   - _UNITYSHADOWMODE_MULTIPLY
   m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
+  m_CustomRenderQueue: 2000
+  stringTagMap:
+    RenderType: Opaque
   disabledShaderPasses:
   - MOTIONVECTORS
   - SRPDEFAULTUNLIT
@@ -109,7 +111,7 @@ Material:
     - _Blend: 0
     - _BlendModePreserveSpecular: 1
     - _BumpScale: 1
-    - _CameraDistanceImpact: 0
+    - _CameraDistanceImpact: 0.311
     - _CelExtraEnabled: 1
     - _CelNumSteps: 3
     - _CelPrimaryMode: 1
@@ -146,11 +148,11 @@ Material:
     - _LightmapDirectionYaw: 0
     - _Metallic: 0
     - _OcclusionStrength: 1
-    - _OutlineDepthOffset: 0
+    - _OutlineDepthOffset: 1
     - _OutlineEnabled: 0
-    - _OutlineScale: 1
-    - _OutlineSpace: 0
-    - _OutlineWidth: 1
+    - _OutlineScale: 1.03
+    - _OutlineSpace: 1
+    - _OutlineWidth: 0.5
     - _OverrideLightmapDir: 0
     - _Parallax: 0.02
     - _QueueOffset: 0
@@ -174,7 +176,7 @@ Material:
     - _UnityShadowPower: 0.2
     - _UnityShadowSharpness: 1
     - _VertexColorsEnabled: 0
-    - _VertexExtrusionSmoothNormals: 0
+    - _VertexExtrusionSmoothNormals: 1
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
@@ -190,7 +192,7 @@ Material:
     - _FlatRimColor: {r: 0.52358484, g: 0.6375387, b: 1, a: 1}
     - _FlatSpecularColor: {r: 0.5188679, g: 0.18933664, b: 0.03671235, a: 1}
     - _LightmapDirection: {r: 0, g: 1, b: 0, a: 0}
-    - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
+    - _OutlineColor: {r: 1, g: 1, b: 1, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
     - _UnityShadowColor: {r: 0.65, g: 0.65, b: 0.65, a: 1}
   m_BuildTextureStacks: []

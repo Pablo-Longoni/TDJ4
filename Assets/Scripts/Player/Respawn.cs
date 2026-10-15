@@ -1,69 +1,92 @@
-using Unity.VisualScripting;
 using UnityEngine;
 using System.Collections;
 
 public class Respawn : MonoBehaviour
 {
     private Vector3 _startPosition;
-    public Rigidbody _rb;
-    public int _limit;
 
-    [SerializeField] public BoxCollider[] _collisions;
+    [SerializeField] private Rigidbody _rb;
+    [SerializeField] private float _limit = -10f;
+    [SerializeField] private BoxCollider[] _collisions;
 
+    [SerializeField] private PlayerMovement _playerMovement;
+    [SerializeField] private DeactivateCollider[] _shadowEffects;
+    [SerializeField] private PlayerShadow _playerShadow;
+
+    [SerializeField] private CubeAnimation _playerAnimation;
+    private bool _isRespawning;
     private ChangeScene _changeScene;
 
-    void Start()
+    private void Start()
     {
         _startPosition = transform.position;
-      //  Debug.Log("Posición inicial: " + _startPosition);
 
         _changeScene = GameObject.FindGameObjectWithTag("GameController").GetComponent<ChangeScene>();
     }
 
-    void Update()
+    private void Update()
     {
-        if (_rb.position.y <= _limit)
+        if (!_isRespawning && _rb.position.y <= _limit)
         {
-            // _changeScene.RestartLevel();
-            RespawnRoutine();
+            StartCoroutine(RespawnRoutine());
         }
     }
 
-    public void RespawnRoutine()
-{
-   
-    foreach (BoxCollider col in _collisions)
-        col.enabled = false;
-
-    
-    _rb.linearVelocity = Vector3.zero;
-    _rb.angularVelocity = Vector3.zero;
-
-    
-    _rb.position = _startPosition;
-
-    
-    _rb.isKinematic = false;
-    _rb.useGravity = true;
-
-    
-    StartCoroutine(ApplyInitialImpulse());
-
-    
-    Invoke(nameof(EnableCollider), 0.5f);
-}
-
-private IEnumerator ApplyInitialImpulse()
-{
-    yield return new WaitForFixedUpdate();
-    _rb.linearVelocity = new Vector3(0, -2f, 0); 
-}
-
-    void EnableCollider()
+    private IEnumerator RespawnRoutine()
     {
-        foreach (BoxCollider col in _collisions)
+        _playerAnimation.CallFalling();
+
+        _isRespawning = true;
+
+        // Bloquear al jugador durante el reinicio.
+        if (_playerMovement != null)
         {
-            col.enabled = true;
+            _playerMovement._input = Vector3.zero;
         }
+
+        // Detener la física.
+        _rb.linearVelocity = Vector3.zero;
+        _rb.angularVelocity = Vector3.zero;
+
+        // Desactivar temporalmente las colisiones del jugador.
+        foreach (Collider col in _collisions)
+        {
+            if (col != null)
+                col.enabled = false;
+        }
+
+        // Volver al punto inicial.
+        _rb.position = _startPosition;
+        transform.position = _startPosition;
+
+        _rb.isKinematic = false;
+        _rb.useGravity = true;
+
+        yield return new WaitForFixedUpdate();
+
+        // Reactivar las colisiones del jugador.
+        foreach (Collider col in _collisions)
+        {
+            if (col != null)
+                col.enabled = true;
+        }
+
+        // Reiniciar TODAS las sombras.
+        foreach (DeactivateCollider shadow in _shadowEffects)
+        {
+            if (shadow != null)
+                shadow.ResetShadowEffect();
+        }
+
+        // Detener cualquier movimiento residual.
+        _rb.linearVelocity = Vector3.zero;
+        _rb.angularVelocity = Vector3.zero;
+
+        _isRespawning = false;
+
+      /*  if (_playerShadow != null)
+        {
+            _playerShadow.RestoreShadow();
+        }*/
     }
 }

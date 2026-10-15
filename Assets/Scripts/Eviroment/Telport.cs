@@ -62,7 +62,7 @@ public class Telport : MonoBehaviour
         float timeElapsed = 0f;
         float moveDuration = 0.7f; // tiempo para llegar al portal
 
-        _cubeAnimation.EnterPortalAnim();
+        _cubeAnimation.EnterPortalAnim(0.15f);
         while (timeElapsed < moveDuration)
         {
             timeElapsed += Time.deltaTime * _moveSpeed;
