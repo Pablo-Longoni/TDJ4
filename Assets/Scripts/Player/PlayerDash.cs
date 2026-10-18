@@ -60,8 +60,9 @@ public class PlayerDash : MonoBehaviour
             _inputReader.ConsumeDash();
 
             //visual effect
+            if(AudioManager.Instance != null)
+                AudioManager.Instance.soundSource.PlayOneShot(AudioManager.Instance._dash);
 
-            AudioManager.Instance.soundSource.PlayOneShot(AudioManager.Instance._dash);
             if (_dashParticles != null)
             {
                 _dashParticles.gameObject.SetActive(true);

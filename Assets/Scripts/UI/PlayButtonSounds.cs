@@ -5,7 +5,15 @@ public class PlayButtonSounds : MonoBehaviour, IPointerEnterHandler/*, ISelectHa
 {
     public void OnPointerEnter(PointerEventData eventData)
     {
-        AudioManager.Instance.soundSource.PlayOneShot(AudioManager.Instance._selected);
+        if(AudioManager.Instance != null)
+        {
+            AudioManager.Instance.soundSource.PlayOneShot(AudioManager.Instance._selected);
+        }
+        else
+        {
+            return;
+        }
+     
     }
 
   /*  public void OnSelect(BaseEventData eventData)
