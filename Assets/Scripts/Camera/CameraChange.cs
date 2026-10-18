@@ -101,8 +101,10 @@ public class CameraChange : MonoBehaviour
     {
         _canChange = false;
 
+        AudioManager.Instance.soundSource.PlayOneShot(AudioManager.Instance._cameraChange);
+
         if (_isIsometric)
-        {
+        {        
             _isIsometric = false;
 
             _cameraRotation.ResetRotation();

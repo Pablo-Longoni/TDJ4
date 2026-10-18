@@ -8,6 +8,7 @@ public class PlayerDash : MonoBehaviour
     [SerializeField] private Rigidbody _rb;
     [SerializeField] private PlayerInputReader _inputReader;
     [SerializeField] private PlayerMovement _movement;
+    [SerializeField] private PlayerGroundDetection _groundDetection;
 
     [Header("Dash")]
     [SerializeField] private float dashSpeed = 40f;
@@ -19,8 +20,9 @@ public class PlayerDash : MonoBehaviour
 
     [Header("Visual feedback")]
   //  [SerializeField] private TrailRenderer _dashTrail;
-  //  [SerializeField] private ParticleSystem _dashParticles;
+    [SerializeField] private ParticleSystem _dashParticles;
     [SerializeField] private GameObject _dashAfterImage;
+    [SerializeField] private Vector3 _particleOffSet = new Vector3(0,5,0);
     [SerializeField] private Material _dashMaterial;
     [SerializeField] private float _afterImageDuration = 0.5f;
     [SerializeField] private int _afterImageCount = 5;
@@ -44,7 +46,7 @@ public class PlayerDash : MonoBehaviour
     {
         // Detectar y consumir el input acá, sincronizado con el mismo ciclo
         // en el que CameraChange.LateUpdate() resetea los flags.
-        if (_inputReader.DashTriggered && !_dashing)
+        if (_inputReader.DashTriggered && !_dashing && _groundDetection.IsGrounded)
         {
             Vector3 dir = _movement._input != Vector3.zero
                 ? _movement._input.normalized
@@ -58,11 +60,20 @@ public class PlayerDash : MonoBehaviour
             _inputReader.ConsumeDash();
 
             //visual effect
-        /*    if (_dashTrail != null)
-                _dashTrail.emitting = true;*/
+
+            AudioManager.Instance.soundSource.PlayOneShot(AudioManager.Instance._dash);
+            if (_dashParticles != null)
+            {
+                _dashParticles.gameObject.SetActive(true);
+
+                _dashParticles.Stop(true,ParticleSystemStopBehavior.StopEmittingAndClear);
+
+                _dashParticles.Play(true);
+            }
 
             if (_dashAfterImage != null)
                 StartCoroutine(CreateAfterImages());
+
         }
     }
 
