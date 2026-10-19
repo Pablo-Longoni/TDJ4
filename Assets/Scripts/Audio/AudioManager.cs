@@ -36,6 +36,12 @@ public class AudioManager : MonoBehaviour
     [Header("Sound Other")]
     public AudioClip _splashWater;
     public AudioClip _flip;
+    public AudioClip _dash;
+    public AudioClip _cameraChange;
+
+    [Header("UI Sounds")]
+    public AudioClip _hover;
+    public AudioClip _selected;
 
     private int lastMusicIndex;
     private AudioDistortionFilter _distortionFilter;

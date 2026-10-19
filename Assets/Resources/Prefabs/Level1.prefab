@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2187201415996211407}
   - component: {fileID: 1811572353959079045}
   - component: {fileID: 8662173059871897265}
+  - component: {fileID: 7991698327926600070}
   m_Layer: 5
   m_Name: Level1
   m_TagString: Untagged
@@ -100,7 +101,7 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 1, g: 1, b: 1, a: 0.8666667}
+    m_HighlightedColor: {r: 0.6698113, g: 0.6698113, b: 0.6698113, a: 0.8666667}
     m_PressedColor: {r: 0.4528302, g: 0.44215024, b: 0.44215024, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
@@ -148,6 +149,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _button: {fileID: 1811572353959079045}
   _scale: {x: 1.2, y: 1.2, z: 1.2}
+--- !u!114 &7991698327926600070
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 668262501782894158}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1e8120fca3d45548be7d4f8de06b6ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &9097806163948355529
 GameObject:
   m_ObjectHideFlags: 0
@@ -250,7 +263,7 @@ MonoBehaviour:
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
-  m_characterSpacing: 0
+  m_characterSpacing: 12
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0

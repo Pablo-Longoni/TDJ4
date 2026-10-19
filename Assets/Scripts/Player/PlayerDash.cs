@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Drawing;
 using UnityEngine;
 
 public class PlayerDash : MonoBehaviour
@@ -6,6 +8,7 @@ public class PlayerDash : MonoBehaviour
     [SerializeField] private Rigidbody _rb;
     [SerializeField] private PlayerInputReader _inputReader;
     [SerializeField] private PlayerMovement _movement;
+    [SerializeField] private PlayerGroundDetection _groundDetection;
 
     [Header("Dash")]
     [SerializeField] private float dashSpeed = 40f;
@@ -15,16 +18,35 @@ public class PlayerDash : MonoBehaviour
     private float _dashTimer;
     private Vector3 _dashDirection;
 
+    [Header("Visual feedback")]
+  //  [SerializeField] private TrailRenderer _dashTrail;
+    [SerializeField] private ParticleSystem _dashParticles;
+    [SerializeField] private GameObject _dashAfterImage;
+    [SerializeField] private Vector3 _particleOffSet = new Vector3(0,5,0);
+    [SerializeField] private Material _dashMaterial;
+    [SerializeField] private float _afterImageDuration = 0.5f;
+    [SerializeField] private int _afterImageCount = 5;
+    [SerializeField] private float _timeBetweenAfterImage = 0.05f;
+    private MeshRenderer _meshRenderer;
+    private Material _originaLMaterial;
     // STATIC: compartido globalmente, para que cualquier PlayerMovement
     // (puede haber más de uno controlando el mismo Rigidbody) sepa que
     // hay un dash en curso y no le pise la velocidad.
     public static bool IsAnyDashing { get; private set; }
 
+    private void Awake()
+    {
+        _meshRenderer = GetComponentInChildren<MeshRenderer>();
+        _originaLMaterial = _meshRenderer != null ? _meshRenderer.material : null;
+
+    /*    if(_dashTrail != null)
+            _dashTrail.emitting = false;*/
+    }
     private void Update()
     {
         // Detectar y consumir el input acá, sincronizado con el mismo ciclo
         // en el que CameraChange.LateUpdate() resetea los flags.
-        if (_inputReader.DashTriggered && !_dashing)
+        if (_inputReader.DashTriggered && !_dashing && _groundDetection.IsGrounded)
         {
             Vector3 dir = _movement._input != Vector3.zero
                 ? _movement._input.normalized
@@ -36,6 +58,23 @@ public class PlayerDash : MonoBehaviour
             _dashDirection = dir;
 
             _inputReader.ConsumeDash();
+
+            //visual effect
+            if(AudioManager.Instance != null)
+                AudioManager.Instance.soundSource.PlayOneShot(AudioManager.Instance._dash);
+
+            if (_dashParticles != null)
+            {
+                _dashParticles.gameObject.SetActive(true);
+
+                _dashParticles.Stop(true,ParticleSystemStopBehavior.StopEmittingAndClear);
+
+                _dashParticles.Play(true);
+            }
+
+            if (_dashAfterImage != null)
+                StartCoroutine(CreateAfterImages());
+
         }
     }
 
@@ -57,5 +96,17 @@ public class PlayerDash : MonoBehaviour
                 _rb.linearVelocity = new Vector3(0, _rb.linearVelocity.y, 0);
             }
         }
+    }
+
+
+    private IEnumerator CreateAfterImages()
+    {
+        for (int i = 0; i < _afterImageCount; i++)
+        {
+            GameObject afterImage = Instantiate(_dashAfterImage, transform.position, transform.rotation);
+            Destroy(afterImage, _afterImageDuration);
+            yield return new WaitForSeconds(_timeBetweenAfterImage);
+        }
+
     }
 }

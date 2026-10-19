@@ -12,9 +12,12 @@ public class PlayerShadow : MonoBehaviour
 
     [SerializeField] private PlayerGroundDetection _groundDetection;
 
+    [SerializeField] private Material _shadowMaterial;
+    private Color _originalColor;
     private void Awake()
     {
         _fakeShadow.SetActive(true);
+        _originalColor = _shadowMaterial.color;
     }
 
     private void Update()
@@ -26,11 +29,7 @@ public class PlayerShadow : MonoBehaviour
     {
         Vector3 rayOrigin = _playerTransform.position;
 
-        Debug.DrawRay(
-            rayOrigin,
-            Vector3.down * _rayDistance,
-            Color.red
-        );
+        Debug.DrawRay(rayOrigin, Vector3.down * _rayDistance, Color.red);
 
         bool hasGroundBelow = Physics.SphereCast(
             rayOrigin,
@@ -41,11 +40,9 @@ public class PlayerShadow : MonoBehaviour
             _layerMask
         );
 
-        // PLAYER ESTÁ EN EL SUELO
         if (_groundDetection.IsGrounded)
         {
             _fakeShadow.SetActive(true);
-
             Vector3 shadowPosition = _playerTransform.position;
             shadowPosition.y -= _shadowOffset;
 
@@ -54,26 +51,39 @@ public class PlayerShadow : MonoBehaviour
             return;
         }
 
-        // PLAYER ESTÁ EN EL AIRE Y HAY UNA FIGURA DEBAJO
         if (hasGroundBelow)
         {
             _fakeShadow.SetActive(true);
-
             Vector3 shadowPosition = hit.point;
             shadowPosition.y += _shadowOffset;
 
             _fakeShadow.transform.position = shadowPosition;
 
-            Debug.DrawLine(
-                rayOrigin,
-                hit.point,
-                Color.green
-            );
+            Debug.DrawLine(rayOrigin, hit.point, Color.green);
 
             return;
         }
 
-        // PLAYER ESTÁ EN EL AIRE Y NO HAY NADA DEBAJO
         _fakeShadow.SetActive(false);
     }
+
+  /*  public void ForceDeactivateShadow()
+    {
+        if (_shadowMaterial == null)
+            return;
+
+        Debug.Log("Color desactivado");
+        Color color = _shadowMaterial.color;
+        color.a = 0f;
+        _shadowMaterial.color = color;
+    }*/
+
+ /*   public void RestoreShadow()
+    {
+        if (_shadowMaterial == null)
+            return;
+
+        Debug.Log("Color activado");
+        _shadowMaterial.color = _originalColor;
+    }*/
 }

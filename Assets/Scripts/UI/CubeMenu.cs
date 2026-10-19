@@ -14,6 +14,7 @@ public class CubeMenu : MonoBehaviour
     private bool _isInCooldown = false;
 
     [Header("Canvas References")]
+    [SerializeField] private GameObject canvasForButtons;
     [SerializeField] private GameObject canvasCube;
     [SerializeField] private GameObject canvasCube1;
     [SerializeField] private GameObject canvasCube2;
@@ -55,7 +56,7 @@ public class CubeMenu : MonoBehaviour
         }
     }
 
-    IEnumerator RotateBy(Vector3 axis)
+    public IEnumerator RotateBy(Vector3 axis)
     {
         float rotated = 0f;
         while (rotated < 90f)
@@ -125,6 +126,7 @@ public class CubeMenu : MonoBehaviour
 
     private void EnableAllCanvasInteraction()
     {
+        EnableCanvasOnly(canvasForButtons);
         EnableCanvasOnly(canvasCube);
         EnableCanvasOnly(canvasCube1);
         EnableCanvasOnly(canvasCube2);
@@ -272,5 +274,17 @@ public class CubeMenu : MonoBehaviour
         _isInCooldown = true;
         yield return new WaitForSeconds(_rotateCooldown);
         _isInCooldown = false;
+    }
+
+    public void RotateLeft()
+    {
+        StartCoroutine(RotateBy(Vector3.back));
+        StartCoroutine(RotationCooldown());
+    }
+
+    public void RotateRight()
+    {
+        StartCoroutine(RotateBy(Vector3.forward));
+        StartCoroutine(RotationCooldown());
     }
 }

@@ -10,43 +10,66 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float groundCheckDistance = 5f;
     [SerializeField] private PlayerAnimationController _playerAnimator;
     [SerializeField] private PlayerTransformation _playerTransformation;
+    [SerializeField] private PlayerGrab _playerGrab;
     public Vector3 _input;
-
+    public bool _movementBlocked = false;
     private CameraChange _cameraChange;
     public CubeRotation _currentCube;
 
-    public FollowEnviroment _minimapCameraFollow;
     private Transform _currentFigure;
     private string _minimapLayerName = "Enviroment";
     private string _defaultLayerName = "Default";
     [SerializeField] private Transform _groundCheck;
     [SerializeField] private LayerMask _layerMask;
-    private void Start()
+
+    private void Awake()
     {
         _cameraChange = FindAnyObjectByType<CameraChange>();
-
-        //asignar layers para check
-      //  _currentCube.StartBlinking();
+        _playerGrab = FindAnyObjectByType<PlayerGrab>();
+    }
+    private void Start()
+    {
+        //  _currentCube.StartBlinking();
     }
 
     void Update()
     {
+        if (_movementBlocked)
+        {
+            _input = Vector3.zero;
+            return;
+        }
+
+
         CheckCurrentCube();
 
         if (!_cameraChange._isIsometric && _currentCube._canRotate && _playerTransformation.CanTransform())
         {
             Rotating();
         }
+        else
+        {
+            return;
+        }
     }
 
     void FixedUpdate()
     {
-        GatherInput();
-        Move();
-
-        if (_cameraChange._isIsometric)
+        if (_movementBlocked)
         {
-            Look();
+            _input = Vector3.zero;
+            _rb.linearVelocity = new Vector3(0f, _rb.linearVelocity.y, 0f);
+            return;
+        }
+        else
+        {
+            GatherInput();
+            Move();
+
+            if (_cameraChange._isIsometric)
+            {
+                Look();
+            }
         }
     }
 
@@ -73,6 +96,37 @@ public class PlayerMovement : MonoBehaviour
             _input = rawInput.normalized;
         }
     }
+    /*
+        void Move()
+        {
+            if (PlayerDash.IsAnyDashing)
+                return;
+
+            if (_cameraChange._isIsometric)
+            {
+                if (_input != Vector3.zero && !_cameraChange._cinematicPlaying)
+                {
+                    Vector3 moveDir = _input * _speed;
+                    _rb.linearVelocity = new Vector3(moveDir.x, _rb.linearVelocity.y, moveDir.z);
+                    _playerAnimator.PlayAnimation("Walk");
+                }
+                else
+                {
+                    _rb.linearVelocity = new Vector3(0, _rb.linearVelocity.y, 0);
+                    _playerAnimator.PlayAnimation("Idle");
+                    Debug.Log("Idle");
+
+                }
+
+                _rb.constraints = RigidbodyConstraints.FreezeRotation;
+            }
+            else
+            {
+                _rb.linearVelocity = Vector3.zero;
+                _rb.constraints = RigidbodyConstraints.FreezeAll;
+            }
+        }
+        */
 
     void Move()
     {
@@ -84,14 +138,22 @@ public class PlayerMovement : MonoBehaviour
             if (_input != Vector3.zero && !_cameraChange._cinematicPlaying)
             {
                 Vector3 moveDir = _input * _speed;
-                _rb.linearVelocity = new Vector3(moveDir.x, _rb.linearVelocity.y, moveDir.z);
-                _playerAnimator.PlayAnimation("Walk");
+
+                _rb.linearVelocity = new Vector3(moveDir.x,_rb.linearVelocity.y, moveDir.z );
+
+                if (_playerGrab.isGrabbed)
+                    _playerAnimator.PlayAnimation("WalkAndGrab");
+                else
+                    _playerAnimator.PlayAnimation("Walk");
             }
             else
             {
+                _rb.linearVelocity = new Vector3(0f, _rb.linearVelocity.y, 0f);
 
-                _rb.linearVelocity = new Vector3(0, _rb.linearVelocity.y, 0);
-                _playerAnimator.PlayAnimation("Idle");
+                if (_playerGrab.isGrabbed)
+                    _playerAnimator.PlayAnimation("IdleGrab");
+                else
+                    _playerAnimator.PlayAnimation("Idle");
             }
 
             _rb.constraints = RigidbodyConstraints.FreezeRotation;
@@ -102,6 +164,7 @@ public class PlayerMovement : MonoBehaviour
             _rb.constraints = RigidbodyConstraints.FreezeAll;
         }
     }
+
 
     void Look()
     {
@@ -165,11 +228,11 @@ public class PlayerMovement : MonoBehaviour
 
             if (detectedCube != null && detectedCube != _currentCube)
             {
-                _currentCube?.StopBlinking();
+                _currentCube?.StopOutline();
 
                 _currentCube = detectedCube;
 
-                _currentCube.StartBlinking();
+                _currentCube.StartOutline();
 
                 Debug.Log($"CURRENT CUBE: {_currentCube.name}");
             }

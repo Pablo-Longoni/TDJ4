@@ -13,14 +13,12 @@ public class CubeRotation : MonoBehaviour
     public float _rotateCooldown = 2f;
 
     // Blink figura
-    private MeshRenderer[] _renderers;
     private Color[] _originalColors;
     private Coroutine _blinkCoroutine;
     private float _fadeSpeed = 0.6f;
     private Color _targetColor;
-    public GameObject _pivotPoint;
+
     private GameObject _pivotInstance;
-    [SerializeField] public AudioManager _audioManager;
 
     public bool _isInCooldown = false;
     public CameraChange _cameraChange;
@@ -28,19 +26,35 @@ public class CubeRotation : MonoBehaviour
     public bool _didRotate = false;
 
     public bool isChildCube = false;
+
+    // Outline de la figura
+    private MeshRenderer[] _renderers;
+    private Material[][] _materials;
+
+    [SerializeField] private string _outlineProperty = "_OutlineScale";
+    [SerializeField] private float _outlineOnValue = 1.03f;
+    [SerializeField] private float _outlineOffValue = 0f;
+
+    public GameObject _pivotPoint;
     void Awake()
     {
-      /*  _renderers = GetComponentsInChildren<MeshRenderer>();
-        _originalColors = new Color[_renderers.Length];
+        _cameraChange = FindFirstObjectByType<CameraChange>();
+
+        _renderers = GetComponentsInChildren<MeshRenderer>(true);
+        _materials = new Material[_renderers.Length][];
 
         for (int i = 0; i < _renderers.Length; i++)
         {
-            _originalColors[i] = _renderers[i].material.color;
+            _materials[i] = _renderers[i].materials;
+
+            foreach (Material mat in _materials[i])
+            {
+                if (mat.HasProperty(_outlineProperty))
+                {
+                    mat.SetFloat(_outlineProperty, _outlineOffValue);
+                }
+            }
         }
-
-        _targetColor = _originalColors[0] * 0.6f; */
-
-        _cameraChange = FindFirstObjectByType<CameraChange>();
     }
 
     void Start()
@@ -176,6 +190,38 @@ public class CubeRotation : MonoBehaviour
     private void DestroyPivotPoint()
     {
        _pivotPoint.SetActive(false);
+    }
+
+    public void StartOutline()
+    {
+        SetOutline(true);
+
+        ShowPivotPoint();
+        _canRotate = true;
+    }
+
+    public void StopOutline()
+    {
+        SetOutline(false);
+
+        DestroyPivotPoint();
+        _canRotate = false;
+    }
+
+    private void SetOutline(bool enabled)
+    {
+        float value = enabled ? _outlineOnValue : _outlineOffValue;
+
+        foreach (Material[] materialArray in _materials)
+        {
+            foreach (Material mat in materialArray)
+            {
+                if (mat.HasProperty(_outlineProperty))
+                {
+                    mat.SetFloat(_outlineProperty, value);
+                }
+            }
+        }
     }
 }
 

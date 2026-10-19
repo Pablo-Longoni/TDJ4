@@ -48,7 +48,6 @@ public class PlayerGrab : MonoBehaviour
         if (_grabbedObject != null)
         {
             MoveGrabbedObject();
-            _playerAnimator.PlayAnimation("WalkAndGrab", true, true);
         }
     }
 

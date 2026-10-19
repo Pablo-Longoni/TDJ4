@@ -11,6 +11,7 @@ public class CubeAnimation : MonoBehaviour
     [Header("Effects")]
     [SerializeField] private GameObject _dustPrefab;
     [SerializeField] private GameObject _miniDustPrefab;
+    [SerializeField] private Vector3 _offSet = new Vector3(0, 1, 0);
 
     [Header("References")]
     [SerializeField] private GameObject _cube;
@@ -65,6 +66,11 @@ public class CubeAnimation : MonoBehaviour
         _playerAnimator.LockAnimation();
     }
 
+    public void CallFalling()
+    {
+        StartFalling();
+    }
+
  
     private void Land()
     {
@@ -88,19 +94,11 @@ public class CubeAnimation : MonoBehaviour
     {
         if (fallDuration >= 1.2f)
         {
-            Instantiate(
-                _dustPrefab,
-                groundCheck.position,
-                _dustPrefab.transform.rotation
-            );
+            Instantiate(_dustPrefab ,groundCheck.position + _offSet, _dustPrefab.transform.rotation);
         }
         else
         {
-            Instantiate(
-                _miniDustPrefab,
-                groundCheck.position,
-                _miniDustPrefab.transform.rotation
-            );
+            Instantiate( _miniDustPrefab,  groundCheck.position + _offSet, _miniDustPrefab.transform.rotation);
         }
     }
 
@@ -129,12 +127,12 @@ public class CubeAnimation : MonoBehaviour
     // Portal
     // --------------------------------------------------
 
-    public void EnterPortalAnim()
+    public void EnterPortalAnim(float duration)
     {
         _fakeShadow.SetActive(false);
         canStretchAndSquash = false;
 
-        StartCoroutine(ScaleObject(_cube, Vector3.zero, 0.15f) );
+        StartCoroutine(ScaleObject(_cube, Vector3.zero, duration) );
 
         Debug.Log("EnterPortalAnim");
     }
