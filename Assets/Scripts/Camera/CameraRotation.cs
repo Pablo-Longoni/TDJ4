@@ -1,3 +1,4 @@
+
 using System.Collections;
 using UnityEngine;
 using TMPro;
@@ -6,6 +7,10 @@ public class CameraRotation : MonoBehaviour
 {
     [Header("Rotation settings")]
     public float _rotationSpeed = 360f;
+
+    [Header("Mobile rotation")]
+    [SerializeField] private float _mobileRotationMultiplier = 0.25f;
+
     [SerializeField] private CameraChange _cameraChange;
     [SerializeField] private PlayerInputReader _inputReader;
 
@@ -37,7 +42,7 @@ public class CameraRotation : MonoBehaviour
 
         bool isRotating = false;
 
-
+        // Mouse
         if (Input.GetMouseButton(0))
         {
             float mouseX = Input.GetAxis("Mouse X");
@@ -46,34 +51,48 @@ public class CameraRotation : MonoBehaviour
             {
                 isRotating = true;
 
-                transform.Rotate( Vector3.up, mouseX * _rotationSpeed * Time.deltaTime);
+                transform.Rotate(
+                    Vector3.up,
+                    mouseX * _rotationSpeed * Time.deltaTime
+                );
             }
         }
 
+        // Gamepad - Rotación izquierda
         if (Input.GetButton("RotateLeft"))
         {
             isRotating = true;
 
-            transform.Rotate(Vector3.up, -_rotationSpeed * Time.deltaTime);
+            transform.Rotate(
+                Vector3.up,
+                -_rotationSpeed * Time.deltaTime
+            );
         }
 
-
+        // Gamepad - Rotación derecha
         if (Input.GetButton("RotateRight"))
         {
             isRotating = true;
 
-            transform.Rotate(Vector3.up,_rotationSpeed * Time.deltaTime);
+            transform.Rotate(
+                Vector3.up,
+                _rotationSpeed * Time.deltaTime
+            );
         }
 
+        // Joystick
         Vector2 look = _inputReader.LookInput;
 
         if (Mathf.Abs(look.x) > 0.1f)
         {
             isRotating = true;
 
-            transform.Rotate( Vector3.up,look.x * _rotationSpeed * Time.deltaTime);
+            transform.Rotate(
+                Vector3.up,
+                look.x * _rotationSpeed * _mobileRotationMultiplier * Time.deltaTime
+            );
         }
-   
+
         if (isRotating && !rotationDetected)
         {
             rotationDetected = true;

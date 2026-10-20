@@ -53,12 +53,12 @@ public class PlayerInputReader : MonoBehaviour
         };
         _controls.Camera.RotateCamera.canceled += _ => RotateCameraPressed = false;
 
-        _controls.Camera.MouseDelta.performed += ctx =>
-        {
-            if (ChangeScene.IsPaused) return;
-            MouseDelta = ctx.ReadValue<Vector2>();
-        };
-        _controls.Camera.MouseDelta.canceled += _ => MouseDelta = Vector2.zero;
+        // _controls.Camera.MouseDelta.performed += ctx =>
+        //{
+        //  if (ChangeScene.IsPaused) return;
+        //MouseDelta = ctx.ReadValue<Vector2>();
+        //};
+        //_controls.Camera.MouseDelta.canceled += _ => MouseDelta = Vector2.zero;
 
         _controls.Camera.CameraHelp.performed += _ =>
         {

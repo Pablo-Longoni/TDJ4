@@ -742,15 +742,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""MouseDelta"",
-                    ""type"": ""Value"",
-                    ""id"": ""2933f9bb-2236-40f1-a461-4abca24a53c9"",
-                    ""expectedControlType"": ""Vector2"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": true
-                },
-                {
                     ""name"": ""CameraHelp"",
                     ""type"": ""Button"",
                     ""id"": ""d5cd95b2-ebef-4afe-a811-f2e0e134ebbe"",
@@ -789,7 +780,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                 {
                     ""name"": ""Click"",
                     ""type"": ""Button"",
-                    ""id"": ""b9778589-921a-47aa-b733-b571b209ea7b"",
+                    ""id"": ""253b7b8d-6ed8-45a4-b9eb-a8c495dfbca6"",
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
@@ -836,17 +827,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": "";Keyboard&Mouse;Gamepad;Joystick"",
                     ""action"": ""RotateCamera"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""84458bcf-5e9d-4b62-b58f-90535274b8d6"",
-                    ""path"": ""<Mouse>/delta"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";Keyboard&Mouse"",
-                    ""action"": ""MouseDelta"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -940,34 +920,23 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""428e0d2c-c830-4c0d-833b-b5bf73a14dad"",
-                    ""path"": ""<Mouse>/leftButton"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";Keyboard&Mouse"",
-                    ""action"": ""Click"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""10d99a25-97f5-4b1b-969d-85d3f3ee3495"",
-                    ""path"": """",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Click"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""b60c4111-e5b7-4de2-a275-3ac257435504"",
                     ""path"": ""<Gamepad>/rightStick"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Look"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5803ba50-467a-447a-8238-e9726918d95b"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard&Mouse"",
+                    ""action"": ""Click"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1245,7 +1214,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         // Camera
         m_Camera = asset.FindActionMap("Camera", throwIfNotFound: true);
         m_Camera_RotateCamera = m_Camera.FindAction("RotateCamera", throwIfNotFound: true);
-        m_Camera_MouseDelta = m_Camera.FindAction("MouseDelta", throwIfNotFound: true);
         m_Camera_CameraHelp = m_Camera.FindAction("CameraHelp", throwIfNotFound: true);
         m_Camera_CameraFlip = m_Camera.FindAction("CameraFlip", throwIfNotFound: true);
         m_Camera_ZoomIn = m_Camera.FindAction("ZoomIn", throwIfNotFound: true);
@@ -1643,7 +1611,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Camera;
     private List<ICameraActions> m_CameraActionsCallbackInterfaces = new List<ICameraActions>();
     private readonly InputAction m_Camera_RotateCamera;
-    private readonly InputAction m_Camera_MouseDelta;
     private readonly InputAction m_Camera_CameraHelp;
     private readonly InputAction m_Camera_CameraFlip;
     private readonly InputAction m_Camera_ZoomIn;
@@ -1665,10 +1632,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Camera/RotateCamera".
         /// </summary>
         public InputAction @RotateCamera => m_Wrapper.m_Camera_RotateCamera;
-        /// <summary>
-        /// Provides access to the underlying input action "Camera/MouseDelta".
-        /// </summary>
-        public InputAction @MouseDelta => m_Wrapper.m_Camera_MouseDelta;
         /// <summary>
         /// Provides access to the underlying input action "Camera/CameraHelp".
         /// </summary>
@@ -1722,9 +1685,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @RotateCamera.started += instance.OnRotateCamera;
             @RotateCamera.performed += instance.OnRotateCamera;
             @RotateCamera.canceled += instance.OnRotateCamera;
-            @MouseDelta.started += instance.OnMouseDelta;
-            @MouseDelta.performed += instance.OnMouseDelta;
-            @MouseDelta.canceled += instance.OnMouseDelta;
             @CameraHelp.started += instance.OnCameraHelp;
             @CameraHelp.performed += instance.OnCameraHelp;
             @CameraHelp.canceled += instance.OnCameraHelp;
@@ -1757,9 +1717,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @RotateCamera.started -= instance.OnRotateCamera;
             @RotateCamera.performed -= instance.OnRotateCamera;
             @RotateCamera.canceled -= instance.OnRotateCamera;
-            @MouseDelta.started -= instance.OnMouseDelta;
-            @MouseDelta.performed -= instance.OnMouseDelta;
-            @MouseDelta.canceled -= instance.OnMouseDelta;
             @CameraHelp.started -= instance.OnCameraHelp;
             @CameraHelp.performed -= instance.OnCameraHelp;
             @CameraHelp.canceled -= instance.OnCameraHelp;
@@ -2108,13 +2065,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnRotateCamera(InputAction.CallbackContext context);
-        /// <summary>
-        /// Method invoked when associated input action "MouseDelta" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
-        /// </summary>
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnMouseDelta(InputAction.CallbackContext context);
         /// <summary>
         /// Method invoked when associated input action "CameraHelp" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>

@@ -656,15 +656,6 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "MouseDelta",
-                    "type": "Value",
-                    "id": "2933f9bb-2236-40f1-a461-4abca24a53c9",
-                    "expectedControlType": "Vector2",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": true
-                },
-                {
                     "name": "CameraHelp",
                     "type": "Button",
                     "id": "d5cd95b2-ebef-4afe-a811-f2e0e134ebbe",
@@ -703,7 +694,7 @@
                 {
                     "name": "Click",
                     "type": "Button",
-                    "id": "b9778589-921a-47aa-b733-b571b209ea7b",
+                    "id": "253b7b8d-6ed8-45a4-b9eb-a8c495dfbca6",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -750,17 +741,6 @@
                     "processors": "",
                     "groups": ";Keyboard&Mouse;Gamepad;Joystick",
                     "action": "RotateCamera",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "84458bcf-5e9d-4b62-b58f-90535274b8d6",
-                    "path": "<Mouse>/delta",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";Keyboard&Mouse",
-                    "action": "MouseDelta",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -854,34 +834,23 @@
                 },
                 {
                     "name": "",
-                    "id": "428e0d2c-c830-4c0d-833b-b5bf73a14dad",
-                    "path": "<Mouse>/leftButton",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";Keyboard&Mouse",
-                    "action": "Click",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "10d99a25-97f5-4b1b-969d-85d3f3ee3495",
-                    "path": "",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Click",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "b60c4111-e5b7-4de2-a275-3ac257435504",
                     "path": "<Gamepad>/rightStick",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "Look",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5803ba50-467a-447a-8238-e9726918d95b",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "Click",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
