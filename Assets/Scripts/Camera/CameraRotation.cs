@@ -8,6 +8,8 @@ public class CameraRotation : MonoBehaviour
     public float _rotationSpeed = 360f;
     [SerializeField] private CameraChange _cameraChange;
     [SerializeField] private PlayerInputReader _inputReader;
+    [Header("Mouse drag settings")]
+    [SerializeField] private float mouseDragSensitivity = 5f;
 
     [Header("Tutorial drag")]
     [SerializeField] private TMP_Text dragTutorial;
@@ -46,7 +48,7 @@ public class CameraRotation : MonoBehaviour
             {
                 isRotating = true;
 
-                transform.Rotate( Vector3.up, mouseX * _rotationSpeed * Time.deltaTime);
+                transform.Rotate(Vector3.up, mouseX * mouseDragSensitivity);
             }
         }
 
@@ -62,7 +64,7 @@ public class CameraRotation : MonoBehaviour
         {
             isRotating = true;
 
-            transform.Rotate(Vector3.up,_rotationSpeed * Time.deltaTime);
+            transform.Rotate(Vector3.up, _rotationSpeed * Time.deltaTime);
         }
 
         Vector2 look = _inputReader.LookInput;
@@ -71,9 +73,9 @@ public class CameraRotation : MonoBehaviour
         {
             isRotating = true;
 
-            transform.Rotate( Vector3.up,look.x * _rotationSpeed * Time.deltaTime);
+            transform.Rotate(Vector3.up, look.x * _rotationSpeed * Time.deltaTime);
         }
-   
+
         if (isRotating && !rotationDetected)
         {
             rotationDetected = true;
