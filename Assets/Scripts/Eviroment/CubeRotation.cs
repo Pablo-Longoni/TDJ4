@@ -126,6 +126,8 @@ public class CubeRotation : MonoBehaviour
         _cameraChange._canChange = true;
     }
 
+    //comentado porque no se usa y tira null
+/*
     public void StartBlinking()
     {
         if (_blinkCoroutine == null)
@@ -222,6 +224,6 @@ public class CubeRotation : MonoBehaviour
                 }
             }
         }
-    }
+    }*/
 }
 
