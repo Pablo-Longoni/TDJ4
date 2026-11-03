@@ -204,7 +204,7 @@ public class PlayerMovement : MonoBehaviour
                 if (detectedCube != null)
                 {
                     _currentCube = detectedCube;
-                    _currentCube.StartBlinking();
+                  //  _currentCube.StartBlinking();
                 }
             }
 
@@ -228,11 +228,11 @@ public class PlayerMovement : MonoBehaviour
 
             if (detectedCube != null && detectedCube != _currentCube)
             {
-                _currentCube?.StopOutline();
+            //    _currentCube?.StopOutline();
 
                 _currentCube = detectedCube;
 
-                _currentCube.StartOutline();
+           //     _currentCube.StartOutline();
 
                 Debug.Log($"CURRENT CUBE: {_currentCube.name}");
             }
